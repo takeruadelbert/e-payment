@@ -29,42 +29,21 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.username = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.password = new System.Windows.Forms.PictureBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnLogin = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.username)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.password)).BeginInit();
+            this.password = new System.Windows.Forms.PictureBox();
+            this.username = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.password)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.username)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(153, 54);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(85, 78);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // username
-            // 
-            this.username.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("username.BackgroundImage")));
-            this.username.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.username.Location = new System.Drawing.Point(68, 183);
-            this.username.Name = "username";
-            this.username.Size = new System.Drawing.Size(24, 24);
-            this.username.TabIndex = 1;
-            this.username.TabStop = false;
-            this.username.Click += new System.EventHandler(this.username_Click);
             // 
             // textBox1
             // 
@@ -88,16 +67,6 @@
             this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel1.Size = new System.Drawing.Size(260, 1);
             this.panel1.TabIndex = 3;
-            // 
-            // password
-            // 
-            this.password.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("password.BackgroundImage")));
-            this.password.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.password.Location = new System.Drawing.Point(68, 233);
-            this.password.Name = "password";
-            this.password.Size = new System.Drawing.Size(24, 24);
-            this.password.TabIndex = 4;
-            this.password.TabStop = false;
             // 
             // textBox2
             // 
@@ -162,6 +131,38 @@
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
+            // password
+            // 
+            this.password.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("password.BackgroundImage")));
+            this.password.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.password.Location = new System.Drawing.Point(68, 233);
+            this.password.Name = "password";
+            this.password.Size = new System.Drawing.Size(24, 24);
+            this.password.TabIndex = 4;
+            this.password.TabStop = false;
+            // 
+            // username
+            // 
+            this.username.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("username.BackgroundImage")));
+            this.username.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.username.Location = new System.Drawing.Point(68, 183);
+            this.username.Name = "username";
+            this.username.Size = new System.Drawing.Size(24, 24);
+            this.username.TabIndex = 1;
+            this.username.TabStop = false;
+            this.username.Click += new System.EventHandler(this.username_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(153, 54);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(85, 78);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -184,10 +185,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "E-Payment - Login";
             this.Load += new System.EventHandler(this.Login_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.username)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.password)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.password)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.username)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -16,10 +16,13 @@ namespace BNITapCash
     public partial class Login : Form
     {
         private Setting setting;
+        private Cashier cashier;
+
         public Login()
         {
             InitializeComponent();
             this.setting = new Setting(this);
+            this.cashier = new Cashier(this);
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -120,7 +123,9 @@ namespace BNITapCash
                 switch(response.Status)
                 {
                     case 201:
-                        MessageBox.Show(response.Message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //MessageBox.Show(response.Message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.cashier.Show();
+                        Hide();
                         break;
                     default:
                         MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -130,6 +135,11 @@ namespace BNITapCash
             {
                 MessageBox.Show("Error : Can't establish connection to server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

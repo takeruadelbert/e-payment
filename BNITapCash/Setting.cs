@@ -38,7 +38,7 @@ namespace BNITapCash
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            this.TextChangeListener();
         }
 
         private void Setting_Load(object sender, EventArgs e)
@@ -48,7 +48,13 @@ namespace BNITapCash
 
         private void textBox1_Click(object sender, EventArgs e)
         {
-            textBox1.Clear();
+            this.TextChangeListener();
+        }
+
+        private void TextChangeListener()
+        {
+            if (textBox1.Text == "IP Address Server")
+                textBox1.Clear();
             pictureBox2.BackgroundImage = Properties.Resources.Icon_pc;
             panel1.ForeColor = Color.FromArgb(78, 184, 206);
             textBox1.ForeColor = Color.FromArgb(78, 184, 206);
@@ -69,7 +75,7 @@ namespace BNITapCash
                 if (tk.ValidateIPv4(ipv4))
                 {
                     this.ip_address_server = ipv4;
-                    MessageBox.Show("IP Address Berhasil Disimpan.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("IP Address Berhasil Diupdate.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -90,6 +96,11 @@ namespace BNITapCash
             {
                 Application.Exit();
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
