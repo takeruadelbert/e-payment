@@ -117,7 +117,8 @@ namespace BNITapCash
             var APIUrl = "ws/accounts/login_api";
             var sent_param = "{\"username\":\"" + username + "\", \"password\":\"" + password + "\"}";
             RESTAPI api = new RESTAPI();
-            DataResponse response = api.API_Post(APIUrl, sent_param);
+            string ip_address_server = "http://" + this.setting.IPAddressServer;
+            DataResponse response = api.API_Post(ip_address_server, APIUrl, sent_param);
             if(response != null)
             {
                 switch(response.Status)
