@@ -34,7 +34,7 @@ namespace BNITapCash
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            this.ChangeTextListener("username", true);
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -44,19 +44,28 @@ namespace BNITapCash
 
         private void textBox1_Click(object sender, EventArgs e)
         {
-            textBox1.Clear();
-            username.BackgroundImage = Properties.Resources.username5;
-            panel1.ForeColor = Color.FromArgb(78, 184, 206);
-            textBox1.ForeColor = Color.FromArgb(78, 184, 206);
-
-            password.BackgroundImage = Properties.Resources.password3;
-            panel2.ForeColor = Color.WhiteSmoke;
-            textBox2.ForeColor = Color.WhiteSmoke;
+            if(textBox1.Text == "Username")
+                this.ChangeTextListener("username");
         }
 
         private void textBox2_Click(object sender, EventArgs e)
         {
-            textBox2.Clear();
+            if(textBox2.Text == "Password") 
+                this.ChangeTextListener("password");
+        }
+
+        private void ChangeTextListener(string field, bool is_textchanged = false)
+        {
+            if(!is_textchanged)
+            {
+                if(field == "username")
+                {
+                    textBox1.Clear();
+                } else
+                {
+                    textBox2.Clear();
+                }
+            }
             username.BackgroundImage = Properties.Resources.username5;
             panel1.ForeColor = Color.FromArgb(78, 184, 206);
             textBox1.ForeColor = Color.FromArgb(78, 184, 206);
