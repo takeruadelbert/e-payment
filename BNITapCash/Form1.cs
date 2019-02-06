@@ -22,8 +22,7 @@ namespace BNITapCash
         {
             InitializeComponent();
             InitData();
-            this.setting = new Setting(this);
-            this.cashier = new Cashier(this);
+            this.setting = new Setting(this);            
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -140,6 +139,7 @@ namespace BNITapCash
                 {
                     case 201:
                         //MessageBox.Show(response.Message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.cashier = new Cashier(this);
                         this.cashier.Show();
                         Hide();
                         break;

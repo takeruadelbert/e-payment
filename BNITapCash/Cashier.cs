@@ -10,14 +10,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AForge.Video;
+using BNITapCash.Bank.BNI;
 
 namespace BNITapCash
 {
     public partial class Cashier : Form
     {
         private Login home;
+        private BNI bni;
         private const string liveCameraURL = "http://192.168.1.121/snapshot";
         JPEGStream stream;
+
+        public string UIDCard
+        {
+            get {
+                return textBox1.Text;
+            }
+
+            set
+            {
+                textBox1.Text = value;
+            }
+        }
 
         public Cashier(Login home)
         {
@@ -35,6 +49,8 @@ namespace BNITapCash
                 MessageBox.Show("Error : Cannot Connect to Live Camera. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LiveCamera.Image = Properties.Resources.no_image;
             }
+            this.bni = new BNI(this);
+            this.bni.RunMain();
         }
 
         private void logo_Click(object sender, EventArgs e)
@@ -125,6 +141,11 @@ namespace BNITapCash
         {
             Bitmap bmp = (Bitmap)eventArgs.Frame.Clone();
             LiveCamera.Image = bmp;
+        }
+
+        private void panel10_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -533,6 +533,7 @@
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(923, 93);
             this.panel10.TabIndex = 30;
+            this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
             // 
             // panel11
             // 
