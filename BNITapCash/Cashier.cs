@@ -60,7 +60,7 @@ namespace BNITapCash
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            this.TextListener("Card UID", true);
         }
 
         private void Cashier_Load(object sender, EventArgs e)
@@ -84,7 +84,7 @@ namespace BNITapCash
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            this.TextListener();
+            
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -106,14 +106,20 @@ namespace BNITapCash
 
         private void textBox1_Click(object sender, EventArgs e)
         {
-            this.TextListener();
+            
         }
 
-        private void TextListener()
+        private void TextListener(string field, bool is_textchanged = false)
         {
-            if (textBox1.Text == "UID Card")
-                textBox1.Clear();
+            if(!is_textchanged)
+            {
+                if (textBox2.Text == "Nomor Plat Kendaraan")
+                {
+                    textBox2.Clear();
+                }
+            }            
             textBox1.ForeColor = Color.FromArgb(78, 184, 206);
+            textBox2.ForeColor = Color.FromArgb(78, 184, 206);
         }
 
         private void logout_Click(object sender, EventArgs e)
@@ -146,6 +152,17 @@ namespace BNITapCash
         private void panel10_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            this.TextListener("Nomor Plat Kendaraan", true);
+        }
+
+        private void textBox2_Click(object sender, EventArgs e)
+        {
+            if (textBox2.Text == "Nomor Plat Kendaraan")
+                this.TextListener("Nomor Plat Kendaraan");
         }
     }
 }
