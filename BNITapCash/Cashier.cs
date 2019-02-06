@@ -56,7 +56,36 @@ namespace BNITapCash
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            this.TextListener();
+        }
 
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
+
+        private void Clear()
+        {
+            textBox1.Text = "UID Card";
+            textBox2.Text = "Nomor Plat Kendaraan";
+            textBox3.Text = "Waktu Masuk";
+            textBox4.Text = "Waktu Keluar";
+            txtHour.Text = "";
+            txtMinute.Text = "";
+            txtSecond.Text = "";
+            txtGrandTotal.Text = "0";
+        }
+
+        private void textBox1_Click(object sender, EventArgs e)
+        {
+            this.TextListener();
+        }
+
+        private void TextListener()
+        {
+            if (textBox1.Text == "UID Card")
+                textBox1.Clear();
+            textBox1.ForeColor = Color.FromArgb(78, 184, 206);
         }
     }
 }

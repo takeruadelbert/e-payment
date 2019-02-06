@@ -145,6 +145,7 @@
             this.textBox1.Size = new System.Drawing.Size(330, 18);
             this.textBox1.TabIndex = 5;
             this.textBox1.Text = "UID Card";
+            this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // panel1
@@ -170,11 +171,11 @@
             this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.Cursor = System.Windows.Forms.Cursors.No;
-            this.textBox2.Enabled = false;
             this.textBox2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.ForeColor = System.Drawing.Color.White;
             this.textBox2.Location = new System.Drawing.Point(622, 190);
             this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(330, 18);
             this.textBox2.TabIndex = 8;
             this.textBox2.Text = "Nomor Plat Kendaraan";
@@ -210,11 +211,11 @@
             this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox3.Cursor = System.Windows.Forms.Cursors.No;
-            this.textBox3.Enabled = false;
             this.textBox3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox3.ForeColor = System.Drawing.Color.White;
             this.textBox3.Location = new System.Drawing.Point(115, 355);
             this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(330, 18);
             this.textBox3.TabIndex = 11;
             this.textBox3.Text = "Waktu Masuk";
@@ -242,11 +243,11 @@
             this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox4.Cursor = System.Windows.Forms.Cursors.No;
-            this.textBox4.Enabled = false;
             this.textBox4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox4.ForeColor = System.Drawing.Color.White;
             this.textBox4.Location = new System.Drawing.Point(623, 355);
             this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(330, 18);
             this.textBox4.TabIndex = 13;
             this.textBox4.Text = "Waktu Keluar";
@@ -309,11 +310,11 @@
             this.txtHour.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.txtHour.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtHour.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtHour.Enabled = false;
             this.txtHour.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHour.ForeColor = System.Drawing.Color.White;
             this.txtHour.Location = new System.Drawing.Point(201, 470);
             this.txtHour.Name = "txtHour";
+            this.txtHour.ReadOnly = true;
             this.txtHour.Size = new System.Drawing.Size(35, 18);
             this.txtHour.TabIndex = 17;
             // 
@@ -354,11 +355,11 @@
             this.txtMinute.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.txtMinute.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtMinute.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtMinute.Enabled = false;
             this.txtMinute.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMinute.ForeColor = System.Drawing.Color.White;
             this.txtMinute.Location = new System.Drawing.Point(513, 471);
             this.txtMinute.Name = "txtMinute";
+            this.txtMinute.ReadOnly = true;
             this.txtMinute.Size = new System.Drawing.Size(35, 18);
             this.txtMinute.TabIndex = 20;
             // 
@@ -367,11 +368,11 @@
             this.txtSecond.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.txtSecond.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSecond.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtSecond.Enabled = false;
             this.txtSecond.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSecond.ForeColor = System.Drawing.Color.White;
             this.txtSecond.Location = new System.Drawing.Point(817, 471);
             this.txtSecond.Name = "txtSecond";
+            this.txtSecond.ReadOnly = true;
             this.txtSecond.Size = new System.Drawing.Size(35, 18);
             this.txtSecond.TabIndex = 24;
             // 
@@ -479,17 +480,18 @@
             this.btnClear.TabIndex = 27;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // txtGrandTotal
             // 
             this.txtGrandTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.txtGrandTotal.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtGrandTotal.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtGrandTotal.Enabled = false;
             this.txtGrandTotal.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGrandTotal.ForeColor = System.Drawing.Color.White;
             this.txtGrandTotal.Location = new System.Drawing.Point(680, 583);
             this.txtGrandTotal.Name = "txtGrandTotal";
+            this.txtGrandTotal.ReadOnly = true;
             this.txtGrandTotal.Size = new System.Drawing.Size(242, 18);
             this.txtGrandTotal.TabIndex = 28;
             this.txtGrandTotal.Text = "0";
