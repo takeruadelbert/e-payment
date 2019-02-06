@@ -111,6 +111,7 @@ namespace BNITapCash
             if(Properties.Settings.Default.IPAddressServer != string.Empty)
             {
                 textBox1.Text = Properties.Settings.Default.IPAddressServer;
+                this.ip_address_server = Properties.Settings.Default.IPAddressServer;
             }
         }
     }

@@ -21,6 +21,7 @@ namespace BNITapCash
         public Login()
         {
             InitializeComponent();
+            InitData();
             this.setting = new Setting(this);
             this.cashier = new Cashier(this);
         }
@@ -113,6 +114,20 @@ namespace BNITapCash
                 return;
             }
 
+            // remember me feature
+            if(checkBox1.Checked)
+            {
+                Properties.Settings.Default.Username = username;
+                Properties.Settings.Default.Password = password;
+                Properties.Settings.Default.RememberMe = "yes";                
+            } else
+            {
+                Properties.Settings.Default.Username = username;
+                Properties.Settings.Default.Password = "";
+                Properties.Settings.Default.RememberMe = "no";
+            }
+            Properties.Settings.Default.Save();
+
             // send data API
             var APIUrl = "ws/accounts/login_api";
             var sent_param = "{\"username\":\"" + username + "\", \"password\":\"" + password + "\"}";
@@ -141,6 +156,33 @@ namespace BNITapCash
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InitData()
+        {
+            if(Properties.Settings.Default.Username != string.Empty)
+            {
+                if(Properties.Settings.Default.RememberMe == "yes")
+                {
+                    textBox1.Text = Properties.Settings.Default.Username;
+                    textBox2.Text = Properties.Settings.Default.Password;
+                    checkBox1.Checked = true;
+                } else
+                {
+                    textBox1.Text = Properties.Settings.Default.Username;
+                }
+            }
+        }
+
+        public void Clear()
+        {
+            textBox2.Clear();
+            checkBox1.Checked = false;
         }
     }
 }

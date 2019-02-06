@@ -12,14 +12,9 @@ namespace BNITapCash
 {
     public partial class Cashier : Form
     {
-        private Form home;
-
-        public Cashier()
-        {
-
-        }
-
-        public Cashier(Form home)
+        private Login home;
+        
+        public Cashier(Login home)
         {
             InitializeComponent();
             this.home = home;
@@ -86,6 +81,27 @@ namespace BNITapCash
             if (textBox1.Text == "UID Card")
                 textBox1.Clear();
             textBox1.ForeColor = Color.FromArgb(78, 184, 206);
+        }
+
+        private void logout_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to logout?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                Properties.Settings.Default.Password = "";
+                Properties.Settings.Default.RememberMe = "no";
+                Properties.Settings.Default.Save();
+
+                // redirect to sign-in form
+                Hide();
+                this.home.Clear();
+                this.home.Show();
+            }
+        }
+
+        private void logout_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(logout, "Logout");
         }
     }
 }
