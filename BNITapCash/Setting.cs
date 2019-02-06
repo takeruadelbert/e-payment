@@ -21,6 +21,7 @@ namespace BNITapCash
             InitializeComponent();
             this.home = home;
             this.ip_address_server = "";
+            InitData();
         }
 
         public string IPAddressServer
@@ -74,7 +75,9 @@ namespace BNITapCash
             {
                 if (tk.ValidateIPv4(ipv4))
                 {
-                    this.ip_address_server = ipv4;
+                    Properties.Settings.Default.IPAddressServer = ipv4;
+                    Properties.Settings.Default.Save();
+                    this.ip_address_server = ipv4;                    
                     MessageBox.Show("IP Address Berhasil Diupdate.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
@@ -101,6 +104,14 @@ namespace BNITapCash
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void InitData()
+        {
+            if(Properties.Settings.Default.IPAddressServer != string.Empty)
+            {
+                textBox1.Text = Properties.Settings.Default.IPAddressServer;
+            }
         }
     }
 }
