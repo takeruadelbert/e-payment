@@ -3,21 +3,38 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AForge.Video;
 
 namespace BNITapCash
 {
     public partial class Cashier : Form
     {
         private Login home;
-        
+        private const string liveCameraURL = "http://192.168.1.121/snapshot";
+        JPEGStream stream;
+
         public Cashier(Login home)
         {
             InitializeComponent();
             this.home = home;
+            try
+            {
+                stream = new JPEGStream(liveCameraURL);
+                stream.NewFrame += stream_NewFrame;
+                stream.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Error : Cannot Connect to Live Camera. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LiveCamera.Image = Properties.Resources.no_image;
+            }
         }
 
         private void logo_Click(object sender, EventArgs e)
@@ -45,7 +62,7 @@ namespace BNITapCash
             DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
-                Application.Exit();
+                System.Environment.Exit(1);
             }
         }
 
@@ -102,6 +119,12 @@ namespace BNITapCash
         private void logout_MouseHover(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(logout, "Logout");
+        }
+
+        private void stream_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            Bitmap bmp = (Bitmap)eventArgs.Frame.Clone();
+            LiveCamera.Image = bmp;
         }
     }
 }
