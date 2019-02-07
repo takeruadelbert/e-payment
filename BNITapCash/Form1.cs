@@ -113,6 +113,11 @@ namespace BNITapCash
                 MessageBox.Show("Invalid IP Address Server.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            if(string.IsNullOrEmpty(this.setting.IPAddressLiveCamera))
+            {
+                MessageBox.Show("Invalid IP Address Live Camera.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             // check reader connection
             BNI bni = new BNI();

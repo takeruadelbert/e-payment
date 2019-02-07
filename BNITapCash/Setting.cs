@@ -15,12 +15,14 @@ namespace BNITapCash
     {
         private Form home;
         private string ip_address_server;
+        private string ip_address_live_camera;
 
         public Setting(Form home)
         {
             InitializeComponent();
             this.home = home;
-            this.ip_address_server = "";
+            IPAddressServer = "";
+            IPAddressLiveCamera = "";
             InitData();
         }
 
@@ -37,9 +39,22 @@ namespace BNITapCash
             }
         }
 
+        public string IPAddressLiveCamera
+        {
+            get
+            {
+                return this.ip_address_live_camera;
+            }
+
+            set
+            {
+                this.ip_address_live_camera = value;
+            }
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            this.TextChangeListener();
+            this.TextChangeListener(true);
         }
 
         private void Setting_Load(object sender, EventArgs e)
@@ -52,13 +67,19 @@ namespace BNITapCash
             this.TextChangeListener();
         }
 
-        private void TextChangeListener()
+        private void TextChangeListener(bool is_textchanged = false)
         {
-            if (textBox1.Text == "IP Address Server")
-                textBox1.Clear();
+            if(!is_textchanged)
+            {
+                if (textBox1.Text == "IP Address Server")
+                    textBox1.Clear();
+                else if (textBox2.Text == "IP Address Live Camera")
+                    textBox2.Clear();
+            }            
             pictureBox2.BackgroundImage = Properties.Resources.Icon_pc;
             panel1.ForeColor = Color.FromArgb(78, 184, 206);
             textBox1.ForeColor = Color.FromArgb(78, 184, 206);
+            textBox2.ForeColor = Color.FromArgb(78, 184, 206);
         }
 
         private void back_Click(object sender, EventArgs e)
@@ -70,26 +91,42 @@ namespace BNITapCash
         private void save_Click(object sender, EventArgs e)
         {
             string ipv4 = textBox1.Text.ToString();
+            string ipv4_live_cam = textBox2.Text.ToString();
             TKHelper tk = new TKHelper();
             if (ipv4 != "" && ipv4 != "IP Address Server" && ipv4 != null)
             {
-                if (tk.ValidateIPv4(ipv4))
+                if (ipv4_live_cam != "" && ipv4_live_cam != "IP Address Live Camera" && ipv4_live_cam != null)
                 {
-                    Properties.Settings.Default.IPAddressServer = ipv4;
-                    Properties.Settings.Default.Save();
-                    this.ip_address_server = ipv4;                    
-                    MessageBox.Show("IP Address Berhasil Diupdate.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (tk.ValidateIPv4(ipv4))
+                    {
+                        if (tk.ValidateIPv4(ipv4_live_cam))
+                        {
+                            Properties.Settings.Default.IPAddressServer = ipv4;
+                            Properties.Settings.Default.IPAddressLiveCamera = ipv4_live_cam;
+                            Properties.Settings.Default.Save();
+                            IPAddressServer = ipv4;
+                            IPAddressLiveCamera = ipv4_live_cam;
+                            MessageBox.Show("Setting Berhasil Diupdate.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid IP Address Live Camera.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid IP Address Server.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Invalid IP Address.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("IP Address Live Camera Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
-                MessageBox.Show("IP Address Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("IP Address Server Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -108,11 +145,27 @@ namespace BNITapCash
 
         private void InitData()
         {
-            if(Properties.Settings.Default.IPAddressServer != string.Empty)
+            if (Properties.Settings.Default.IPAddressServer != string.Empty)
             {
                 textBox1.Text = Properties.Settings.Default.IPAddressServer;
-                this.ip_address_server = Properties.Settings.Default.IPAddressServer;
+                this.IPAddressServer = Properties.Settings.Default.IPAddressServer;
             }
+
+            if (Properties.Settings.Default.IPAddressLiveCamera != string.Empty)
+            {
+                textBox2.Text = Properties.Settings.Default.IPAddressLiveCamera;
+                IPAddressLiveCamera = Properties.Settings.Default.IPAddressLiveCamera;
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            this.TextChangeListener(true);
+        }
+
+        private void textBox2_Click(object sender, EventArgs e)
+        {
+            this.TextChangeListener();
         }
     }
 }

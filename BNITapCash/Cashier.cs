@@ -20,7 +20,7 @@ namespace BNITapCash
         private Login home;
         private BNI bni;
         private TKHelper helper;
-        private const string liveCameraURL = "http://192.168.1.121/snapshot";
+        private string liveCameraURL = "http://" + Properties.Settings.Default.IPAddressLiveCamera + "/snapshot";
         JPEGStream stream;
 
         public string UIDCard

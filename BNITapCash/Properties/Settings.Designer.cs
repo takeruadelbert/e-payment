@@ -70,5 +70,17 @@ namespace BNITapCash.Properties {
                 this["RememberMe"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string IPAddressLiveCamera {
+            get {
+                return ((string)(this["IPAddressLiveCamera"]));
+            }
+            set {
+                this["IPAddressLiveCamera"] = value;
+            }
+        }
     }
 }
