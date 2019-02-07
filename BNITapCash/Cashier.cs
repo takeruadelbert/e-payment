@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AForge.Video;
 using BNITapCash.Bank.BNI;
+using BNITapCash.Helper;
 
 namespace BNITapCash
 {
@@ -18,6 +19,7 @@ namespace BNITapCash
     {
         private Login home;
         private BNI bni;
+        private TKHelper helper;
         private const string liveCameraURL = "http://192.168.1.121/snapshot";
         JPEGStream stream;
 
@@ -36,6 +38,8 @@ namespace BNITapCash
         public Cashier(Login home)
         {
             InitializeComponent();
+            this.helper = new TKHelper();
+            textBox4.Text = this.helper.GetCurrentDatetime();
             this.home = home;
             try
             {
@@ -51,6 +55,7 @@ namespace BNITapCash
             }
             this.bni = new BNI(this);
             this.bni.RunMain();
+            this.StartTimer();
         }
 
         private void logo_Click(object sender, EventArgs e)
@@ -84,7 +89,15 @@ namespace BNITapCash
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            
+            string feedback = this.ValidateFields();
+            if(feedback == "ok")
+            {
+                MessageBox.Show("OK", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            } else
+            {
+                MessageBox.Show(feedback, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -97,7 +110,7 @@ namespace BNITapCash
             textBox1.Text = "UID Card";
             textBox2.Text = "Nomor Plat Kendaraan";
             textBox3.Text = "Waktu Masuk";
-            textBox4.Text = "Waktu Keluar";
+            textBox4.Text = this.helper.GetCurrentDatetime();
             txtHour.Text = "";
             txtMinute.Text = "";
             txtSecond.Text = "";
@@ -157,12 +170,40 @@ namespace BNITapCash
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             this.TextListener("Nomor Plat Kendaraan", true);
+            textBox2.CharacterCasing = CharacterCasing.Upper;
         }
 
         private void textBox2_Click(object sender, EventArgs e)
         {
             if (textBox2.Text == "Nomor Plat Kendaraan")
                 this.TextListener("Nomor Plat Kendaraan");
+        }
+
+        private string ValidateFields()
+        {
+            if(textBox2.Text.ToLower() == "nomor plat kendaraan" || textBox2.Text == "")
+            {
+                return "Field 'Nomor Plat Kendaraan' Harus Diisi.";
+            }
+
+            if(textBox4.Text.ToLower() == "waktu keluar" || textBox4.Text == "")
+            {
+                return "Field 'Waktu Keluar' Kosong.";
+            }
+            return "ok";
+        }        
+
+        private void TimerTick(object sender, EventArgs e)
+        {
+            textBox4.Text = this.helper.GetCurrentDatetime();
+        }
+
+        private void StartTimer()
+        {
+            System.Windows.Forms.Timer tmr = new System.Windows.Forms.Timer();
+            tmr.Interval = 1000; // 1 second
+            tmr.Tick += new EventHandler(TimerTick);
+            tmr.Enabled = true;
         }
     }
 }

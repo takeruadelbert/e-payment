@@ -22,5 +22,10 @@ namespace BNITapCash.Helper
             byte tempForParsing;
             return splitValues.All(r => byte.TryParse(r, out tempForParsing));
         }
+
+        public string GetCurrentDatetime()
+        {
+            return DateTime.Now.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID")) + " " + DateTime.Now.ToString("HH:mm:ss");
+        }
     }
 }
