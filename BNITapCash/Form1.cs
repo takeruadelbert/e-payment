@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BNITapCash.API;
+using BNITapCash.Bank.BNI;
 
 namespace BNITapCash
 {
@@ -110,6 +111,14 @@ namespace BNITapCash
             if (string.IsNullOrEmpty(this.setting.IPAddressServer))
             {
                 MessageBox.Show("Invalid IP Address Server.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // check reader connection
+            BNI bni = new BNI();
+            if(!bni.CheckReaderConn())
+            {
+                MessageBox.Show("Error : Contactless Reader not available.\nPlease plug it and then try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

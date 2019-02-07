@@ -33,6 +33,11 @@ namespace BNITapCash.Bank.BNI
 
         private Cashier cashier;
 
+        public BNI()
+        {
+
+        }
+
         public BNI(Cashier cashier)
         {
             try
@@ -296,6 +301,12 @@ namespace BNITapCash.Bank.BNI
             byte[] Data = new byte[display_text.Length];
             Data = System.Text.Encoding.UTF8.GetBytes(display_text);
             acr123u.LCDCharacterDisplay((byte)XYPosition, Data);
+        }
+
+        public bool CheckReaderConn()
+        {
+            List<string> temp = bni.getListReader();
+            return temp.Count == 0 ? false : true;
         }
     }
 }
