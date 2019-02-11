@@ -114,7 +114,10 @@ namespace BNITapCash
             txtHour.Text = "";
             txtMinute.Text = "";
             txtSecond.Text = "";
-            txtGrandTotal.Text = "0";
+            txtGrandTotal.Text = "0";            
+            comboBox1.SelectedIndex = -1;
+            comboBox1.ResetText();
+            comboBox1.SelectedText = "- Pilih Tipe Kendaraan -";
         }
 
         private void textBox1_Click(object sender, EventArgs e)

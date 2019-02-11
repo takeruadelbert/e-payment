@@ -72,6 +72,9 @@
             this.panel10 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictVehicle)).BeginInit();
@@ -87,6 +90,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel10.SuspendLayout();
             this.panel11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.SuspendLayout();
             // 
             // logo
@@ -137,7 +141,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Location = new System.Drawing.Point(57, 269);
+            this.panel3.Location = new System.Drawing.Point(60, 343);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(922, 1);
             this.panel3.TabIndex = 9;
@@ -146,7 +150,7 @@
             // 
             this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox3.Location = new System.Drawing.Point(25, 39);
+            this.pictureBox3.Location = new System.Drawing.Point(25, 21);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(40, 42);
             this.pictureBox3.TabIndex = 10;
@@ -159,7 +163,7 @@
             this.textBox3.Cursor = System.Windows.Forms.Cursors.No;
             this.textBox3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox3.ForeColor = System.Drawing.Color.White;
-            this.textBox3.Location = new System.Drawing.Point(74, 56);
+            this.textBox3.Location = new System.Drawing.Point(74, 38);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(330, 18);
@@ -169,7 +173,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
-            this.panel4.Location = new System.Drawing.Point(25, 84);
+            this.panel4.Location = new System.Drawing.Point(25, 66);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(378, 1);
             this.panel4.TabIndex = 7;
@@ -178,7 +182,7 @@
             // 
             this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox4.Location = new System.Drawing.Point(533, 39);
+            this.pictureBox4.Location = new System.Drawing.Point(533, 21);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(40, 42);
             this.pictureBox4.TabIndex = 12;
@@ -191,7 +195,7 @@
             this.textBox4.Cursor = System.Windows.Forms.Cursors.No;
             this.textBox4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox4.ForeColor = System.Drawing.Color.White;
-            this.textBox4.Location = new System.Drawing.Point(582, 56);
+            this.textBox4.Location = new System.Drawing.Point(582, 38);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(330, 18);
@@ -201,7 +205,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.White;
-            this.panel5.Location = new System.Drawing.Point(533, 84);
+            this.panel5.Location = new System.Drawing.Point(533, 66);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(378, 1);
             this.panel5.TabIndex = 8;
@@ -223,7 +227,7 @@
             // 
             this.pictureBox5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5.BackgroundImage")));
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox5.Location = new System.Drawing.Point(68, 154);
+            this.pictureBox5.Location = new System.Drawing.Point(68, 99);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(40, 42);
             this.pictureBox5.TabIndex = 15;
@@ -236,7 +240,7 @@
             this.textBox5.Cursor = System.Windows.Forms.Cursors.No;
             this.textBox5.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox5.ForeColor = System.Drawing.Color.White;
-            this.textBox5.Location = new System.Drawing.Point(230, 172);
+            this.textBox5.Location = new System.Drawing.Point(230, 117);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(35, 18);
@@ -246,7 +250,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.White;
-            this.panel6.Location = new System.Drawing.Point(69, 198);
+            this.panel6.Location = new System.Drawing.Point(69, 143);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(190, 1);
             this.panel6.TabIndex = 8;
@@ -258,7 +262,7 @@
             this.txtHour.Cursor = System.Windows.Forms.Cursors.No;
             this.txtHour.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHour.ForeColor = System.Drawing.Color.White;
-            this.txtHour.Location = new System.Drawing.Point(160, 171);
+            this.txtHour.Location = new System.Drawing.Point(160, 116);
             this.txtHour.Name = "txtHour";
             this.txtHour.ReadOnly = true;
             this.txtHour.Size = new System.Drawing.Size(35, 18);
@@ -268,7 +272,7 @@
             // 
             this.pictureBox6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox6.BackgroundImage")));
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox6.Location = new System.Drawing.Point(380, 154);
+            this.pictureBox6.Location = new System.Drawing.Point(380, 99);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(40, 42);
             this.pictureBox6.TabIndex = 18;
@@ -277,7 +281,7 @@
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.White;
-            this.panel7.Location = new System.Drawing.Point(380, 198);
+            this.panel7.Location = new System.Drawing.Point(380, 143);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(190, 1);
             this.panel7.TabIndex = 9;
@@ -289,7 +293,7 @@
             this.textBox6.Cursor = System.Windows.Forms.Cursors.No;
             this.textBox6.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox6.ForeColor = System.Drawing.Color.White;
-            this.textBox6.Location = new System.Drawing.Point(535, 171);
+            this.textBox6.Location = new System.Drawing.Point(535, 116);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
             this.textBox6.Size = new System.Drawing.Size(35, 18);
@@ -303,7 +307,7 @@
             this.txtMinute.Cursor = System.Windows.Forms.Cursors.No;
             this.txtMinute.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMinute.ForeColor = System.Drawing.Color.White;
-            this.txtMinute.Location = new System.Drawing.Point(472, 172);
+            this.txtMinute.Location = new System.Drawing.Point(472, 117);
             this.txtMinute.Name = "txtMinute";
             this.txtMinute.ReadOnly = true;
             this.txtMinute.Size = new System.Drawing.Size(35, 18);
@@ -316,7 +320,7 @@
             this.txtSecond.Cursor = System.Windows.Forms.Cursors.No;
             this.txtSecond.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSecond.ForeColor = System.Drawing.Color.White;
-            this.txtSecond.Location = new System.Drawing.Point(776, 172);
+            this.txtSecond.Location = new System.Drawing.Point(776, 117);
             this.txtSecond.Name = "txtSecond";
             this.txtSecond.ReadOnly = true;
             this.txtSecond.Size = new System.Drawing.Size(35, 18);
@@ -329,7 +333,7 @@
             this.textBox8.Cursor = System.Windows.Forms.Cursors.No;
             this.textBox8.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox8.ForeColor = System.Drawing.Color.White;
-            this.textBox8.Location = new System.Drawing.Point(839, 171);
+            this.textBox8.Location = new System.Drawing.Point(839, 116);
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
             this.textBox8.Size = new System.Drawing.Size(35, 18);
@@ -339,7 +343,7 @@
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.White;
-            this.panel8.Location = new System.Drawing.Point(684, 198);
+            this.panel8.Location = new System.Drawing.Point(684, 143);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(190, 1);
             this.panel8.TabIndex = 21;
@@ -348,7 +352,7 @@
             // 
             this.pictureBox7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox7.BackgroundImage")));
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox7.Location = new System.Drawing.Point(684, 154);
+            this.pictureBox7.Location = new System.Drawing.Point(684, 99);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(40, 42);
             this.pictureBox7.TabIndex = 22;
@@ -357,7 +361,7 @@
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.White;
-            this.panel9.Location = new System.Drawing.Point(535, 309);
+            this.panel9.Location = new System.Drawing.Point(535, 240);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(378, 1);
             this.panel9.TabIndex = 9;
@@ -366,7 +370,7 @@
             // 
             this.pictureBox8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox8.BackgroundImage")));
             this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox8.Location = new System.Drawing.Point(538, 267);
+            this.pictureBox8.Location = new System.Drawing.Point(538, 198);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(40, 42);
             this.pictureBox8.TabIndex = 10;
@@ -379,7 +383,7 @@
             this.textBox7.Cursor = System.Windows.Forms.Cursors.No;
             this.textBox7.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox7.ForeColor = System.Drawing.Color.White;
-            this.textBox7.Location = new System.Drawing.Point(579, 284);
+            this.textBox7.Location = new System.Drawing.Point(579, 215);
             this.textBox7.Name = "textBox7";
             this.textBox7.ReadOnly = true;
             this.textBox7.Size = new System.Drawing.Size(40, 18);
@@ -394,7 +398,7 @@
             this.textBox9.Cursor = System.Windows.Forms.Cursors.No;
             this.textBox9.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox9.ForeColor = System.Drawing.Color.White;
-            this.textBox9.Location = new System.Drawing.Point(872, 284);
+            this.textBox9.Location = new System.Drawing.Point(872, 215);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
             this.textBox9.Size = new System.Drawing.Size(40, 18);
@@ -407,7 +411,7 @@
             this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(421, 677);
+            this.btnSave.Location = new System.Drawing.Point(426, 698);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(111, 34);
             this.btnSave.TabIndex = 26;
@@ -420,7 +424,7 @@
             this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(567, 677);
+            this.btnClear.Location = new System.Drawing.Point(572, 698);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(111, 34);
             this.btnClear.TabIndex = 27;
@@ -435,7 +439,7 @@
             this.txtGrandTotal.Cursor = System.Windows.Forms.Cursors.No;
             this.txtGrandTotal.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGrandTotal.ForeColor = System.Drawing.Color.White;
-            this.txtGrandTotal.Location = new System.Drawing.Point(639, 284);
+            this.txtGrandTotal.Location = new System.Drawing.Point(639, 215);
             this.txtGrandTotal.Name = "txtGrandTotal";
             this.txtGrandTotal.ReadOnly = true;
             this.txtGrandTotal.Size = new System.Drawing.Size(242, 18);
@@ -526,15 +530,18 @@
             // panel10
             // 
             this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel10.Controls.Add(this.comboBox1);
+            this.panel10.Controls.Add(this.panel13);
             this.panel10.Controls.Add(this.panel2);
+            this.panel10.Controls.Add(this.pictureBox9);
             this.panel10.Controls.Add(this.textBox2);
             this.panel10.Controls.Add(this.pictureBox2);
             this.panel10.Controls.Add(this.panel1);
             this.panel10.Controls.Add(this.textBox1);
             this.panel10.Controls.Add(this.pictureBox1);
-            this.panel10.Location = new System.Drawing.Point(57, 153);
+            this.panel10.Location = new System.Drawing.Point(61, 140);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(923, 93);
+            this.panel10.Size = new System.Drawing.Size(923, 152);
             this.panel10.TabIndex = 30;
             this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
             // 
@@ -565,19 +572,55 @@
             this.panel11.Controls.Add(this.panel4);
             this.panel11.Controls.Add(this.textBox3);
             this.panel11.Controls.Add(this.pictureBox3);
-            this.panel11.Location = new System.Drawing.Point(57, 299);
+            this.panel11.Location = new System.Drawing.Point(57, 391);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(922, 352);
+            this.panel11.Size = new System.Drawing.Size(939, 267);
             this.panel11.TabIndex = 31;
             // 
             // panel12
             // 
             this.panel12.BackColor = System.Drawing.Color.White;
             this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel12.Location = new System.Drawing.Point(0, 246);
+            this.panel12.Location = new System.Drawing.Point(0, 179);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(922, 1);
+            this.panel12.Size = new System.Drawing.Size(937, 1);
             this.panel12.TabIndex = 1;
+            // 
+            // panel13
+            // 
+            this.panel13.BackColor = System.Drawing.Color.White;
+            this.panel13.Location = new System.Drawing.Point(18, 126);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(378, 1);
+            this.panel13.TabIndex = 9;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox9.BackgroundImage")));
+            this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox9.Location = new System.Drawing.Point(18, 87);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(40, 42);
+            this.pictureBox9.TabIndex = 10;
+            this.pictureBox9.TabStop = false;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
+            this.comboBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.ForeColor = System.Drawing.Color.White;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Motor",
+            "Mobil",
+            "Truk"});
+            this.comboBox1.Location = new System.Drawing.Point(66, 93);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(330, 26);
+            this.comboBox1.TabIndex = 11;
+            this.comboBox1.Text = "- Pilih Tipe Kendaraan -";
             // 
             // Cashier
             // 
@@ -618,6 +661,7 @@
             this.panel10.PerformLayout();
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -666,5 +710,8 @@
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.PictureBox pictureBox9;
     }
 }
