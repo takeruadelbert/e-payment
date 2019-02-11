@@ -18,7 +18,7 @@ namespace BNITapCash.API
 
         }
 
-        public DataResponse API_Post(string ip_address_server, string APIUrl, string sent_param)
+        public DataResponse API_Post(string ip_address_server, string APIUrl, string sent_param = "")
         {            
             string result = "";
             try
@@ -26,6 +26,7 @@ namespace BNITapCash.API
                 string full_API_URL = ip_address_server + repo + APIUrl;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(full_API_URL);
                 request.Method = "POST";
+                request.Timeout = 3000; // 3 seconds
 
                 System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
                 Byte[] byteArray = encoding.GetBytes(sent_param);
