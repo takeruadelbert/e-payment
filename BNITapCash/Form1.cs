@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BNITapCash.API;
 using BNITapCash.Bank.BNI;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace BNITapCash
 {
@@ -143,7 +145,12 @@ namespace BNITapCash
 
             // send data API
             var APIUrl = Properties.Resources.LoginAPIURL;
-            var sent_param = "{\"username\":\"" + username + "\", \"password\":\"" + password + "\"}";
+            //var sent_param = "{\"username\":\"" + username + "\", \"password\":\"" + password + "\"}";
+            JObject param = new JObject();
+            param["username"] = username;
+            param["password"] = password;
+            var sent_param = JsonConvert.SerializeObject(param);
+
             RESTAPI api = new RESTAPI();
             string ip_address_server = "http://" + this.setting.IPAddressServer;
             DataResponse response = api.API_Post(ip_address_server, APIUrl, sent_param);
