@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace BNITapCash.API
         }
 
         [JsonProperty("data")]
-        public List<string> Data
+        public JArray Data
         {
             get;
             set;

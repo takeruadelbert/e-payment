@@ -123,6 +123,7 @@
   </data>
   <data name="LoginAPIURL" xml:space="preserve">
     <value>/ws/accounts/login_api</value>
+    <comment>API for Sign In</comment>
   </data>
   <data name="no_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\no_image.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,6 +134,10 @@
   <data name="repo" xml:space="preserve">
     <value>/epass2018</value>
     <comment>repository of the server</comment>
+  </data>
+  <data name="RequestUIDFareAPIURL" xml:space="preserve">
+    <value>/ws/parking_outs/request_uid_fare</value>
+    <comment>API for Request Data Parking In by UID card</comment>
   </data>
   <data name="stn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\stn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

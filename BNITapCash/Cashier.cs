@@ -10,8 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AForge.Video;
+using BNITapCash.API;
 using BNITapCash.Bank.BNI;
 using BNITapCash.Helper;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace BNITapCash
 {
@@ -41,7 +44,7 @@ namespace BNITapCash
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
             this.helper = new TKHelper();
-            textBox4.Text = this.helper.GetCurrentDatetime();
+            //textBox4.Text = this.helper.GetCurrentDatetime();
             this.home = home;
             try
             {
@@ -57,7 +60,7 @@ namespace BNITapCash
             }
             this.bni = new BNI(this);
             this.bni.RunMain();
-            this.StartTimer();
+            //this.StartTimer();
         }
 
         private void logo_Click(object sender, EventArgs e)
@@ -119,6 +122,9 @@ namespace BNITapCash
             txtSecond.Text = "";
             txtGrandTotal.Text = "0";
             this.ResetComboBox();
+
+            PictFace.Image = Properties.Resources.no_image;
+            PictVehicle.Image = Properties.Resources.no_image;
         }
 
         private void textBox1_Click(object sender, EventArgs e)
@@ -225,8 +231,68 @@ namespace BNITapCash
                 {
                     if (comboBox1.SelectedIndex != 0)
                     {
-                        MessageBox.Show("OK", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
+                        // send data API
+                        var APIUrl = Properties.Resources.RequestUIDFareAPIURL;
+                        JObject param = new JObject();
+                        param["uid"] = textBox1.Text;
+                        param["vehicle"] = comboBox1.Text;
+                        var sent_param = JsonConvert.SerializeObject(param);
+
+                        RESTAPI api = new RESTAPI();
+                        string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
+                        DataResponse response = api.API_Post(ip_address_server, APIUrl, sent_param);
+                        if (response != null)
+                        {
+                            switch (response.Status)
+                            {
+                                case 206:
+                                    //MessageBox.Show(response.Message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    foreach(JObject data in response.Data)
+                                    {
+                                        // Duration Data Process
+                                        string duration = data["lama_parkir"].ToString();
+                                        string[] temp = duration.Split(':');
+                                        txtHour.Text = temp[0];
+                                        txtMinute.Text = temp[1];
+                                        txtSecond.Text = temp[2];
+
+                                        // Total Fare Process
+                                        txtGrandTotal.Text = data["tarif_parkir"].ToString();
+
+                                        // Datetime Parking In
+                                        string datetime_in = data["waktu_masuk"].ToString();
+                                        string[] temp_dt_in = datetime_in.Split(' ');
+                                        textBox3.Text = this.helper.ConvertDatetime(temp_dt_in[0], temp_dt_in[1]);
+
+                                        // Datetime Out
+                                        string datetime_out = data["waktu_keluar"].ToString();
+                                        string[] temp_dt_out = datetime_out.Split(' ');
+                                        textBox4.Text = this.helper.ConvertDatetime(temp_dt_out[0], temp_dt_out[1]);
+
+                                        // Load Picture of face and plate number
+                                        string URL_pict_face = "http://" + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + data["gambar_face"].ToString();
+                                        PictFace.Load(URL_pict_face);
+                                        PictFace.BackgroundImageLayout = ImageLayout.Stretch;
+                                        PictFace.SizeMode = PictureBoxSizeMode.StretchImage;
+                                        string URL_pict_vehicle = "http://" + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + data["gambar_plate"].ToString();
+                                        PictVehicle.Load(URL_pict_vehicle);
+                                        PictVehicle.BackgroundImageLayout = ImageLayout.Stretch;
+                                        PictVehicle.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                                        // Total Fare Process
+                                        string total_fare = data["tarif_parkir"].ToString();
+                                        txtGrandTotal.Text = this.helper.IDR(total_fare);
+                                    }
+                                    break;
+                                default:
+                                    MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error : Can't establish connection to server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 else

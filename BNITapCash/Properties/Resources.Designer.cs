@@ -109,6 +109,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/parking_outs/request_uid_fare.
+        /// </summary>
+        internal static string RequestUIDFareAPIURL {
+            get {
+                return ResourceManager.GetString("RequestUIDFareAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap stn {

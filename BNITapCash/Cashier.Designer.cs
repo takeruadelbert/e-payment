@@ -109,7 +109,7 @@
             this.LiveCamera.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("LiveCamera.BackgroundImage")));
             this.LiveCamera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.LiveCamera.ImageLocation = "";
-            this.LiveCamera.Location = new System.Drawing.Point(1002, 546);
+            this.LiveCamera.Location = new System.Drawing.Point(1042, 552);
             this.LiveCamera.Name = "LiveCamera";
             this.LiveCamera.Size = new System.Drawing.Size(287, 180);
             this.LiveCamera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -121,9 +121,9 @@
             this.PictVehicle.BackgroundImage = global::BNITapCash.Properties.Resources.no_image;
             this.PictVehicle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PictVehicle.ImageLocation = "";
-            this.PictVehicle.Location = new System.Drawing.Point(1102, 290);
+            this.PictVehicle.Location = new System.Drawing.Point(1042, 305);
             this.PictVehicle.Name = "PictVehicle";
-            this.PictVehicle.Size = new System.Drawing.Size(187, 183);
+            this.PictVehicle.Size = new System.Drawing.Size(287, 180);
             this.PictVehicle.TabIndex = 1;
             this.PictVehicle.TabStop = false;
             // 
@@ -132,9 +132,9 @@
             this.PictFace.BackgroundImage = global::BNITapCash.Properties.Resources.no_image;
             this.PictFace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PictFace.ImageLocation = "";
-            this.PictFace.Location = new System.Drawing.Point(1100, 36);
+            this.PictFace.Location = new System.Drawing.Point(1042, 61);
             this.PictFace.Name = "PictFace";
-            this.PictFace.Size = new System.Drawing.Size(187, 183);
+            this.PictFace.Size = new System.Drawing.Size(287, 180);
             this.PictFace.TabIndex = 0;
             this.PictFace.TabStop = false;
             // 

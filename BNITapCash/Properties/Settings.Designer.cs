@@ -82,5 +82,16 @@ namespace BNITapCash.Properties {
                 this["IPAddressLiveCamera"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection VehicleTypes {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["VehicleTypes"]));
+            }
+            set {
+                this["VehicleTypes"] = value;
+            }
+        }
     }
 }
