@@ -25,7 +25,8 @@ namespace BNITapCash
 
         public string UIDCard
         {
-            get {
+            get
+            {
                 return textBox1.Text;
             }
 
@@ -38,6 +39,7 @@ namespace BNITapCash
         public Cashier(Login home)
         {
             InitializeComponent();
+            comboBox1.SelectedIndex = 0;
             this.helper = new TKHelper();
             textBox4.Text = this.helper.GetCurrentDatetime();
             this.home = home;
@@ -90,10 +92,11 @@ namespace BNITapCash
         private void btnSave_Click(object sender, EventArgs e)
         {
             string feedback = this.ValidateFields();
-            if(feedback == "ok")
+            if (feedback == "ok")
             {
                 MessageBox.Show("OK", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            } else
+            }
+            else
             {
                 MessageBox.Show(feedback, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -114,26 +117,24 @@ namespace BNITapCash
             txtHour.Text = "";
             txtMinute.Text = "";
             txtSecond.Text = "";
-            txtGrandTotal.Text = "0";            
-            comboBox1.SelectedIndex = -1;
-            comboBox1.ResetText();
-            comboBox1.SelectedText = "- Pilih Tipe Kendaraan -";
+            txtGrandTotal.Text = "0";
+            this.ResetComboBox();
         }
 
         private void textBox1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void TextListener(string field, bool is_textchanged = false)
         {
-            if(!is_textchanged)
+            if (!is_textchanged)
             {
                 if (textBox2.Text == "Nomor Plat Kendaraan")
                 {
                     textBox2.Clear();
                 }
-            }            
+            }
             textBox1.ForeColor = Color.FromArgb(78, 184, 206);
             textBox2.ForeColor = Color.FromArgb(78, 184, 206);
         }
@@ -184,17 +185,17 @@ namespace BNITapCash
 
         private string ValidateFields()
         {
-            if(textBox2.Text.ToLower() == "nomor plat kendaraan" || textBox2.Text == "")
+            if (textBox2.Text.ToLower() == "nomor plat kendaraan" || textBox2.Text == "")
             {
                 return "Field 'Nomor Plat Kendaraan' Harus Diisi.";
             }
 
-            if(textBox4.Text.ToLower() == "waktu keluar" || textBox4.Text == "")
+            if (textBox4.Text.ToLower() == "waktu keluar" || textBox4.Text == "")
             {
                 return "Field 'Waktu Keluar' Kosong.";
             }
             return "ok";
-        }        
+        }
 
         private void TimerTick(object sender, EventArgs e)
         {
@@ -207,6 +208,34 @@ namespace BNITapCash
             tmr.Interval = 1000; // 1 second
             tmr.Tick += new EventHandler(TimerTick);
             tmr.Enabled = true;
+        }
+
+        private void ResetComboBox()
+        {
+            comboBox1.SelectedIndex = 0;
+            comboBox1.ResetText();
+            comboBox1.SelectedText = "- Pilih Tipe Kendaraan -";
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex != 0)
+            {
+                if (textBox1.Text != "" && textBox1.Text != "UID Card")
+                {
+                    if (comboBox1.SelectedIndex != 0)
+                    {
+                        MessageBox.Show("OK", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("UID Card Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.ResetComboBox();
+                    return;
+                }
+            }
         }
     }
 }
