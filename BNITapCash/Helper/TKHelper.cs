@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,18 @@ namespace BNITapCash.Helper
         public string GetCurrentDatetime()
         {
             return DateTime.Now.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID")) + " " + DateTime.Now.ToString("HH:mm:ss");
+        }
+
+        public string ConvertDatetime(string param_date, string param_time)
+        {
+            System.Globalization.CultureInfo cultureinfo = new System.Globalization.CultureInfo("id-ID");
+            DateTime dt = DateTime.Parse(param_date, cultureinfo);
+            return dt.ToString("dd MMMM yyyy", cultureinfo) + " " + param_time;
+        }
+
+        public string IDR(string nominal)
+        {
+            return String.Format(CultureInfo.CreateSpecificCulture("id-id"), "{0:N0}", Convert.ToInt32(nominal));
         }
     }
 }
