@@ -71,6 +71,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/accounts/login_api.
+        /// </summary>
+        internal static string LoginAPIURL {
+            get {
+                return ResourceManager.GetString("LoginAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap no_image {
@@ -87,6 +96,15 @@ namespace BNITapCash.Properties {
             get {
                 object obj = ResourceManager.GetObject("password3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /epass2018.
+        /// </summary>
+        internal static string repo {
+            get {
+                return ResourceManager.GetString("repo", resourceCulture);
             }
         }
         

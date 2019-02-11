@@ -11,8 +11,6 @@ namespace BNITapCash.API
 {
     class RESTAPI
     {
-        private const string repo = "/epass2018/";
-
         public RESTAPI()
         {
 
@@ -23,7 +21,7 @@ namespace BNITapCash.API
             string result = "";
             try
             {
-                string full_API_URL = ip_address_server + repo + APIUrl;
+                string full_API_URL = ip_address_server + Properties.Resources.repo + APIUrl;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(full_API_URL);
                 request.Method = "POST";
                 request.Timeout = 3000; // 3 seconds

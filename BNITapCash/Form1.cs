@@ -142,7 +142,7 @@ namespace BNITapCash
             Properties.Settings.Default.Save();
 
             // send data API
-            var APIUrl = "ws/accounts/login_api";
+            var APIUrl = Properties.Resources.LoginAPIURL;
             var sent_param = "{\"username\":\"" + username + "\", \"password\":\"" + password + "\"}";
             RESTAPI api = new RESTAPI();
             string ip_address_server = "http://" + this.setting.IPAddressServer;
