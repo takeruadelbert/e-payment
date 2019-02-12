@@ -41,7 +41,7 @@ namespace BNITapCash.Helper
             return dt.ToString("dd MMMM yyyy", cultureinfo) + " " + param_time;
         }
         
-        // Default Format : dd-MM-yyyy HH:mm:ss
+        // Default Format : yyyy-MM-dd HH:mm:ss
         public string ConvertDatetimeToDefaultFormat(string dt)
         {
             string[] temp = dt.Split(' ');
@@ -49,7 +49,7 @@ namespace BNITapCash.Helper
             string month = this.GetMonthInNumber(temp[1]);
             string year = temp[2];
             string time = temp[3];
-            return date + "-" + month + "-" + year + " " + time;
+            return year + "-" + month + "-" + date + " " + time;
         }
 
         public string IDR(string nominal)
