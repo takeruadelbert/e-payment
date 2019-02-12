@@ -118,36 +118,46 @@ namespace BNITapCash
             string feedback = this.ValidateFields();
             if (feedback == "ok")
             {
-                // API POST Data to server
-                JObject param = new JObject();
-                param["uid"] = textBox1.Text.ToString();
-                param["vehicle"] = comboBox1.Text.ToString();
-                param["waktu_keluar"] = this.helper.ConvertDatetimeToDefaultFormat(textBox4.Text.ToString());
-                param["username"] = Properties.Settings.Default.Username;
-                param["plate_number"] = textBox2.Text.ToString();
-                param["total_fare"] = this.helper.IDRToNominal(txtGrandTotal.Text.ToString());
-                param["ipv4"] = this.helper.GetLocalIPAddress();
-                var sent_param = JsonConvert.SerializeObject(param);
-                RESTAPI save = new RESTAPI();
-                string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
-                DataResponse response = save.API_Post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, sent_param);
-                if (response != null)
+                int totalFare = this.helper.IDRToNominal(txtGrandTotal.Text.ToString());
+                // deduct balance of card
+                string responseDeduct = bni.DeductBalance(totalFare);
+                if (responseDeduct == "OK")
                 {
-                    switch (response.Status)
+                    // API POST Data to server
+                    JObject param = new JObject();
+                    param["uid"] = textBox1.Text.ToString();
+                    param["vehicle"] = comboBox1.Text.ToString();
+                    param["waktu_keluar"] = this.helper.ConvertDatetimeToDefaultFormat(textBox4.Text.ToString());
+                    param["username"] = Properties.Settings.Default.Username;
+                    param["plate_number"] = textBox2.Text.ToString();
+                    param["total_fare"] = totalFare;
+                    param["ipv4"] = this.helper.GetLocalIPAddress();
+                    var sent_param = JsonConvert.SerializeObject(param);
+                    RESTAPI save = new RESTAPI();
+                    string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
+                    DataResponse response = save.API_Post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, sent_param);
+                    if (response != null)
                     {
-                        case 206:
-                            MessageBox.Show(response.Message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Clear(true);
-                            break;
-                        default:
-                            MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
+                        switch (response.Status)
+                        {
+                            case 206:
+                                MessageBox.Show("Transaksi Berhasil.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                this.Clear(true);
+                                break;
+                            default:
+                                MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                    MessageBox.Show(responseDeduct, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }                
             }
             else
             {

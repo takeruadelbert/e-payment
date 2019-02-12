@@ -228,7 +228,7 @@ namespace BNITapCash.Bank.BNI
             Console.WriteLine(result);
         }
 
-        private void DeductBalance(int amount = 0)
+        public string DeductBalance(int amount = 0)
         {
             try
             {
@@ -238,16 +238,20 @@ namespace BNITapCash.Bank.BNI
                 {
                     string result = bni.debitProcess(this.readerList[2], this.selectedReader, amount, this.TID);
                     Console.WriteLine("Successfully Deducted for Rp. " + amount + ",-.");
+                    Console.WriteLine("Current Balance : " + String.Format("{0:n}", Int32.Parse(this.GetCardBalance())));
                     this.CreateSettlement();
+                    return "OK";
                 }
                 else
                 {
                     Console.WriteLine("Can't Deduct : Insufficient Balance.");
+                    return "Can't Deduct : Insufficient Balance.";
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return ex.Message;
             }
         }
 
