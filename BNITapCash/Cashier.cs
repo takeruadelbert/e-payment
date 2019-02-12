@@ -129,12 +129,13 @@ namespace BNITapCash
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            Clear();
+            Clear(true);
         }
 
-        private void Clear()
+        private void Clear(bool include_uid = false)
         {
-            textBox1.Text = "UID Card";
+            if(include_uid)
+                textBox1.Text = "UID Card";
             textBox2.Text = "Nomor Plat Kendaraan";
             textBox3.Text = "Waktu Masuk";
             textBox4.Text = this.helper.GetCurrentDatetime();
@@ -157,7 +158,7 @@ namespace BNITapCash
         {
             if (!is_textchanged)
             {
-                if (textBox2.Text == "Nomor Plat Kendaraan")
+                if (textBox2.Text.ToLower() == "nomor plat kendaraan")
                 {
                     textBox2.Clear();
                 }
@@ -206,7 +207,7 @@ namespace BNITapCash
 
         private void textBox2_Click(object sender, EventArgs e)
         {
-            if (textBox2.Text == "Nomor Plat Kendaraan")
+            if (textBox2.Text.ToLower() == "nomor plat kendaraan")
                 this.TextListener("Nomor Plat Kendaraan");
         }
 
@@ -307,6 +308,7 @@ namespace BNITapCash
                                     break;
                                 default:
                                     MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    this.Clear();
                                     break;
                             }
                         }

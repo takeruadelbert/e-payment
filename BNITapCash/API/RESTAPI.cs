@@ -73,7 +73,6 @@ namespace BNITapCash.API
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
                     result = reader.ReadToEnd();
-                    Console.WriteLine(result);
                     var json = JsonConvert.DeserializeObject<DataResponse>(result);
                     return json;
                 }
