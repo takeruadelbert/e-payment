@@ -118,7 +118,36 @@ namespace BNITapCash
             string feedback = this.ValidateFields();
             if (feedback == "ok")
             {
-                MessageBox.Show("OK", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // API POST Data to server
+                JObject param = new JObject();
+                param["uid"] = textBox1.Text.ToString();
+                param["vehicle"] = comboBox1.Text.ToString();
+                param["waktu_keluar"] = this.helper.ConvertDatetimeToDefaultFormat(textBox4.Text.ToString());
+                param["username"] = Properties.Settings.Default.Username;
+                param["plate_number"] = textBox2.Text.ToString();
+                param["total_fare"] = this.helper.IDRToNominal(txtGrandTotal.Text.ToString());
+                param["ipv4"] = this.helper.GetLocalIPAddress();
+                var sent_param = JsonConvert.SerializeObject(param);
+                RESTAPI save = new RESTAPI();
+                string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
+                DataResponse response = save.API_Post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, sent_param);
+                if (response != null)
+                {
+                    switch (response.Status)
+                    {
+                        case 206:
+                            MessageBox.Show(response.Message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Clear(true);
+                            break;
+                        default:
+                            MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
@@ -221,6 +250,16 @@ namespace BNITapCash
             if (textBox4.Text.ToLower() == "waktu keluar" || textBox4.Text == "")
             {
                 return "Field 'Waktu Keluar' Kosong.";
+            }
+
+            if(textBox1.Text.ToLower() == "uid card" || textBox1.Text == "")
+            {
+                return "Field 'UID Card' Harus Diisi.";
+            }
+
+            if(comboBox1.SelectedIndex == -1 || comboBox1.SelectedIndex == 0)
+            {
+                return "Field 'Tipe Kendaraan' Harus Dipilih.";
             }
             return "ok";
         }

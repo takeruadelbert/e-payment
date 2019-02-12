@@ -127,7 +127,7 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /ws/vehicle_types/get_all_vehicle_name.
+        ///   Looks up a localized string similar to /ws/parking_outs/save_parking_out.
         /// </summary>
         internal static string SaveDataParkingAPIURL {
             get {

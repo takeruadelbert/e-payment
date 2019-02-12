@@ -150,7 +150,7 @@
     <comment>API for request data vehicle type</comment>
   </data>
   <data name="SaveDataParkingAPIURL" xml:space="preserve">
-    <value>/ws/vehicle_types/get_all_vehicle_name</value>
+    <value>/ws/parking_outs/save_parking_out</value>
     <comment>API for saving data to server</comment>
   </data>
 </root>
