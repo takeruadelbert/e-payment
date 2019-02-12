@@ -13,6 +13,7 @@ using BNITapCash.API;
 using BNITapCash.Bank.BNI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using BNITapCash.Helper;
 
 namespace BNITapCash
 {
@@ -20,12 +21,13 @@ namespace BNITapCash
     {
         private Setting setting;
         private Cashier cashier;
+        private TKHelper tk = new TKHelper();
 
         public Login()
         {
             InitializeComponent();
             InitData();
-            this.setting = new Setting(this);            
+            this.setting = new Setting(this);
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -50,24 +52,25 @@ namespace BNITapCash
 
         private void textBox1_Click(object sender, EventArgs e)
         {
-            if(textBox1.Text == "Username")
+            if (textBox1.Text == "Username")
                 this.ChangeTextListener("username");
         }
 
         private void textBox2_Click(object sender, EventArgs e)
         {
-            if(textBox2.Text == "Password") 
+            if (textBox2.Text == "Password")
                 this.ChangeTextListener("password");
         }
 
         private void ChangeTextListener(string field, bool is_textchanged = false)
         {
-            if(!is_textchanged)
+            if (!is_textchanged)
             {
-                if(field == "username")
+                if (field == "username")
                 {
                     textBox1.Clear();
-                } else
+                }
+                else
                 {
                     textBox2.Clear();
                 }
@@ -115,7 +118,7 @@ namespace BNITapCash
                 MessageBox.Show("Invalid IP Address Server.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if(string.IsNullOrEmpty(this.setting.IPAddressLiveCamera))
+            if (string.IsNullOrEmpty(this.setting.IPAddressLiveCamera))
             {
                 MessageBox.Show("Invalid IP Address Live Camera.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -123,19 +126,20 @@ namespace BNITapCash
 
             // check reader connection
             BNI bni = new BNI();
-            if(!bni.CheckReaderConn())
+            if (!bni.CheckReaderConn())
             {
                 MessageBox.Show("Error : Contactless Reader not available.\nPlease plug it and then try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             // remember me feature
-            if(checkBox1.Checked)
+            if (checkBox1.Checked)
             {
                 Properties.Settings.Default.Username = username;
                 Properties.Settings.Default.Password = password;
-                Properties.Settings.Default.RememberMe = "yes";                
-            } else
+                Properties.Settings.Default.RememberMe = "yes";
+            }
+            else
             {
                 Properties.Settings.Default.Username = username;
                 Properties.Settings.Default.Password = "";
@@ -143,20 +147,56 @@ namespace BNITapCash
             }
             Properties.Settings.Default.Save();
 
+            string ip_address_server = "http://" + this.setting.IPAddressServer;
+
+            // pull some data from server e.g. Vehicle Types
+            string APIPullData = Properties.Resources.RequestVehicleTypeAPIURL;
+            RESTAPI pull = new RESTAPI();
+            DataResponse receivedData = pull.API_Get(ip_address_server, APIPullData);
+            if (receivedData != null)
+            {
+                switch (receivedData.Status)
+                {
+                    case 206:
+                        JArray receivedVehicleTypes = receivedData.Data;
+                        JObject vehicleTypes = new JObject();
+                        vehicleTypes.Add(new JProperty("VehicleTypes", receivedVehicleTypes));
+
+                        // write into a file called 'master-data.json'
+                        try
+                        {
+                            string savedDir = tk.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
+                            string json = JsonConvert.SerializeObject(vehicleTypes);
+                            System.IO.File.WriteAllText(@savedDir, json);
+                            //MessageBox.Show("Pull Master Data is Success.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        } catch(Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        break;
+                    default:
+                        MessageBox.Show(receivedData.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error : Can't establish connection to server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             // send data API
             var APIUrl = Properties.Resources.LoginAPIURL;
-            //var sent_param = "{\"username\":\"" + username + "\", \"password\":\"" + password + "\"}";
             JObject param = new JObject();
             param["username"] = username;
             param["password"] = password;
             var sent_param = JsonConvert.SerializeObject(param);
 
             RESTAPI api = new RESTAPI();
-            string ip_address_server = "http://" + this.setting.IPAddressServer;
             DataResponse response = api.API_Post(ip_address_server, APIUrl, sent_param);
-            if(response != null)
+            if (response != null)
             {
-                switch(response.Status)
+                switch (response.Status)
                 {
                     case 201:
                         //MessageBox.Show(response.Message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -168,7 +208,8 @@ namespace BNITapCash
                         MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show("Error : Can't establish connection to server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -186,14 +227,15 @@ namespace BNITapCash
 
         private void InitData()
         {
-            if(Properties.Settings.Default.Username != string.Empty)
+            if (Properties.Settings.Default.Username != string.Empty)
             {
-                if(Properties.Settings.Default.RememberMe == "yes")
+                if (Properties.Settings.Default.RememberMe == "yes")
                 {
                     textBox1.Text = Properties.Settings.Default.Username;
                     textBox2.Text = Properties.Settings.Default.Password;
                     checkBox1.Checked = true;
-                } else
+                }
+                else
                 {
                     textBox1.Text = Properties.Settings.Default.Username;
                 }

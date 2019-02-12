@@ -118,6 +118,24 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/vehicle_types/get_all_vehicle_name.
+        /// </summary>
+        internal static string RequestVehicleTypeAPIURL {
+            get {
+                return ResourceManager.GetString("RequestVehicleTypeAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /ws/vehicle_types/get_all_vehicle_name.
+        /// </summary>
+        internal static string SaveDataParkingAPIURL {
+            get {
+                return ResourceManager.GetString("SaveDataParkingAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap stn {

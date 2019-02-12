@@ -17,7 +17,7 @@ namespace BNITapCash.API
         }
 
         public DataResponse API_Post(string ip_address_server, string APIUrl, string sent_param = "")
-        {            
+        {
             string result = "";
             try
             {
@@ -56,8 +56,34 @@ namespace BNITapCash.API
                 //    String errorText = reader.ReadToEnd();
                 //}
                 //throw;
+                Console.WriteLine(ex.Message);
                 return null;
             }
+        }
+
+        public DataResponse API_Get(string ip_address_server, string API_URL)
+        {
+            string result = "";
+            try
+            {
+                string full_URL_API = ip_address_server + Properties.Resources.repo + API_URL;
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(full_URL_API);
+                WebResponse response = request.GetResponse();
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    result = reader.ReadToEnd();
+                    Console.WriteLine(result);
+                    var json = JsonConvert.DeserializeObject<DataResponse>(result);
+                    return json;
+                }
+            }
+            catch (WebException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+
         }
     }
 }

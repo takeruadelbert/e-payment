@@ -42,7 +42,6 @@ namespace BNITapCash
         public Cashier(Login home)
         {
             InitializeComponent();
-            comboBox1.SelectedIndex = 0;
             this.helper = new TKHelper();
             //textBox4.Text = this.helper.GetCurrentDatetime();
             this.home = home;
@@ -61,6 +60,28 @@ namespace BNITapCash
             this.bni = new BNI(this);
             this.bni.RunMain();
             //this.StartTimer();
+
+            // initialize vehicle type options            
+            try
+            {
+                comboBox1.Items.Add("- Pilih Tipe Kendaraan -");
+                string masterDataFile = this.helper.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
+                using (StreamReader reader = new StreamReader(masterDataFile))
+                {
+                    string json = reader.ReadToEnd();
+                    dynamic vehicleTypes = JsonConvert.DeserializeObject(json);
+                    foreach (var types in vehicleTypes["VehicleTypes"])
+                    {
+                        comboBox1.Items.Add(types);
+                    }
+                    comboBox1.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Error : failed to fetch vehicle type data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void logo_Click(object sender, EventArgs e)
@@ -247,7 +268,7 @@ namespace BNITapCash
                             {
                                 case 206:
                                     //MessageBox.Show(response.Message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    foreach(JObject data in response.Data)
+                                    foreach (JObject data in response.Data)
                                     {
                                         // Duration Data Process
                                         string duration = data["lama_parkir"].ToString();
@@ -297,7 +318,7 @@ namespace BNITapCash
                 }
                 else
                 {
-                    MessageBox.Show("UID Card Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Silahkan Tap Kartunya Terlebih Dahulu.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     this.ResetComboBox();
                     return;
                 }

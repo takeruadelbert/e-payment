@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +41,12 @@ namespace BNITapCash.Helper
         public string IDR(string nominal)
         {
             return String.Format(CultureInfo.CreateSpecificCulture("id-id"), "{0:N0}", Convert.ToInt32(nominal));
+        }
+
+        public string GetApplicationExecutableDirectoryName()
+        {
+            string workingDirectory = Environment.CurrentDirectory;
+            return Directory.GetParent(workingDirectory).Parent.FullName;
         }
     }
 }
