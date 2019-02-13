@@ -148,14 +148,13 @@ namespace BNITapCash.Bank.BNI
                     acr123u.connectDirect();
                     acr123u.LCDBacklightControl(0xFF);
                     this.SetLCDDisplayText("Processing ...");
-                    this.LEDStatus = LEDGreen;
+                    this.LEDStatus = LEDOrange;
+                    this.LEDStatus |= LEDAntBlue;
                     this.LEDStatus |= LEDAntGreen;
+                    this.LEDStatus |= LEDAntRed;
                     this.acr123u.setLEDControl(this.LEDStatus);
-                    this.SetLCDDisplayText("DONE ...");
                     acr123u.disconnect();
-
-                    // dedeuct balance
-                    //this.DeductBalance();
+                    
                     this.cashier.UIDCard = this.GetCardNumber();
                 }
                 catch (Exception ex)
@@ -235,22 +234,57 @@ namespace BNITapCash.Bank.BNI
                 // check if deducted amount is sufficient within balance range and the balance must be greater than 0
                 int cardBalance = Int32.Parse(this.GetCardBalance());
                 if (cardBalance > 0 && (cardBalance - amount) > 0)
-                {
-                    string result = bni.debitProcess(this.readerList[2], this.selectedReader, amount, this.TID);
+                {                    
+                    string result = bni.debitProcess(this.readerList[2].ToString(), this.selectedReader.ToString(), amount, this.TID);
                     Console.WriteLine("Successfully Deducted for Rp. " + amount + ",-.");
                     Console.WriteLine("Current Balance : " + String.Format("{0:n}", Int32.Parse(this.GetCardBalance())));
-                    this.CreateSettlement();
+                    //this.CreateSettlement();
+
+                    acr123u.connectDirect();
+                    int repeat = 3;
+                    int onDuration = 5;
+                    int OffDuration = 10;
+                    acr123u.setBuzzerControl((byte)repeat, (byte)onDuration, (byte)OffDuration);
+                    this.LEDStatus = LEDGreen;
+                    this.LEDStatus |= LEDAntGreen;
+                    acr123u.LCDBacklightControl(0xFF);
+                    this.acr123u.setLEDControl(this.LEDStatus);
+                    this.SetLCDDisplayText("Success ...");
+                    acr123u.disconnect();
+
                     return "OK";
                 }
                 else
                 {
+                    acr123u.connectDirect();
+                    this.SetLCDDisplayText("Insufficient Bal");
                     Console.WriteLine("Can't Deduct : Insufficient Balance.");
+                    int repeat = 2;
+                    int onDuration = 5;
+                    int OffDuration = 10;
+                    acr123u.setBuzzerControl((byte)repeat, (byte)onDuration, (byte)OffDuration);
+                    this.LEDStatus = LEDRed;
+                    this.LEDStatus |= LEDAntRed;
+                    acr123u.LCDBacklightControl(0xFF);
+                    this.acr123u.setLEDControl(this.LEDStatus);
+                    acr123u.disconnect();
                     return "Can't Deduct : Insufficient Balance.";
                 }
             }
             catch (Exception ex)
             {
+                acr123u.connectDirect();
+                this.SetLCDDisplayText("Fail to Process.");
                 Console.WriteLine(ex.Message);
+                int repeat = 2;
+                int onDuration = 5;
+                int OffDuration = 10;
+                acr123u.setBuzzerControl((byte)repeat, (byte)onDuration, (byte)OffDuration);
+                this.LEDStatus = LEDRed;
+                this.LEDStatus |= LEDAntRed;
+                acr123u.LCDBacklightControl(0xFF);
+                this.acr123u.setLEDControl(this.LEDStatus);
+                acr123u.disconnect();
                 return ex.Message;
             }
         }

@@ -157,7 +157,7 @@ namespace BNITapCash
                 else
                 {
                     MessageBox.Show(responseDeduct, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }                
+                }
             }
             else
             {
@@ -173,7 +173,7 @@ namespace BNITapCash
 
         private void Clear(bool include_uid = false)
         {
-            if(include_uid)
+            if (include_uid)
                 textBox1.Text = "UID Card";
             textBox2.Text = "Nomor Plat Kendaraan";
             textBox3.Text = "Waktu Masuk";
@@ -262,12 +262,12 @@ namespace BNITapCash
                 return "Field 'Waktu Keluar' Kosong.";
             }
 
-            if(textBox1.Text.ToLower() == "uid card" || textBox1.Text == "")
+            if (textBox1.Text.ToLower() == "uid card" || textBox1.Text == "")
             {
                 return "Field 'UID Card' Harus Diisi.";
             }
 
-            if(comboBox1.SelectedIndex == -1 || comboBox1.SelectedIndex == 0)
+            if (comboBox1.SelectedIndex == -1 || comboBox1.SelectedIndex == 0)
             {
                 return "Field 'Tipe Kendaraan' Harus Dipilih.";
             }
