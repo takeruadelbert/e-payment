@@ -242,7 +242,7 @@ namespace BNITapCash.Bank.BNI
             {
                 string path_file = tk.GetApplicationExecutableDirectoryName() + "\\bin\\Debug\\settlement\\" + FileWatcher.newFile[i];
                 path_file = Regex.Replace(path_file, @"\\", @"\\");
-                string created = "2019-02-19 15:36:00";
+                string created = tk.ConvertDatetimeToDefaultFormat(tk.GetCurrentDatetime());
                 string query = "INSERT INTO settlements (path_file, created) VALUES('" + path_file + "', '" + created + "')";
                 try
                 {
