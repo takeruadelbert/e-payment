@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 using BNITapCashDLL;
 using PCSC;
 using BNITapCash.Readers.Contactless.Acr123U;
+using System.IO;
+using BNITapCash.Helper;
+using BNITapCash.Miscellaneous.FileMonitor;
+using BNITapCash.DB;
+using System.Text.RegularExpressions;
 
 namespace BNITapCash.Bank.BNI
 {
@@ -32,6 +37,9 @@ namespace BNITapCash.Bank.BNI
         private string TID = "12001401";
 
         private Cashier cashier;
+        private TKHelper tk = new TKHelper();
+        private FileWatcher watcher;
+        private DBConnect database;
 
         public BNI()
         {
@@ -46,6 +54,8 @@ namespace BNITapCash.Bank.BNI
                 this.readerList = bni.getListReader();
                 this.selectedReader = this.readerList[0]; // PICC selected
                 this.cashier = cashier;
+                watcher = new FileWatcher();
+                database = new DBConnect();
             }
             catch (Exception ex)
             {
@@ -154,7 +164,7 @@ namespace BNITapCash.Bank.BNI
                     this.LEDStatus |= LEDAntRed;
                     this.acr123u.setLEDControl(this.LEDStatus);
                     acr123u.disconnect();
-                    
+
                     this.cashier.UIDCard = this.GetCardNumber();
                 }
                 catch (Exception ex)
@@ -195,6 +205,7 @@ namespace BNITapCash.Bank.BNI
 
         private void CreateSettlement()
         {
+            FileWatcher.newFile.Clear();
             string tidSettlement = this.TID;
             List<Trx> listDebitLine = new List<Trx>();
 
@@ -225,6 +236,23 @@ namespace BNITapCash.Bank.BNI
             }
             string result = bni.createSettlement(settlementList, "000100012000014", tidSettlement);
             Console.WriteLine(result);
+
+            // insert to local database
+            for (int i = 0; i < FileWatcher.newFile.Count; i++)
+            {
+                string path_file = tk.GetApplicationExecutableDirectoryName() + "\\bin\\Debug\\settlement\\" + FileWatcher.newFile[i];
+                path_file = Regex.Replace(path_file, @"\\", @"\\");
+                string created = "2019-02-19 15:36:00";
+                string query = "INSERT INTO settlements (path_file, created) VALUES('" + path_file + "', '" + created + "')";
+                try
+                {
+                    database.Insert(query);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
         }
 
         public string DeductBalance(int amount = 0)
@@ -234,11 +262,11 @@ namespace BNITapCash.Bank.BNI
                 // check if deducted amount is sufficient within balance range and the balance must be greater than 0
                 int cardBalance = Int32.Parse(this.GetCardBalance());
                 if (cardBalance > 0 && (cardBalance - amount) > 0)
-                {                    
+                {
                     string result = bni.debitProcess(this.readerList[2].ToString(), this.selectedReader.ToString(), amount, this.TID);
                     Console.WriteLine("Successfully Deducted for Rp. " + amount + ",-.");
                     Console.WriteLine("Current Balance : " + String.Format("{0:n}", Int32.Parse(this.GetCardBalance())));
-                    //this.CreateSettlement();
+                    this.CreateSettlement();
 
                     acr123u.connectDirect();
                     int repeat = 3;

@@ -68,6 +68,11 @@ namespace BNITapCash.Helper
             return Directory.GetParent(workingDirectory).Parent.FullName;
         }
 
+        public string GetDirectoryName()
+        {
+            return System.AppDomain.CurrentDomain.BaseDirectory;
+        }
+
         public string GetLocalIPAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
