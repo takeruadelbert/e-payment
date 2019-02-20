@@ -16,6 +16,7 @@ using Newtonsoft.Json.Linq;
 using BNITapCash.Helper;
 using System.Threading;
 using BNITapCash.Miscellaneous;
+using BNITapCash.DB;
 
 namespace BNITapCash
 {
@@ -91,6 +92,7 @@ namespace BNITapCash
             DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
+                Dispose();
                 System.Environment.Exit(1);
             }
         }
@@ -138,13 +140,21 @@ namespace BNITapCash
             {
                 loading.ShowDialog(this);
 
+                // check local database connection
+                DBConnect database = new DBConnect();
+                if (!database.CheckMySQLConnection())
+                {
+                    MessageBox.Show("Error : Can't Establish Connection to Local Database.\nPlease setup properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 // check reader connection
                 BNI bni = new BNI();
                 if (!bni.CheckReaderConn())
                 {
                     MessageBox.Show("Error : Contactless Reader not available.\nPlease plug it and then try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
-                }
+                }                
 
                 // remember me feature
                 if (checkBox1.Checked)

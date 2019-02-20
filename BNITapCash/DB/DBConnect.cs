@@ -270,5 +270,23 @@ namespace BNITapCash.DB
                 Console.WriteLine("Error , unable to Restore!");
             }
         }
+
+        public bool CheckMySQLConnection()
+        {
+            bool successful = true;
+            try
+            {
+                successful = this.OpenConnection();
+                if(successful)
+                {
+                    this.CloseConnection();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                successful = false;
+            }
+            return successful;
+        }
     }
 }
