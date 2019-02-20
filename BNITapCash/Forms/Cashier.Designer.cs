@@ -75,6 +75,7 @@
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
+            this.ManualPayment = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictVehicle)).BeginInit();
@@ -91,6 +92,7 @@
             this.panel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.panel11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ManualPayment)).BeginInit();
             this.SuspendLayout();
             // 
             // logo
@@ -619,12 +621,25 @@
             this.panel12.Size = new System.Drawing.Size(937, 1);
             this.panel12.TabIndex = 1;
             // 
+            // ManualPayment
+            // 
+            this.ManualPayment.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ManualPayment.BackgroundImage")));
+            this.ManualPayment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ManualPayment.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ManualPayment.Location = new System.Drawing.Point(68, 713);
+            this.ManualPayment.Name = "ManualPayment";
+            this.ManualPayment.Size = new System.Drawing.Size(30, 30);
+            this.ManualPayment.TabIndex = 32;
+            this.ManualPayment.TabStop = false;
+            this.ManualPayment.MouseHover += new System.EventHandler(this.ManualPayment_MouseHover);
+            // 
             // Cashier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.ClientSize = new System.Drawing.Size(1366, 768);
+            this.Controls.Add(this.ManualPayment);
             this.Controls.Add(this.panel11);
             this.Controls.Add(this.panel10);
             this.Controls.Add(this.logout);
@@ -659,6 +674,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ManualPayment)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -710,5 +726,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.PictureBox ManualPayment;
     }
 }

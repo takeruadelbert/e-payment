@@ -120,7 +120,7 @@ namespace BNITapCash
             {
                 int totalFare = this.helper.IDRToNominal(txtGrandTotal.Text.ToString());
                 // deduct balance of card
-                string responseDeduct = bni.DeductBalance(totalFare);
+                string responseDeduct = bni.DeductBalance();
                 if (responseDeduct == "OK")
                 {
                     // API POST Data to server
@@ -185,7 +185,9 @@ namespace BNITapCash
             this.ResetComboBox();
 
             PictFace.Image = Properties.Resources.no_image;
+            PictFace.SizeMode = PictureBoxSizeMode.StretchImage;
             PictVehicle.Image = Properties.Resources.no_image;
+            PictVehicle.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void textBox1_Click(object sender, EventArgs e)
@@ -374,6 +376,11 @@ namespace BNITapCash
                     return;
                 }
             }
+        }
+
+        private void ManualPayment_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(ManualPayment, "Manual Payment");
         }
     }
 }
