@@ -153,8 +153,4 @@
     <value>/ws/parking_outs/save_parking_out</value>
     <comment>API for saving data to server</comment>
   </data>
-  <data name="OpenGateAPIURL" xml:space="preserve">
-    <value>/ws/parking_logs/open_gate</value>
-    <comment>API for opening gate manually</comment>
-  </data>
 </root>

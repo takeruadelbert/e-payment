@@ -15,7 +15,6 @@ using BNITapCash.Bank.BNI;
 using BNITapCash.Helper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using BNITapCash.Forms;
 
 namespace BNITapCash
 {
@@ -43,9 +42,15 @@ namespace BNITapCash
         public Cashier(Login home)
         {
             InitializeComponent();
-            this.helper = new TKHelper();
-            //textBox4.Text = this.helper.GetCurrentDatetime();
             this.home = home;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            nonCash.Checked = true;
+            this.helper = new TKHelper();
+            //textBox4.Text = this.helper.GetCurrentDatetime();            
             try
             {
                 stream = new JPEGStream(liveCameraURL);
@@ -121,44 +126,27 @@ namespace BNITapCash
             if (feedback == "ok")
             {
                 int totalFare = this.helper.IDRToNominal(txtGrandTotal.Text.ToString());
-                // deduct balance of card
-                string responseDeduct = bni.DeductBalance();
-                if (responseDeduct == "OK")
+
+                // check the payment method whether it's cash or non-cash
+                string type = nonCash.Checked ? "noncash" : "cash";
+                if (type == "noncash")
                 {
-                    // API POST Data to server
-                    JObject param = new JObject();
-                    param["uid"] = textBox1.Text.ToString();
-                    param["vehicle"] = comboBox1.Text.ToString();
-                    param["waktu_keluar"] = this.helper.ConvertDatetimeToDefaultFormat(textBox4.Text.ToString());
-                    param["username"] = Properties.Settings.Default.Username;
-                    param["plate_number"] = textBox2.Text.ToString();
-                    param["total_fare"] = totalFare;
-                    param["ipv4"] = this.helper.GetLocalIPAddress();
-                    var sent_param = JsonConvert.SerializeObject(param);
-                    RESTAPI save = new RESTAPI();
-                    string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
-                    DataResponse response = save.API_Post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, sent_param);
-                    if (response != null)
+                    // deduct balance of card
+                    string responseDeduct = bni.DeductBalance();
+                    if (responseDeduct == "OK")
                     {
-                        switch (response.Status)
-                        {
-                            case 206:
-                                MessageBox.Show("Transaksi Berhasil.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                this.Clear(true);
-                                break;
-                            default:
-                                MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                break;
-                        }
+                        // API POST Data to server
+                        this.SendDataToServer(totalFare);
                     }
                     else
                     {
-                        MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(responseDeduct, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
                 }
                 else
                 {
-                    MessageBox.Show(responseDeduct, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.SendDataToServer(totalFare);
                 }
             }
             else
@@ -190,6 +178,8 @@ namespace BNITapCash
             PictFace.SizeMode = PictureBoxSizeMode.StretchImage;
             PictVehicle.Image = Properties.Resources.no_image;
             PictVehicle.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            nonCash.Checked = true;
         }
 
         private void textBox1_Click(object sender, EventArgs e)
@@ -380,52 +370,36 @@ namespace BNITapCash
             }
         }
 
-        private void ManualPayment_MouseHover(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(ManualPayment, "Manual Payment");
-        }
-
-        private void ManualPayment_Click(object sender, EventArgs e)
-        {
-            string uid_card = textBox1.Text.ToString();
-            string grandTotal = txtGrandTotal.Text.ToString();
-            if(string.IsNullOrEmpty(uid_card) || uid_card.ToLower() == "uid card")
-            {
-                MessageBox.Show("UID Card Tidak Boleh Kosong.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if(string.IsNullOrEmpty(grandTotal) || grandTotal == "0")
-            {
-                MessageBox.Show("Grand Total Tidak Boleh Kosong.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            ManualPayment manual = new ManualPayment(this, uid_card, grandTotal);
-            manual.Show();
-            Hide();
-        }
-
-        private void btnOpenGate_Click(object sender, EventArgs e)
+        private void SendDataToServer(int totalFare)
         {
             JObject param = new JObject();
+            param["uid"] = textBox1.Text.ToString();
+            param["vehicle"] = comboBox1.Text.ToString();
+            param["waktu_keluar"] = this.helper.ConvertDatetimeToDefaultFormat(textBox4.Text.ToString());
+            param["username"] = Properties.Settings.Default.Username;
+            param["plate_number"] = textBox2.Text.ToString();
+            param["total_fare"] = totalFare;
             param["ipv4"] = this.helper.GetLocalIPAddress();
             var sent_param = JsonConvert.SerializeObject(param);
-            RESTAPI open = new RESTAPI();
+            RESTAPI save = new RESTAPI();
             string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
-            DataResponse response = open.API_Post(ip_address_server, Properties.Resources.OpenGateAPIURL, sent_param);
-            if(response != null)
+            DataResponse response = save.API_Post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, sent_param);
+            if (response != null)
             {
                 switch (response.Status)
                 {
                     case 206:
-                        MessageBox.Show("Palang Berhasil Dibuka.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Transaksi Berhasil.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Clear(true);
                         break;
                     default:
                         MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
         }
     }

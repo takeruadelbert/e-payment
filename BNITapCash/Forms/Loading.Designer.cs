@@ -1,4 +1,4 @@
-﻿namespace BNITapCash.Miscellaneous
+﻿namespace BNITapCash.Forms
 {
     partial class Loading
     {

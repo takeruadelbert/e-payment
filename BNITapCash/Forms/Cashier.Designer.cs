@@ -75,8 +75,9 @@
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.ManualPayment = new System.Windows.Forms.PictureBox();
-            this.btnOpenGate = new System.Windows.Forms.Button();
+            this.cash = new System.Windows.Forms.RadioButton();
+            this.nonCash = new System.Windows.Forms.RadioButton();
+            this.paymentMethod = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictVehicle)).BeginInit();
@@ -93,7 +94,7 @@
             this.panel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.panel11.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ManualPayment)).BeginInit();
+            this.paymentMethod.SuspendLayout();
             this.SuspendLayout();
             // 
             // logo
@@ -414,7 +415,7 @@
             this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(382, 698);
+            this.btnSave.Location = new System.Drawing.Point(421, 698);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(111, 34);
             this.btnSave.TabIndex = 26;
@@ -427,7 +428,7 @@
             this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(528, 698);
+            this.btnClear.Location = new System.Drawing.Point(567, 698);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(111, 34);
             this.btnClear.TabIndex = 27;
@@ -584,6 +585,7 @@
             // panel11
             // 
             this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel11.Controls.Add(this.paymentMethod);
             this.panel11.Controls.Add(this.panel12);
             this.panel11.Controls.Add(this.txtGrandTotal);
             this.panel11.Controls.Add(this.textBox9);
@@ -622,31 +624,48 @@
             this.panel12.Size = new System.Drawing.Size(937, 1);
             this.panel12.TabIndex = 1;
             // 
-            // ManualPayment
+            // cash
             // 
-            this.ManualPayment.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ManualPayment.BackgroundImage")));
-            this.ManualPayment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ManualPayment.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ManualPayment.Location = new System.Drawing.Point(68, 713);
-            this.ManualPayment.Name = "ManualPayment";
-            this.ManualPayment.Size = new System.Drawing.Size(30, 30);
-            this.ManualPayment.TabIndex = 32;
-            this.ManualPayment.TabStop = false;
-            this.ManualPayment.Click += new System.EventHandler(this.ManualPayment_Click);
-            this.ManualPayment.MouseHover += new System.EventHandler(this.ManualPayment_MouseHover);
+            this.cash.AutoSize = true;
+            this.cash.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cash.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cash.ForeColor = System.Drawing.Color.White;
+            this.cash.Location = new System.Drawing.Point(98, 22);
+            this.cash.Name = "cash";
+            this.cash.Size = new System.Drawing.Size(62, 22);
+            this.cash.TabIndex = 30;
+            this.cash.TabStop = true;
+            this.cash.Text = "Tunai";
+            this.cash.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cash.UseVisualStyleBackColor = true;
             // 
-            // btnOpenGate
+            // nonCash
             // 
-            this.btnOpenGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
-            this.btnOpenGate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenGate.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenGate.Location = new System.Drawing.Point(676, 698);
-            this.btnOpenGate.Name = "btnOpenGate";
-            this.btnOpenGate.Size = new System.Drawing.Size(119, 34);
-            this.btnOpenGate.TabIndex = 33;
-            this.btnOpenGate.Text = "Open Gate";
-            this.btnOpenGate.UseVisualStyleBackColor = false;
-            this.btnOpenGate.Click += new System.EventHandler(this.btnOpenGate_Click);
+            this.nonCash.AutoSize = true;
+            this.nonCash.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.nonCash.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nonCash.ForeColor = System.Drawing.Color.White;
+            this.nonCash.Location = new System.Drawing.Point(177, 22);
+            this.nonCash.Name = "nonCash";
+            this.nonCash.Size = new System.Drawing.Size(95, 22);
+            this.nonCash.TabIndex = 31;
+            this.nonCash.TabStop = true;
+            this.nonCash.Text = "Non-Tunai";
+            this.nonCash.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.nonCash.UseVisualStyleBackColor = true;
+            // 
+            // paymentMethod
+            // 
+            this.paymentMethod.Controls.Add(this.cash);
+            this.paymentMethod.Controls.Add(this.nonCash);
+            this.paymentMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paymentMethod.ForeColor = System.Drawing.Color.White;
+            this.paymentMethod.Location = new System.Drawing.Point(25, 190);
+            this.paymentMethod.Name = "paymentMethod";
+            this.paymentMethod.Size = new System.Drawing.Size(379, 57);
+            this.paymentMethod.TabIndex = 32;
+            this.paymentMethod.TabStop = false;
+            this.paymentMethod.Text = "Metode Pembayaran";
             // 
             // Cashier
             // 
@@ -654,8 +673,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.ClientSize = new System.Drawing.Size(1366, 768);
-            this.Controls.Add(this.btnOpenGate);
-            this.Controls.Add(this.ManualPayment);
             this.Controls.Add(this.panel11);
             this.Controls.Add(this.panel10);
             this.Controls.Add(this.logout);
@@ -690,7 +707,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ManualPayment)).EndInit();
+            this.paymentMethod.ResumeLayout(false);
+            this.paymentMethod.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -742,7 +760,8 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.PictureBox pictureBox9;
-        private System.Windows.Forms.PictureBox ManualPayment;
-        private System.Windows.Forms.Button btnOpenGate;
+        private System.Windows.Forms.RadioButton cash;
+        private System.Windows.Forms.RadioButton nonCash;
+        private System.Windows.Forms.GroupBox paymentMethod;
     }
 }
