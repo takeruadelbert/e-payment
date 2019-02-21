@@ -15,6 +15,7 @@ using BNITapCash.Bank.BNI;
 using BNITapCash.Helper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using BNITapCash.Forms;
 
 namespace BNITapCash
 {
@@ -109,6 +110,7 @@ namespace BNITapCash
             DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
+                Dispose();
                 System.Environment.Exit(1);
             }
         }
@@ -171,7 +173,7 @@ namespace BNITapCash
             Clear(true);
         }
 
-        private void Clear(bool include_uid = false)
+        public void Clear(bool include_uid = false)
         {
             if (include_uid)
                 textBox1.Text = "UID Card";
@@ -381,6 +383,50 @@ namespace BNITapCash
         private void ManualPayment_MouseHover(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(ManualPayment, "Manual Payment");
+        }
+
+        private void ManualPayment_Click(object sender, EventArgs e)
+        {
+            string uid_card = textBox1.Text.ToString();
+            string grandTotal = txtGrandTotal.Text.ToString();
+            if(string.IsNullOrEmpty(uid_card) || uid_card.ToLower() == "uid card")
+            {
+                MessageBox.Show("UID Card Tidak Boleh Kosong.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if(string.IsNullOrEmpty(grandTotal) || grandTotal == "0")
+            {
+                MessageBox.Show("Grand Total Tidak Boleh Kosong.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            ManualPayment manual = new ManualPayment(this, uid_card, grandTotal);
+            manual.Show();
+            Hide();
+        }
+
+        private void btnOpenGate_Click(object sender, EventArgs e)
+        {
+            JObject param = new JObject();
+            param["ipv4"] = this.helper.GetLocalIPAddress();
+            var sent_param = JsonConvert.SerializeObject(param);
+            RESTAPI open = new RESTAPI();
+            string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
+            DataResponse response = open.API_Post(ip_address_server, Properties.Resources.OpenGateAPIURL, sent_param);
+            if(response != null)
+            {
+                switch (response.Status)
+                {
+                    case 206:
+                        MessageBox.Show("Palang Berhasil Dibuka.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    default:
+                        MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
+            } else
+            {
+                MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
     }
 }

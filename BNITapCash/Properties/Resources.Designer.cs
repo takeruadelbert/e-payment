@@ -90,6 +90,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/parking_logs/open_gate.
+        /// </summary>
+        internal static string OpenGateAPIURL {
+            get {
+                return ResourceManager.GetString("OpenGateAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap password3 {
