@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BNITapCash
+namespace BNITapCash.Forms
 {
     public partial class Loading : Form
     {
