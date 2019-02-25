@@ -74,10 +74,11 @@
             this.panel13 = new System.Windows.Forms.Panel();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.panel12 = new System.Windows.Forms.Panel();
+            this.paymentMethod = new System.Windows.Forms.GroupBox();
             this.cash = new System.Windows.Forms.RadioButton();
             this.nonCash = new System.Windows.Forms.RadioButton();
-            this.paymentMethod = new System.Windows.Forms.GroupBox();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.webcam = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictVehicle)).BeginInit();
@@ -95,6 +96,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.panel11.SuspendLayout();
             this.paymentMethod.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.webcam)).BeginInit();
             this.SuspendLayout();
             // 
             // logo
@@ -220,11 +222,12 @@
             this.close.Cursor = System.Windows.Forms.Cursors.Hand;
             this.close.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.close.ForeColor = System.Drawing.Color.White;
-            this.close.Location = new System.Drawing.Point(1328, 15);
+            this.close.Location = new System.Drawing.Point(1327, 12);
             this.close.Name = "close";
             this.close.Size = new System.Drawing.Size(24, 24);
             this.close.TabIndex = 14;
             this.close.Text = "X";
+            this.close.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.close.Click += new System.EventHandler(this.close_Click);
             // 
             // pictureBox5
@@ -415,7 +418,7 @@
             this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(421, 698);
+            this.btnSave.Location = new System.Drawing.Point(471, 703);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(111, 34);
             this.btnSave.TabIndex = 26;
@@ -428,7 +431,7 @@
             this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(567, 698);
+            this.btnClear.Location = new System.Drawing.Point(617, 703);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(111, 34);
             this.btnClear.TabIndex = 27;
@@ -615,14 +618,18 @@
             this.panel11.Size = new System.Drawing.Size(939, 267);
             this.panel11.TabIndex = 31;
             // 
-            // panel12
+            // paymentMethod
             // 
-            this.panel12.BackColor = System.Drawing.Color.White;
-            this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel12.Location = new System.Drawing.Point(0, 179);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(937, 1);
-            this.panel12.TabIndex = 1;
+            this.paymentMethod.Controls.Add(this.cash);
+            this.paymentMethod.Controls.Add(this.nonCash);
+            this.paymentMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paymentMethod.ForeColor = System.Drawing.Color.White;
+            this.paymentMethod.Location = new System.Drawing.Point(25, 190);
+            this.paymentMethod.Name = "paymentMethod";
+            this.paymentMethod.Size = new System.Drawing.Size(379, 57);
+            this.paymentMethod.TabIndex = 32;
+            this.paymentMethod.TabStop = false;
+            this.paymentMethod.Text = "Metode Pembayaran";
             // 
             // cash
             // 
@@ -654,18 +661,27 @@
             this.nonCash.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.nonCash.UseVisualStyleBackColor = true;
             // 
-            // paymentMethod
+            // panel12
             // 
-            this.paymentMethod.Controls.Add(this.cash);
-            this.paymentMethod.Controls.Add(this.nonCash);
-            this.paymentMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paymentMethod.ForeColor = System.Drawing.Color.White;
-            this.paymentMethod.Location = new System.Drawing.Point(25, 190);
-            this.paymentMethod.Name = "paymentMethod";
-            this.paymentMethod.Size = new System.Drawing.Size(379, 57);
-            this.paymentMethod.TabIndex = 32;
-            this.paymentMethod.TabStop = false;
-            this.paymentMethod.Text = "Metode Pembayaran";
+            this.panel12.BackColor = System.Drawing.Color.White;
+            this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel12.Location = new System.Drawing.Point(0, 179);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(937, 1);
+            this.panel12.TabIndex = 1;
+            // 
+            // webcam
+            // 
+            this.webcam.BackgroundImage = global::BNITapCash.Properties.Resources.no_image;
+            this.webcam.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.webcam.ImageLocation = "";
+            this.webcam.Location = new System.Drawing.Point(834, 18);
+            this.webcam.Name = "webcam";
+            this.webcam.Size = new System.Drawing.Size(94, 96);
+            this.webcam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.webcam.TabIndex = 32;
+            this.webcam.TabStop = false;
+            this.webcam.Visible = false;
             // 
             // Cashier
             // 
@@ -673,6 +689,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.ClientSize = new System.Drawing.Size(1366, 768);
+            this.Controls.Add(this.webcam);
             this.Controls.Add(this.panel11);
             this.Controls.Add(this.panel10);
             this.Controls.Add(this.logout);
@@ -709,6 +726,7 @@
             this.panel11.PerformLayout();
             this.paymentMethod.ResumeLayout(false);
             this.paymentMethod.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.webcam)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -763,5 +781,6 @@
         private System.Windows.Forms.RadioButton cash;
         private System.Windows.Forms.RadioButton nonCash;
         private System.Windows.Forms.GroupBox paymentMethod;
+        private System.Windows.Forms.PictureBox webcam;
     }
 }

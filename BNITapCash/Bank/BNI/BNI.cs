@@ -34,7 +34,8 @@ namespace BNITapCash.Bank.BNI
         byte LEDAntGreen = 0x20;
         byte LEDAntBlue = 0x40;
 
-        private string TID = "12001401";
+        private const string TID = "12001401";
+        private const string settlementMID = "000100012000014";
 
         private Cashier cashier;
         private TKHelper tk = new TKHelper();
@@ -82,7 +83,7 @@ namespace BNITapCash.Bank.BNI
                     try
                     {
                         Console.WriteLine("Initializing SAM ...");
-                        return bni.initSAM(this.readerList[2]);
+                        return bni.initSAM(this.readerList[3]);
                     }
                     catch (Exception ex)
                     {
@@ -107,7 +108,7 @@ namespace BNITapCash.Bank.BNI
             {
                 try
                 {
-                    return bni.getSAMStatus(this.readerList[2]);
+                    return bni.getSAMStatus(this.readerList[3]);
                 }
                 catch (Exception ex)
                 {
@@ -203,17 +204,13 @@ namespace BNITapCash.Bank.BNI
             Console.WriteLine();
         }
 
-        private void CreateSettlement()
+        private void CreateSettlement(string deductResult)
         {
             FileWatcher.newFile.Clear();
-            string tidSettlement = this.TID;
+            string tidSettlement = TID;
             List<Trx> listDebitLine = new List<Trx>();
 
-            string[] filelines = new string[] {
-                "D01754613000000685901FFFFFF2B1F6F6312001401000EE4740EE4730000120000000000BF45E708FC584A560000000000000000000000001200140101FFFFFF2B1F688F535643202037362000A34CF8059B18087700001100000000000050000000000017",
-                "D01754613000001274101FFFFFF2B1F708912001402000F41EC0F41EB0000560000010000019DF34B3E808AB699889333020F42402B1EBAA01200140101FFFFFF2B1F68A8535643202037362000E432CD52EAB023DE00005500000100000050000000000017",
-                "D01754613000000685901FFFFFF2B1F6F6312001401000EE4740EE4730000120000000000BF45E708FC584A560000000000000000000000001200140101FFFFFF2B1F688F535643202037362000A34CF8059B18087700001100000000000050000000000017"
-            };
+            string[] filelines = new string[] { deductResult };
             for (int a = 0; a < filelines.Length; a++)
             {
                 string debitLine = filelines[a];
@@ -234,7 +231,7 @@ namespace BNITapCash.Bank.BNI
                     settlementList.Add(elemen.TrxLine);
                 }
             }
-            string result = bni.createSettlement(settlementList, "000100012000014", tidSettlement);
+            string result = bni.createSettlement(settlementList, settlementMID, tidSettlement);
             Console.WriteLine(result);
 
             // insert to local database
@@ -263,10 +260,10 @@ namespace BNITapCash.Bank.BNI
                 int cardBalance = Int32.Parse(this.GetCardBalance());
                 if (cardBalance > 0 && (cardBalance - amount) > 0)
                 {
-                    string result = bni.debitProcess(this.readerList[2].ToString(), this.selectedReader.ToString(), amount, this.TID);
+                    string result = bni.debitProcess(this.readerList[3].ToString(), this.selectedReader.ToString(), amount, TID);
                     Console.WriteLine("Successfully Deducted for Rp. " + amount + ",-.");
                     Console.WriteLine("Current Balance : " + String.Format("{0:n}", Int32.Parse(this.GetCardBalance())));
-                    this.CreateSettlement();
+                    this.CreateSettlement(result);
 
                     acr123u.connectDirect();
                     int repeat = 3;

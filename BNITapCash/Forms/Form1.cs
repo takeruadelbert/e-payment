@@ -17,6 +17,7 @@ using BNITapCash.Helper;
 using System.Threading;
 using BNITapCash.Miscellaneous;
 using BNITapCash.DB;
+using BNITapCash.Forms;
 
 namespace BNITapCash
 {
