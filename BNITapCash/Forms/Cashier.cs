@@ -146,7 +146,7 @@ namespace BNITapCash
                     MessageBox.Show("Snapshoot Webcam Bermasalah.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                Bitmap bmp = new Bitmap(webcamImage.Image, 50, 30);
+                Bitmap bmp = new Bitmap(webcamImage.Image, 480, 360); // 360p resolution
                 //var compressedBmp = Base64Helper.GetCompressedBitmap(bmp, 30L);
                 string base64Image = bmp.ToBase64String(ImageFormat.Png);
 
