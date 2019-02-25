@@ -24,10 +24,10 @@ namespace BNITapCash.DB
 
         private void Initialize()
         {
-            server = "localhost";
-            database = "epayment";
-            uid = "root";
-            password = "takeru123";
+            server = Properties.Settings.Default.DBHost;
+            database = Properties.Settings.Default.DBName;
+            uid = Properties.Settings.Default.DBUsername;
+            password = Properties.Settings.Default.DBPassword;
             string connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
             connection = new MySqlConnection(connectionString);
         }

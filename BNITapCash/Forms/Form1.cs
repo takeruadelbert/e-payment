@@ -25,6 +25,7 @@ namespace BNITapCash
     {
         private Setting setting;
         private Cashier cashier;
+        private DatabaseConfig DBConfig;
         private TKHelper tk = new TKHelper();
 
         public Login()
@@ -32,6 +33,7 @@ namespace BNITapCash
             InitializeComponent();
             InitData();
             this.setting = new Setting(this);
+            this.DBConfig = new DatabaseConfig(this);
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -100,8 +102,8 @@ namespace BNITapCash
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            Hide();
-            setting.Show();
+            //Hide();
+            //setting.Show();
         }
 
         private void SignIn()
@@ -273,6 +275,26 @@ namespace BNITapCash
         {
             textBox2.Clear();
             checkBox1.Checked = false;
+        }
+
+        private void iPv4ServerCameraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Hide();
+            setting.Show();
+        }
+
+        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                contextMenuStrip1.Show(this.PointToScreen(e.Location));
+            }
+        }
+
+        private void databaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Hide();
+            DBConfig.Show();
         }
     }
 }
