@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -15,6 +16,7 @@ using BNITapCash.Bank.BNI;
 using BNITapCash.Helper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using BNITapCash.Miscellaneous.Webcam;
 
 namespace BNITapCash
 {
@@ -25,6 +27,9 @@ namespace BNITapCash
         private TKHelper helper;
         private string liveCameraURL = "http://" + Properties.Settings.Default.IPAddressLiveCamera + "/snapshot";
         JPEGStream stream;
+
+        public PictureBox webcamImage;
+        private Webcam camera;
 
         public string UIDCard
         {
@@ -44,6 +49,8 @@ namespace BNITapCash
             InitializeComponent();
             this.home = home;
             Initialize();
+            this.webcamImage = webcam;
+            InitializeWebcam();
         }
 
         private void Initialize()
@@ -90,6 +97,12 @@ namespace BNITapCash
             }
         }
 
+        private void InitializeWebcam()
+        {
+            camera = new Webcam(this);
+            camera.StartWebcam();
+        }
+
         private void logo_Click(object sender, EventArgs e)
         {
 
@@ -127,16 +140,28 @@ namespace BNITapCash
             {
                 int totalFare = this.helper.IDRToNominal(txtGrandTotal.Text.ToString());
 
+                // encoded base64 Image from Webcam
+                if(webcamImage.Image == null)
+                {
+                    MessageBox.Show("Snapshoot Webcam Bermasalah.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                Bitmap bmp = new Bitmap(webcamImage.Image, 50, 30);
+                //var compressedBmp = Base64Helper.GetCompressedBitmap(bmp, 30L);
+                string base64Image = bmp.ToBase64String(ImageFormat.Png);
+
                 // check the payment method whether it's cash or non-cash
                 string type = nonCash.Checked ? "noncash" : "cash";
                 if (type == "noncash")
                 {
+                    string paymentMethod = "NCSH";
+                    string bankCode = "BNI";
                     // deduct balance of card
-                    string responseDeduct = bni.DeductBalance();
+                    string responseDeduct = bni.DeductBalance(totalFare);
                     if (responseDeduct == "OK")
                     {
                         // API POST Data to server
-                        this.SendDataToServer(totalFare);
+                        this.SendDataToServer(totalFare, base64Image, paymentMethod, bankCode);
                     }
                     else
                     {
@@ -146,7 +171,8 @@ namespace BNITapCash
                 }
                 else
                 {
-                    this.SendDataToServer(totalFare);
+                    string paymentMethod = "CASH";
+                    this.SendDataToServer(totalFare, base64Image, paymentMethod);
                 }
             }
             else
@@ -370,7 +396,7 @@ namespace BNITapCash
             }
         }
 
-        private void SendDataToServer(int totalFare)
+        private void SendDataToServer(int totalFare, string base64Image, string paymentMethod, string bankCode = "")
         {
             JObject param = new JObject();
             param["uid"] = textBox1.Text.ToString();
@@ -380,6 +406,9 @@ namespace BNITapCash
             param["plate_number"] = textBox2.Text.ToString();
             param["total_fare"] = totalFare;
             param["ipv4"] = this.helper.GetLocalIPAddress();
+            param["payment_method"] = paymentMethod;
+            param["bank_code"] = bankCode;
+            param["image"] = base64Image;
             var sent_param = JsonConvert.SerializeObject(param);
             RESTAPI save = new RESTAPI();
             string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
