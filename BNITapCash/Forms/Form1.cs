@@ -26,6 +26,7 @@ namespace BNITapCash
         private Setting setting;
         private Cashier cashier;
         private DatabaseConfig DBConfig;
+        private About about;
         private TKHelper tk = new TKHelper();
 
         public Login()
@@ -34,6 +35,7 @@ namespace BNITapCash
             InitData();
             this.setting = new Setting(this);
             this.DBConfig = new DatabaseConfig(this);
+            this.about = new About();
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -295,6 +297,15 @@ namespace BNITapCash
         {
             Hide();
             DBConfig.Show();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(!about.Visible)
+            {
+                about = new About();
+                about.Show();
+            }
         }
     }
 }

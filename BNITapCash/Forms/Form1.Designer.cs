@@ -40,6 +40,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iPv4ServerCameraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.password = new System.Windows.Forms.PictureBox();
             this.username = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -144,9 +145,10 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.databaseToolStripMenuItem,
-            this.iPv4ServerCameraToolStripMenuItem});
+            this.iPv4ServerCameraToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
             // 
             // databaseToolStripMenuItem
             // 
@@ -163,6 +165,15 @@
             this.iPv4ServerCameraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.iPv4ServerCameraToolStripMenuItem.Text = "IPv4 Server/Camera";
             this.iPv4ServerCameraToolStripMenuItem.Click += new System.EventHandler(this.iPv4ServerCameraToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.BackgroundImage = global::BNITapCash.Properties.Resources.version;
+            this.aboutToolStripMenuItem.Image = global::BNITapCash.Properties.Resources.version;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Text = "About E-Payment";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // password
             // 
@@ -270,6 +281,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem databaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iPv4ServerCameraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

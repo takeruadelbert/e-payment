@@ -71,6 +71,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to www.linkedin.com/in/lukas-fam-037645175.
+        /// </summary>
+        internal static string DeveloperURL {
+            get {
+                return ResourceManager.GetString("DeveloperURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap host {
@@ -182,6 +191,25 @@ namespace BNITapCash.Properties {
             get {
                 object obj = ResourceManager.GetObject("username5", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap version {
+            get {
+                object obj = ResourceManager.GetObject("version", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1.0.1.
+        /// </summary>
+        internal static string VersionApp {
+            get {
+                return ResourceManager.GetString("VersionApp", resourceCulture);
             }
         }
     }

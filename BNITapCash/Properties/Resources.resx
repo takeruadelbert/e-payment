@@ -117,33 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="stn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\stn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RequestUIDFareAPIURL" xml:space="preserve">
-    <value>/ws/parking_outs/request_uid_fare</value>
-    <comment>API for Request Data Parking In by UID card</comment>
-  </data>
-  <data name="RequestVehicleTypeAPIURL" xml:space="preserve">
-    <value>/ws/vehicle_types/get_all_vehicle_name</value>
-    <comment>API for request data vehicle type</comment>
-  </data>
-  <data name="database" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\database.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Icon_pc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icon_pc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ipaddress" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ipaddress.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="SaveDataParkingAPIURL" xml:space="preserve">
     <value>/ws/parking_outs/save_parking_out</value>
     <comment>API for saving data to server</comment>
   </data>
-  <data name="username5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\username5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="database" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\database.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ipaddress" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ipaddress.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LoginAPIURL" xml:space="preserve">
+    <value>/ws/accounts/login_api</value>
+    <comment>API for Sign In</comment>
+  </data>
+  <data name="VersionApp" xml:space="preserve">
+    <value>1.0.1</value>
+    <comment>version of E-Payment Software</comment>
+  </data>
+  <data name="Icon_pc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icon_pc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RequestVehicleTypeAPIURL" xml:space="preserve">
+    <value>/ws/vehicle_types/get_all_vehicle_name</value>
+    <comment>API for request data vehicle type</comment>
   </data>
   <data name="repo" xml:space="preserve">
     <value>/epass2018</value>
@@ -152,14 +150,27 @@
   <data name="no_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\no_image.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="host" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\host.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RequestUIDFareAPIURL" xml:space="preserve">
+    <value>/ws/parking_outs/request_uid_fare</value>
+    <comment>API for Request Data Parking In by UID card</comment>
+  </data>
+  <data name="DeveloperURL" xml:space="preserve">
+    <value>www.linkedin.com/in/lukas-fam-037645175</value>
+    <comment>how to get in touch with the developer of E-Payment Software</comment>
+  </data>
+  <data name="stn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="username5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\username5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="password3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\password3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LoginAPIURL" xml:space="preserve">
-    <value>/ws/accounts/login_api</value>
-    <comment>API for Sign In</comment>
-  </data>
-  <data name="host" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\host.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="version" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\version.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
