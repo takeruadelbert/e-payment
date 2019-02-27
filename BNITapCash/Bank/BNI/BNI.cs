@@ -11,6 +11,7 @@ using BNITapCash.Helper;
 using BNITapCash.Miscellaneous.FileMonitor;
 using BNITapCash.DB;
 using System.Text.RegularExpressions;
+using System.Security.Principal;
 
 namespace BNITapCash.Bank.BNI
 {
@@ -237,8 +238,9 @@ namespace BNITapCash.Bank.BNI
             // insert to local database
             for (int i = 0; i < FileWatcher.newFile.Count; i++)
             {
-                string path_file = tk.GetApplicationExecutableDirectoryName() + "\\bin\\Debug\\settlement\\" + FileWatcher.newFile[i];
-                path_file = Regex.Replace(path_file, @"\\", @"\\");
+                string filename = @FileWatcher.newFile[i];
+                string path = @tk.GetApplicationExecutableDirectoryName() + @"\bin\Debug\settlement\";
+                string path_file = @tk.GetApplicationExecutableDirectoryName() + @"\bin\\Debug\settlement\" + FileWatcher.newFile[i];
                 string created = tk.ConvertDatetimeToDefaultFormat(tk.GetCurrentDatetime());
                 string query = "INSERT INTO settlements (path_file, created) VALUES('" + path_file + "', '" + created + "')";
                 try
@@ -249,6 +251,24 @@ namespace BNITapCash.Bank.BNI
                 {
                     Console.WriteLine(ex.Message);
                 }
+
+                // copy file to destination server
+                try
+                {
+                    string targetPath = "\\" + Properties.Settings.Default.DBHost + @"\test\";
+
+                    string sourceFile = Path.Combine(path, filename);
+                    string destFile = Path.Combine(targetPath, filename);
+                    if (!Directory.Exists(targetPath))
+                    {
+                        Directory.CreateDirectory(targetPath);
+                    }
+                    File.Copy(sourceFile, destFile, true);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }                
             }
         }
 
