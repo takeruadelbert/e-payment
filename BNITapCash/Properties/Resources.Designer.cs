@@ -175,6 +175,24 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to \Public.
+        /// </summary>
+        internal static string SettlementPathFromWindows {
+            get {
+                return ResourceManager.GetString("SettlementPathFromWindows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /home/adminstn/settlement/.
+        /// </summary>
+        internal static string SettlmentPathInUbuntu {
+            get {
+                return ResourceManager.GetString("SettlmentPathInUbuntu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap stn {

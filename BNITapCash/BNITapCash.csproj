@@ -104,6 +104,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\Base64Helper.cs" />
+    <Compile Include="Helper\ServerHelper.cs" />
     <Compile Include="Helper\TKHelper.cs" />
     <Compile Include="Miscellaneous\FileMonitor\FileWatcher.cs" />
     <Compile Include="Forms\Loading.cs">

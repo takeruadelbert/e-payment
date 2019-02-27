@@ -40,6 +40,7 @@ namespace BNITapCash.Bank.BNI
 
         private Cashier cashier;
         private TKHelper tk = new TKHelper();
+        private ServerHelper serverHelper = new ServerHelper();
         private FileWatcher watcher;
         private DBConnect database;
 
@@ -233,7 +234,7 @@ namespace BNITapCash.Bank.BNI
                 }
             }
             string result = bni.createSettlement(settlementList, settlementMID, tidSettlement);
-            Console.WriteLine(result);
+            //Console.WriteLine(result);
 
             // insert to local database
             for (int i = 0; i < FileWatcher.newFile.Count; i++)
@@ -241,8 +242,18 @@ namespace BNITapCash.Bank.BNI
                 string filename = @FileWatcher.newFile[i];
                 string path = @tk.GetApplicationExecutableDirectoryName() + @"\bin\Debug\settlement\";
                 string path_file = @tk.GetApplicationExecutableDirectoryName() + @"\bin\\Debug\settlement\" + FileWatcher.newFile[i];
+
+                // get settlement path in server
+                string serverSettlementPath = Properties.Resources.SettlmentPathInUbuntu + filename;
+
                 string created = tk.ConvertDatetimeToDefaultFormat(tk.GetCurrentDatetime());
-                string query = "INSERT INTO settlements (path_file, created) VALUES('" + path_file + "', '" + created + "')";
+                string query = "INSERT INTO settlements (path_file, created) VALUES('" + serverSettlementPath + "', '" + created + "')";
+
+                // copy file to destination server
+                string targetPath = @"\\" + Properties.Settings.Default.DBHost + @Properties.Resources.SettlementPathFromWindows;
+                serverHelper.CopyFileToServer(filename, path, targetPath);
+
+                // insert to server database
                 try
                 {
                     database.Insert(query);
@@ -251,24 +262,7 @@ namespace BNITapCash.Bank.BNI
                 {
                     Console.WriteLine(ex.Message);
                 }
-
-                // copy file to destination server
-                try
-                {
-                    string targetPath = "\\" + Properties.Settings.Default.DBHost + @"\test\";
-
-                    string sourceFile = Path.Combine(path, filename);
-                    string destFile = Path.Combine(targetPath, filename);
-                    if (!Directory.Exists(targetPath))
-                    {
-                        Directory.CreateDirectory(targetPath);
-                    }
-                    File.Copy(sourceFile, destFile, true);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }                
+                
             }
         }
 
