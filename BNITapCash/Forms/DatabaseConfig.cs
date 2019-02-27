@@ -48,7 +48,6 @@ namespace BNITapCash.Forms
 
         private void InitData()
         {
-            Console.WriteLine(Properties.Settings.Default.DBHost);
             if (Properties.Settings.Default.DBHost != string.Empty)
             {
                 txtDBHost.Text = Properties.Settings.Default.DBHost;
