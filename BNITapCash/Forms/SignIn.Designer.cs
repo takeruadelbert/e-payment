@@ -40,6 +40,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iPv4ServerCameraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tIDSettlementMIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.password = new System.Windows.Forms.PictureBox();
             this.username = new System.Windows.Forms.PictureBox();
@@ -146,15 +147,16 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.databaseToolStripMenuItem,
             this.iPv4ServerCameraToolStripMenuItem,
+            this.tIDSettlementMIDToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(178, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(180, 92);
             // 
             // databaseToolStripMenuItem
             // 
             this.databaseToolStripMenuItem.Image = global::BNITapCash.Properties.Resources.database;
             this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.databaseToolStripMenuItem.Text = "Database";
             this.databaseToolStripMenuItem.Click += new System.EventHandler(this.databaseToolStripMenuItem_Click);
             // 
@@ -162,16 +164,24 @@
             // 
             this.iPv4ServerCameraToolStripMenuItem.Image = global::BNITapCash.Properties.Resources.ipaddress;
             this.iPv4ServerCameraToolStripMenuItem.Name = "iPv4ServerCameraToolStripMenuItem";
-            this.iPv4ServerCameraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.iPv4ServerCameraToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.iPv4ServerCameraToolStripMenuItem.Text = "IPv4 Server/Camera";
             this.iPv4ServerCameraToolStripMenuItem.Click += new System.EventHandler(this.iPv4ServerCameraToolStripMenuItem_Click);
+            // 
+            // tIDSettlementMIDToolStripMenuItem
+            // 
+            this.tIDSettlementMIDToolStripMenuItem.Image = global::BNITapCash.Properties.Resources.id;
+            this.tIDSettlementMIDToolStripMenuItem.Name = "tIDSettlementMIDToolStripMenuItem";
+            this.tIDSettlementMIDToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.tIDSettlementMIDToolStripMenuItem.Text = "TID/Settlement MID";
+            this.tIDSettlementMIDToolStripMenuItem.Click += new System.EventHandler(this.tIDSettlementMIDToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.BackgroundImage = global::BNITapCash.Properties.Resources.version;
             this.aboutToolStripMenuItem.Image = global::BNITapCash.Properties.Resources.version;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.aboutToolStripMenuItem.Text = "About E-Payment";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -283,6 +293,7 @@
         private System.Windows.Forms.ToolStripMenuItem databaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iPv4ServerCameraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tIDSettlementMIDToolStripMenuItem;
     }
 }
 

@@ -102,6 +102,16 @@ namespace BNITapCash.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap id {
+            get {
+                object obj = ResourceManager.GetObject("id", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ipaddress {
             get {
                 object obj = ResourceManager.GetObject("ipaddress", resourceCulture);
@@ -115,6 +125,16 @@ namespace BNITapCash.Properties {
         internal static string LoginAPIURL {
             get {
                 return ResourceManager.GetString("LoginAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mid {
+            get {
+                object obj = ResourceManager.GetObject("mid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -198,6 +218,16 @@ namespace BNITapCash.Properties {
         internal static System.Drawing.Bitmap stn {
             get {
                 object obj = ResourceManager.GetObject("stn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tid {
+            get {
+                object obj = ResourceManager.GetObject("tid", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

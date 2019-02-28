@@ -27,6 +27,7 @@ namespace BNITapCash
         private Cashier cashier;
         private DatabaseConfig DBConfig;
         private About about;
+        private TMID tmid;
         private TKHelper tk = new TKHelper();
 
         public Login()
@@ -36,6 +37,7 @@ namespace BNITapCash
             this.setting = new Setting(this);
             this.DBConfig = new DatabaseConfig(this);
             this.about = new About();
+            this.tmid = new TMID(this);
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -138,6 +140,18 @@ namespace BNITapCash
             if (string.IsNullOrEmpty(this.setting.IPAddressLiveCamera))
             {
                 MessageBox.Show("Invalid IP Address Live Camera.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // validate TID & Settlement MID for further transaction
+            if(string.IsNullOrEmpty(this.tmid.TID))
+            {
+                MessageBox.Show("Invalid 'TID' value.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if(string.IsNullOrEmpty(this.tmid.MID))
+            {
+                MessageBox.Show("Invalid 'Settlement MID' value.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -306,6 +320,12 @@ namespace BNITapCash
                 about = new About();
                 about.Show();
             }
+        }
+
+        private void tIDSettlementMIDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Hide();
+            tmid.Show();
         }
     }
 }

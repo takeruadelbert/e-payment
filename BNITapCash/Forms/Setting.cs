@@ -134,6 +134,7 @@ namespace BNITapCash
             DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
+                Dispose();
                 System.Environment.Exit(1);
             }
         }

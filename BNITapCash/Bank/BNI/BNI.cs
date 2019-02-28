@@ -35,8 +35,8 @@ namespace BNITapCash.Bank.BNI
         byte LEDAntGreen = 0x20;
         byte LEDAntBlue = 0x40;
 
-        private const string TID = "12001401";
-        private const string settlementMID = "000100012000014";
+        //private const string TID = "12001401";
+        //private const string settlementMID = "000100012000014";
 
         private Cashier cashier;
         private TKHelper tk = new TKHelper();
@@ -209,7 +209,7 @@ namespace BNITapCash.Bank.BNI
         private void CreateSettlement(string deductResult)
         {
             FileWatcher.newFile.Clear();
-            string tidSettlement = TID;
+            string tidSettlement = Properties.Settings.Default.TID;
             List<Trx> listDebitLine = new List<Trx>();
 
             string[] filelines = new string[] { deductResult };
@@ -233,7 +233,7 @@ namespace BNITapCash.Bank.BNI
                     settlementList.Add(elemen.TrxLine);
                 }
             }
-            string result = bni.createSettlement(settlementList, settlementMID, tidSettlement);
+            string result = bni.createSettlement(settlementList, Properties.Settings.Default.MID, tidSettlement);
             //Console.WriteLine(result);
 
             // insert to local database
@@ -274,7 +274,7 @@ namespace BNITapCash.Bank.BNI
                 int cardBalance = Int32.Parse(this.GetCardBalance());
                 if (cardBalance > 0 && (cardBalance - amount) > 0)
                 {
-                    string result = bni.debitProcess(this.readerList[3].ToString(), this.selectedReader.ToString(), amount, TID);
+                    string result = bni.debitProcess(this.readerList[3].ToString(), this.selectedReader.ToString(), amount, Properties.Settings.Default.TID);
                     Console.WriteLine("Successfully Deducted for Rp. " + amount + ",-.");
                     Console.WriteLine("Current Balance : " + String.Format("{0:n}", Int32.Parse(this.GetCardBalance())));
                     this.CreateSettlement(result);

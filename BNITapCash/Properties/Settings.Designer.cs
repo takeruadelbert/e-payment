@@ -130,5 +130,29 @@ namespace BNITapCash.Properties {
                 this["DBPassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TID {
+            get {
+                return ((string)(this["TID"]));
+            }
+            set {
+                this["TID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MID {
+            get {
+                return ((string)(this["MID"]));
+            }
+            set {
+                this["MID"] = value;
+            }
+        }
     }
 }
