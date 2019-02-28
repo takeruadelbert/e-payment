@@ -260,5 +260,15 @@ namespace BNITapCash.Properties {
                 return ResourceManager.GetString("VersionApp", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap webcam {
+            get {
+                object obj = ResourceManager.GetObject("webcam", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

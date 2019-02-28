@@ -146,8 +146,7 @@ namespace BNITapCash
                     MessageBox.Show("Snapshoot Webcam Bermasalah.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                Bitmap bmp = new Bitmap(webcamImage.Image, 480, 360); // 360p resolution
-                //var compressedBmp = Base64Helper.GetCompressedBitmap(bmp, 30L);
+                Bitmap bmp = new Bitmap(webcamImage.Image, Properties.Settings.Default.WebcamWidth, Properties.Settings.Default.WebcamHeight);
                 string base64Image = bmp.ToBase64String(ImageFormat.Png);
 
                 // check the payment method whether it's cash or non-cash

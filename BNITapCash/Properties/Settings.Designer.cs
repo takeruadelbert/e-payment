@@ -154,5 +154,29 @@ namespace BNITapCash.Properties {
                 this["MID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int WebcamWidth {
+            get {
+                return ((int)(this["WebcamWidth"]));
+            }
+            set {
+                this["WebcamWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int WebcamHeight {
+            get {
+                return ((int)(this["WebcamHeight"]));
+            }
+            set {
+                this["WebcamHeight"] = value;
+            }
+        }
     }
 }

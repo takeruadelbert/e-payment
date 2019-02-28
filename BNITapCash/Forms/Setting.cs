@@ -16,6 +16,8 @@ namespace BNITapCash
         private Form home;
         private string ip_address_server;
         private string ip_address_live_camera;
+        private int webcam_width;
+        private int webcam_height;
 
         public Setting(Form home)
         {
@@ -52,6 +54,16 @@ namespace BNITapCash
             }
         }
 
+        public int WebcamWidth
+        {
+            get; set;
+        }
+
+        public int WebcamHeight
+        {
+            get; set;
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.TextChangeListener(true);
@@ -69,17 +81,23 @@ namespace BNITapCash
 
         private void TextChangeListener(bool is_textchanged = false)
         {
-            if(!is_textchanged)
+            if (!is_textchanged)
             {
                 if (textBox1.Text == "IP Address Server")
                     textBox1.Clear();
                 else if (textBox2.Text == "IP Address Live Camera")
                     textBox2.Clear();
-            }            
+                else if (txtWidth.Text == "Width")
+                    txtWidth.Clear();
+                else if (txtHeight.Text == "Height")
+                    txtHeight.Clear();
+            }
             pictureBox2.BackgroundImage = Properties.Resources.Icon_pc;
             panel1.ForeColor = Color.FromArgb(78, 184, 206);
             textBox1.ForeColor = Color.FromArgb(78, 184, 206);
             textBox2.ForeColor = Color.FromArgb(78, 184, 206);
+            txtWidth.ForeColor = Color.FromArgb(78, 184, 206);
+            txtHeight.ForeColor = Color.FromArgb(78, 184, 206);
         }
 
         private void back_Click(object sender, EventArgs e)
@@ -92,6 +110,8 @@ namespace BNITapCash
         {
             string ipv4 = textBox1.Text.ToString();
             string ipv4_live_cam = textBox2.Text.ToString();
+            int width = Convert.ToInt32(txtWidth.Text);
+            int height = Convert.ToInt32(txtHeight.Text);
             TKHelper tk = new TKHelper();
             if (ipv4 != "" && ipv4 != "IP Address Server" && ipv4 != null)
             {
@@ -103,6 +123,8 @@ namespace BNITapCash
                         {
                             Properties.Settings.Default.IPAddressServer = ipv4;
                             Properties.Settings.Default.IPAddressLiveCamera = ipv4_live_cam;
+                            Properties.Settings.Default.WebcamWidth = width;
+                            Properties.Settings.Default.WebcamHeight = height;
                             Properties.Settings.Default.Save();
                             IPAddressServer = ipv4;
                             IPAddressLiveCamera = ipv4_live_cam;
@@ -157,6 +179,29 @@ namespace BNITapCash
                 textBox2.Text = Properties.Settings.Default.IPAddressLiveCamera;
                 IPAddressLiveCamera = Properties.Settings.Default.IPAddressLiveCamera;
             }
+
+            // give default value of resolution : (480 x 360)
+            if (Properties.Settings.Default.WebcamWidth != 0)
+            {
+                txtWidth.Text = Properties.Settings.Default.WebcamWidth.ToString();
+                WebcamWidth = Properties.Settings.Default.WebcamWidth;
+            }
+            else
+            {
+                txtWidth.Text = "480";
+                WebcamWidth = 480;
+            }
+
+            if (Properties.Settings.Default.WebcamHeight != 0)
+            {
+                txtHeight.Text = Properties.Settings.Default.WebcamHeight.ToString();
+                WebcamHeight = Properties.Settings.Default.WebcamHeight;
+            }
+            else
+            {
+                txtHeight.Text = "360";
+                WebcamHeight = 360;
+            }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -167,6 +212,42 @@ namespace BNITapCash
         private void textBox2_Click(object sender, EventArgs e)
         {
             this.TextChangeListener();
+        }
+
+        private void txtWidth_TextChanged(object sender, EventArgs e)
+        {
+            this.TextChangeListener(true);
+        }
+
+        private void txtHeight_TextChanged(object sender, EventArgs e)
+        {
+            this.TextChangeListener(true);
+        }
+
+        private void txtWidth_Click(object sender, EventArgs e)
+        {
+            this.TextChangeListener();
+        }
+
+        private void txtHeight_Click(object sender, EventArgs e)
+        {
+            this.TextChangeListener();
+        }
+
+        private void txtWidth_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtHeight_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
