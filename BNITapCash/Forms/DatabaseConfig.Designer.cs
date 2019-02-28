@@ -46,6 +46,7 @@
             this.back = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.minimize = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.password)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.username)).BeginInit();
@@ -259,12 +260,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Database Configuration";
             // 
+            // minimize
+            // 
+            this.minimize.AutoSize = true;
+            this.minimize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.minimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.minimize.ForeColor = System.Drawing.Color.White;
+            this.minimize.Location = new System.Drawing.Point(665, 12);
+            this.minimize.Name = "minimize";
+            this.minimize.Size = new System.Drawing.Size(21, 24);
+            this.minimize.TabIndex = 22;
+            this.minimize.Text = "_";
+            this.minimize.Click += new System.EventHandler(this.minimize_Click);
+            // 
             // DatabaseConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.ClientSize = new System.Drawing.Size(723, 425);
+            this.Controls.Add(this.minimize);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.back);
             this.Controls.Add(this.quit);
@@ -309,5 +324,6 @@
         private System.Windows.Forms.Button back;
         private System.Windows.Forms.Button save;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label minimize;
     }
 }

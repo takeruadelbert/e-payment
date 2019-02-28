@@ -156,7 +156,7 @@ namespace BNITapCash
                     string paymentMethod = "NCSH";
                     string bankCode = "BNI";
                     // deduct balance of card
-                    string responseDeduct = bni.DeductBalance(totalFare);
+                    string responseDeduct = bni.DeductBalance();
                     if (responseDeduct == "OK")
                     {
                         // API POST Data to server
@@ -429,6 +429,11 @@ namespace BNITapCash
             {
                 MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void minimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

@@ -79,6 +79,7 @@
             this.nonCash = new System.Windows.Forms.RadioButton();
             this.panel12 = new System.Windows.Forms.Panel();
             this.webcam = new System.Windows.Forms.PictureBox();
+            this.minimize = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictVehicle)).BeginInit();
@@ -683,12 +684,26 @@
             this.webcam.TabStop = false;
             this.webcam.Visible = false;
             // 
+            // minimize
+            // 
+            this.minimize.AutoSize = true;
+            this.minimize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.minimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.minimize.ForeColor = System.Drawing.Color.White;
+            this.minimize.Location = new System.Drawing.Point(1307, 9);
+            this.minimize.Name = "minimize";
+            this.minimize.Size = new System.Drawing.Size(21, 24);
+            this.minimize.TabIndex = 33;
+            this.minimize.Text = "_";
+            this.minimize.Click += new System.EventHandler(this.minimize_Click);
+            // 
             // Cashier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.ClientSize = new System.Drawing.Size(1366, 768);
+            this.Controls.Add(this.minimize);
             this.Controls.Add(this.webcam);
             this.Controls.Add(this.panel11);
             this.Controls.Add(this.panel10);
@@ -729,6 +744,7 @@
             this.paymentMethod.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.webcam)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -783,5 +799,6 @@
         private System.Windows.Forms.RadioButton nonCash;
         private System.Windows.Forms.GroupBox paymentMethod;
         private System.Windows.Forms.PictureBox webcam;
+        private System.Windows.Forms.Label minimize;
     }
 }

@@ -120,5 +120,10 @@ namespace BNITapCash.Forms
                 System.Environment.Exit(1);
             }
         }
+
+        private void minimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 }
