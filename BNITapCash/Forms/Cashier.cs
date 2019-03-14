@@ -427,7 +427,7 @@ namespace BNITapCash
             }
             else
             {
-                MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error found when receiving server response.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

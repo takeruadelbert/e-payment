@@ -85,7 +85,7 @@ namespace BNITapCash.Bank.BNI
                     try
                     {
                         Console.WriteLine("Initializing SAM ...");
-                        return bni.initSAM(this.readerList[3]);
+                        return bni.initSAM(this.readerList[2]);
                     }
                     catch (Exception ex)
                     {
@@ -110,7 +110,7 @@ namespace BNITapCash.Bank.BNI
             {
                 try
                 {
-                    return bni.getSAMStatus(this.readerList[3]);
+                    return bni.getSAMStatus(this.readerList[2]);
                 }
                 catch (Exception ex)
                 {
@@ -237,33 +237,33 @@ namespace BNITapCash.Bank.BNI
             //Console.WriteLine(result);
 
             // insert to local database
-            for (int i = 0; i < FileWatcher.newFile.Count; i++)
-            {
-                string filename = @FileWatcher.newFile[i];
-                string path = @tk.GetApplicationExecutableDirectoryName() + @"\bin\Debug\settlement\";
-                string path_file = @tk.GetApplicationExecutableDirectoryName() + @"\bin\\Debug\settlement\" + FileWatcher.newFile[i];
+            //for (int i = 0; i < FileWatcher.newFile.Count; i++)
+            //{
+            //    string filename = @FileWatcher.newFile[i];
+            //    string path = @tk.GetApplicationExecutableDirectoryName() + @"\bin\Debug\settlement\";
+            //    string path_file = @tk.GetApplicationExecutableDirectoryName() + @"\bin\\Debug\settlement\" + FileWatcher.newFile[i];
 
-                // get settlement path in server
-                string serverSettlementPath = Properties.Resources.SettlmentPathInUbuntu + filename;
+            //    // get settlement path in server
+            //    string serverSettlementPath = Properties.Resources.SettlmentPathInUbuntu + filename;
 
-                string created = tk.ConvertDatetimeToDefaultFormat(tk.GetCurrentDatetime());
-                string query = "INSERT INTO settlements (path_file, created) VALUES('" + serverSettlementPath + "', '" + created + "')";
+            //    string created = tk.ConvertDatetimeToDefaultFormat(tk.GetCurrentDatetime());
+            //    string query = "INSERT INTO settlements (path_file, created) VALUES('" + serverSettlementPath + "', '" + created + "')";
 
-                // copy file to destination server
-                string targetPath = @"\\" + Properties.Settings.Default.DBHost + @Properties.Resources.SettlementPathFromWindows;
-                serverHelper.CopyFileToServer(filename, path, targetPath);
+            //    // copy file to destination server
+            //    string targetPath = @"\\" + Properties.Settings.Default.DBHost + @Properties.Resources.SettlementPathFromWindows;
+            //    serverHelper.CopyFileToServer(filename, path, targetPath);
 
-                // insert to server database
-                try
-                {
-                    database.Insert(query);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                
-            }
+            //    // insert to server database
+            //    try
+            //    {
+            //        database.Insert(query);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+            //    }
+
+            //}
         }
 
         public string DeductBalance(int amount = 0)
@@ -274,24 +274,39 @@ namespace BNITapCash.Bank.BNI
                 int cardBalance = Int32.Parse(this.GetCardBalance());
                 if (cardBalance > 0 && (cardBalance - amount) > 0)
                 {
-                    string result = bni.debitProcess(this.readerList[3].ToString(), this.selectedReader.ToString(), amount, Properties.Settings.Default.TID);
-                    Console.WriteLine("Successfully Deducted for Rp. " + amount + ",-.");
-                    Console.WriteLine("Current Balance : " + String.Format("{0:n}", Int32.Parse(this.GetCardBalance())));
-                    this.CreateSettlement(result);
+                    string result = bni.debitProcess(this.readerList[2].ToString(), this.selectedReader.ToString(), amount, Properties.Settings.Default.TID);
 
-                    acr123u.connectDirect();
-                    int repeat = 3;
-                    int onDuration = 5;
-                    int OffDuration = 10;
-                    acr123u.setBuzzerControl((byte)repeat, (byte)onDuration, (byte)OffDuration);
-                    this.LEDStatus = LEDGreen;
-                    this.LEDStatus |= LEDAntGreen;
-                    acr123u.LCDBacklightControl(0xFF);
-                    this.acr123u.setLEDControl(this.LEDStatus);
-                    this.SetLCDDisplayText("Success ...");
-                    acr123u.disconnect();
+                    // store deduct result card to server
+                    string created = tk.ConvertDatetimeToDefaultFormat(tk.GetCurrentDatetime());
+                    string query = "INSERT INTO deduct_card_results (result, created) VALUES('" + result + "', '" + created + "')";
+                    try
+                    {
+                        database.Insert(query);
 
-                    return "OK";
+                        Console.WriteLine("Successfully Deducted for Rp. " + amount + ",-.");
+                        Console.WriteLine("Current Balance : " + String.Format("{0:n}", Int32.Parse(this.GetCardBalance())));
+
+                        //this.CreateSettlement(result);
+
+                        acr123u.connectDirect();
+                        int repeat = 3;
+                        int onDuration = 5;
+                        int OffDuration = 10;
+                        acr123u.setBuzzerControl((byte)repeat, (byte)onDuration, (byte)OffDuration);
+                        this.LEDStatus = LEDGreen;
+                        this.LEDStatus |= LEDAntGreen;
+                        acr123u.LCDBacklightControl(0xFF);
+                        this.acr123u.setLEDControl(this.LEDStatus);
+                        this.SetLCDDisplayText("Success ...");
+                        acr123u.disconnect();
+
+                        return "OK";
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        return ex.Message;
+                    }
                 }
                 else
                 {
