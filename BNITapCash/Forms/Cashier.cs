@@ -156,7 +156,10 @@ namespace BNITapCash
                     string paymentMethod = "NCSH";
                     string bankCode = "BNI";
                     // deduct balance of card
-                    string responseDeduct = bni.DeductBalance(bankCode, totalFare);
+                    string ipv4 = helper.GetLocalIPAddress();
+                    string TIDSettlement = Properties.Settings.Default.TID;
+                    string operator_name = Properties.Settings.Default.Username;
+                    string responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name, totalFare);
                     if (responseDeduct == "OK")
                     {
                         // API POST Data to server
