@@ -266,7 +266,7 @@ namespace BNITapCash.Bank.BNI
             //}
         }
 
-        public string DeductBalance(int amount = 0)
+        public string DeductBalance(string bank, int amount = 0)
         {
             try
             {
@@ -278,7 +278,8 @@ namespace BNITapCash.Bank.BNI
 
                     // store deduct result card to server
                     string created = tk.ConvertDatetimeToDefaultFormat(tk.GetCurrentDatetime());
-                    string query = "INSERT INTO deduct_card_results (result, created) VALUES('" + result + "', '" + created + "')";
+                    string query = "INSERT INTO deduct_card_results (result, amount, transaction_dt, bank, created) VALUES('" + result + "', '" + amount + "', '" + created + "', '" + 
+                        bank + "', '" + created + "')";
                     try
                     {
                         database.Insert(query);
