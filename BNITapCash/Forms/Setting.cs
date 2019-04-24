@@ -254,5 +254,10 @@ namespace BNITapCash
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

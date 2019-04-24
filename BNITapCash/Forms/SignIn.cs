@@ -144,12 +144,12 @@ namespace BNITapCash
             }
 
             // validate TID & Settlement MID for further transaction
-            if(string.IsNullOrEmpty(this.tmid.TID))
+            if (string.IsNullOrEmpty(this.tmid.TID))
             {
                 MessageBox.Show("Invalid 'TID' value.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if(string.IsNullOrEmpty(this.tmid.MID))
+            if (string.IsNullOrEmpty(this.tmid.MID))
             {
                 MessageBox.Show("Invalid 'Settlement MID' value.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -173,7 +173,7 @@ namespace BNITapCash
                 {
                     MessageBox.Show("Error : Contactless Reader not available.\nPlease plug it and then try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
-                }                
+                }
 
                 // remember me feature
                 if (checkBox1.Checked)
@@ -244,9 +244,17 @@ namespace BNITapCash
                     {
                         case 201:
                             //MessageBox.Show(response.Message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.cashier = new Cashier(this);
-                            this.cashier.Show();
-                            Hide();
+                            try
+                            {
+                                this.cashier = new Cashier(this);
+                                this.cashier.Show();
+                                Hide();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Error : Can't Connect to Webcam.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }                            
                             break;
                         default:
                             MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -301,7 +309,7 @@ namespace BNITapCash
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
                 contextMenuStrip1.Show(this.PointToScreen(e.Location));
             }
@@ -315,7 +323,7 @@ namespace BNITapCash
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(!about.Visible)
+            if (!about.Visible)
             {
                 about = new About();
                 about.Show();

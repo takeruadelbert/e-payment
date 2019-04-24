@@ -51,6 +51,7 @@ namespace BNITapCash
             Initialize();
             this.webcamImage = webcam;
             InitializeWebcam();
+
         }
 
         private void Initialize()
@@ -141,7 +142,7 @@ namespace BNITapCash
                 int totalFare = this.helper.IDRToNominal(txtGrandTotal.Text.ToString());
 
                 // encoded base64 Image from Webcam
-                if(webcamImage.Image == null)
+                if (webcamImage.Image == null)
                 {
                     MessageBox.Show("Snapshoot Webcam Bermasalah.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
