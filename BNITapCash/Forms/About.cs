@@ -33,5 +33,15 @@ namespace BNITapCash.Forms
         {
             Dispose();
         }
+
+        private void txtVersion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void About_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

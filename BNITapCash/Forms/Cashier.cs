@@ -159,7 +159,7 @@ namespace BNITapCash
                     string ipv4 = helper.GetLocalIPAddress();
                     string TIDSettlement = Properties.Settings.Default.TID;
                     string operator_name = Properties.Settings.Default.Username;
-                    string responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name, totalFare);
+                    string responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
                     if (responseDeduct == "OK")
                     {
                         // API POST Data to server

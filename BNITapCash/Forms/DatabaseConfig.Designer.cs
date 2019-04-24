@@ -293,6 +293,7 @@
             this.Name = "DatabaseConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DatabaseConfig";
+            this.Load += new System.EventHandler(this.DatabaseConfig_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.password)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.username)).EndInit();

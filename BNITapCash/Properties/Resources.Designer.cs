@@ -71,7 +71,7 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to www.linkedin.com/in/lukas-fam-037645175.
+        ///   Looks up a localized string similar to https://takeruadelbert.github.io/.
         /// </summary>
         internal static string DeveloperURL {
             get {

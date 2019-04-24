@@ -53,6 +53,7 @@
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 1;
             this.progressBar1.UseWaitCursor = true;
+            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
             // 
             // Loading
             // 

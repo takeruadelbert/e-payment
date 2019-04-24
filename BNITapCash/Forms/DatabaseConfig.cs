@@ -210,5 +210,10 @@ namespace BNITapCash.Forms
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
+        private void DatabaseConfig_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
