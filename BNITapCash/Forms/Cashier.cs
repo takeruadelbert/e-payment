@@ -62,6 +62,8 @@ namespace BNITapCash
             try
             {
                 stream = new JPEGStream(liveCameraURL);
+                stream.Login = Properties.Settings.Default.LiveCameraUsername;
+                stream.Password = Properties.Settings.Default.LiveCameraPassword;
                 stream.NewFrame += stream_NewFrame;
                 stream.Start();
             }

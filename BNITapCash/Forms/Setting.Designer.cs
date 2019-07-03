@@ -49,6 +49,13 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.minimize = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.liveCameraUsername = new System.Windows.Forms.TextBox();
+            this.username = new System.Windows.Forms.PictureBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.liveCameraPassword = new System.Windows.Forms.TextBox();
+            this.password = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -56,6 +63,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.username)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.password)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -84,9 +94,9 @@
             // 
             this.save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
             this.save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.save.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.save.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.save.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
-            this.save.Location = new System.Drawing.Point(223, 450);
+            this.save.Location = new System.Drawing.Point(223, 588);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(111, 34);
             this.save.TabIndex = 4;
@@ -98,9 +108,9 @@
             // 
             this.back.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
             this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.back.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.back.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.back.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
-            this.back.Location = new System.Drawing.Point(90, 450);
+            this.back.Location = new System.Drawing.Point(90, 588);
             this.back.Name = "back";
             this.back.Size = new System.Drawing.Size(111, 34);
             this.back.TabIndex = 5;
@@ -279,7 +289,7 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.pictureBox5);
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.groupBox2.Location = new System.Drawing.Point(42, 312);
+            this.groupBox2.Location = new System.Drawing.Point(42, 450);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(332, 100);
             this.groupBox2.TabIndex = 18;
@@ -299,12 +309,95 @@
             this.minimize.Text = "_";
             this.minimize.Click += new System.EventHandler(this.minimize_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.panel6);
+            this.groupBox3.Controls.Add(this.liveCameraPassword);
+            this.groupBox3.Controls.Add(this.password);
+            this.groupBox3.Controls.Add(this.panel5);
+            this.groupBox3.Controls.Add(this.liveCameraUsername);
+            this.groupBox3.Controls.Add(this.username);
+            this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.groupBox3.Location = new System.Drawing.Point(37, 319);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(337, 100);
+            this.groupBox3.TabIndex = 20;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Live Camera";
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.White;
+            this.panel5.Location = new System.Drawing.Point(24, 65);
+            this.panel5.Name = "panel5";
+            this.panel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.panel5.Size = new System.Drawing.Size(130, 1);
+            this.panel5.TabIndex = 6;
+            // 
+            // liveCameraUsername
+            // 
+            this.liveCameraUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
+            this.liveCameraUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.liveCameraUsername.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.liveCameraUsername.ForeColor = System.Drawing.Color.White;
+            this.liveCameraUsername.Location = new System.Drawing.Point(55, 42);
+            this.liveCameraUsername.Name = "liveCameraUsername";
+            this.liveCameraUsername.Size = new System.Drawing.Size(86, 18);
+            this.liveCameraUsername.TabIndex = 5;
+            this.liveCameraUsername.Text = "Username";
+            this.liveCameraUsername.Click += new System.EventHandler(this.LiveCameraUsername_Click);
+            this.liveCameraUsername.TextChanged += new System.EventHandler(this.LiveCameraUsername_TextChanged);
+            // 
+            // username
+            // 
+            this.username.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("username.BackgroundImage")));
+            this.username.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.username.Location = new System.Drawing.Point(24, 36);
+            this.username.Name = "username";
+            this.username.Size = new System.Drawing.Size(24, 24);
+            this.username.TabIndex = 4;
+            this.username.TabStop = false;
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.White;
+            this.panel6.Location = new System.Drawing.Point(184, 66);
+            this.panel6.Name = "panel6";
+            this.panel6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.panel6.Size = new System.Drawing.Size(130, 1);
+            this.panel6.TabIndex = 7;
+            // 
+            // liveCameraPassword
+            // 
+            this.liveCameraPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
+            this.liveCameraPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.liveCameraPassword.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.liveCameraPassword.ForeColor = System.Drawing.Color.White;
+            this.liveCameraPassword.Location = new System.Drawing.Point(216, 42);
+            this.liveCameraPassword.Name = "liveCameraPassword";
+            this.liveCameraPassword.Size = new System.Drawing.Size(86, 18);
+            this.liveCameraPassword.TabIndex = 9;
+            this.liveCameraPassword.Text = "Password";
+            this.liveCameraPassword.Click += new System.EventHandler(this.LiveCameraPassword_Click);
+            this.liveCameraPassword.TextChanged += new System.EventHandler(this.LiveCameraPassword_TextChanged);
+            // 
+            // password
+            // 
+            this.password.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("password.BackgroundImage")));
+            this.password.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.password.Location = new System.Drawing.Point(184, 38);
+            this.password.Name = "password";
+            this.password.Size = new System.Drawing.Size(24, 24);
+            this.password.TabIndex = 8;
+            this.password.TabStop = false;
+            // 
             // Setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
-            this.ClientSize = new System.Drawing.Size(416, 535);
+            this.ClientSize = new System.Drawing.Size(416, 683);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.minimize);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -327,6 +420,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.username)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.password)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -354,5 +451,12 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label minimize;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.TextBox liveCameraUsername;
+        private System.Windows.Forms.PictureBox username;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.TextBox liveCameraPassword;
+        private System.Windows.Forms.PictureBox password;
     }
 }

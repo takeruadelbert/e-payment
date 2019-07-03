@@ -91,6 +91,10 @@ namespace BNITapCash
                     txtWidth.Clear();
                 else if (txtHeight.Text == "Height")
                     txtHeight.Clear();
+                else if (liveCameraUsername.Text == "Username")
+                    liveCameraUsername.Clear();
+                else if (liveCameraPassword.Text == "Password")
+                    liveCameraPassword.Clear();
             }
             pictureBox2.BackgroundImage = Properties.Resources.Icon_pc;
             panel1.ForeColor = Color.FromArgb(78, 184, 206);
@@ -98,6 +102,8 @@ namespace BNITapCash
             textBox2.ForeColor = Color.FromArgb(78, 184, 206);
             txtWidth.ForeColor = Color.FromArgb(78, 184, 206);
             txtHeight.ForeColor = Color.FromArgb(78, 184, 206);
+            liveCameraUsername.ForeColor = Color.FromArgb(78, 184, 206);
+            liveCameraPassword.ForeColor = Color.FromArgb(78, 184, 206);
         }
 
         private void back_Click(object sender, EventArgs e)
@@ -112,6 +118,8 @@ namespace BNITapCash
             string ipv4_live_cam = textBox2.Text.ToString();
             int width = Convert.ToInt32(txtWidth.Text);
             int height = Convert.ToInt32(txtHeight.Text);
+            string liveCamUsername = liveCameraUsername.Text;
+            string liveCamPassword = liveCameraPassword.Text;
             TKHelper tk = new TKHelper();
             if (ipv4 != "" && ipv4 != "IP Address Server" && ipv4 != null)
             {
@@ -125,6 +133,8 @@ namespace BNITapCash
                             Properties.Settings.Default.IPAddressLiveCamera = ipv4_live_cam;
                             Properties.Settings.Default.WebcamWidth = width;
                             Properties.Settings.Default.WebcamHeight = height;
+                            Properties.Settings.Default.LiveCameraUsername = liveCamUsername;
+                            Properties.Settings.Default.LiveCameraPassword = liveCamPassword;
                             Properties.Settings.Default.Save();
                             IPAddressServer = ipv4;
                             IPAddressLiveCamera = ipv4_live_cam;
@@ -202,6 +212,12 @@ namespace BNITapCash
                 txtHeight.Text = "360";
                 WebcamHeight = 360;
             }
+
+            if(Properties.Settings.Default.LiveCameraPassword != string.Empty)
+            {
+                liveCameraPassword.Text = Properties.Settings.Default.LiveCameraPassword;
+            }
+            liveCameraUsername.Text = Properties.Settings.Default.LiveCameraPassword;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -258,6 +274,27 @@ namespace BNITapCash
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void LiveCameraUsername_TextChanged(object sender, EventArgs e)
+        {
+            this.TextChangeListener(true);
+        }
+
+        private void LiveCameraPassword_TextChanged(object sender, EventArgs e)
+        {
+            textBox2.PasswordChar = '●';
+            this.TextChangeListener(true);
+        }
+
+        private void LiveCameraUsername_Click(object sender, EventArgs e)
+        {
+            this.TextChangeListener();
+        }
+
+        private void LiveCameraPassword_Click(object sender, EventArgs e)
+        {
+            this.TextChangeListener();
         }
     }
 }
