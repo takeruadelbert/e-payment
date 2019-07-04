@@ -76,10 +76,10 @@ namespace BNITapCash
 
         private void textBox1_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener();
+            this.TextChangeListener(false, "IP Address Server");
         }
 
-        private void TextChangeListener(bool is_textchanged = false)
+        private void TextChangeListener(bool is_textchanged = false, string field = "")
         {
             if (!is_textchanged)
             {
@@ -103,7 +103,8 @@ namespace BNITapCash
             txtWidth.ForeColor = Color.FromArgb(78, 184, 206);
             txtHeight.ForeColor = Color.FromArgb(78, 184, 206);
             liveCameraUsername.ForeColor = Color.FromArgb(78, 184, 206);
-            liveCameraPassword.ForeColor = Color.FromArgb(78, 184, 206);
+            if(liveCameraPassword.Text != "Password")
+                liveCameraPassword.ForeColor = Color.FromArgb(78, 184, 206);
         }
 
         private void back_Click(object sender, EventArgs e)
@@ -217,7 +218,7 @@ namespace BNITapCash
             {
                 liveCameraPassword.Text = Properties.Settings.Default.LiveCameraPassword;
             }
-            liveCameraUsername.Text = Properties.Settings.Default.LiveCameraPassword;
+            liveCameraUsername.Text = Properties.Settings.Default.LiveCameraUsername;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -227,7 +228,7 @@ namespace BNITapCash
 
         private void textBox2_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener();
+            this.TextChangeListener(false, "IP Address Live Camera");
         }
 
         private void txtWidth_TextChanged(object sender, EventArgs e)
@@ -242,12 +243,12 @@ namespace BNITapCash
 
         private void txtWidth_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener();
+            this.TextChangeListener(false, "Width");
         }
 
         private void txtHeight_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener();
+            this.TextChangeListener(false, "Height");
         }
 
         private void txtWidth_KeyPress(object sender, KeyPressEventArgs e)
@@ -283,18 +284,18 @@ namespace BNITapCash
 
         private void LiveCameraPassword_TextChanged(object sender, EventArgs e)
         {
-            textBox2.PasswordChar = '●';
+            liveCameraPassword.PasswordChar = '●';
             this.TextChangeListener(true);
         }
 
         private void LiveCameraUsername_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener();
+            this.TextChangeListener(false, "Username");
         }
 
         private void LiveCameraPassword_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener();
+            this.TextChangeListener(false, "Password");
         }
     }
 }
