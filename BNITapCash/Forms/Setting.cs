@@ -228,7 +228,7 @@ namespace BNITapCash
 
         private void textBox2_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, "IP Address Live Camera");
+            this.TextChangeListener(false, textBox2.Text);
         }
 
         private void txtWidth_TextChanged(object sender, EventArgs e)
@@ -243,12 +243,12 @@ namespace BNITapCash
 
         private void txtWidth_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, "Width");
+            this.TextChangeListener(false, txtWidth.Text);
         }
 
         private void txtHeight_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, "Height");
+            this.TextChangeListener(false, txtHeight.Text);
         }
 
         private void txtWidth_KeyPress(object sender, KeyPressEventArgs e)
@@ -290,12 +290,12 @@ namespace BNITapCash
 
         private void LiveCameraUsername_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, "Username");
+            this.TextChangeListener(false, liveCameraUsername.Text);
         }
 
         private void LiveCameraPassword_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, "Password");
+            this.TextChangeListener(false, liveCameraPassword.Text);
         }
     }
 }

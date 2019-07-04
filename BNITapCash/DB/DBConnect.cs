@@ -28,8 +28,7 @@ namespace BNITapCash.DB
             this.database = database;
             this.uid = uid;
             this.password = password;
-            string connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-            connection = new MySqlConnection(connectionString);
+            InitDatabaseConnection(server, database, uid, password);
         }
 
         private void Initialize()
@@ -38,6 +37,11 @@ namespace BNITapCash.DB
             database = Properties.Settings.Default.DBName;
             uid = Properties.Settings.Default.DBUsername;
             password = Properties.Settings.Default.DBPassword;
+            InitDatabaseConnection(server, database, uid, password);
+        }
+
+        private void InitDatabaseConnection(string server, string database, string uid, string password)
+        {
             string connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
             connection = new MySqlConnection(connectionString);
         }

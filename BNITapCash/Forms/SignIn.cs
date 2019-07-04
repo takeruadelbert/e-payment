@@ -90,8 +90,8 @@ namespace BNITapCash
             textBox1.ForeColor = Color.FromArgb(78, 184, 206);
 
             password.BackgroundImage = Properties.Resources.password3;
-            panel2.ForeColor = Color.WhiteSmoke;
-            textBox2.ForeColor = Color.WhiteSmoke;
+            panel2.ForeColor = Color.FromArgb(78, 184, 206);
+            textBox2.ForeColor = Color.FromArgb(78, 184, 206);
         }
 
         private void label1_Click(object sender, EventArgs e)
