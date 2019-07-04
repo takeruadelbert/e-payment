@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BNITapCash.Helper;
+using BNITapCash.DB;
 
 namespace BNITapCash.Forms
 {
@@ -214,6 +215,33 @@ namespace BNITapCash.Forms
         private void DatabaseConfig_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnTestConnection_Click(object sender, EventArgs e)
+        {
+            string host = txtDBHost.Text;
+            string dbname = txtDBName.Text;
+            string username = txtDBUsername.Text;
+            string password = txtDBPassword.Text;
+            if (this.ValidateFields(host, dbname, username, password))
+            {
+                DBConnect db = new DBConnect(host, dbname, username, password);
+                if (db.CheckMySQLConnection())
+                {
+                    MessageBox.Show("Connection Established.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Failed to connect.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("There's still invalid field(s).", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
         }
     }
 }

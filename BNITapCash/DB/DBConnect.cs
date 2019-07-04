@@ -22,6 +22,16 @@ namespace BNITapCash.DB
             Initialize();
         }
 
+        public DBConnect(string server, string database, string uid, string password)
+        {
+            this.server = server;
+            this.database = database;
+            this.uid = uid;
+            this.password = password;
+            string connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            connection = new MySqlConnection(connectionString);
+        }
+
         private void Initialize()
         {
             server = Properties.Settings.Default.DBHost;
@@ -277,7 +287,7 @@ namespace BNITapCash.DB
             try
             {
                 successful = this.OpenConnection();
-                if(successful)
+                if (successful)
                 {
                     this.CloseConnection();
                 }

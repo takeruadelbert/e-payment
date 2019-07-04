@@ -47,6 +47,7 @@
             this.save = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.minimize = new System.Windows.Forms.Label();
+            this.btnTestConnection = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.password)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.username)).BeginInit();
@@ -214,9 +215,9 @@
             // 
             this.back.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
             this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.back.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.back.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.back.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
-            this.back.Location = new System.Drawing.Point(244, 336);
+            this.back.Location = new System.Drawing.Point(154, 336);
             this.back.Name = "back";
             this.back.Size = new System.Drawing.Size(111, 34);
             this.back.TabIndex = 20;
@@ -228,9 +229,9 @@
             // 
             this.save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
             this.save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.save.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.save.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.save.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
-            this.save.Location = new System.Drawing.Point(377, 336);
+            this.save.Location = new System.Drawing.Point(287, 336);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(111, 34);
             this.save.TabIndex = 19;
@@ -273,12 +274,27 @@
             this.minimize.Text = "_";
             this.minimize.Click += new System.EventHandler(this.minimize_Click);
             // 
+            // btnTestConnection
+            // 
+            this.btnTestConnection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
+            this.btnTestConnection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTestConnection.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTestConnection.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
+            this.btnTestConnection.Location = new System.Drawing.Point(433, 336);
+            this.btnTestConnection.Name = "btnTestConnection";
+            this.btnTestConnection.Size = new System.Drawing.Size(130, 34);
+            this.btnTestConnection.TabIndex = 23;
+            this.btnTestConnection.Text = "Test Connection";
+            this.btnTestConnection.UseVisualStyleBackColor = false;
+            this.btnTestConnection.Click += new System.EventHandler(this.BtnTestConnection_Click);
+            // 
             // DatabaseConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.ClientSize = new System.Drawing.Size(723, 425);
+            this.Controls.Add(this.btnTestConnection);
             this.Controls.Add(this.minimize);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.back);
@@ -326,5 +342,6 @@
         private System.Windows.Forms.Button save;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label minimize;
+        private System.Windows.Forms.Button btnTestConnection;
     }
 }
