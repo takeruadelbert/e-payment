@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BNITapCash.API
 {
@@ -17,7 +14,7 @@ namespace BNITapCash.API
 
         }
 
-        public DataResponse API_Post(string ip_address_server, string APIUrl, string sent_param = "")
+        public Object API_Post(string ip_address_server, string APIUrl, bool resultSingleObject = false, string sent_param = "")
         {
             string result = "";
             try
@@ -43,7 +40,15 @@ namespace BNITapCash.API
                     Stream receiveStream = response.GetResponseStream();
                     StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
                     result = readStream.ReadToEnd();
-                    var json = JsonConvert.DeserializeObject<DataResponse>(result);
+                    Object json = null;
+                    if (resultSingleObject)
+                    {
+                        json = JsonConvert.DeserializeObject<DataResponseObject>(result);
+                    }
+                    else
+                    {
+                        json = JsonConvert.DeserializeObject<DataResponse>(result);
+                    }
                     return json;
                 }
             }
@@ -61,7 +66,7 @@ namespace BNITapCash.API
             }
         }
 
-        public DataResponse API_Get(string ip_address_server, string API_URL)
+        public Object API_Get(string ip_address_server, string API_URL, bool resultSingleObject = false)
         {
             string result = "";
             try
@@ -75,7 +80,15 @@ namespace BNITapCash.API
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
                     result = reader.ReadToEnd();
-                    var json = JsonConvert.DeserializeObject<DataResponse>(result);
+                    Object json = null;
+                    if (resultSingleObject)
+                    {
+                        json = JsonConvert.DeserializeObject<DataResponseObject>(result);
+                    }
+                    else
+                    {
+                        json = JsonConvert.DeserializeObject<DataResponse>(result);
+                    }
                     return json;
                 }
             }

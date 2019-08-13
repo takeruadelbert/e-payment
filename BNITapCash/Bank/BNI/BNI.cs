@@ -274,7 +274,8 @@ namespace BNITapCash.Bank.BNI
                 int cardBalance = Int32.Parse(this.GetCardBalance());
                 if (cardBalance > 0 && (cardBalance - amount) > 0)
                 {
-                    string result = bni.debitProcess(this.readerList[2].ToString(), this.selectedReader.ToString(), amount, Properties.Settings.Default.TID);
+                    //string result = bni.debitProcess(this.readerList[2].ToString(), this.selectedReader.ToString(), amount, Properties.Settings.Default.TID);
+                    string result = "test";
 
                     // store deduct result card to server
                     string created = tk.ConvertDatetimeToDefaultFormat(tk.GetCurrentDatetime());

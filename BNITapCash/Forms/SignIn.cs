@@ -1,23 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BNITapCash.API;
+﻿using BNITapCash.API;
 using BNITapCash.Bank.BNI;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using BNITapCash.Helper;
-using System.Threading;
-using BNITapCash.Miscellaneous;
 using BNITapCash.DB;
 using BNITapCash.Forms;
+using BNITapCash.Helper;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Drawing;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace BNITapCash
 {
@@ -195,7 +186,7 @@ namespace BNITapCash
                 // pull some data from server e.g. Vehicle Types
                 string APIPullData = Properties.Resources.RequestVehicleTypeAPIURL;
                 RESTAPI pull = new RESTAPI();
-                DataResponse receivedData = pull.API_Get(ip_address_server, APIPullData);
+                DataResponse receivedData = (DataResponse)pull.API_Get(ip_address_server, APIPullData);
                 if (receivedData != null)
                 {
                     switch (receivedData.Status)
@@ -237,7 +228,7 @@ namespace BNITapCash
                 var sent_param = JsonConvert.SerializeObject(param);
 
                 RESTAPI api = new RESTAPI();
-                DataResponse response = api.API_Post(ip_address_server, APIUrl, sent_param);
+                DataResponse response = (DataResponse)api.API_Post(ip_address_server, APIUrl, false, sent_param);
                 if (response != null)
                 {
                     switch (response.Status)
@@ -254,7 +245,7 @@ namespace BNITapCash
                             {
                                 MessageBox.Show("Error : Can't Connect to Webcam.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
-                            }                            
+                            }
                             break;
                         default:
                             MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

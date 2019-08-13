@@ -319,6 +319,7 @@ namespace BNITapCash
             comboBox1.SelectedText = "- Pilih Tipe Kendaraan -";
         }
 
+        // event tap card : request to database to fetch data automatically
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex != 0)
@@ -336,7 +337,7 @@ namespace BNITapCash
 
                         RESTAPI api = new RESTAPI();
                         string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
-                        DataResponse response = api.API_Post(ip_address_server, APIUrl, sent_param);
+                        DataResponse response = (DataResponse)api.API_Post(ip_address_server, APIUrl, false, sent_param);
                         if (response != null)
                         {
                             switch (response.Status)
@@ -417,7 +418,7 @@ namespace BNITapCash
             var sent_param = JsonConvert.SerializeObject(param);
             RESTAPI save = new RESTAPI();
             string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
-            DataResponse response = save.API_Post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, sent_param);
+            DataResponseObject response = (DataResponseObject)save.API_Post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, true, sent_param);
             if (response != null)
             {
                 switch (response.Status)
