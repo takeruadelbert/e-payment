@@ -117,26 +117,134 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="no_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\no_image.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Group 3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Group 31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BG PUTIH21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BG PUTIH22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RequestUIDFareAPIURL" xml:space="preserve">
+    <value>/ws/parking_outs/request_uid_fare</value>
+    <comment>API for Request Data Parking In by UID card</comment>
+  </data>
+  <data name="BG PUTIH" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BG PUTIH1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="login-header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\login-header1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SettlementPathFromWindows" xml:space="preserve">
+    <value>\Public</value>
+  </data>
   <data name="VersionApp" xml:space="preserve">
     <value>1.0.1</value>
     <comment>version of E-Payment Software</comment>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="database" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\database.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="print report" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\print report1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="id" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\id.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="version" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\version.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ipaddress" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ipaddress.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WP DISPENSER2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WP DISPENSER21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tid.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="password3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\password3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="main" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\main1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="stn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="main-footer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\main-footer1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reprint button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\reprint button1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo_pelindo_gray.jpg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_pelindo_gray.jpg1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LoginAPIURL" xml:space="preserve">
     <value>/ws/accounts/login_api</value>
     <comment>API for Sign In</comment>
   </data>
-  <data name="SettlementPathFromWindows" xml:space="preserve">
-    <value>\Public</value>
+  <data name="logo di embos (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo di embos (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="username5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\username5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="main-header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\main-header1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DeveloperURL" xml:space="preserve">
+    <value>https://takeruadelbert.github.io/</value>
+    <comment>how to get in touch with the developer of E-Payment Software</comment>
+  </data>
+  <data name="repo" xml:space="preserve">
+    <value>/epass2018</value>
+    <comment>repository of the server</comment>
+  </data>
+  <data name="minimize button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minimize button1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BG BIRU" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BG BIRU1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pelindo4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pelindo41.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WP DISPENSER" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WP DISPENSER1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="close button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\close button1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BG PUTIH2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BG PUTIH21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="host" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\host.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ilugroup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ilugroup1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon setting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon setting1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="webcam" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\webcam.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="missing ticket button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\missing ticket button1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ipaddress" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ipaddress.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="id" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\id.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="main-footer-short1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\main-footer-short2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="database" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\database.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="main-footer-short" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\main-footer-short1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Icon_pc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icon_pc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,50 +253,17 @@
     <value>/ws/vehicle_types/get_all_vehicle_name</value>
     <comment>API for request data vehicle type</comment>
   </data>
-  <data name="repo" xml:space="preserve">
-    <value>/epass2018</value>
-    <comment>repository of the server</comment>
+  <data name="SettlmentPathInUbuntu" xml:space="preserve">
+    <value>/home/adminstn/settlement/</value>
   </data>
   <data name="SaveDataParkingAPIURL" xml:space="preserve">
     <value>/ws/parking_outs/save_parking_out</value>
     <comment>API for saving data to server</comment>
   </data>
-  <data name="no_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\no_image.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="back button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\back button1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="host" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\host.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="mid" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RequestUIDFareAPIURL" xml:space="preserve">
-    <value>/ws/parking_outs/request_uid_fare</value>
-    <comment>API for Request Data Parking In by UID card</comment>
-  </data>
-  <data name="version" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\version.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DeveloperURL" xml:space="preserve">
-    <value>https://takeruadelbert.github.io/</value>
-    <comment>how to get in touch with the developer of E-Payment Software</comment>
-  </data>
-  <data name="tid" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\tid.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SettlmentPathInUbuntu" xml:space="preserve">
-    <value>/home/adminstn/settlement/</value>
-  </data>
-  <data name="stn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\stn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="username5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\username5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="password3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\password3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="webcam" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\webcam.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="main-footer1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\main-footer2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

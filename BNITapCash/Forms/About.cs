@@ -12,9 +12,12 @@ namespace BNITapCash.Forms
 {
     public partial class About : Form
     {
+        private Form home;
+
         public About()
         {
             InitializeComponent();
+            this.home = home;
             InitData();
         }
 
@@ -29,11 +32,6 @@ namespace BNITapCash.Forms
             System.Diagnostics.Process.Start(Properties.Resources.DeveloperURL);
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-            Dispose();
-        }
-
         private void txtVersion_Click(object sender, EventArgs e)
         {
 
@@ -42,6 +40,41 @@ namespace BNITapCash.Forms
         private void About_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Dispose();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AppName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                Dispose();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void logout_Click(object sender, EventArgs e)
+        {
+            home.Show();
+            Hide();
         }
     }
 }

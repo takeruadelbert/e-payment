@@ -8,13 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BNITapCash.Helper;
-using BNITapCash.DB;
 
 namespace BNITapCash.Forms
 {
     public partial class DatabaseConfig : Form
     {
         private Form home;
+        private string host;
+        private string db_name;
+        private string db_username;
+        private string db_password;
 
         public DatabaseConfig(Form home)
         {
@@ -92,13 +95,13 @@ namespace BNITapCash.Forms
             string db_name = txtDBName.Text.ToString();
             string db_username = txtDBUsername.Text.ToString();
             string db_password = txtDBPassword.Text.ToString();
-            if (this.ValidateFields(db_host, db_name, db_username))
+            if (this.ValidateFields(db_host, db_name, db_username, db_password))
             {
                 Properties.Settings.Default.DBHost = db_host;
                 Properties.Settings.Default.DBName = db_name;
                 Properties.Settings.Default.DBUsername = db_username;
                 Properties.Settings.Default.DBPassword = db_password;
-
+                Console.WriteLine(Properties.Settings.Default.DBHost);
                 this.DBHost = db_host;
                 this.DBName = db_name;
                 this.DBUsername = db_username;
@@ -125,38 +128,38 @@ namespace BNITapCash.Forms
 
         private void txtDBPassword_TextChanged(object sender, EventArgs e)
         {
-            txtDBPassword.PasswordChar = '●';
             this.TextChangeListener(true);
         }
 
         private void txtDBHost_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, txtDBHost.Text);
+            this.TextChangeListener();
         }
 
         private void txtDBName_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, txtDBName.Text);
+            this.TextChangeListener();
         }
 
         private void txtDBUsername_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, txtDBUsername.Text);
+            this.TextChangeListener();
         }
 
-        private void TextChangeListener(bool is_textchanged = false, string field = "")
+        private void TextChangeListener(bool is_textchanged = false)
         {
             if (!is_textchanged)
             {
-                if (field == "Host")
+                if (txtDBHost.Text == "Host")
                     txtDBHost.Clear();
-                if (field == "Database Name")
+                if (txtDBName.Text == "Database Name")
                     txtDBName.Clear();
-                if (field == "Username")
+                if (txtDBUsername.Text == "Username")
                     txtDBUsername.Clear();
-                if (field == "Password")
+                if (txtDBPassword.Text == "Password")
                     txtDBPassword.Clear();
             }
+            txtDBPassword.PasswordChar = '●';
             txtDBHost.ForeColor = Color.FromArgb(78, 184, 206);
             txtDBName.ForeColor = Color.FromArgb(78, 184, 206);
             txtDBUsername.ForeColor = Color.FromArgb(78, 184, 206);
@@ -165,10 +168,10 @@ namespace BNITapCash.Forms
 
         private void txtDBPassword_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, txtDBPassword.Text);
+            this.TextChangeListener();
         }
 
-        private bool ValidateFields(string db_host, string db_name, string db_username)
+        private bool ValidateFields(string db_host, string db_name, string db_username, string db_password)
         {
             bool result = true;
             TKHelper tk = new TKHelper();
@@ -195,6 +198,11 @@ namespace BNITapCash.Forms
                 MessageBox.Show("Field 'Username' Belum Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+            if (string.IsNullOrEmpty(db_password) || db_password == "Password")
+            {
+                MessageBox.Show("Field 'Password' Belum Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
             return result;
         }
 
@@ -208,31 +216,25 @@ namespace BNITapCash.Forms
 
         }
 
-        private void BtnTestConnection_Click(object sender, EventArgs e)
+        private void logout_Click(object sender, EventArgs e)
         {
-            string host = txtDBHost.Text;
-            string dbname = txtDBName.Text;
-            string username = txtDBUsername.Text;
-            string password = txtDBPassword.Text;
-            if (this.ValidateFields(host, dbname, username))
+            home.Show();
+            Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
             {
-                DBConnect db = new DBConnect(host, dbname, username, password);
-                if (db.CheckMySQLConnection())
-                {
-                    MessageBox.Show("Connection Established.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("Failed to connect.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+                Dispose();
+                System.Environment.Exit(1);
             }
-            else
-            {
-                MessageBox.Show("There's still invalid field(s).", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

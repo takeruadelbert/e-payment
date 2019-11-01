@@ -62,8 +62,6 @@ namespace BNITapCash
             try
             {
                 stream = new JPEGStream(liveCameraURL);
-                stream.Login = Properties.Settings.Default.LiveCameraUsername;
-                stream.Password = Properties.Settings.Default.LiveCameraPassword;
                 stream.NewFrame += stream_NewFrame;
                 stream.Start();
             }
@@ -119,21 +117,6 @@ namespace BNITapCash
         private void Cashier_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void close_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
-            {
-                Dispose();
-                System.Environment.Exit(1);
-            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -319,7 +302,6 @@ namespace BNITapCash
             comboBox1.SelectedText = "- Pilih Tipe Kendaraan -";
         }
 
-        // event tap card : request to database to fetch data automatically
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex != 0)
@@ -337,7 +319,7 @@ namespace BNITapCash
 
                         RESTAPI api = new RESTAPI();
                         string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
-                        DataResponse response = (DataResponse)api.API_Post(ip_address_server, APIUrl, false, sent_param);
+                        DataResponse response = api.API_Post(ip_address_server, APIUrl, sent_param);
                         if (response != null)
                         {
                             switch (response.Status)
@@ -418,7 +400,7 @@ namespace BNITapCash
             var sent_param = JsonConvert.SerializeObject(param);
             RESTAPI save = new RESTAPI();
             string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
-            DataResponseObject response = (DataResponseObject)save.API_Post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, true, sent_param);
+            DataResponse response = save.API_Post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, sent_param);
             if (response != null)
             {
                 switch (response.Status)
@@ -438,9 +420,24 @@ namespace BNITapCash
             }
         }
 
-        private void minimize_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                Dispose();
+                System.Environment.Exit(1);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
