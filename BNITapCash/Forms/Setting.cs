@@ -76,10 +76,10 @@ namespace BNITapCash
 
         private void textBox1_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, "IP Address Server");
+            this.TextChangeListener();
         }
 
-        private void TextChangeListener(bool is_textchanged = false, string field = "")
+        private void TextChangeListener(bool is_textchanged = false)
         {
             if (!is_textchanged)
             {
@@ -91,7 +91,7 @@ namespace BNITapCash
                     txtWidth.Clear();
                 else if (txtHeight.Text == "Height")
                     txtHeight.Clear();
-                else if (liveCameraUsername.Text == "Username")
+				else if (liveCameraUsername.Text == "Username")
                     liveCameraUsername.Clear();
                 else if (liveCameraPassword.Text == "Password")
                     liveCameraPassword.Clear();
@@ -102,7 +102,7 @@ namespace BNITapCash
             textBox2.ForeColor = Color.FromArgb(78, 184, 206);
             txtWidth.ForeColor = Color.FromArgb(78, 184, 206);
             txtHeight.ForeColor = Color.FromArgb(78, 184, 206);
-            liveCameraUsername.ForeColor = Color.FromArgb(78, 184, 206);
+			liveCameraUsername.ForeColor = Color.FromArgb(78, 184, 206);
             if(liveCameraPassword.Text != "Password")
                 liveCameraPassword.ForeColor = Color.FromArgb(78, 184, 206);
         }
@@ -119,7 +119,7 @@ namespace BNITapCash
             string ipv4_live_cam = textBox2.Text.ToString();
             int width = Convert.ToInt32(txtWidth.Text);
             int height = Convert.ToInt32(txtHeight.Text);
-            string liveCamUsername = liveCameraUsername.Text;
+			string liveCamUsername = liveCameraUsername.Text;
             string liveCamPassword = liveCameraPassword.Text;
             TKHelper tk = new TKHelper();
             if (ipv4 != "" && ipv4 != "IP Address Server" && ipv4 != null)
@@ -134,7 +134,7 @@ namespace BNITapCash
                             Properties.Settings.Default.IPAddressLiveCamera = ipv4_live_cam;
                             Properties.Settings.Default.WebcamWidth = width;
                             Properties.Settings.Default.WebcamHeight = height;
-                            Properties.Settings.Default.LiveCameraUsername = liveCamUsername;
+							Properties.Settings.Default.LiveCameraUsername = liveCamUsername;
                             Properties.Settings.Default.LiveCameraPassword = liveCamPassword;
                             Properties.Settings.Default.Save();
                             IPAddressServer = ipv4;
@@ -159,16 +159,6 @@ namespace BNITapCash
             else
             {
                 MessageBox.Show("IP Address Server Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
-            {
-                Dispose();
-                System.Environment.Exit(1);
             }
         }
 
@@ -213,12 +203,6 @@ namespace BNITapCash
                 txtHeight.Text = "360";
                 WebcamHeight = 360;
             }
-
-            if(Properties.Settings.Default.LiveCameraPassword != string.Empty)
-            {
-                liveCameraPassword.Text = Properties.Settings.Default.LiveCameraPassword;
-            }
-            liveCameraUsername.Text = Properties.Settings.Default.LiveCameraUsername;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -228,7 +212,7 @@ namespace BNITapCash
 
         private void textBox2_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, textBox2.Text);
+            this.TextChangeListener();
         }
 
         private void txtWidth_TextChanged(object sender, EventArgs e)
@@ -243,12 +227,12 @@ namespace BNITapCash
 
         private void txtWidth_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, txtWidth.Text);
+            this.TextChangeListener();
         }
 
         private void txtHeight_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, txtHeight.Text);
+            this.TextChangeListener();
         }
 
         private void txtWidth_KeyPress(object sender, KeyPressEventArgs e)
@@ -267,17 +251,22 @@ namespace BNITapCash
             }
         }
 
-        private void minimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }
 
-        private void LiveCameraUsername_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                Dispose();
+                System.Environment.Exit(1);
+            }
+        }
+		
+		private void LiveCameraUsername_TextChanged(object sender, EventArgs e)
         {
             this.TextChangeListener(true);
         }
@@ -288,14 +277,20 @@ namespace BNITapCash
             this.TextChangeListener(true);
         }
 
-        private void LiveCameraUsername_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, liveCameraUsername.Text);
+            this.WindowState = FormWindowState.Minimized;
         }
 
-        private void LiveCameraPassword_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener(false, liveCameraPassword.Text);
+
+        }
+
+        private void logout_Click(object sender, EventArgs e)
+        {
+            home.Show();
+            Hide();
         }
     }
 }

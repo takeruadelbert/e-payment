@@ -13,12 +13,14 @@ namespace BNITapCash.Forms
     public partial class TMID : Form
     {
         private Login login;
+        private Form home;
         private string tid;
         private string settlement_mid;
 
         public TMID(Login login)
         {
             InitializeComponent();
+            this.home = home;
             this.login = login;
             InitData();
         }
@@ -124,6 +126,12 @@ namespace BNITapCash.Forms
         private void minimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void logout_Click(object sender, EventArgs e)
+        {
+            home.Show();
+            Hide();
         }
     }
 }

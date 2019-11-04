@@ -1,14 +1,23 @@
-﻿using BNITapCash.API;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using BNITapCash.API;
 using BNITapCash.Bank.BNI;
-using BNITapCash.DB;
-using BNITapCash.Forms;
-using BNITapCash.Helper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Drawing;
+using BNITapCash.Helper;
 using System.Threading;
-using System.Windows.Forms;
+using BNITapCash.Miscellaneous;
+using BNITapCash.DB;
+using BNITapCash.Forms;
 
 namespace BNITapCash
 {
@@ -48,18 +57,18 @@ namespace BNITapCash
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            textBox2.PasswordChar = '●';
+            password.PasswordChar = '●';
         }
 
         private void textBox1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "Username")
+            if (username.Text == "Username")
                 this.ChangeTextListener("username");
         }
 
         private void textBox2_Click(object sender, EventArgs e)
         {
-            if (textBox2.Text == "Password")
+            if (password.Text == "Password")
                 this.ChangeTextListener("password");
         }
 
@@ -69,30 +78,20 @@ namespace BNITapCash
             {
                 if (field == "username")
                 {
-                    textBox1.Clear();
+                    username.Clear();
                 }
                 else
                 {
-                    textBox2.Clear();
+                    password.Clear();
                 }
             }
             username.BackgroundImage = Properties.Resources.username5;
             panel1.ForeColor = Color.FromArgb(78, 184, 206);
-            textBox1.ForeColor = Color.FromArgb(78, 184, 206);
+            username.ForeColor = Color.FromArgb(78, 184, 206);
 
             password.BackgroundImage = Properties.Resources.password3;
-            panel2.ForeColor = Color.FromArgb(78, 184, 206);
-            textBox2.ForeColor = Color.FromArgb(78, 184, 206);
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
-            {
-                Dispose();
-                System.Environment.Exit(1);
-            }
+            panel2.ForeColor = Color.WhiteSmoke;
+            password.ForeColor = Color.WhiteSmoke;
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -111,8 +110,8 @@ namespace BNITapCash
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = textBox1.Text.ToString();
-            string password = textBox2.Text.ToString();
+            string username = this.username.Text.ToString();
+            string password = this.password.Text.ToString();
             if (username == "" || username == "Username")
             {
                 MessageBox.Show("Username Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -186,7 +185,7 @@ namespace BNITapCash
                 // pull some data from server e.g. Vehicle Types
                 string APIPullData = Properties.Resources.RequestVehicleTypeAPIURL;
                 RESTAPI pull = new RESTAPI();
-                DataResponse receivedData = (DataResponse)pull.API_Get(ip_address_server, APIPullData);
+                DataResponse receivedData = pull.API_Get(ip_address_server, APIPullData);
                 if (receivedData != null)
                 {
                     switch (receivedData.Status)
@@ -196,7 +195,7 @@ namespace BNITapCash
                             JObject vehicleTypes = new JObject();
                             vehicleTypes.Add(new JProperty("VehicleTypes", receivedVehicleTypes));
 
-                            // write into a file called 'master-data.json'
+                           // write into a file called 'master-data.json'
                             try
                             {
                                 string savedDir = tk.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
@@ -228,7 +227,7 @@ namespace BNITapCash
                 var sent_param = JsonConvert.SerializeObject(param);
 
                 RESTAPI api = new RESTAPI();
-                DataResponse response = (DataResponse)api.API_Post(ip_address_server, APIUrl, false, sent_param);
+                DataResponse response = api.API_Post(ip_address_server, APIUrl, sent_param);
                 if (response != null)
                 {
                     switch (response.Status)
@@ -237,15 +236,15 @@ namespace BNITapCash
                             //MessageBox.Show(response.Message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             try
                             {
-                                this.cashier = new Cashier(this);
-                                this.cashier.Show();
-                                Hide();
+                this.cashier = new Cashier(this);
+                this.cashier.Show();
+                Hide();
                             }
                             catch (Exception ex)
                             {
                                 MessageBox.Show("Error : Can't Connect to Webcam.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
-                            }
+                            }                            
                             break;
                         default:
                             MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -275,20 +274,20 @@ namespace BNITapCash
             {
                 if (Properties.Settings.Default.RememberMe == "yes")
                 {
-                    textBox1.Text = Properties.Settings.Default.Username;
-                    textBox2.Text = Properties.Settings.Default.Password;
+                    username.Text = Properties.Settings.Default.Username;
+                    password.Text = Properties.Settings.Default.Password;
                     checkBox1.Checked = true;
                 }
                 else
                 {
-                    textBox1.Text = Properties.Settings.Default.Username;
+                    username.Text = Properties.Settings.Default.Username;
                 }
             }
         }
 
         public void Clear()
         {
-            textBox2.Clear();
+            password.Clear();
             checkBox1.Checked = false;
         }
 
@@ -327,12 +326,17 @@ namespace BNITapCash
             tmid.Show();
         }
 
-        private void minimize_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                Dispose();
+                System.Environment.Exit(1);
+            }
         }
 
-        private void minimize_Click_1(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
