@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BNITapCash.Interface;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace BNITapCash.API
 {
-    class RESTAPI
+    class RESTAPI : RestAPIMethod
     {
         private const int timeout_conn = 5000; // 3 seconds
         public RESTAPI()
@@ -14,7 +15,7 @@ namespace BNITapCash.API
 
         }
 
-        public Object API_Post(string ip_address_server, string APIUrl, bool resultSingleObject = false, string sent_param = "")
+        public DataResponse post(string ip_address_server, string APIUrl, bool resultSingleObject = false, string sent_param = "")
         {
             string result = "";
             try
@@ -40,33 +41,26 @@ namespace BNITapCash.API
                     Stream receiveStream = response.GetResponseStream();
                     StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
                     result = readStream.ReadToEnd();
-                    Object json = null;
+                    DataResponse json = null;
                     if (resultSingleObject)
                     {
                         json = JsonConvert.DeserializeObject<DataResponseObject>(result);
                     }
                     else
                     {
-                        json = JsonConvert.DeserializeObject<DataResponse>(result);
+                        json = JsonConvert.DeserializeObject<DataResponseArray>(result);
                     }
                     return json;
                 }
             }
             catch (WebException ex)
             {
-                //WebResponse errorResponse = ex.Response;
-                //using (Stream responseStream = errorResponse.GetResponseStream())
-                //{
-                //    StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
-                //    String errorText = reader.ReadToEnd();
-                //}
-                //throw;
                 Console.WriteLine(ex.Message);
                 return null;
             }
         }
 
-        public Object API_Get(string ip_address_server, string API_URL, bool resultSingleObject = false)
+        public DataResponse get(string ip_address_server, string API_URL, bool resultSingleObject = false)
         {
             string result = "";
             try
@@ -80,14 +74,14 @@ namespace BNITapCash.API
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
                     result = reader.ReadToEnd();
-                    Object json = null;
+                    DataResponse json = null;
                     if (resultSingleObject)
                     {
                         json = JsonConvert.DeserializeObject<DataResponseObject>(result);
                     }
                     else
                     {
-                        json = JsonConvert.DeserializeObject<DataResponse>(result);
+                        json = JsonConvert.DeserializeObject<DataResponseArray>(result);
                     }
                     return json;
                 }

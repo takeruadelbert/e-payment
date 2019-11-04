@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\DataResponse.cs" />
+    <Compile Include="API\DataResponseArray.cs" />
     <Compile Include="API\DataResponseObject.cs" />
     <Compile Include="API\RESTAPI.cs" />
     <Compile Include="Bank\BNI\BNI.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Helper\Base64Helper.cs" />
     <Compile Include="Helper\ServerHelper.cs" />
     <Compile Include="Helper\TKHelper.cs" />
+    <Compile Include="Interface\RestAPIMethod.cs" />
     <Compile Include="Miscellaneous\FileMonitor\FileWatcher.cs" />
     <Compile Include="Forms\Loading.cs">
       <SubType>Form</SubType>

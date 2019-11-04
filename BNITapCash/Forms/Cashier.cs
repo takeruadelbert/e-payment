@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using AForge.Video;
+﻿using AForge.Video;
 using BNITapCash.API;
 using BNITapCash.Bank.BNI;
 using BNITapCash.Helper;
+using BNITapCash.Miscellaneous.Webcam;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using BNITapCash.Miscellaneous.Webcam;
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Windows.Forms;
 
 namespace BNITapCash
 {
@@ -319,7 +312,7 @@ namespace BNITapCash
 
                         RESTAPI api = new RESTAPI();
                         string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
-                        DataResponse response = api.API_Post(ip_address_server, APIUrl, sent_param);
+                        DataResponseArray response = (DataResponseArray)api.post(ip_address_server, APIUrl, false, sent_param);
                         if (response != null)
                         {
                             switch (response.Status)
@@ -400,7 +393,7 @@ namespace BNITapCash
             var sent_param = JsonConvert.SerializeObject(param);
             RESTAPI save = new RESTAPI();
             string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
-            DataResponse response = save.API_Post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, sent_param);
+            DataResponseObject response = (DataResponseObject)save.post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, true, sent_param);
             if (response != null)
             {
                 switch (response.Status)

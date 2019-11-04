@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using BNITapCash.Helper;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using BNITapCash.Helper;
 
 namespace BNITapCash
 {
@@ -203,6 +197,17 @@ namespace BNITapCash
                 txtHeight.Text = "360";
                 WebcamHeight = 360;
             }
+
+            if(Properties.Settings.Default.LiveCameraUsername != string.Empty)
+            {
+                liveCameraUsername.Text = Properties.Settings.Default.LiveCameraUsername;
+
+            }
+
+            if(Properties.Settings.Default.LiveCameraPassword != string.Empty)
+            {
+                liveCameraPassword.Text = Properties.Settings.Default.LiveCameraPassword;
+            }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -265,17 +270,6 @@ namespace BNITapCash
                 System.Environment.Exit(1);
             }
         }
-		
-		private void LiveCameraUsername_TextChanged(object sender, EventArgs e)
-        {
-            this.TextChangeListener(true);
-        }
-
-        private void LiveCameraPassword_TextChanged(object sender, EventArgs e)
-        {
-            liveCameraPassword.PasswordChar = '●';
-            this.TextChangeListener(true);
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -291,6 +285,27 @@ namespace BNITapCash
         {
             home.Show();
             Hide();
+        }
+
+        private void liveCameraPassword_TextChanged_1(object sender, EventArgs e)
+        {
+            liveCameraPassword.PasswordChar = '●';
+            this.TextChangeListener(true);
+        }
+
+        private void liveCameraUsername_TextChanged_1(object sender, EventArgs e)
+        {
+            this.TextChangeListener(true);
+        }
+
+        private void liveCameraUsername_Click(object sender, EventArgs e)
+        {
+            this.TextChangeListener();
+        }
+
+        private void liveCameraPassword_Click(object sender, EventArgs e)
+        {
+            this.TextChangeListener();
         }
     }
 }
