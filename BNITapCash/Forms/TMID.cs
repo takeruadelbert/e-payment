@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BNITapCash.Forms
@@ -14,39 +8,30 @@ namespace BNITapCash.Forms
     {
         private Login login;
         private Form home;
-        private string tid;
-        private string settlement_mid;
 
         public TMID(Login login)
         {
             InitializeComponent();
-            this.home = home;
             this.login = login;
             InitData();
         }
 
-        public string TID
-        {
-            get; set;
-        }
+        public string TID { get; set; }
 
-        public string MID
-        {
-            get; set;
-        }
+        public string MID { get; set;}
 
         private void InitData()
         {
             if (Properties.Settings.Default.TID != string.Empty)
             {
                 txtTID.Text = Properties.Settings.Default.TID;
-                this.TID = Properties.Settings.Default.TID;
+                TID = Properties.Settings.Default.TID;
             }
 
             if (Properties.Settings.Default.MID != string.Empty)
             {
                 txtSettlementMID.Text = Properties.Settings.Default.MID;
-                this.MID = Properties.Settings.Default.MID;
+                MID = Properties.Settings.Default.MID;
             }
         }
 
@@ -69,8 +54,8 @@ namespace BNITapCash.Forms
             Properties.Settings.Default.TID = tid_value;
             Properties.Settings.Default.MID = mid_value;
             Properties.Settings.Default.Save();
-            this.TID = tid_value;
-            this.MID = mid_value;
+            TID = tid_value;
+            MID = mid_value;
             MessageBox.Show("Setting Berhasil Diupdate.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

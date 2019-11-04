@@ -8,10 +8,6 @@ namespace BNITapCash
     public partial class Setting : Form
     {
         private Form home;
-        private string ip_address_server;
-        private string ip_address_live_camera;
-        private int webcam_width;
-        private int webcam_height;
 
         public Setting(Form home)
         {
@@ -22,41 +18,13 @@ namespace BNITapCash
             InitData();
         }
 
-        public string IPAddressServer
-        {
-            get
-            {
-                return this.ip_address_server;
-            }
+        public string IPAddressServer { get; set; }
 
-            set
-            {
-                this.ip_address_server = value;
-            }
-        }
+        public string IPAddressLiveCamera { get; set; }
 
-        public string IPAddressLiveCamera
-        {
-            get
-            {
-                return this.ip_address_live_camera;
-            }
+        public int WebcamWidth { get; set; }
 
-            set
-            {
-                this.ip_address_live_camera = value;
-            }
-        }
-
-        public int WebcamWidth
-        {
-            get; set;
-        }
-
-        public int WebcamHeight
-        {
-            get; set;
-        }
+        public int WebcamHeight { get; set; }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -85,7 +53,7 @@ namespace BNITapCash
                     txtWidth.Clear();
                 else if (txtHeight.Text == "Height")
                     txtHeight.Clear();
-				else if (liveCameraUsername.Text == "Username")
+                else if (liveCameraUsername.Text == "Username")
                     liveCameraUsername.Clear();
                 else if (liveCameraPassword.Text == "Password")
                     liveCameraPassword.Clear();
@@ -96,8 +64,8 @@ namespace BNITapCash
             textBox2.ForeColor = Color.FromArgb(78, 184, 206);
             txtWidth.ForeColor = Color.FromArgb(78, 184, 206);
             txtHeight.ForeColor = Color.FromArgb(78, 184, 206);
-			liveCameraUsername.ForeColor = Color.FromArgb(78, 184, 206);
-            if(liveCameraPassword.Text != "Password")
+            liveCameraUsername.ForeColor = Color.FromArgb(78, 184, 206);
+            if (liveCameraPassword.Text != "Password")
                 liveCameraPassword.ForeColor = Color.FromArgb(78, 184, 206);
         }
 
@@ -113,7 +81,7 @@ namespace BNITapCash
             string ipv4_live_cam = textBox2.Text.ToString();
             int width = Convert.ToInt32(txtWidth.Text);
             int height = Convert.ToInt32(txtHeight.Text);
-			string liveCamUsername = liveCameraUsername.Text;
+            string liveCamUsername = liveCameraUsername.Text;
             string liveCamPassword = liveCameraPassword.Text;
             TKHelper tk = new TKHelper();
             if (ipv4 != "" && ipv4 != "IP Address Server" && ipv4 != null)
@@ -128,7 +96,7 @@ namespace BNITapCash
                             Properties.Settings.Default.IPAddressLiveCamera = ipv4_live_cam;
                             Properties.Settings.Default.WebcamWidth = width;
                             Properties.Settings.Default.WebcamHeight = height;
-							Properties.Settings.Default.LiveCameraUsername = liveCamUsername;
+                            Properties.Settings.Default.LiveCameraUsername = liveCamUsername;
                             Properties.Settings.Default.LiveCameraPassword = liveCamPassword;
                             Properties.Settings.Default.Save();
                             IPAddressServer = ipv4;
@@ -198,13 +166,13 @@ namespace BNITapCash
                 WebcamHeight = 360;
             }
 
-            if(Properties.Settings.Default.LiveCameraUsername != string.Empty)
+            if (Properties.Settings.Default.LiveCameraUsername != string.Empty)
             {
                 liveCameraUsername.Text = Properties.Settings.Default.LiveCameraUsername;
 
             }
 
-            if(Properties.Settings.Default.LiveCameraPassword != string.Empty)
+            if (Properties.Settings.Default.LiveCameraPassword != string.Empty)
             {
                 liveCameraPassword.Text = Properties.Settings.Default.LiveCameraPassword;
             }

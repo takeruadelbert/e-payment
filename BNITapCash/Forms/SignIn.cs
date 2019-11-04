@@ -81,8 +81,8 @@ namespace BNITapCash
             username.ForeColor = Color.FromArgb(78, 184, 206);
 
             password.BackgroundImage = Properties.Resources.password3;
-            panel2.ForeColor = Color.WhiteSmoke;
-            password.ForeColor = Color.WhiteSmoke;
+            panel2.ForeColor = Color.FromArgb(78, 184, 206); ;
+            password.ForeColor = Color.FromArgb(78, 184, 206); ;
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)

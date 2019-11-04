@@ -5,12 +5,9 @@ namespace BNITapCash.Forms
 {
     public partial class About : Form
     {
-        private Form home;
-
         public About()
         {
             InitializeComponent();
-            this.home = home;
             InitData();
         }
 
@@ -58,12 +55,6 @@ namespace BNITapCash.Forms
         private void button2_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void logout_Click(object sender, EventArgs e)
-        {
-            home.Show();
-            Hide();
         }
     }
 }
