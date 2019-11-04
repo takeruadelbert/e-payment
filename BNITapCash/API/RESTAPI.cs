@@ -15,7 +15,7 @@ namespace BNITapCash.API
 
         }
 
-        public DataResponse post(string ip_address_server, string APIUrl, bool resultSingleObject = false, string sent_param = "")
+        public DataResponseArray post(string ip_address_server, string APIUrl, bool resultSingleObject = false, string sent_param = "")
         {
             string result = "";
             try
@@ -41,7 +41,7 @@ namespace BNITapCash.API
                     Stream receiveStream = response.GetResponseStream();
                     StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
                     result = readStream.ReadToEnd();
-                    DataResponse json = null;
+                    DataResponseArray json = null;
                     if (resultSingleObject)
                     {
                         json = JsonConvert.DeserializeObject<DataResponseObject>(result);
@@ -60,7 +60,7 @@ namespace BNITapCash.API
             }
         }
 
-        public DataResponse get(string ip_address_server, string API_URL, bool resultSingleObject = false)
+        public DataResponseArray get(string ip_address_server, string API_URL, bool resultSingleObject = false)
         {
             string result = "";
             try
@@ -74,7 +74,7 @@ namespace BNITapCash.API
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
                     result = reader.ReadToEnd();
-                    DataResponse json = null;
+                    DataResponseArray json = null;
                     if (resultSingleObject)
                     {
                         json = JsonConvert.DeserializeObject<DataResponseObject>(result);

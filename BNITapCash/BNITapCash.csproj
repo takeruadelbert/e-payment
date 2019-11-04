@@ -75,7 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\DataResponse.cs" />
+    <Compile Include="API\base\DataResponse.cs" />
     <Compile Include="API\DataResponseArray.cs" />
     <Compile Include="API\DataResponseObject.cs" />
     <Compile Include="API\RESTAPI.cs" />

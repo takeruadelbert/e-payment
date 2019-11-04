@@ -2,7 +2,7 @@
 
 namespace BNITapCash.API
 {
-    class DataResponseObject : DataResponse
+    class DataResponseObject : DataResponseArray
     {
         [JsonProperty("data")]
         public JsonObjectAttribute Data { get; set; }

@@ -193,7 +193,7 @@ namespace BNITapCash
         {
             string APIPullData = Properties.Resources.RequestVehicleTypeAPIURL;
             RESTAPI pull = new RESTAPI();
-            DataResponseArray receivedData = (DataResponseArray)pull.get(ip_address_server, APIPullData);
+            DataResponseArray receivedData = pull.get(ip_address_server, APIPullData);
             if (receivedData != null)
             {
                 switch (receivedData.Status)
