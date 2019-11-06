@@ -14,14 +14,11 @@
  * 
  * =========================================================================================*/
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+using BNITapCash.Exceptions;
 using BNITapCash.Pcsc;
 using BNITapCash.Readers.Pcsc;
-using BNITapCash.Exceptions;
+using System;
+using System.Linq;
 
 namespace BNITapCash.Readers.Contactless.Acr123U
 {
@@ -86,8 +83,8 @@ namespace BNITapCash.Readers.Contactless.Acr123U
             return byteToInt(data, false);
         }
 
-        #endregion 
-    
+        #endregion
+
         #region ISmartCardReaderContactless Members
 
         public override byte[] getFirmwareVersion()

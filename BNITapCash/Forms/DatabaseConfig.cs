@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using BNITapCash.DB;
 using BNITapCash.Helper;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace BNITapCash.Forms
 {
@@ -95,13 +90,13 @@ namespace BNITapCash.Forms
             string db_name = txtDBName.Text.ToString();
             string db_username = txtDBUsername.Text.ToString();
             string db_password = txtDBPassword.Text.ToString();
-            if (this.ValidateFields(db_host, db_name, db_username, db_password))
+            if (ValidateFields(db_host, db_name, db_username))
             {
                 Properties.Settings.Default.DBHost = db_host;
                 Properties.Settings.Default.DBName = db_name;
                 Properties.Settings.Default.DBUsername = db_username;
                 Properties.Settings.Default.DBPassword = db_password;
-                Console.WriteLine(Properties.Settings.Default.DBHost);
+
                 this.DBHost = db_host;
                 this.DBName = db_name;
                 this.DBUsername = db_username;
@@ -171,7 +166,7 @@ namespace BNITapCash.Forms
             this.TextChangeListener();
         }
 
-        private bool ValidateFields(string db_host, string db_name, string db_username, string db_password)
+        private bool ValidateFields(string db_host, string db_name, string db_username)
         {
             bool result = true;
             TKHelper tk = new TKHelper();
@@ -198,11 +193,7 @@ namespace BNITapCash.Forms
                 MessageBox.Show("Field 'Username' Belum Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            if (string.IsNullOrEmpty(db_password) || db_password == "Password")
-            {
-                MessageBox.Show("Field 'Password' Belum Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
+            
             return result;
         }
 
@@ -214,12 +205,6 @@ namespace BNITapCash.Forms
         private void DatabaseConfig_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void logout_Click(object sender, EventArgs e)
-        {
-            home.Show();
-            Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -235,6 +220,33 @@ namespace BNITapCash.Forms
         private void button2_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void TestDatabaseConnection()
+        {
+            string host = txtDBHost.Text;
+            string dbname = txtDBName.Text;
+            string username = txtDBUsername.Text;
+            string password = txtDBPassword.Text;
+            if (this.ValidateFields(host, dbname, username))
+            {
+                DBConnect db = new DBConnect(host, dbname, username, password);
+                if (db.CheckMySQLConnection())
+                {
+                    MessageBox.Show("Connection Established.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Failed to connect.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("There's still invalid field(s).", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
         }
     }
 }

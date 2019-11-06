@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using AForge.Video;
+﻿using AForge.Video;
 using BNITapCash.API;
 using BNITapCash.Bank.BNI;
 using BNITapCash.Helper;
+using BNITapCash.Miscellaneous.Webcam;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using BNITapCash.Miscellaneous.Webcam;
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Windows.Forms;
 
 namespace BNITapCash
 {
@@ -50,8 +43,7 @@ namespace BNITapCash
             this.home = home;
             Initialize();
             this.webcamImage = webcam;
-            InitializeWebcam();
-
+            this.camera = new Webcam(this);
         }
 
         private void Initialize()
@@ -98,12 +90,6 @@ namespace BNITapCash
             }
         }
 
-        private void InitializeWebcam()
-        {
-            camera = new Webcam(this);
-            camera.StartWebcam();
-        }
-
         private void logo_Click(object sender, EventArgs e)
         {
 
@@ -127,11 +113,23 @@ namespace BNITapCash
                 int totalFare = this.helper.IDRToNominal(txtGrandTotal.Text.ToString());
 
                 // encoded base64 Image from Webcam
+                try
+                {
+                    camera.StartWebcam();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Webcam Bermasalah : Pastikan Webcam dipasang dengan benar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 if (webcamImage.Image == null)
                 {
                     MessageBox.Show("Snapshoot Webcam Bermasalah.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    camera.StopWebcam();
                     return;
                 }
+                camera.StopWebcam();
                 Bitmap bmp = new Bitmap(webcamImage.Image, Properties.Settings.Default.WebcamWidth, Properties.Settings.Default.WebcamHeight);
                 string base64Image = bmp.ToBase64String(ImageFormat.Png);
 
@@ -319,7 +317,8 @@ namespace BNITapCash
 
                         RESTAPI api = new RESTAPI();
                         string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
-                        DataResponse response = api.API_Post(ip_address_server, APIUrl, sent_param);
+
+                        DataResponseArray response = (DataResponseArray)api.post(ip_address_server, APIUrl, false, sent_param);
                         if (response != null)
                         {
                             switch (response.Status)
@@ -400,7 +399,7 @@ namespace BNITapCash
             var sent_param = JsonConvert.SerializeObject(param);
             RESTAPI save = new RESTAPI();
             string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
-            DataResponse response = save.API_Post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, sent_param);
+            DataResponseObject response = (DataResponseObject)save.post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, true, sent_param);
             if (response != null)
             {
                 switch (response.Status)

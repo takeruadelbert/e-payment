@@ -75,15 +75,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\DataResponse.cs" />
+    <Compile Include="API\base\DataResponse.cs" />
+    <Compile Include="API\DataResponseArray.cs" />
     <Compile Include="API\DataResponseObject.cs" />
     <Compile Include="API\RESTAPI.cs" />
     <Compile Include="Bank\BNI\BNI.cs" />
-    <Compile Include="Bank\BNI\Pcsc\Apdu.cs" />
-    <Compile Include="Bank\BNI\Pcsc\Helper.cs" />
-    <Compile Include="Bank\BNI\Pcsc\PcscProvider.cs" />
-    <Compile Include="Bank\BNI\Pcsc\PcscReader.cs" />
-    <Compile Include="Bank\BNI\Reader\Acr123U.cs" />
+    <Compile Include="Card\Mifare\Card.cs" />
+    <Compile Include="Card\Mifare\MifareCard.cs" />
+    <Compile Include="Constant\Constant.cs" />
+    <Compile Include="ReaderDevice\Pcsc\Apdu.cs" />
+    <Compile Include="ReaderDevice\Pcsc\Helper.cs" />
+    <Compile Include="ReaderDevice\Pcsc\PcscProvider.cs" />
+    <Compile Include="ReaderDevice\Pcsc\PcscReader.cs" />
+    <Compile Include="ReaderDevice\Reader\Acr123U.cs" />
     <Compile Include="Bank\BNI\Trx.cs" />
     <Compile Include="Forms\About.cs">
       <SubType>Form</SubType>
@@ -97,8 +101,8 @@
     <Compile Include="Forms\Cashier.Designer.cs">
       <DependentUpon>Cashier.cs</DependentUpon>
     </Compile>
-    <Compile Include="Bank\BNI\Exceptions\PcscException.cs" />
-    <Compile Include="Bank\BNI\Exceptions\ReaderException.cs" />
+    <Compile Include="ReaderDevice\Exceptions\PcscException.cs" />
+    <Compile Include="ReaderDevice\Exceptions\ReaderException.cs" />
     <Compile Include="DB\DBConnect.cs" />
     <Compile Include="Forms\DatabaseConfig.cs">
       <SubType>Form</SubType>
@@ -127,6 +131,7 @@
     <Compile Include="Helper\Base64Helper.cs" />
     <Compile Include="Helper\ServerHelper.cs" />
     <Compile Include="Helper\TKHelper.cs" />
+    <Compile Include="Interface\RestAPIMethod.cs" />
     <Compile Include="Miscellaneous\FileMonitor\FileWatcher.cs" />
     <Compile Include="Forms\Loading.cs">
       <SubType>Form</SubType>

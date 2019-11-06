@@ -1,23 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using BNITapCash.Helper;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using BNITapCash.Helper;
 
 namespace BNITapCash
 {
     public partial class Setting : Form
     {
         private Form home;
-        private string ip_address_server;
-        private string ip_address_live_camera;
-        private int webcam_width;
-        private int webcam_height;
 
         public Setting(Form home)
         {
@@ -28,41 +18,13 @@ namespace BNITapCash
             InitData();
         }
 
-        public string IPAddressServer
-        {
-            get
-            {
-                return this.ip_address_server;
-            }
+        public string IPAddressServer { get; set; }
 
-            set
-            {
-                this.ip_address_server = value;
-            }
-        }
+        public string IPAddressLiveCamera { get; set; }
 
-        public string IPAddressLiveCamera
-        {
-            get
-            {
-                return this.ip_address_live_camera;
-            }
+        public int WebcamWidth { get; set; }
 
-            set
-            {
-                this.ip_address_live_camera = value;
-            }
-        }
-
-        public int WebcamWidth
-        {
-            get; set;
-        }
-
-        public int WebcamHeight
-        {
-            get; set;
-        }
+        public int WebcamHeight { get; set; }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -102,8 +64,8 @@ namespace BNITapCash
             textBox2.ForeColor = Color.FromArgb(78, 184, 206);
             txtWidth.ForeColor = Color.FromArgb(78, 184, 206);
             txtHeight.ForeColor = Color.FromArgb(78, 184, 206);
-			liveCameraUsername.ForeColor = Color.FromArgb(78, 184, 206);
-            if(liveCameraPassword.Text != "Password")
+            liveCameraUsername.ForeColor = Color.FromArgb(78, 184, 206);
+            if (liveCameraPassword.Text != "Password")
                 liveCameraPassword.ForeColor = Color.FromArgb(78, 184, 206);
         }
 
@@ -203,6 +165,17 @@ namespace BNITapCash
                 txtHeight.Text = "360";
                 WebcamHeight = 360;
             }
+
+            if (Properties.Settings.Default.LiveCameraUsername != string.Empty)
+            {
+                liveCameraUsername.Text = Properties.Settings.Default.LiveCameraUsername;
+
+            }
+
+            if (Properties.Settings.Default.LiveCameraPassword != string.Empty)
+            {
+                liveCameraPassword.Text = Properties.Settings.Default.LiveCameraPassword;
+            }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -265,17 +238,6 @@ namespace BNITapCash
                 System.Environment.Exit(1);
             }
         }
-		
-		private void LiveCameraUsername_TextChanged(object sender, EventArgs e)
-        {
-            this.TextChangeListener(true);
-        }
-
-        private void LiveCameraPassword_TextChanged(object sender, EventArgs e)
-        {
-            liveCameraPassword.PasswordChar = '●';
-            this.TextChangeListener(true);
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -287,10 +249,24 @@ namespace BNITapCash
 
         }
 
-        private void logout_Click(object sender, EventArgs e)
+        private void liveCameraPassword_TextChanged_1(object sender, EventArgs e)
         {
-            home.Show();
-            Hide();
+            liveCameraPassword.PasswordChar = '●';
+            this.TextChangeListener(true);
+        }
+        private void liveCameraUsername_TextChanged_1(object sender, EventArgs e)
+        {
+            this.TextChangeListener(true);
+        }
+
+        private void liveCameraUsername_Click(object sender, EventArgs e)
+        {
+            this.TextChangeListener();
+        }
+
+        private void liveCameraPassword_Click(object sender, EventArgs e)
+        {
+            this.TextChangeListener();
         }
     }
 }

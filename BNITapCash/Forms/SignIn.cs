@@ -90,14 +90,13 @@ namespace BNITapCash
             username.ForeColor = Color.FromArgb(78, 184, 206);
 
             password.BackgroundImage = Properties.Resources.password3;
-            panel2.ForeColor = Color.WhiteSmoke;
-            password.ForeColor = Color.WhiteSmoke;
+            panel2.ForeColor = Color.FromArgb(78, 184, 206); ;
+            password.ForeColor = Color.FromArgb(78, 184, 206); ;
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            //Hide();
-            //setting.Show();
+
         }
 
         private void SignIn()
@@ -112,149 +111,169 @@ namespace BNITapCash
         {
             string username = this.username.Text.ToString();
             string password = this.password.Text.ToString();
+
+            if (Validate(username, password))
+            {
+                using (Loading loading = new Loading(SignIn))
+                {
+                    loading.ShowDialog(this);
+
+                    // check local database connection
+                    DBConnect database = new DBConnect();
+                    if (!database.CheckMySQLConnection())
+                    {
+                        MessageBox.Show("Error : Can't Establish Connection to Local Database.\nPlease setup properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    // check reader connection
+                    BNI bni = new BNI();
+                    if (!bni.CheckReaderConn())
+                    {
+                        MessageBox.Show("Error : Contactless Reader not available.\nPlease plug it and then try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    // remember me feature
+                    if (checkBox1.Checked)
+                    {
+                        Properties.Settings.Default.Username = username;
+                        Properties.Settings.Default.Password = password;
+                        Properties.Settings.Default.RememberMe = "yes";
+                    }
+                    else
+                    {
+                        Properties.Settings.Default.Username = username;
+                        Properties.Settings.Default.Password = "";
+                        Properties.Settings.Default.RememberMe = "no";
+                    }
+                    Properties.Settings.Default.Save();
+
+                    string ip_address_server = "http://" + this.setting.IPAddressServer;
+
+                    // pull some data from server e.g. Vehicle Types
+                    if (PullDataFromServer(ip_address_server))
+                    {
+                        ApiSignIn(username, password, ip_address_server);
+                    }
+                }
+            }
+        }
+
+        private bool Validate(string username, string password)
+        {
             if (username == "" || username == "Username")
             {
                 MessageBox.Show("Username Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return false;
             }
             if (password == "" || password == "Password")
             {
                 MessageBox.Show("Password Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return false;
             }
             if (string.IsNullOrEmpty(this.setting.IPAddressServer))
             {
                 MessageBox.Show("Invalid IP Address Server.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return false;
             }
             if (string.IsNullOrEmpty(this.setting.IPAddressLiveCamera))
             {
                 MessageBox.Show("Invalid IP Address Live Camera.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return false;
             }
 
             // validate TID & Settlement MID for further transaction
             if (string.IsNullOrEmpty(this.tmid.TID))
             {
                 MessageBox.Show("Invalid 'TID' value.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return false;
             }
             if (string.IsNullOrEmpty(this.tmid.MID))
             {
                 MessageBox.Show("Invalid 'Settlement MID' value.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return false;
             }
 
-            using (Loading loading = new Loading(SignIn))
+            return true;
+        }
+        private bool PullDataFromServer(string ip_address_server)
+        {
+            string APIPullData = Properties.Resources.RequestVehicleTypeAPIURL;
+            RESTAPI pull = new RESTAPI();
+            DataResponseArray receivedData = pull.get(ip_address_server, APIPullData);
+            if (receivedData != null)
             {
-                loading.ShowDialog(this);
-
-                // check local database connection
-                DBConnect database = new DBConnect();
-                if (!database.CheckMySQLConnection())
+                switch (receivedData.Status)
                 {
-                    MessageBox.Show("Error : Can't Establish Connection to Local Database.\nPlease setup properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                    case 206:
+                        JArray receivedVehicleTypes = receivedData.Data;
+                        JObject vehicleTypes = new JObject();
+                        vehicleTypes.Add(new JProperty("VehicleTypes", receivedVehicleTypes));
 
-                // check reader connection
-                BNI bni = new BNI();
-                if (!bni.CheckReaderConn())
-                {
-                    MessageBox.Show("Error : Contactless Reader not available.\nPlease plug it and then try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                        // write into a file called 'master-data.json'
+                        try
+                        {
+                            string savedDir = tk.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
+                            string json = JsonConvert.SerializeObject(vehicleTypes);
+                            System.IO.File.WriteAllText(@savedDir, json);
+                            //MessageBox.Show("Pull Master Data is Success.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // remember me feature
-                if (checkBox1.Checked)
-                {
-                    Properties.Settings.Default.Username = username;
-                    Properties.Settings.Default.Password = password;
-                    Properties.Settings.Default.RememberMe = "yes";
+                            return true;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
+                    default:
+                        MessageBox.Show(receivedData.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
                 }
-                else
-                {
-                    Properties.Settings.Default.Username = username;
-                    Properties.Settings.Default.Password = "";
-                    Properties.Settings.Default.RememberMe = "no";
-                }
-                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                MessageBox.Show("Error : Can't establish connection to server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
 
-                string ip_address_server = "http://" + this.setting.IPAddressServer;
+        private void ApiSignIn(string username, string password, string ip_address_server)
+        {
+            var APIUrl = Properties.Resources.LoginAPIURL;
+            JObject param = new JObject();
+            param["username"] = username;
+            param["password"] = password;
+            var sent_param = JsonConvert.SerializeObject(param);
 
-                // pull some data from server e.g. Vehicle Types
-                string APIPullData = Properties.Resources.RequestVehicleTypeAPIURL;
-                RESTAPI pull = new RESTAPI();
-                DataResponse receivedData = pull.API_Get(ip_address_server, APIPullData);
-                if (receivedData != null)
+            RESTAPI api = new RESTAPI();
+            DataResponseArray response = (DataResponseArray)api.post(ip_address_server, APIUrl, false, sent_param);
+            if (response != null)
+            {
+                switch (response.Status)
                 {
-                    switch (receivedData.Status)
-                    {
-                        case 206:
-                            JArray receivedVehicleTypes = receivedData.Data;
-                            JObject vehicleTypes = new JObject();
-                            vehicleTypes.Add(new JProperty("VehicleTypes", receivedVehicleTypes));
-
-                           // write into a file called 'master-data.json'
-                            try
-                            {
-                                string savedDir = tk.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
-                                string json = JsonConvert.SerializeObject(vehicleTypes);
-                                System.IO.File.WriteAllText(@savedDir, json);
-                                //MessageBox.Show("Pull Master Data is Success.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine(ex.Message);
-                                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                            break;
-                        default:
-                            MessageBox.Show(receivedData.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                    }
+                    case 201:
+                        try
+                        {
+                            this.cashier = new Cashier(this);
+                            this.cashier.Show();
+                            Hide();
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Error : Can't Connect to Webcam.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    default:
+                        MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
                 }
-                else
-                {
-                    MessageBox.Show("Error : Can't establish connection to server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                // send data API
-                var APIUrl = Properties.Resources.LoginAPIURL;
-                JObject param = new JObject();
-                param["username"] = username;
-                param["password"] = password;
-                var sent_param = JsonConvert.SerializeObject(param);
-
-                RESTAPI api = new RESTAPI();
-                DataResponse response = api.API_Post(ip_address_server, APIUrl, sent_param);
-                if (response != null)
-                {
-                    switch (response.Status)
-                    {
-                        case 201:
-                            //MessageBox.Show(response.Message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            try
-                            {
-                this.cashier = new Cashier(this);
-                this.cashier.Show();
-                Hide();
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("Error : Can't Connect to Webcam.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }                            
-                            break;
-                        default:
-                            MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Error : Can't establish connection to server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            else
+            {
+                MessageBox.Show("Error : Can't establish connection to server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

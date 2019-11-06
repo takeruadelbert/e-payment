@@ -14,11 +14,6 @@
  * 
  * =========================================================================================*/
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Security.Cryptography;
 
 namespace BNITapCash.Pcsc
 {
@@ -142,7 +137,7 @@ namespace BNITapCash.Pcsc
 
             if (tmpbytes == null)
                 return "";
-                        
+
             for (int i = 0; i < tmpbytes.Length; i++)
             {
                 tmpStr += string.Format("{0:X2}", tmpbytes[i]);

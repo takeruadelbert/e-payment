@@ -16,8 +16,6 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
 
 namespace BNITapCash.Pcsc
@@ -43,7 +41,7 @@ namespace BNITapCash.Pcsc
             /// Length, in bytes, of the SCARD_IO_REQUEST structure plus any following PCI-specific information.
             /// </summary>
             public int cbPciLength;
-        }       
+        }
 
         /// <summary>
         /// The SCARD_READERSTATE structure is used by functions for tracking smart cards within readers.
@@ -79,7 +77,7 @@ namespace BNITapCash.Pcsc
             /// <summary>
             /// ATR of the inserted card, with extra alignment bytes. 
             /// </summary>
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst=36)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 36)]
             public byte[] rgbAtr;
         }
 
@@ -120,7 +118,7 @@ namespace BNITapCash.Pcsc
         /// are performed within the domain of the user.
         /// </summary>
         public const int SCARD_SCOPE_USER = 0;
-        
+
         /// <summary>
         /// The context is that of the current terminal, and any database 
         /// operations are performed within the domain of that terminal.  
@@ -143,21 +141,21 @@ namespace BNITapCash.Pcsc
         /// from state transition monitoring services. This is represented
         /// by all bits set to zero.
         /// </summary>
-        public const int SCARD_STATE_UNAWARE = 0x00;        
+        public const int SCARD_STATE_UNAWARE = 0x00;
 
         /// <summary>
         /// The application requested that this reader be ignored. No other
         /// bits will be set.
         /// </summary>
         public const int SCARD_STATE_IGNORE = 0x01;
-        
+
         /// <summary>
         /// This implies that there is a difference between the state 
         /// believed by the application, and the state known by the Service
         /// Manager.When this bit is set, the application may assume a
         /// significant state change has occurred on this reader.
         /// </summary>
-        public const int SCARD_STATE_CHANGED = 0x02;        
+        public const int SCARD_STATE_CHANGED = 0x02;
 
         /// <summary>
         /// This implies that the given reader name is not recognized by
@@ -165,25 +163,25 @@ namespace BNITapCash.Pcsc
         /// and SCARD_STATE_IGNORE will also be set.
         /// </summary>
         public const int SCARD_STATE_UNKNOWN = 0x04;
-        
+
         /// <summary>
         /// This implies that the actual state of this reader is not
         /// available. If this bit is set, then all the following bits are
         /// clear.
         /// </summary>
         public const int SCARD_STATE_UNAVAILABLE = 0x08;
-        
+
         /// <summary>
         /// This implies that there is not card in the reader.  If this bit
         /// is set, all the following bits will be clear.
         /// </summary>
         public const int SCARD_STATE_EMPTY = 0x10;
-        
+
         /// <summary>
         /// This implies that there is a card in the reader. 
         /// </summary>
         public const int SCARD_STATE_PRESENT = 0x20;
-        
+
         /// <summary>
         /// This implies that there is a card in the reader with an ATR
         /// matching one of the target cards. If this bit is set,
@@ -191,44 +189,44 @@ namespace BNITapCash.Pcsc
         /// on the SCardLocateCard() service.
         /// </summary>
         public const int SCARD_STATE_ATRMATCH = 0x40;
-        
+
         /// <summary>
         /// This implies that the card in the reader is allocated for 
         /// exclusive use by another application. If this bit is set,
         /// SCARD_STATE_PRESENT will also be set.
         /// </summary>
         public const int SCARD_STATE_EXCLUSIVE = 0x80;
-        
+
         /// <summary>
         /// This implies that the card in the reader is in use by one or 
         /// more other applications, but may be connected to in shared mode. 
         /// If this bit is set, SCARD_STATE_PRESENT will also be set.
         /// </summary>
         public const int SCARD_STATE_INUSE = 0x100;
-        
+
         /// <summary>
         /// This implies that the card in the reader is unresponsive or not
         /// supported by the reader or software.
         /// </summary>
         public const int SCARD_STATE_MUTE = 0x200;
-        
+
         /// <summary>
         /// This implies that the card in the reader has not been powered up. 
         /// </summary>
         public const int SCARD_STATE_UNPOWERED = 0x400;
-        
+
         /// <summary>
         /// This application is not willing to share this card with other 
         /// applications.
         /// </summary>
         public const int SCARD_SHARE_EXCLUSIVE = 1;
-        
+
         /// <summary>
         /// This application is willing to share this card with other 
         /// applications.
         /// </summary>
         public const int SCARD_SHARE_SHARED = 2;
-        
+
         /// <summary>
         /// This application demands direct control of the reader, so it 
         /// is not available to other applications.
@@ -262,7 +260,7 @@ namespace BNITapCash.Pcsc
         #endregion
 
         #region ACS IOCTL Class
-        
+
         public const long FILE_DEVICE_SMARTCARD = 0x310000; // Reader action IOCTLs
         public const long IOCTL_SMARTCARD_DIRECT = FILE_DEVICE_SMARTCARD + 2050 * 4;
         public const long IOCTL_SMARTCARD_SELECT_SLOT = FILE_DEVICE_SMARTCARD + 2051 * 4;
@@ -282,15 +280,15 @@ namespace BNITapCash.Pcsc
         public const long IOCTL_SMARTCARD_SET_CARD_TYPE = FILE_DEVICE_SMARTCARD + 2060 * 4;
         public const long IOCTL_SMARTCARD_ACR128_ESCAPE_COMMAND = FILE_DEVICE_SMARTCARD + 2079 * 4;
 
-        public const long IOCTL_SMARTCARD_ENABLE_PIN_VERIFICATION  = FILE_DEVICE_SMARTCARD + 2075 * 4;
-        public const long IOCTL_SMARTCARD_ENABLE_PIN_MODIFICATION   = FILE_DEVICE_SMARTCARD + 2076 * 4;
-        public const long IOCTL_SMARTCARD_DISABLE_SECURE_PIN_ENTRY  = FILE_DEVICE_SMARTCARD + 2077 * 4;
-        public const long IOCTL_SMARTCARD_GET_FIRMWARE_VERSION  = FILE_DEVICE_SMARTCARD + 2078 * 4;
-        public const long IOCTL_SMARTCARD_DISPLAY_LCD_MESSAGE  = FILE_DEVICE_SMARTCARD + 2079 * 4;
-        public const long IOCTL_SMARTCARD_READ_KEY  = FILE_DEVICE_SMARTCARD + 2080 * 4;
+        public const long IOCTL_SMARTCARD_ENABLE_PIN_VERIFICATION = FILE_DEVICE_SMARTCARD + 2075 * 4;
+        public const long IOCTL_SMARTCARD_ENABLE_PIN_MODIFICATION = FILE_DEVICE_SMARTCARD + 2076 * 4;
+        public const long IOCTL_SMARTCARD_DISABLE_SECURE_PIN_ENTRY = FILE_DEVICE_SMARTCARD + 2077 * 4;
+        public const long IOCTL_SMARTCARD_GET_FIRMWARE_VERSION = FILE_DEVICE_SMARTCARD + 2078 * 4;
+        public const long IOCTL_SMARTCARD_DISPLAY_LCD_MESSAGE = FILE_DEVICE_SMARTCARD + 2079 * 4;
+        public const long IOCTL_SMARTCARD_READ_KEY = FILE_DEVICE_SMARTCARD + 2080 * 4;
         public const long CM_IOCTL_GET_FEATURE_REQUEST = FILE_DEVICE_SMARTCARD + 3400 * 4;
 
-        
+
         #endregion
 
         #region Error Codes
@@ -351,12 +349,12 @@ namespace BNITapCash.Pcsc
         /// <summary>
         /// T=0 is the active protocol.
         /// </summary>
-        public const int SCARD_PROTOCOL_T0 = 0x01;                
+        public const int SCARD_PROTOCOL_T0 = 0x01;
 
         /// <summary>
         /// T=1 is the active protocol.
         /// </summary>
-        public const int SCARD_PROTOCOL_T1 = 0x02;                
+        public const int SCARD_PROTOCOL_T1 = 0x02;
 
         /// <summary>
         /// Raw is the active protocol.
@@ -367,47 +365,47 @@ namespace BNITapCash.Pcsc
         #endregion
 
         #region Reader State
-        
+
         /// <summary>
         /// This value implies the driver is unaware of the current 
         /// state of the reader.
         /// </summary>
         public const int SCARD_UNKNOWN = 0;
-        
+
         /// <summary>
         /// This value implies there is no card in the reader.
         /// </summary>
         public const int SCARD_ABSENT = 1;
-        
+
         /// <summary>
         /// This value implies there is a card is present in the reader, 
         /// but that it has not been moved into position for use.        
         /// </summary>
         public const int SCARD_PRESENT = 2;
-        
+
         /// <summary>
         /// This value implies there is a card in the reader in position 
         /// for use.  The card is not powered.
         /// </summary>
         public const int SCARD_SWALLOWED = 3;
-        
+
         /// <summary>
         /// This value implies there is power is being provided to the card, 
         /// but the Reader Driver is unaware of the mode of the card.
         /// </summary>
         public const int SCARD_POWERED = 4;
-        
+
         /// <summary>
         /// This value implies the card has been reset and is awaiting 
         /// PTS negotiation.
         /// </summary>
         public const int SCARD_NEGOTIABLE = 5;
-        
+
         /// <summary>
         /// This value implies the card has been reset and specific 
         /// communication protocols have been established.
         /// </summary>
-        public const int SCARD_SPECIFIC = 6;        
+        public const int SCARD_SPECIFIC = 6;
 
         #endregion
 
@@ -549,7 +547,7 @@ namespace BNITapCash.Pcsc
         /// <param name="RecvBuffLen">[in, out] Supplies the length, in bytes, of the pbRecvBuffer parameter and receives the actual number of bytes received from the smart card. This value cannot be SCARD_AUTOALLOCATE because SCardTransmit does not support SCARD_AUTOALLOCATE.</param>
         /// <returns>If the function successfully sends a service request to the smart card, the return value is SCARD_S_SUCCESS.
         /// If the function fails, it returns an error code. For more information, see Smart Card Return Values.</returns>
-        [DllImport(winscardDLLFName, SetLastError=true)]
+        [DllImport(winscardDLLFName, SetLastError = true)]
         public static extern int SCardTransmit(IntPtr hCard, ref SCARD_IO_REQUEST pioSendRequest, byte[] SendBuff, int SendBuffLen, ref SCARD_IO_REQUEST pioRecvRequest, byte[] RecvBuff, ref int RecvBuffLen);
 
         /// <summary>
@@ -687,10 +685,10 @@ namespace BNITapCash.Pcsc
                     return ("Gemplus MPCOS");
                 default:
                     return ("Unknown Card");
-                    
+
             }
         }
-        
+
 
         #endregion
 

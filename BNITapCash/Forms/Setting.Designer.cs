@@ -506,6 +506,7 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(400, 500);
             this.panel6.TabIndex = 24;
+
             // 
             // label12
             // 

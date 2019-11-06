@@ -14,12 +14,10 @@
  * 
  * =========================================================================================*/
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BNITapCash.Readers.Pcsc;
 using BNITapCash.Exceptions;
+using BNITapCash.Readers.Pcsc;
+using System;
+using System.Linq;
 
 namespace BNITapCash.Pcsc
 {
@@ -185,7 +183,7 @@ namespace BNITapCash.Pcsc
                 throw new PcscException(returnCode);
             }
 
-            
+
             shareMode_ = shareMode;
             pProtocol_ = preferedProtocol;
             _readerName = readerName;
@@ -195,7 +193,7 @@ namespace BNITapCash.Pcsc
         {
             connect(readerName, PcscProvider.SCARD_PROTOCOL_UNDEFINED, PcscProvider.SCARD_SHARE_DIRECT);
         }
-        
+
         public string[] getReaderList()
         {
             byte[] returnData;
@@ -207,7 +205,7 @@ namespace BNITapCash.Pcsc
             int readerCount = 255;
 
             returnCode = PcscProvider.SCardEstablishContext(PcscProvider.SCARD_SCOPE_USER, 0, 0, ref hContext);
-            
+
             if (returnCode != PcscProvider.SCARD_S_SUCCESS)
             {
                 lastError = returnCode;
@@ -215,7 +213,7 @@ namespace BNITapCash.Pcsc
             }
 
             returnCode = PcscProvider.SCardListReaders(hContext_, null, null, ref readerCount);
-            
+
             if (returnCode != PcscProvider.SCARD_S_SUCCESS)
             {
                 lastError = returnCode;
@@ -223,7 +221,7 @@ namespace BNITapCash.Pcsc
             }
 
             returnData = new byte[readerCount];
-            
+
             returnCode = PcscProvider.SCardListReaders(hContext_, sReaderGroup, returnData, ref readerCount);
             if (returnCode != PcscProvider.SCARD_S_SUCCESS)
                 return readerList;
@@ -234,9 +232,9 @@ namespace BNITapCash.Pcsc
 
             return readerList;
         }
-        
+
         public void disconnect()
-        {            
+        {
             int returnValue = PcscProvider.SCardDisconnect(hCard_, PcscProvider.SCARD_UNPOWER_CARD);
             if (returnValue != PcscProvider.SCARD_S_SUCCESS)
                 throw new PcscException(returnValue);
@@ -386,7 +384,7 @@ namespace BNITapCash.Pcsc
         {
             throw new NotImplementedException();
         }
-        
+
         void sendCommandTriggerEvent(TransmitApduEventArg e)
         {
             if (OnSendCommand == null)
