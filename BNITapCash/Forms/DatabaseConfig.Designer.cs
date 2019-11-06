@@ -52,6 +52,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -203,6 +204,7 @@
             this.panel5.BackColor = System.Drawing.Color.Transparent;
             this.panel5.BackgroundImage = global::BNITapCash.Properties.Resources.BG_PUTIH2;
             this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel5.Controls.Add(this.button3);
             this.panel5.Controls.Add(this.panel9);
             this.panel5.Controls.Add(this.panel7);
             this.panel5.Controls.Add(this.button1);
@@ -259,7 +261,7 @@
             this.button1.Size = new System.Drawing.Size(40, 30);
             this.button1.TabIndex = 29;
             this.button1.UseVisualStyleBackColor = true;
-            //this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -276,7 +278,7 @@
             this.button2.Size = new System.Drawing.Size(40, 30);
             this.button2.TabIndex = 30;
             this.button2.UseVisualStyleBackColor = true;
-            //this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label5
             // 
@@ -351,6 +353,22 @@
             this.panel8.Size = new System.Drawing.Size(36, 38);
             this.panel8.TabIndex = 35;
             // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.DodgerBlue;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.Black;
+            this.button3.Location = new System.Drawing.Point(324, 343);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(250, 45);
+            this.button3.TabIndex = 36;
+            this.button3.Text = "TEST CONNECTION";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
             // DatabaseConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -403,5 +421,6 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Button button3;
     }
 }
