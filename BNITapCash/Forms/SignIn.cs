@@ -1,14 +1,23 @@
-﻿using BNITapCash.API;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using BNITapCash.API;
 using BNITapCash.Bank.BNI;
-using BNITapCash.DB;
-using BNITapCash.Forms;
-using BNITapCash.Helper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Drawing;
+using BNITapCash.Helper;
 using System.Threading;
-using System.Windows.Forms;
+using BNITapCash.Miscellaneous;
+using BNITapCash.DB;
+using BNITapCash.Forms;
 
 namespace BNITapCash
 {
@@ -188,7 +197,6 @@ namespace BNITapCash
 
             return true;
         }
-
         private bool PullDataFromServer(string ip_address_server)
         {
             string APIPullData = Properties.Resources.RequestVehicleTypeAPIURL;

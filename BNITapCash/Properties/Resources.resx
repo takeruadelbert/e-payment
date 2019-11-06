@@ -266,4 +266,61 @@
   <data name="main-footer1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\main-footer2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="OFL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\OFL.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Poppins_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-Black.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_BlackItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-BlackItalic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_Bold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-Bold.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_BoldItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-BoldItalic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_ExtraBold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-ExtraBold.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_ExtraBoldItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-ExtraBoldItalic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_ExtraLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-ExtraLight.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_ExtraLightItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-ExtraLightItalic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_Italic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-Italic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_Light" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-Light.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_LightItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-LightItalic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_Medium" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-Medium.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_MediumItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-MediumItalic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_Regular" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-Regular.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_SemiBold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-SemiBold.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_SemiBoldItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-SemiBoldItalic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_Thin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-Thin.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Poppins_ThinItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\fonts\Poppins-ThinItalic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

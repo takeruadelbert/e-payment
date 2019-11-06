@@ -54,8 +54,6 @@ namespace BNITapCash
             try
             {
                 stream = new JPEGStream(liveCameraURL);
-                stream.Login = Properties.Settings.Default.LiveCameraUsername;
-                stream.Password = Properties.Settings.Default.LiveCameraPassword;
                 stream.NewFrame += stream_NewFrame;
                 stream.Start();
             }
@@ -319,6 +317,7 @@ namespace BNITapCash
 
                         RESTAPI api = new RESTAPI();
                         string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
+
                         DataResponseArray response = (DataResponseArray)api.post(ip_address_server, APIUrl, false, sent_param);
                         if (response != null)
                         {

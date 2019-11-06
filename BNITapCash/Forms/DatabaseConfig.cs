@@ -96,7 +96,7 @@ namespace BNITapCash.Forms
                 Properties.Settings.Default.DBName = db_name;
                 Properties.Settings.Default.DBUsername = db_username;
                 Properties.Settings.Default.DBPassword = db_password;
-                
+
                 this.DBHost = db_host;
                 this.DBName = db_name;
                 this.DBUsername = db_username;
@@ -193,6 +193,7 @@ namespace BNITapCash.Forms
                 MessageBox.Show("Field 'Username' Belum Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+            
             return result;
         }
 
@@ -204,12 +205,6 @@ namespace BNITapCash.Forms
         private void DatabaseConfig_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void logout_Click(object sender, EventArgs e)
-        {
-            home.Show();
-            Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)

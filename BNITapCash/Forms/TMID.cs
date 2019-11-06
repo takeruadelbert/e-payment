@@ -12,6 +12,7 @@ namespace BNITapCash.Forms
         public TMID(Login login)
         {
             InitializeComponent();
+            this.home = home;
             this.login = login;
             InitData();
         }
