@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using BNITapCash.ConstantVariable;
 
 namespace BNITapCash
 {
@@ -53,7 +54,7 @@ namespace BNITapCash
                     txtWidth.Clear();
                 else if (txtHeight.Text == "Height")
                     txtHeight.Clear();
-				else if (liveCameraUsername.Text == "Username")
+                else if (liveCameraUsername.Text == "Username")
                     liveCameraUsername.Clear();
                 else if (liveCameraPassword.Text == "Password")
                     liveCameraPassword.Clear();
@@ -81,7 +82,7 @@ namespace BNITapCash
             string ipv4_live_cam = textBox2.Text.ToString();
             int width = Convert.ToInt32(txtWidth.Text);
             int height = Convert.ToInt32(txtHeight.Text);
-			string liveCamUsername = liveCameraUsername.Text;
+            string liveCamUsername = liveCameraUsername.Text;
             string liveCamPassword = liveCameraPassword.Text;
             TKHelper tk = new TKHelper();
             if (ipv4 != "" && ipv4 != "IP Address Server" && ipv4 != null)
@@ -96,31 +97,31 @@ namespace BNITapCash
                             Properties.Settings.Default.IPAddressLiveCamera = ipv4_live_cam;
                             Properties.Settings.Default.WebcamWidth = width;
                             Properties.Settings.Default.WebcamHeight = height;
-							Properties.Settings.Default.LiveCameraUsername = liveCamUsername;
+                            Properties.Settings.Default.LiveCameraUsername = liveCamUsername;
                             Properties.Settings.Default.LiveCameraPassword = liveCamPassword;
                             Properties.Settings.Default.Save();
                             IPAddressServer = ipv4;
                             IPAddressLiveCamera = ipv4_live_cam;
-                            MessageBox.Show("Setting Berhasil Diupdate.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(Constant.SETTING_UPDATE_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            MessageBox.Show("Invalid IP Address Live Camera.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_LIVE_CAMERA, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Invalid IP Address Server.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_SERVER, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("IP Address Live Camera Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(Constant.WARNING_MESSAGE_IP_ADDRESS_LIVE_CAMERA_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
-                MessageBox.Show("IP Address Server Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Constant.WARNING_MESSAGE_IP_ADDRESS_SERVER_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -231,7 +232,7 @@ namespace BNITapCash
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show(, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 Dispose();

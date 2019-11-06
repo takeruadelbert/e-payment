@@ -25,15 +25,25 @@ namespace BNITapCash.Card.Mifare
         private static readonly IContextFactory contextFactory = ContextFactory.Instance;
         SCardMonitor sCardMonitor = new SCardMonitor(contextFactory, SCardScope.System);
 
-        Acr123U acr123u = new Acr123U();
+        Acr123U acr123u;
         byte LEDStatus;
 
+        private Cashier cashier;
+
         public MifareCard()
+        {
+            
+        }
+
+        public MifareCard(Cashier cashier)
         {
             establishContext();
             Console.WriteLine("===========");
             Console.WriteLine("List Reader");
             Console.WriteLine("===========");
+
+            this.cashier = cashier;
+            this.acr123u = new Acr123U();
         }
 
         public string SelectDevice()
@@ -157,39 +167,94 @@ namespace BNITapCash.Card.Mifare
             if (connectCard())
             {
                 string cardUID = getcardUID();
+                this.cashier.UIDCard = cardUID;
                 Console.WriteLine("UID = " + cardUID);
             }
         }
 
-        private void card_CardInserted(object sender, EventArgs e)
+        private void CardInserted(object sender, EventArgs e)
         {
             context.Post(new SendOrPostCallback(o =>
             {
                 Console.WriteLine(Constant.BREAKLINE + Constant.CARD_INSERTED);
                 connect();
+
+                //SetToScanningCard();
             }), null);
         }
 
-        private void card_CardRemoved(object sender, EventArgs e)
+        private void CardRemoved(object sender, EventArgs e)
         {
             context.Post(new SendOrPostCallback(o =>
             {
                 Console.WriteLine(Constant.BREAKLINE + Constant.CARD_REMOVED);
                 disconnect();
+
+                //SetToWaitingCardToBeScanned();
             }), null);
         }
 
         public void RunMain()
         {
+            acr123u.readerName = SelectDevice();
+            acr123u.connectDirect();
+
+            // set background light on
+            acr123u.LCDBacklightControl(0xFF);
+
+            // set LED
+            this.LEDStatus |= Constant.LED_ORANGE;
+            this.LEDStatus |= Constant.LED_ANT_BLUE;
+            this.acr123u.setLEDControl(this.LEDStatus);
+
+            // set Display Text
+            this.SetLCDDisplayText(Constant.APP_NAME);
+
+            acr123u.disconnect();
+
             context = SynchronizationContext.Current;
             if (context == null)
             {
                 context = new SynchronizationContext();
             }
-
-            sCardMonitor.CardInserted += new CardInsertedEvent(card_CardInserted);
-            sCardMonitor.CardRemoved += new CardRemovedEvent(card_CardRemoved);
+            
+            sCardMonitor.CardInserted += new CardInsertedEvent(CardInserted);
+            sCardMonitor.CardRemoved += new CardRemovedEvent(CardRemoved);
             sCardMonitor.Start(SelectDevice());
+        }
+
+        private void SetToScanningCard()
+        {
+            acr123u.connectDirect();
+            acr123u.LCDBacklightControl(0xFF);
+            this.SetLCDDisplayText(Constant.MESSAGE_SCANNING);
+            this.LEDStatus = Constant.LED_ORANGE;
+            this.LEDStatus |= Constant.LED_ANT_BLUE;
+            this.LEDStatus |= Constant.LED_ANT_GREEN;
+            this.LEDStatus |= Constant.LED_ANT_RED;
+            this.acr123u.setLEDControl(this.LEDStatus);
+            acr123u.disconnect();
+        }
+
+        private void SetToWaitingCardToBeScanned()
+        {
+            acr123u.connectDirect();
+            acr123u.LCDBacklightControl(0xFF);
+            this.LEDStatus = Constant.LED_ORANGE;
+            this.LEDStatus |= Constant.LED_ANT_BLUE;
+            this.acr123u.setLEDControl(this.LEDStatus);
+            this.SetLCDDisplayText(Constant.MESSAGE_WAITING_CARD);
+            acr123u.disconnect();
+        }
+
+        private void SetLCDDisplayText(string display_text)
+        {
+            acr123u.LCDBacklightControl(0xFF);
+            acr123u.ClearLCD();
+            int XYPosition = 0;
+            byte[] Data = new byte[display_text.Length];
+            Data = System.Text.Encoding.UTF8.GetBytes(display_text);
+            acr123u.LCDCharacterDisplay((byte)XYPosition, Data);
         }
 
         public bool CheckReaderConnection()

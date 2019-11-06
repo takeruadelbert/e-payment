@@ -1,6 +1,7 @@
 ﻿using AForge.Video;
 using BNITapCash.API;
 using BNITapCash.Bank.BNI;
+using BNITapCash.Card.Mifare;
 using BNITapCash.Helper;
 using BNITapCash.Miscellaneous.Webcam;
 using Newtonsoft.Json;
@@ -23,6 +24,7 @@ namespace BNITapCash
 
         public PictureBox webcamImage;
         private Webcam camera;
+        private MifareCard mifareCard;
 
         public string UIDCard
         {
@@ -63,9 +65,12 @@ namespace BNITapCash
                 MessageBox.Show("Error : Cannot Connect to Live Camera. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LiveCamera.Image = Properties.Resources.no_image;
             }
-            this.bni = new BNI(this);
-            this.bni.RunMain();
+            this.bni = new BNI();
+            //this.bni.RunMain();
             //this.StartTimer();
+
+            this.mifareCard = new MifareCard(this);
+            this.mifareCard.RunMain();
 
             // initialize vehicle type options            
             try
