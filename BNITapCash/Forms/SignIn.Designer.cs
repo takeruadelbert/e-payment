@@ -139,7 +139,7 @@
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            //this.pictureBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseDown);
+            this.pictureBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseDown);
             // 
             // contextMenuStrip1
             // 
@@ -149,40 +149,40 @@
             this.tIDSettlementMIDToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(179, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 114);
             // 
             // databaseToolStripMenuItem
             // 
             this.databaseToolStripMenuItem.Image = global::BNITapCash.Properties.Resources.database;
             this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.databaseToolStripMenuItem.Text = "Database";
-           // this.databaseToolStripMenuItem.Click += new System.EventHandler(this.databaseToolStripMenuItem_Click);
+            this.databaseToolStripMenuItem.Click += new System.EventHandler(this.databaseToolStripMenuItem_Click);
             // 
             // iPv4ServerCameraToolStripMenuItem
             // 
             this.iPv4ServerCameraToolStripMenuItem.Image = global::BNITapCash.Properties.Resources.ipaddress;
             this.iPv4ServerCameraToolStripMenuItem.Name = "iPv4ServerCameraToolStripMenuItem";
-            this.iPv4ServerCameraToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.iPv4ServerCameraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.iPv4ServerCameraToolStripMenuItem.Text = "IPv4 Server/Camera";
-         //   this.iPv4ServerCameraToolStripMenuItem.Click += new System.EventHandler(this.iPv4ServerCameraToolStripMenuItem_Click);
+            this.iPv4ServerCameraToolStripMenuItem.Click += new System.EventHandler(this.iPv4ServerCameraToolStripMenuItem_Click);
             // 
             // tIDSettlementMIDToolStripMenuItem
             // 
             this.tIDSettlementMIDToolStripMenuItem.Image = global::BNITapCash.Properties.Resources.id;
             this.tIDSettlementMIDToolStripMenuItem.Name = "tIDSettlementMIDToolStripMenuItem";
-            this.tIDSettlementMIDToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.tIDSettlementMIDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.tIDSettlementMIDToolStripMenuItem.Text = "TID/Settlement MID";
-          //  this.tIDSettlementMIDToolStripMenuItem.Click += new System.EventHandler(this.tIDSettlementMIDToolStripMenuItem_Click);
+            this.tIDSettlementMIDToolStripMenuItem.Click += new System.EventHandler(this.tIDSettlementMIDToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.BackgroundImage = global::BNITapCash.Properties.Resources.version;
             this.aboutToolStripMenuItem.Image = global::BNITapCash.Properties.Resources.version;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About E-Payment";
-          //  this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // checkBox1
             // 
@@ -192,7 +192,6 @@
             this.checkBox1.Size = new System.Drawing.Size(15, 14);
             this.checkBox1.TabIndex = 9;
             this.checkBox1.UseVisualStyleBackColor = true;
-           // this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // textBox3
             // 
@@ -215,7 +214,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(240, 100);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            //this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // button1
             // 
@@ -234,7 +232,7 @@
             this.button1.Size = new System.Drawing.Size(40, 30);
             this.button1.TabIndex = 13;
             this.button1.UseVisualStyleBackColor = false;
-        //    this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -251,7 +249,7 @@
             this.button2.Size = new System.Drawing.Size(40, 30);
             this.button2.TabIndex = 14;
             this.button2.UseVisualStyleBackColor = true;
-         //   this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // panel4
             // 
