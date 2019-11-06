@@ -41,6 +41,7 @@
             this.back = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.buttonTestConnection = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
@@ -52,7 +53,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -82,11 +82,11 @@
             // 
             this.txtDBPassword.BackColor = System.Drawing.Color.White;
             this.txtDBPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDBPassword.Font = new System.Drawing.Font("Poppins ExtraBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDBPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDBPassword.ForeColor = System.Drawing.Color.DimGray;
             this.txtDBPassword.Location = new System.Drawing.Point(323, 297);
             this.txtDBPassword.Name = "txtDBPassword";
-            this.txtDBPassword.Size = new System.Drawing.Size(228, 24);
+            this.txtDBPassword.Size = new System.Drawing.Size(228, 19);
             this.txtDBPassword.TabIndex = 11;
             this.txtDBPassword.Text = "Password";
             this.txtDBPassword.Click += new System.EventHandler(this.txtDBPassword_Click);
@@ -105,11 +105,11 @@
             // 
             this.txtDBUsername.BackColor = System.Drawing.Color.White;
             this.txtDBUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDBUsername.Font = new System.Drawing.Font("Poppins ExtraBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDBUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDBUsername.ForeColor = System.Drawing.Color.DimGray;
             this.txtDBUsername.Location = new System.Drawing.Point(43, 297);
             this.txtDBUsername.Name = "txtDBUsername";
-            this.txtDBUsername.Size = new System.Drawing.Size(229, 24);
+            this.txtDBUsername.Size = new System.Drawing.Size(229, 19);
             this.txtDBUsername.TabIndex = 7;
             this.txtDBUsername.Text = "Username";
             this.txtDBUsername.Click += new System.EventHandler(this.txtDBUsername_Click);
@@ -128,11 +128,11 @@
             // 
             this.txtDBName.BackColor = System.Drawing.Color.White;
             this.txtDBName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDBName.Font = new System.Drawing.Font("Poppins ExtraBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDBName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDBName.ForeColor = System.Drawing.Color.DimGray;
             this.txtDBName.Location = new System.Drawing.Point(323, 233);
             this.txtDBName.Name = "txtDBName";
-            this.txtDBName.Size = new System.Drawing.Size(228, 24);
+            this.txtDBName.Size = new System.Drawing.Size(228, 19);
             this.txtDBName.TabIndex = 17;
             this.txtDBName.Text = "Database Name";
             this.txtDBName.Click += new System.EventHandler(this.txtDBName_Click);
@@ -151,11 +151,11 @@
             // 
             this.txtDBHost.BackColor = System.Drawing.Color.White;
             this.txtDBHost.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDBHost.Font = new System.Drawing.Font("Poppins ExtraBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDBHost.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDBHost.ForeColor = System.Drawing.Color.DimGray;
             this.txtDBHost.Location = new System.Drawing.Point(43, 233);
             this.txtDBHost.Name = "txtDBHost";
-            this.txtDBHost.Size = new System.Drawing.Size(229, 24);
+            this.txtDBHost.Size = new System.Drawing.Size(229, 19);
             this.txtDBHost.TabIndex = 13;
             this.txtDBHost.Text = "Host";
             this.txtDBHost.Click += new System.EventHandler(this.txtDBHost_Click);
@@ -170,7 +170,7 @@
             this.back.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.back.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.back.Font = new System.Drawing.Font("Poppins ExtraBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.back.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.back.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.back.Location = new System.Drawing.Point(41, 406);
             this.back.Name = "back";
@@ -189,7 +189,7 @@
             this.save.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(165)))), ((int)(((byte)(44)))));
             this.save.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(165)))), ((int)(((byte)(44)))));
             this.save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.save.Font = new System.Drawing.Font("Poppins ExtraBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.save.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.save.ForeColor = System.Drawing.Color.White;
             this.save.Location = new System.Drawing.Point(324, 406);
             this.save.Name = "save";
@@ -204,7 +204,7 @@
             this.panel5.BackColor = System.Drawing.Color.Transparent;
             this.panel5.BackgroundImage = global::BNITapCash.Properties.Resources.BG_PUTIH2;
             this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel5.Controls.Add(this.button3);
+            this.panel5.Controls.Add(this.buttonTestConnection);
             this.panel5.Controls.Add(this.panel9);
             this.panel5.Controls.Add(this.panel7);
             this.panel5.Controls.Add(this.button1);
@@ -229,6 +229,23 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(618, 500);
             this.panel5.TabIndex = 24;
+            // 
+            // buttonTestConnection
+            // 
+            this.buttonTestConnection.BackColor = System.Drawing.Color.DodgerBlue;
+            this.buttonTestConnection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonTestConnection.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonTestConnection.FlatAppearance.BorderSize = 0;
+            this.buttonTestConnection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTestConnection.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTestConnection.ForeColor = System.Drawing.Color.Black;
+            this.buttonTestConnection.Location = new System.Drawing.Point(324, 343);
+            this.buttonTestConnection.Name = "buttonTestConnection";
+            this.buttonTestConnection.Size = new System.Drawing.Size(250, 45);
+            this.buttonTestConnection.TabIndex = 36;
+            this.buttonTestConnection.Text = "TEST CONNECTION";
+            this.buttonTestConnection.UseVisualStyleBackColor = false;
+            this.buttonTestConnection.Click += new System.EventHandler(this.buttonTestConnection_Click);
             // 
             // panel9
             // 
@@ -283,55 +300,55 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Poppins Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
             this.label5.Location = new System.Drawing.Point(318, 268);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(94, 26);
+            this.label5.Size = new System.Drawing.Size(83, 18);
             this.label5.TabIndex = 28;
             this.label5.Text = "Password";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Poppins Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
             this.label4.Location = new System.Drawing.Point(38, 268);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 26);
+            this.label4.Size = new System.Drawing.Size(85, 18);
             this.label4.TabIndex = 27;
             this.label4.Text = "Username";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Poppins Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
             this.label3.Location = new System.Drawing.Point(318, 199);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(149, 26);
+            this.label3.Size = new System.Drawing.Size(128, 18);
             this.label3.TabIndex = 26;
             this.label3.Text = "Database Name";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Poppins Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
             this.label2.Location = new System.Drawing.Point(38, 199);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(258, 26);
+            this.label2.Size = new System.Drawing.Size(230, 18);
             this.label2.TabIndex = 25;
             this.label2.Text = "IP Address E-Payment Server";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Poppins ExtraBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
             this.label1.Location = new System.Drawing.Point(40, 151);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(339, 28);
+            this.label1.Size = new System.Drawing.Size(362, 20);
             this.label1.TabIndex = 24;
             this.label1.Text = "DATABASE CONFIGURATION E-PAYMENT";
             // 
@@ -352,22 +369,6 @@
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(36, 38);
             this.panel8.TabIndex = 35;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.DodgerBlue;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.Black;
-            this.button3.Location = new System.Drawing.Point(324, 343);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(250, 45);
-            this.button3.TabIndex = 36;
-            this.button3.Text = "TEST CONNECTION";
-            this.button3.UseVisualStyleBackColor = false;
             // 
             // DatabaseConfig
             // 
@@ -421,6 +422,6 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonTestConnection;
     }
 }

@@ -3,16 +3,13 @@ using BNITapCash.Helper;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using BNITapCash.ConstantVariable;
 
 namespace BNITapCash.Forms
 {
     public partial class DatabaseConfig : Form
     {
         private Form home;
-        private string host;
-        private string db_name;
-        private string db_username;
-        private string db_password;
 
         public DatabaseConfig(Form home)
         {
@@ -21,25 +18,13 @@ namespace BNITapCash.Forms
             InitData();
         }
 
-        public string DBHost
-        {
-            get; set;
-        }
+        public string DBHost { get; set; }
 
-        public string DBName
-        {
-            get; set;
-        }
+        public string DBName { get; set; }
 
-        public string DBUsername
-        {
-            get; set;
-        }
+        public string DBUsername { get; set; }
 
-        public string DBPassword
-        {
-            get; set;
-        }
+        public string DBPassword { get; set; }
 
         private void InitData()
         {
@@ -70,7 +55,7 @@ namespace BNITapCash.Forms
 
         private void label1_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show(Constant.CONFIRMATION_MESSAGE_BEFORE_EXIT, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 Dispose();
@@ -102,7 +87,7 @@ namespace BNITapCash.Forms
                 this.DBUsername = db_username;
                 this.DBPassword = db_password;
                 Properties.Settings.Default.Save();
-                MessageBox.Show("Konfigurasi Database Berhasil Diupdate.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Constant.DATABASE_CONFIG_VALIDATION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -172,28 +157,28 @@ namespace BNITapCash.Forms
             TKHelper tk = new TKHelper();
             if (string.IsNullOrEmpty(db_host) || db_host == "Host")
             {
-                MessageBox.Show("Field 'Host' Belum Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Constant.WARNING_MESSAGE_HOST_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            else if (db_host.ToLower() != "localhost")
+            else if (db_host.ToLower() != Constant.LOCALHOST_VALUE)
             {
                 if (!tk.ValidateIPv4(db_host))
                 {
-                    MessageBox.Show("Invalid Host.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_HOST, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
             }
             if (string.IsNullOrEmpty(db_name) || db_name == "Database Name")
             {
-                MessageBox.Show("Field 'Name' Belum Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Constant.WARNING_MESSAGE_DATABASE_NAME_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             if (string.IsNullOrEmpty(db_username) || db_username == "Username")
             {
-                MessageBox.Show("Field 'Username' Belum Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Constant.WARNING_MESSAGE_USERNAME_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            
+
             return result;
         }
 
@@ -209,7 +194,7 @@ namespace BNITapCash.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show(Constant.CONFIRMATION_MESSAGE_BEFORE_EXIT, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 Dispose();
@@ -233,20 +218,20 @@ namespace BNITapCash.Forms
                 DBConnect db = new DBConnect(host, dbname, username, password);
                 if (db.CheckMySQLConnection())
                 {
-                    MessageBox.Show("Connection Established.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Constant.STATUS_CONNECTION_ESTABLISH, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 else
                 {
-                    MessageBox.Show("Failed to connect.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_LOCAL_DATABASE, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
-            else
-            {
-                MessageBox.Show("There's still invalid field(s).", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+        }
+
+        private void buttonTestConnection_Click(object sender, EventArgs e)
+        {
+            TestDatabaseConnection();
         }
     }
 }
