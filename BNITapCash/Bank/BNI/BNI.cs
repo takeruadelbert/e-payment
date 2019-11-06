@@ -5,6 +5,7 @@ using BNITapCash.Readers.Contactless.Acr123U;
 using PCSC;
 using System;
 using System.Collections.Generic;
+using BNITapCash.ConstantVariable;
 
 namespace BNITapCash.Bank.BNI
 {
@@ -20,16 +21,6 @@ namespace BNITapCash.Bank.BNI
 
         Acr123U acr123u = new Acr123U();
         byte LEDStatus;
-        byte LEDBlue = 0x01;
-        byte LEDOrange = 0x02;
-        byte LEDGreen = 0x04;
-        byte LEDRed = 0x08;
-        byte LEDAntRed = 0x10;
-        byte LEDAntGreen = 0x20;
-        byte LEDAntBlue = 0x40;
-
-        //private const string TID = "12001401";
-        //private const string settlementMID = "000100012000014";
 
         private Cashier cashier;
         private TKHelper tk = new TKHelper();
@@ -72,13 +63,13 @@ namespace BNITapCash.Bank.BNI
         {
             if (this.readerList != null)
             {
-                string SAM_message = "SAM has already been initialized.";
+                string SAM_message = Constant.MESSAGE_SAM_ALREADY_INITIALIZED;
                 if (this.GetSAMStatus().ToLower() != SAM_message.ToLower())
                 {
                     try
                     {
-                        Console.WriteLine("Initializing SAM ...");
-                        return bni.initSAM(this.readerList[2]);
+                        Console.WriteLine(Constant.MESSAGE_INTIALIZING_SAM);
+                        return bni.initSAM(this.readerList[1]);
                     }
                     catch (Exception ex)
                     {
@@ -93,7 +84,7 @@ namespace BNITapCash.Bank.BNI
             }
             else
             {
-                return "Failed to Initialize SAM : No Reader found or selected.";
+                return Constant.ERROR_MESSAGE_FAILED_INITIALIZE_SAM;
             }
         }
 
@@ -103,7 +94,7 @@ namespace BNITapCash.Bank.BNI
             {
                 try
                 {
-                    return bni.getSAMStatus(this.readerList[2]);
+                    return bni.getSAMStatus(this.readerList[1]);
                 }
                 catch (Exception ex)
                 {
@@ -112,7 +103,7 @@ namespace BNITapCash.Bank.BNI
             }
             else
             {
-                return "Failed to Get SAM Status : No Reader found or selected.";
+                return Constant.ERROR_MESSAGE_FAILED_GET_SAM_STATUS;
             }
         }
 
@@ -153,11 +144,11 @@ namespace BNITapCash.Bank.BNI
 
                     acr123u.connectDirect();
                     acr123u.LCDBacklightControl(0xFF);
-                    this.SetLCDDisplayText("Processing ...");
-                    this.LEDStatus = LEDOrange;
-                    this.LEDStatus |= LEDAntBlue;
-                    this.LEDStatus |= LEDAntGreen;
-                    this.LEDStatus |= LEDAntRed;
+                    this.SetLCDDisplayText(Constant.MESSAGE_PROCESSING);
+                    this.LEDStatus = Constant.LED_ORANGE;
+                    this.LEDStatus |= Constant.LED_ANT_BLUE;
+                    this.LEDStatus |= Constant.LED_ANT_GREEN;
+                    this.LEDStatus |= Constant.LED_ANT_RED;
                     this.acr123u.setLEDControl(this.LEDStatus);
                     acr123u.disconnect();
 
@@ -176,13 +167,13 @@ namespace BNITapCash.Bank.BNI
             {
                 try
                 {
-                    Console.WriteLine("Card Ejected.\n");
+                    Console.WriteLine(Constant.CARD_REMOVED + Constant.BREAKLINE);
                     acr123u.connectDirect();
                     acr123u.LCDBacklightControl(0xFF);
-                    this.LEDStatus = LEDOrange;
-                    this.LEDStatus |= LEDAntBlue;
+                    this.LEDStatus = Constant.LED_ORANGE;
+                    this.LEDStatus |= Constant.LED_ANT_BLUE;
                     this.acr123u.setLEDControl(this.LEDStatus);
-                    this.SetLCDDisplayText("Waiting Card ...");
+                    this.SetLCDDisplayText(Constant.MESSAGE_WAITING_CARD);
                     acr123u.disconnect();
                 }
                 catch (Exception ex)
@@ -267,12 +258,12 @@ namespace BNITapCash.Bank.BNI
                 int cardBalance = Int32.Parse(this.GetCardBalance());
                 if (cardBalance > 0 && (cardBalance - amount) > 0)
                 {
-                    //string result = bni.debitProcess(this.readerList[2].ToString(), this.selectedReader.ToString(), amount, Properties.Settings.Default.TID);
+                    //string result = bni.debitProcess(this.readerList[1].ToString(), this.selectedReader.ToString(), amount, Properties.Settings.Default.TID);
                     string result = "test";
 
                     // store deduct result card to server
                     string created = tk.ConvertDatetimeToDefaultFormat(tk.GetCurrentDatetime());
-                    string query = "INSERT INTO deduct_card_results (result, amount, transaction_dt, bank, ipv4, operator, ID_reader, created) VALUES('" + result + "', '" + amount + 
+                    string query = "INSERT INTO deduct_card_results (result, amount, transaction_dt, bank, ipv4, operator, ID_reader, created) VALUES('" + result + "', '" + amount +
                         "', '" + created + "', '" + bank + "', '" + ipv4 + "', '" + operator_name + "', '" + TIDSettlement + "', '" + created + "')";
                     try
                     {
@@ -288,14 +279,14 @@ namespace BNITapCash.Bank.BNI
                         int onDuration = 5;
                         int OffDuration = 10;
                         acr123u.setBuzzerControl((byte)repeat, (byte)onDuration, (byte)OffDuration);
-                        this.LEDStatus = LEDGreen;
-                        this.LEDStatus |= LEDAntGreen;
+                        this.LEDStatus = Constant.LED_GREEN;
+                        this.LEDStatus |= Constant.LED_ANT_GREEN;
                         acr123u.LCDBacklightControl(0xFF);
                         this.acr123u.setLEDControl(this.LEDStatus);
-                        this.SetLCDDisplayText("Success ...");
+                        this.SetLCDDisplayText(Constant.MESSAGE_SUCCESS_DEDUCT);
                         acr123u.disconnect();
 
-                        return "OK";
+                        return Constant.MESSAGE_OK;
                     }
                     catch (Exception ex)
                     {
@@ -306,31 +297,31 @@ namespace BNITapCash.Bank.BNI
                 else
                 {
                     acr123u.connectDirect();
-                    this.SetLCDDisplayText("Insufficient Bal");
-                    Console.WriteLine("Can't Deduct : Insufficient Balance.");
+                    this.SetLCDDisplayText(Constant.ERROR_MESSAGE_INSUFFICIENT_BALANCE);
+                    Console.WriteLine(Constant.ERROR_MESSAGE_CANNOT_DEDUCT_INSUFFICIENT_BALANCE);
                     int repeat = 2;
                     int onDuration = 5;
                     int OffDuration = 10;
                     acr123u.setBuzzerControl((byte)repeat, (byte)onDuration, (byte)OffDuration);
-                    this.LEDStatus = LEDRed;
-                    this.LEDStatus |= LEDAntRed;
+                    this.LEDStatus = Constant.LED_RED;
+                    this.LEDStatus |= Constant.LED_ANT_RED;
                     acr123u.LCDBacklightControl(0xFF);
                     this.acr123u.setLEDControl(this.LEDStatus);
                     acr123u.disconnect();
-                    return "Can't Deduct : Insufficient Balance.";
+                    return Constant.ERROR_MESSAGE_CANNOT_DEDUCT_INSUFFICIENT_BALANCE;
                 }
             }
             catch (Exception ex)
             {
                 acr123u.connectDirect();
-                this.SetLCDDisplayText("Fail to Process.");
+                this.SetLCDDisplayText(Constant.ERROR_FAIL_PROCESS);
                 Console.WriteLine(ex.Message);
                 int repeat = 2;
                 int onDuration = 5;
                 int OffDuration = 10;
                 acr123u.setBuzzerControl((byte)repeat, (byte)onDuration, (byte)OffDuration);
-                this.LEDStatus = LEDRed;
-                this.LEDStatus |= LEDAntRed;
+                this.LEDStatus = Constant.LED_RED;
+                this.LEDStatus |= Constant.LED_ANT_RED;
                 acr123u.LCDBacklightControl(0xFF);
                 this.acr123u.setLEDControl(this.LEDStatus);
                 acr123u.disconnect();
@@ -361,12 +352,12 @@ namespace BNITapCash.Bank.BNI
             acr123u.LCDBacklightControl(0xFF);
 
             // set LED
-            this.LEDStatus |= LEDOrange;
-            this.LEDStatus |= LEDAntBlue;
+            this.LEDStatus |= Constant.LED_ORANGE;
+            this.LEDStatus |= Constant.LED_ANT_BLUE;
             this.acr123u.setLEDControl(this.LEDStatus);
 
             // set Display Text
-            this.SetLCDDisplayText("E-Payment");
+            this.SetLCDDisplayText(Constant.APP_NAME);
 
             acr123u.disconnect();
 
