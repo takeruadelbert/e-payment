@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AForge;
-using AForge.Video;
+﻿using AForge.Video;
 using AForge.Video.DirectShow;
-using BNITapCash.Forms;
+using System;
+using System.Drawing;
 
 namespace BNITapCash.Miscellaneous.Webcam
 {

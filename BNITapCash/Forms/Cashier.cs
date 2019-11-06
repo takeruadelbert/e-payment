@@ -43,8 +43,7 @@ namespace BNITapCash
             this.home = home;
             Initialize();
             this.webcamImage = webcam;
-            //InitializeWebcam();
-
+            this.camera = new Webcam(this);
         }
 
         private void Initialize()
@@ -93,12 +92,6 @@ namespace BNITapCash
             }
         }
 
-        private void InitializeWebcam()
-        {
-            camera = new Webcam(this);
-            camera.StartWebcam();
-        }
-
         private void logo_Click(object sender, EventArgs e)
         {
 
@@ -122,11 +115,23 @@ namespace BNITapCash
                 int totalFare = this.helper.IDRToNominal(txtGrandTotal.Text.ToString());
 
                 // encoded base64 Image from Webcam
+                try
+                {
+                    camera.StartWebcam();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Webcam Bermasalah : Pastikan Webcam dipasang dengan benar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 if (webcamImage.Image == null)
                 {
                     MessageBox.Show("Snapshoot Webcam Bermasalah.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    camera.StopWebcam();
                     return;
                 }
+                camera.StopWebcam();
                 Bitmap bmp = new Bitmap(webcamImage.Image, Properties.Settings.Default.WebcamWidth, Properties.Settings.Default.WebcamHeight);
                 string base64Image = bmp.ToBase64String(ImageFormat.Png);
 

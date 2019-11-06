@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BNITapCashDLL;
-using PCSC;
-using BNITapCash.Readers.Contactless.Acr123U;
-using System.IO;
+﻿using BNITapCash.DB;
 using BNITapCash.Helper;
 using BNITapCash.Miscellaneous.FileMonitor;
-using BNITapCash.DB;
-using System.Text.RegularExpressions;
-using System.Security.Principal;
+using BNITapCash.Readers.Contactless.Acr123U;
+using PCSC;
+using System;
+using System.Collections.Generic;
 
 namespace BNITapCash.Bank.BNI
 {
