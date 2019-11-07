@@ -232,7 +232,7 @@ namespace BNITapCash
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show(Constant.CONFIRMATION_MESSAGE_BEFORE_EXIT, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 Dispose();

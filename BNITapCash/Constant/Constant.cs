@@ -7,7 +7,6 @@
         public static readonly string WHITESPACE = " ";
         public static readonly string APP_NAME = "E-Payment";
         public static readonly string LOCALHOST_VALUE = "localhost";
-        public static readonly string ERROR_MESSAGE_FAIL_TO_CONNECT_WEBCAM = "Error : Can't Connect to Webcam.";
         public static readonly string CONFIRMATION_MESSAGE_BEFORE_EXIT = "Are you sure you want to exit?";
 
         // validation
@@ -24,6 +23,7 @@
         public static readonly string WARNING_MESSAGE_INVALID_TID = "Invalid 'TID' value.";
         public static readonly string WARNING_MESSAGE_INVALID_MID = "Invalid 'MID' value.";
         public static readonly string WARNING_MESSAGE_INVALID_HOST = "Invalid Host.";
+        public static readonly string WARNING_MESSAGE_UNTAPPED_CARD = "Silahkan Tap Kartunya Terlebih Dahulu.";
 
         public static readonly string DATABASE_CONFIG_VALIDATION_SUCCESS = "Konfigurasi Database Berhasil Diupdate.";
         public static readonly string SETTING_UPDATE_SUCCESS = "Setting Berhasil Diupdate.";
@@ -31,6 +31,8 @@
         // API
         public static readonly string ERROR_MESSAGE_FAIL_TO_CONNECT_LOCAL_DATABASE = "Error : Can't Establish Connection to Local Database." + BREAKLINE + "Please setup properly.";
         public static readonly string ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER = "Error : Can't establish connection to server.";
+        public static readonly string ERROR_MESSAGE_FAIL_TO_FETCH_VEHICLE_TYPE_DATA = "Error : failed to fetch vehicle type data.";
+        public static readonly string ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER = "Error found when receiving server response.";
 
         public static readonly string STATUS_CONNECTION_ESTABLISH = "Connection Established.";
 
@@ -58,6 +60,14 @@
         public static readonly string ERROR_FAIL_PROCESS = "Fail to Process.";
         public static readonly string ERROR_MESSAGE_INSUFFICIENT_BALANCE = "Insufficient Bal";
 
+        // web cam
+        public static readonly string ERROR_MESSAGE_FAIL_TO_CONNECT_WEBCAM = "Error : Can't Connect to Webcam.";
+        public static readonly string ERROR_MESSAGE_WEBCAM_TROUBLE = "Webcam Bermasalah : Pastikan Webcam dipasang dengan benar.";
+        public static readonly string ERROR_MESSAGE_WEBCAM_SNAPSHOOT_FAILED = "Snapshoot Webcam Bermasalah.";
+
+        // live camera
+        public static readonly string ERROR_MESSAGE_FAIL_TO_CONNECT_LIVE_CAMERA = "Error : Cannot Connect to Live Camera.";
+
         // BNI
         public static readonly string MESSAGE_OK = "OK";
         public static readonly string MESSAGE_INTIALIZING_SAM = "Initializing SAM ...";
@@ -65,6 +75,6 @@
         public static readonly string ERROR_MESSAGE_FAILED_INITIALIZE_SAM = "Failed to Initialize SAM : No Reader found or selected.";
         public static readonly string ERROR_MESSAGE_FAILED_GET_SAM_STATUS = "Failed to Get SAM Status : No Reader found or selected.";
         public static readonly string ERROR_MESSAGE_CANNOT_DEDUCT_INSUFFICIENT_BALANCE = "Can't Deduct : Insufficient Balance.";
-
+        public static readonly string TRANSACTION_SUCCESS = "Transaksi Berhasil.";
     }
 }

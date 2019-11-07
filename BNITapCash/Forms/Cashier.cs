@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
+using BNITapCash.ConstantVariable;
 
 namespace BNITapCash
 {
@@ -19,7 +20,7 @@ namespace BNITapCash
         private Login home;
         private BNI bni;
         private TKHelper helper;
-        private string liveCameraURL = "http://" + Properties.Settings.Default.IPAddressLiveCamera + "/snapshot";
+        private readonly string liveCameraURL = "http://" + Properties.Settings.Default.IPAddressLiveCamera + "/snapshot";
         JPEGStream stream;
 
         public PictureBox webcamImage;
@@ -62,7 +63,7 @@ namespace BNITapCash
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show("Error : Cannot Connect to Live Camera. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_LIVE_CAMERA, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LiveCamera.Image = Properties.Resources.no_image;
             }
             this.bni = new BNI();
@@ -91,7 +92,7 @@ namespace BNITapCash
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show("Error : failed to fetch vehicle type data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_FETCH_VEHICLE_TYPE_DATA, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -124,13 +125,13 @@ namespace BNITapCash
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Webcam Bermasalah : Pastikan Webcam dipasang dengan benar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_TROUBLE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 if (webcamImage.Image == null)
                 {
-                    MessageBox.Show("Snapshoot Webcam Bermasalah.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_SNAPSHOOT_FAILED, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     camera.StopWebcam();
                     return;
                 }
@@ -149,7 +150,7 @@ namespace BNITapCash
                     string TIDSettlement = Properties.Settings.Default.TID;
                     string operator_name = Properties.Settings.Default.Username;
                     string responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
-                    if (responseDeduct == "OK")
+                    if (responseDeduct == Constant.MESSAGE_OK)
                     {
                         // API POST Data to server
                         this.SendDataToServer(totalFare, base64Image, paymentMethod, bankCode);
@@ -201,16 +202,21 @@ namespace BNITapCash
 
         private void textBox1_Click(object sender, EventArgs e)
         {
-
+            if (textBox1.Text.ToLower() == "uid card")
+                this.TextListener("uid card");
         }
 
         private void TextListener(string field, bool is_textchanged = false)
         {
             if (!is_textchanged)
             {
-                if (textBox2.Text.ToLower() == "nomor plat kendaraan")
+                if (field == "nomor plat kendaraan")
                 {
                     textBox2.Clear();
+                }
+                if (field == "uid card")
+                {
+                    textBox1.Clear();
                 }
             }
             textBox1.ForeColor = Color.FromArgb(78, 184, 206);
@@ -219,7 +225,7 @@ namespace BNITapCash
 
         private void logout_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to logout?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show(Constant.CONFIRMATION_MESSAGE_BEFORE_EXIT, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 Properties.Settings.Default.Password = "";
@@ -258,7 +264,7 @@ namespace BNITapCash
         private void textBox2_Click(object sender, EventArgs e)
         {
             if (textBox2.Text.ToLower() == "nomor plat kendaraan")
-                this.TextListener("Nomor Plat Kendaraan");
+                this.TextListener("nomor plat kendaraan");
         }
 
         private string ValidateFields()
@@ -375,13 +381,13 @@ namespace BNITapCash
                         }
                         else
                         {
-                            MessageBox.Show("Error : Can't establish connection to server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Silahkan Tap Kartunya Terlebih Dahulu.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(Constant.WARNING_MESSAGE_UNTAPPED_CARD, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     this.ResetComboBox();
                     return;
                 }
@@ -410,7 +416,7 @@ namespace BNITapCash
                 switch (response.Status)
                 {
                     case 206:
-                        MessageBox.Show("Transaksi Berhasil.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Clear(true);
                         break;
                     default:
@@ -420,13 +426,13 @@ namespace BNITapCash
             }
             else
             {
-                MessageBox.Show("Error found when receiving server response.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show(Constant.CONFIRMATION_MESSAGE_BEFORE_EXIT, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 Dispose();
