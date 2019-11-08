@@ -30,6 +30,7 @@ namespace BNITapCash
         private MifareCard mifareCard;
         private RESTAPI restApi;
         private AutoCompleteStringCollection autoComplete;
+        //private ComboBox listBarcodeSuggestion;
 
         public string UIDCard
         {
@@ -188,7 +189,7 @@ namespace BNITapCash
         public void Clear(bool include_uid = false)
         {
             if (include_uid)
-                textBox1.Text = "UID Card";
+            textBox1.Text = "UID Card";
             textBox2.Text = "Nomor Plat Kendaraan";
             textBox3.Text = "Waktu Masuk";
             textBox4.Text = this.helper.GetCurrentDatetime();
@@ -196,7 +197,7 @@ namespace BNITapCash
             txtMinute.Text = "";
             txtSecond.Text = "";
             txtGrandTotal.Text = "0";
-            this.ResetComboBox();
+            //this.ResetComboBox();
 
             PictFace.Image = Properties.Resources.no_image;
             PictFace.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -472,7 +473,8 @@ namespace BNITapCash
                     {
                         foreach (Barcode barcode in barcodes)
                         {
-                            autoComplete.Add(barcode.barcode);
+                            listBarcodeSuggestion.Items.Add(barcode.barcode);
+                            //autoComplete.Add(barcode.barcode);
                         }
                     }
                 }
@@ -484,14 +486,40 @@ namespace BNITapCash
         {
             if (e.KeyCode == Keys.Enter)
             {
+                listBarcodeSuggestion.Visible = true;
                 string barcode = textBox1.Text.ToString();
-                autoComplete.Clear();
-                autoComplete = SearchBarcode(barcode);
-                if (autoComplete != null)
+                listBarcodeSuggestion.Items.Clear();
+                SearchBarcode(barcode);
+                listBarcodeSuggestion.DroppedDown = true;
+                listBarcodeSuggestion.Focus();
+                if (listBarcodeSuggestion.Items.Count == 0)
                 {
-                    textBox1.AutoCompleteCustomSource = autoComplete;
+                    listBarcodeSuggestion.Items.Add("Data Tidak Ditemukan");
+                    textBox1.Focus();
+
                 }
+                else if (listBarcodeSuggestion.Items.Count == 1)
+                {
+                    textBox1.Text = listBarcodeSuggestion.Items[0].ToString();
+                    listBarcodeSuggestion.Items.Clear();
+                    listBarcodeSuggestion.Visible = false;
+                }
+                //if (listBarcodeSuggestion.Text != null)
+                //{
+                //var item = this.comboBox1.GetItemText(this.comboBox1.SelectedItem);
+                //textBox1.AutoCompleteCustomSource = autoComplete;
+
+                //}
             }
+        }
+
+        private void selectBarcode(object sender, EventArgs e)
+        {
+            if (listBarcodeSuggestion.SelectedItem != "Data Tidak Ditemukan") {
+                textBox1.Text = listBarcodeSuggestion.Text;
+                listBarcodeSuggestion.Visible = false;
+            }
+            
         }
     }
 }

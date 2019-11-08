@@ -68,6 +68,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel14 = new System.Windows.Forms.Panel();
+            this.listBarcodeSuggestion = new System.Windows.Forms.ComboBox();
             this.panel9 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -419,9 +420,11 @@
             this.textBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.DimGray;
-            this.textBox1.Location = new System.Drawing.Point(345, 148);
+            this.textBox1.Location = new System.Drawing.Point(345, 142);
+            this.textBox1.MaximumSize = new System.Drawing.Size(262, 25);
+            this.textBox1.MinimumSize = new System.Drawing.Size(262, 25);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(259, 17);
+            this.textBox1.Size = new System.Drawing.Size(262, 25);
             this.textBox1.TabIndex = 5;
             this.textBox1.Text = "UID Card";
             this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
@@ -630,11 +633,25 @@
             this.panel14.Controls.Add(this.panel3);
             this.panel14.Controls.Add(this.panel4);
             this.panel14.Controls.Add(this.panel5);
+            this.panel14.Controls.Add(this.listBarcodeSuggestion);
             this.panel14.Location = new System.Drawing.Point(81, 63);
             this.panel14.Margin = new System.Windows.Forms.Padding(100);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(1200, 600);
             this.panel14.TabIndex = 12;
+            // 
+            // listBarcodeSuggestion
+            // 
+            this.listBarcodeSuggestion.AllowDrop = true;
+            this.listBarcodeSuggestion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listBarcodeSuggestion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.listBarcodeSuggestion.FormattingEnabled = true;
+            this.listBarcodeSuggestion.Location = new System.Drawing.Point(346, 144);
+            this.listBarcodeSuggestion.Name = "listBarcodeSuggestion";
+            this.listBarcodeSuggestion.Size = new System.Drawing.Size(261, 21);
+            this.listBarcodeSuggestion.TabIndex = 51;
+            this.listBarcodeSuggestion.Visible = false;
+            this.listBarcodeSuggestion.SelectedIndexChanged += new System.EventHandler(this.selectBarcode);
             // 
             // panel9
             // 
@@ -900,5 +917,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox listBarcodeSuggestion;
     }
 }
