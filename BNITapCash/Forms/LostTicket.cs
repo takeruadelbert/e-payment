@@ -11,7 +11,7 @@ namespace BNITapCash.Forms
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(Constant.CONFIRMATION_MESSAGE_BEFORE_EXIT, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
@@ -21,14 +21,14 @@ namespace BNITapCash.Forms
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnMinimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
        
         public void Clear(bool include_uid = false)
         {
-            
+
         }
 
         private void btnLsTicketClear_Click(object sender, EventArgs e)
@@ -46,5 +46,6 @@ namespace BNITapCash.Forms
         {
 
         }
+
     }
 }
