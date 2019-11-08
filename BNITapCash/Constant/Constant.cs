@@ -18,6 +18,10 @@
         public static readonly string WARNING_MESSAGE_IP_ADDRESS_LIVE_CAMERA_NOT_EMPTY = "IP Address Live Camera Harus Diisi.";
         public static readonly string WARNING_MESSAGE_TID_NOT_EMPTY = "TID Harus Diisi.";
         public static readonly string WARNING_MESSAGE_MID_NOT_EMPTY = "Settlement MID Harus Diisi.";
+        public static readonly string WARMING_MESSAGE_PLATE_NUMBER_NOT_EMPTY = "Field 'Nomor Plat Kendaraan' Harus Diisi.";
+        public static readonly string WARNING_MESSAGE_DATETIME_LEAVE_NOT_EMPTY = "Field 'Waktu Keluar' Kosong.";
+        public static readonly string WARNING_MESSAGE_UID_CARD_NOT_EMPTY = "Field 'UID Card' Harus Diisi.";
+        public static readonly string WARNING_MESSAGE_VEHICLE_TYPE_NOT_EMPTY = "Field 'Tipe Kendaraan' Harus Dipilih.";
         public static readonly string WARNING_MESSAGE_INVALID_IP_ADDRESS_SERVER = "Invalid IP Address Server.";
         public static readonly string WARNING_MESSAGE_INVALID_IP_ADDRESS_LIVE_CAMERA = "Invalid IP Address Live Camera.";
         public static readonly string WARNING_MESSAGE_INVALID_TID = "Invalid 'TID' value.";

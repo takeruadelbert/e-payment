@@ -1,4 +1,5 @@
 ﻿using BNITapCash.API;
+using BNITapCash.API.response;
 using BNITapCash.Card.Mifare;
 using BNITapCash.ConstantVariable;
 using BNITapCash.DB;
@@ -7,6 +8,7 @@ using BNITapCash.Helper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -193,7 +195,7 @@ namespace BNITapCash
         {
             string APIPullData = Properties.Resources.RequestVehicleTypeAPIURL;
             RESTAPI pull = new RESTAPI();
-            DataResponseArray receivedData = pull.get(ip_address_server, APIPullData);
+            DataResponseArray receivedData = (DataResponseArray)pull.get(ip_address_server, APIPullData);
             if (receivedData != null)
             {
                 switch (receivedData.Status)

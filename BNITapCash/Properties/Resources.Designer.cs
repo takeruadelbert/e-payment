@@ -627,6 +627,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/parking_ins/search_barcode.
+        /// </summary>
+        internal static string SearchBarcodeAPIURL {
+            get {
+                return ResourceManager.GetString("SearchBarcodeAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to \Public.
         /// </summary>
         internal static string SettlementPathFromWindows {

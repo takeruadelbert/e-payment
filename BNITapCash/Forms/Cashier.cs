@@ -1,17 +1,19 @@
 ﻿using AForge.Video;
 using BNITapCash.API;
+using BNITapCash.API.response;
 using BNITapCash.Bank.BNI;
 using BNITapCash.Card.Mifare;
+using BNITapCash.ConstantVariable;
 using BNITapCash.Helper;
 using BNITapCash.Miscellaneous.Webcam;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
-using BNITapCash.ConstantVariable;
 
 namespace BNITapCash
 {
@@ -26,6 +28,8 @@ namespace BNITapCash
         public PictureBox webcamImage;
         private Webcam camera;
         private MifareCard mifareCard;
+        private RESTAPI restApi;
+        private AutoCompleteStringCollection autoComplete;
 
         public string UIDCard
         {
@@ -47,6 +51,8 @@ namespace BNITapCash
             Initialize();
             this.webcamImage = webcam;
             this.camera = new Webcam(this);
+            this.restApi = new RESTAPI();
+            autoComplete = new AutoCompleteStringCollection();
         }
 
         private void Initialize()
@@ -103,7 +109,7 @@ namespace BNITapCash
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            this.TextListener("Card UID", true);
+
         }
 
         private void Cashier_Load(object sender, EventArgs e)
@@ -271,24 +277,24 @@ namespace BNITapCash
         {
             if (textBox2.Text.ToLower() == "nomor plat kendaraan" || textBox2.Text == "")
             {
-                return "Field 'Nomor Plat Kendaraan' Harus Diisi.";
+                return Constant.WARMING_MESSAGE_PLATE_NUMBER_NOT_EMPTY;
             }
 
             if (textBox4.Text.ToLower() == "waktu keluar" || textBox4.Text == "")
             {
-                return "Field 'Waktu Keluar' Kosong.";
+                return Constant.WARNING_MESSAGE_DATETIME_LEAVE_NOT_EMPTY;
             }
 
             if (textBox1.Text.ToLower() == "uid card" || textBox1.Text == "")
             {
-                return "Field 'UID Card' Harus Diisi.";
+                return Constant.WARNING_MESSAGE_UID_CARD_NOT_EMPTY;
             }
 
             if (comboBox1.SelectedIndex == -1 || comboBox1.SelectedIndex == 0)
             {
-                return "Field 'Tipe Kendaraan' Harus Dipilih.";
+                return Constant.WARNING_MESSAGE_VEHICLE_TYPE_NOT_EMPTY;
             }
-            return "ok";
+            return Constant.MESSAGE_OK;
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -448,6 +454,44 @@ namespace BNITapCash
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private AutoCompleteStringCollection SearchBarcode(string keyword)
+        {
+            var queryParam = "?barcode=" + keyword;
+            var ApiURL = Properties.Resources.SearchBarcodeAPIURL + queryParam;
+            string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
+            DataResponseArray response = (DataResponseArray)restApi.get(ip_address_server, ApiURL, false);
+            if (response != null)
+            {
+                if (response.Status == 206)
+                {
+                    string data = response.Data.ToString();
+                    List<Barcode> barcodes = JsonConvert.DeserializeObject<List<Barcode>>(response.Data.ToString());
+                    if (barcodes.Count > 0)
+                    {
+                        foreach (Barcode barcode in barcodes)
+                        {
+                            autoComplete.Add(barcode.barcode);
+                        }
+                    }
+                }
+            }
+            return autoComplete;
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string barcode = textBox1.Text.ToString();
+                autoComplete.Clear();
+                autoComplete = SearchBarcode(barcode);
+                if (autoComplete != null)
+                {
+                    textBox1.AutoCompleteCustomSource = autoComplete;
+                }
+            }
         }
     }
 }

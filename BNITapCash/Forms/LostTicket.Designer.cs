@@ -49,10 +49,10 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnMinimize = new System.Windows.Forms.Button();
             this.panel13 = new System.Windows.Forms.Panel();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.webcam = new System.Windows.Forms.PictureBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.txtGrandTotal = new System.Windows.Forms.TextBox();
@@ -127,10 +127,10 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.btnMinimize);
             this.panel1.Controls.Add(this.panel13);
             this.panel1.Controls.Add(this.pictureBox11);
-            this.panel1.Controls.Add(this.button4);
+            this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.webcam);
             this.panel1.Controls.Add(this.textBox4);
             this.panel1.Controls.Add(this.txtGrandTotal);
@@ -146,11 +146,11 @@
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("Poppins Medium", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label8.Location = new System.Drawing.Point(629, 533);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(130, 28);
+            this.label8.Size = new System.Drawing.Size(119, 20);
             this.label8.TabIndex = 76;
             this.label8.Text = "Back To Kasir";
             this.label8.Click += new System.EventHandler(this.label8_Click);
@@ -175,7 +175,7 @@
             this.btnClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.Font = new System.Drawing.Font("Poppins ExtraBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnClear.Location = new System.Drawing.Point(797, 524);
             this.btnClear.Name = "btnClear";
@@ -193,7 +193,7 @@
             this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(165)))), ((int)(((byte)(44)))));
             this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(165)))), ((int)(((byte)(44)))));
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Poppins ExtraBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
             this.btnSave.Location = new System.Drawing.Point(989, 524);
             this.btnSave.Name = "btnSave";
@@ -216,7 +216,7 @@
             this.cash.AutoSize = true;
             this.cash.BackColor = System.Drawing.Color.WhiteSmoke;
             this.cash.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cash.Font = new System.Drawing.Font("Poppins Medium", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cash.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cash.ForeColor = System.Drawing.Color.Gray;
             this.cash.Location = new System.Drawing.Point(349, 411);
             this.cash.MaximumSize = new System.Drawing.Size(202, 62);
@@ -235,12 +235,12 @@
             this.nonCash.AutoSize = true;
             this.nonCash.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(197)))), ((int)(((byte)(244)))));
             this.nonCash.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.nonCash.Font = new System.Drawing.Font("Poppins Medium", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nonCash.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nonCash.ForeColor = System.Drawing.Color.White;
             this.nonCash.Location = new System.Drawing.Point(558, 411);
             this.nonCash.Name = "nonCash";
             this.nonCash.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.nonCash.Size = new System.Drawing.Size(202, 62);
+            this.nonCash.Size = new System.Drawing.Size(186, 45);
             this.nonCash.TabIndex = 62;
             this.nonCash.TabStop = true;
             this.nonCash.Text = "Non Tunai";
@@ -250,33 +250,33 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Poppins Medium", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.DimGray;
             this.label7.Location = new System.Drawing.Point(792, 379);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(97, 23);
+            this.label7.Size = new System.Drawing.Size(105, 16);
             this.label7.TabIndex = 70;
             this.label7.Text = "TOTAL TARIF";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Poppins Medium", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.DimGray;
             this.label6.Location = new System.Drawing.Point(345, 380);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(165, 23);
+            this.label6.Size = new System.Drawing.Size(152, 16);
             this.label6.TabIndex = 69;
             this.label6.Text = "Metode Pembayaran";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Poppins Medium", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.DimGray;
             this.label5.Location = new System.Drawing.Point(323, 216);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(194, 23);
+            this.label5.Size = new System.Drawing.Size(178, 16);
             this.label5.TabIndex = 68;
             this.label5.Text = "Waktu Keluar Kendaraan";
             // 
@@ -285,12 +285,12 @@
             this.textBox9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(242)))), ((int)(((byte)(191)))));
             this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox9.Cursor = System.Windows.Forms.Cursors.No;
-            this.textBox9.Font = new System.Drawing.Font("Poppins Medium", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(138)))), ((int)(((byte)(9)))));
             this.textBox9.Location = new System.Drawing.Point(1089, 420);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(57, 44);
+            this.textBox9.Size = new System.Drawing.Size(57, 33);
             this.textBox9.TabIndex = 59;
             this.textBox9.Text = ",00.";
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -298,22 +298,22 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Poppins Medium", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
             this.label4.Location = new System.Drawing.Point(610, 119);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 23);
+            this.label4.Size = new System.Drawing.Size(85, 16);
             this.label4.TabIndex = 67;
             this.label4.Text = "Nomor Plat";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Poppins Medium", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
             this.label3.Location = new System.Drawing.Point(325, 119);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(127, 23);
+            this.label3.Size = new System.Drawing.Size(119, 16);
             this.label3.TabIndex = 66;
             this.label3.Text = "Tipe Kendaraan";
             // 
@@ -322,12 +322,12 @@
             this.textBox7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(242)))), ((int)(((byte)(191)))));
             this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox7.Cursor = System.Windows.Forms.Cursors.No;
-            this.textBox7.Font = new System.Drawing.Font("Poppins Medium", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(138)))), ((int)(((byte)(9)))));
             this.textBox7.Location = new System.Drawing.Point(810, 420);
             this.textBox7.Name = "textBox7";
             this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(40, 44);
+            this.textBox7.Size = new System.Drawing.Size(40, 33);
             this.textBox7.TabIndex = 56;
             this.textBox7.Text = "Rp.";
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -347,12 +347,12 @@
             this.comboBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox1.Font = new System.Drawing.Font("Poppins Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.ForeColor = System.Drawing.Color.DimGray;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(331, 141);
+            this.comboBox1.Location = new System.Drawing.Point(331, 146);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(256, 34);
+            this.comboBox1.Size = new System.Drawing.Size(256, 26);
             this.comboBox1.TabIndex = 57;
             // 
             // textBox2
@@ -360,29 +360,30 @@
             this.textBox2.BackColor = System.Drawing.Color.White;
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.textBox2.Font = new System.Drawing.Font("Poppins Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.ForeColor = System.Drawing.Color.DimGray;
             this.textBox2.Location = new System.Drawing.Point(615, 153);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(260, 23);
+            this.textBox2.Size = new System.Drawing.Size(260, 17);
             this.textBox2.TabIndex = 54;
             this.textBox2.Text = "Nomor Plat Kendaraan";
             // 
-            // button3
+            // btnMinimize
             // 
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Image = global::BNITapCash.Properties.Resources.minimize_button;
-            this.button3.Location = new System.Drawing.Point(1107, 11);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(40, 30);
-            this.button3.TabIndex = 65;
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMinimize.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnMinimize.FlatAppearance.BorderSize = 0;
+            this.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinimize.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinimize.Image = global::BNITapCash.Properties.Resources.minimize_button;
+            this.btnMinimize.Location = new System.Drawing.Point(1107, 11);
+            this.btnMinimize.Name = "btnMinimize";
+            this.btnMinimize.Size = new System.Drawing.Size(40, 30);
+            this.btnMinimize.TabIndex = 65;
+            this.btnMinimize.UseVisualStyleBackColor = true;
+            this.btnMinimize.Click += new System.EventHandler(this.button2_Click);
             // 
             // panel13
             // 
@@ -403,21 +404,22 @@
             this.pictureBox11.TabIndex = 51;
             this.pictureBox11.TabStop = false;
             // 
-            // button4
+            // btnClose
             // 
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Image = global::BNITapCash.Properties.Resources.close_button;
-            this.button4.Location = new System.Drawing.Point(1148, 11);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(40, 30);
-            this.button4.TabIndex = 64;
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Image = global::BNITapCash.Properties.Resources.close_button;
+            this.btnClose.Location = new System.Drawing.Point(1148, 11);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(40, 30);
+            this.btnClose.TabIndex = 64;
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.button1_Click);
             // 
             // webcam
             // 
@@ -438,14 +440,14 @@
             this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox4.Cursor = System.Windows.Forms.Cursors.No;
-            this.textBox4.Font = new System.Drawing.Font("Poppins Medium", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
             this.textBox4.Location = new System.Drawing.Point(331, 256);
             this.textBox4.MaximumSize = new System.Drawing.Size(350, 40);
             this.textBox4.MinimumSize = new System.Drawing.Size(350, 40);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(350, 36);
+            this.textBox4.Size = new System.Drawing.Size(350, 28);
             this.textBox4.TabIndex = 58;
             this.textBox4.Text = "- - -  00:00:00";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -455,14 +457,14 @@
             this.txtGrandTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(242)))), ((int)(((byte)(191)))));
             this.txtGrandTotal.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtGrandTotal.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtGrandTotal.Font = new System.Drawing.Font("Poppins Medium", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtGrandTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGrandTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(138)))), ((int)(((byte)(9)))));
             this.txtGrandTotal.Location = new System.Drawing.Point(799, 420);
             this.txtGrandTotal.MaximumSize = new System.Drawing.Size(290, 45);
             this.txtGrandTotal.MinimumSize = new System.Drawing.Size(290, 45);
             this.txtGrandTotal.Name = "txtGrandTotal";
             this.txtGrandTotal.ReadOnly = true;
-            this.txtGrandTotal.Size = new System.Drawing.Size(290, 44);
+            this.txtGrandTotal.Size = new System.Drawing.Size(290, 33);
             this.txtGrandTotal.TabIndex = 60;
             this.txtGrandTotal.Text = "0";
             this.txtGrandTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -527,10 +529,10 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnMinimize;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.PictureBox pictureBox11;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.PictureBox webcam;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox txtGrandTotal;
