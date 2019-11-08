@@ -1,5 +1,6 @@
 ﻿using AForge.Video;
 using BNITapCash.API;
+using BNITapCash.API.request;
 using BNITapCash.API.response;
 using BNITapCash.Bank.BNI;
 using BNITapCash.Card.Mifare;
@@ -120,7 +121,7 @@ namespace BNITapCash
         private void btnSave_Click(object sender, EventArgs e)
         {
             string feedback = this.ValidateFields();
-            if (feedback == "ok")
+            if (feedback == Constant.MESSAGE_OK)
             {
                 int totalFare = this.helper.IDRToNominal(txtGrandTotal.Text.ToString());
 
@@ -327,10 +328,11 @@ namespace BNITapCash
                     {
                         // send data API
                         var APIUrl = Properties.Resources.RequestUIDFareAPIURL;
-                        JObject param = new JObject();
-                        param["uid"] = textBox1.Text;
-                        param["vehicle"] = comboBox1.Text;
-                        var sent_param = JsonConvert.SerializeObject(param);
+
+                        string uidType = helper.GetUidType(UIDCard);
+                        string vehicle = comboBox1.Text.ToString();
+                        RequestFareRequest requestFare = new RequestFareRequest(uidType, UIDCard, vehicle);
+                        var sent_param = JsonConvert.SerializeObject(requestFare);
 
                         RESTAPI api = new RESTAPI();
                         string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
@@ -402,21 +404,17 @@ namespace BNITapCash
 
         private void SendDataToServer(int totalFare, string base64Image, string paymentMethod, string bankCode = "")
         {
-            JObject param = new JObject();
-            param["uid"] = textBox1.Text.ToString();
-            param["vehicle"] = comboBox1.Text.ToString();
-            param["waktu_keluar"] = this.helper.ConvertDatetimeToDefaultFormat(textBox4.Text.ToString());
-            param["username"] = Properties.Settings.Default.Username;
-            param["plate_number"] = textBox2.Text.ToString();
-            param["total_fare"] = totalFare;
-            param["ipv4"] = this.helper.GetLocalIPAddress();
-            param["payment_method"] = paymentMethod;
-            param["bank_code"] = bankCode;
-            param["image"] = base64Image;
-            var sent_param = JsonConvert.SerializeObject(param);
-            RESTAPI save = new RESTAPI();
+            string uid = textBox1.Text.ToString();
+            string vehicle = comboBox1.Text.ToString();
+            string datetimeOut = this.helper.ConvertDatetimeToDefaultFormat(textBox4.Text.ToString());
+            string username = Properties.Settings.Default.Username;
+            string plateNumber = textBox2.Text.ToString();
+            string ipAddressLocal = this.helper.GetLocalIPAddress();
+            ParkingOutRequest parkingOutRequest = new ParkingOutRequest(uid, vehicle, datetimeOut, username, plateNumber, totalFare, ipAddressLocal, paymentMethod, bankCode, base64Image);
+            var sent_param = JsonConvert.SerializeObject(parkingOutRequest);
+
             string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
-            DataResponseObject response = (DataResponseObject)save.post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, true, sent_param);
+            DataResponseObject response = (DataResponseObject)restApi.post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, true, sent_param);
             if (response != null)
             {
                 switch (response.Status)

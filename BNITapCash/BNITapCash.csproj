@@ -75,6 +75,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\request\ParkingOutRequest.cs" />
+    <Compile Include="API\request\RequestFareRequest.cs" />
     <Compile Include="API\response\base\DataResponse.cs" />
     <Compile Include="API\response\base\DataResponseArray.cs" />
     <Compile Include="API\response\base\DataResponseObject.cs" />

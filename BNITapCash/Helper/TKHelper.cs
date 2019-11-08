@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using BNITapCash.ConstantVariable;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace BNITapCash.Helper
 {
@@ -40,7 +37,7 @@ namespace BNITapCash.Helper
             DateTime dt = DateTime.Parse(param_date, cultureinfo);
             return dt.ToString("dd MMMM yyyy", cultureinfo) + " " + param_time;
         }
-        
+
         // Default Format : yyyy-MM-dd HH:mm:ss
         public string ConvertDatetimeToDefaultFormat(string dt)
         {
@@ -89,7 +86,7 @@ namespace BNITapCash.Helper
         private string GetMonthInNumber(string month, int digit = 2)
         {
             int month_in_number = -1;
-            switch(month)
+            switch (month)
             {
                 case "Januari":
                     month_in_number = 1;
@@ -129,9 +126,14 @@ namespace BNITapCash.Helper
                     break;
                 default:
                     month_in_number = -1;
-                    break;                
+                    break;
             }
             return month_in_number != -1 ? month_in_number.ToString("00") : "";
+        }
+
+        public string GetUidType(string uid)
+        {
+            return uid.Length == Constant.BARCODE_LENGTH ? "barcode" : "nfc";
         }
     }
 }
