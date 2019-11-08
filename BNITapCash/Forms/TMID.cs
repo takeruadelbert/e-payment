@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using BNITapCash.ConstantVariable;
 
 namespace BNITapCash.Forms
 {
     public partial class TMID : Form
     {
         private Login login;
-        private Form home;
 
         public TMID(Login login)
         {
@@ -19,7 +19,7 @@ namespace BNITapCash.Forms
 
         public string TID { get; set; }
 
-        public string MID { get; set;}
+        public string MID { get; set; }
 
         private void InitData()
         {
@@ -42,13 +42,13 @@ namespace BNITapCash.Forms
             string mid_value = txtSettlementMID.Text.ToString();
             if (string.IsNullOrEmpty(tid_value) || tid_value == "TID")
             {
-                MessageBox.Show("TID Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Constant.WARNING_MESSAGE_TID_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if(string.IsNullOrEmpty(mid_value) || mid_value == "Settlement MID")
+            if (string.IsNullOrEmpty(mid_value) || mid_value == "Settlement MID")
             {
-                MessageBox.Show("Settlement MID Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Constant.WARNING_MESSAGE_MID_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -57,7 +57,7 @@ namespace BNITapCash.Forms
             Properties.Settings.Default.Save();
             TID = tid_value;
             MID = mid_value;
-            MessageBox.Show("Setting Berhasil Diupdate.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(Constant.SETTING_UPDATE_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void back_Click(object sender, EventArgs e)
@@ -101,7 +101,7 @@ namespace BNITapCash.Forms
 
         private void label1_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show(Constant.CONFIRMATION_MESSAGE_BEFORE_EXIT, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 Dispose();
@@ -112,12 +112,6 @@ namespace BNITapCash.Forms
         private void minimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void logout_Click(object sender, EventArgs e)
-        {
-            home.Show();
-            Hide();
         }
     }
 }

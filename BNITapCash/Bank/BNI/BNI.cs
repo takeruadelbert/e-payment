@@ -22,25 +22,19 @@ namespace BNITapCash.Bank.BNI
         Acr123U acr123u = new Acr123U();
         byte LEDStatus;
 
-        private Cashier cashier;
         private TKHelper tk = new TKHelper();
         private ServerHelper serverHelper = new ServerHelper();
         private FileWatcher watcher;
         private DBConnect database;
 
+
         public BNI()
-        {
-
-        }
-
-        public BNI(Cashier cashier)
         {
             try
             {
                 this.LEDStatus = 0x00;
                 this.readerList = bni.getListReader();
                 this.selectedReader = this.readerList[0]; // PICC selected
-                this.cashier = cashier;
                 watcher = new FileWatcher();
                 database = new DBConnect();
             }
@@ -151,8 +145,6 @@ namespace BNITapCash.Bank.BNI
                     this.LEDStatus |= Constant.LED_ANT_RED;
                     this.acr123u.setLEDControl(this.LEDStatus);
                     acr123u.disconnect();
-
-                    this.cashier.UIDCard = this.GetCardNumber();
                 }
                 catch (Exception ex)
                 {

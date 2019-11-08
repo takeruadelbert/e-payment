@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +14,18 @@ using BNITapCash.Bank.BNI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using BNITapCash.Helper;
+﻿using BNITapCash.API;
+using BNITapCash.API.response;
+using BNITapCash.Card.Mifare;
+using BNITapCash.ConstantVariable;
+using BNITapCash.DB;
+using BNITapCash.Forms;
+using BNITapCash.Helper;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 using BNITapCash.Miscellaneous;
 using BNITapCash.DB;
@@ -101,7 +113,7 @@ namespace BNITapCash
 
         private void SignIn()
         {
-            for (int i = 0; i <= 500; i++)
+            for (int i = 0; i <= 300; i++)
             {
                 Thread.Sleep(10);
             }
@@ -122,15 +134,15 @@ namespace BNITapCash
                     DBConnect database = new DBConnect();
                     if (!database.CheckMySQLConnection())
                     {
-                        MessageBox.Show("Error : Can't Establish Connection to Local Database.\nPlease setup properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_LOCAL_DATABASE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
                     // check reader connection
-                    BNI bni = new BNI();
-                    if (!bni.CheckReaderConn())
+                    MifareCard mifareCard = new MifareCard();
+                    if (!mifareCard.CheckReaderConnection())
                     {
-                        MessageBox.Show("Error : Contactless Reader not available.\nPlease plug it and then try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Constant.ERROR_MESSAGE_DEVICE_READER_NOT_FOUND, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -164,34 +176,34 @@ namespace BNITapCash
         {
             if (username == "" || username == "Username")
             {
-                MessageBox.Show("Username Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Constant.WARNING_MESSAGE_USERNAME_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             if (password == "" || password == "Password")
             {
-                MessageBox.Show("Password Harus Diisi.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Constant.WARNING_MESSAGE_PASSWORD_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             if (string.IsNullOrEmpty(this.setting.IPAddressServer))
             {
-                MessageBox.Show("Invalid IP Address Server.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_SERVER, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             if (string.IsNullOrEmpty(this.setting.IPAddressLiveCamera))
             {
-                MessageBox.Show("Invalid IP Address Live Camera.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_LIVE_CAMERA, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             // validate TID & Settlement MID for further transaction
             if (string.IsNullOrEmpty(this.tmid.TID))
             {
-                MessageBox.Show("Invalid 'TID' value.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_TID, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             if (string.IsNullOrEmpty(this.tmid.MID))
             {
-                MessageBox.Show("Invalid 'Settlement MID' value.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_MID, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
@@ -201,7 +213,7 @@ namespace BNITapCash
         {
             string APIPullData = Properties.Resources.RequestVehicleTypeAPIURL;
             RESTAPI pull = new RESTAPI();
-            DataResponseArray receivedData = pull.get(ip_address_server, APIPullData);
+            DataResponseArray receivedData = (DataResponseArray)pull.get(ip_address_server, APIPullData);
             if (receivedData != null)
             {
                 switch (receivedData.Status)
@@ -234,7 +246,7 @@ namespace BNITapCash
             }
             else
             {
-                MessageBox.Show("Error : Can't establish connection to server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
@@ -262,7 +274,7 @@ namespace BNITapCash
                         }
                         catch (Exception)
                         {
-                            MessageBox.Show("Error : Can't Connect to Webcam.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_WEBCAM, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                         break;
@@ -273,7 +285,7 @@ namespace BNITapCash
             }
             else
             {
-                MessageBox.Show("Error : Can't establish connection to server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -347,7 +359,7 @@ namespace BNITapCash
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show(Constant.CONFIRMATION_MESSAGE_BEFORE_EXIT, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 Dispose();

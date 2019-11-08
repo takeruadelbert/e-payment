@@ -1,11 +1,15 @@
 ﻿using AForge.Video;
 using BNITapCash.API;
+using BNITapCash.API.response;
 using BNITapCash.Bank.BNI;
+using BNITapCash.Card.Mifare;
+using BNITapCash.ConstantVariable;
 using BNITapCash.Helper;
 using BNITapCash.Miscellaneous.Webcam;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -18,11 +22,14 @@ namespace BNITapCash
         private Login home;
         private BNI bni;
         private TKHelper helper;
-        private string liveCameraURL = "http://" + Properties.Settings.Default.IPAddressLiveCamera + "/snapshot";
+        private readonly string liveCameraURL = "http://" + Properties.Settings.Default.IPAddressLiveCamera + "/snapshot";
         JPEGStream stream;
 
         public PictureBox webcamImage;
         private Webcam camera;
+        private MifareCard mifareCard;
+        private RESTAPI restApi;
+        private AutoCompleteStringCollection autoComplete;
 
         public string UIDCard
         {
@@ -44,6 +51,8 @@ namespace BNITapCash
             Initialize();
             this.webcamImage = webcam;
             this.camera = new Webcam(this);
+            this.restApi = new RESTAPI();
+            autoComplete = new AutoCompleteStringCollection();
         }
 
         private void Initialize()
@@ -60,12 +69,15 @@ namespace BNITapCash
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show("Error : Cannot Connect to Live Camera. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_LIVE_CAMERA, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LiveCamera.Image = Properties.Resources.no_image;
             }
-            this.bni = new BNI(this);
-            this.bni.RunMain();
+            this.bni = new BNI();
+            //this.bni.RunMain();
             //this.StartTimer();
+
+            this.mifareCard = new MifareCard(this);
+            this.mifareCard.RunMain();
 
             // initialize vehicle type options            
             try
@@ -86,7 +98,7 @@ namespace BNITapCash
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show("Error : failed to fetch vehicle type data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_FETCH_VEHICLE_TYPE_DATA, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -97,7 +109,7 @@ namespace BNITapCash
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            this.TextListener("Card UID", true);
+
         }
 
         private void Cashier_Load(object sender, EventArgs e)
@@ -119,13 +131,13 @@ namespace BNITapCash
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Webcam Bermasalah : Pastikan Webcam dipasang dengan benar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_TROUBLE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 if (webcamImage.Image == null)
                 {
-                    MessageBox.Show("Snapshoot Webcam Bermasalah.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_SNAPSHOOT_FAILED, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     camera.StopWebcam();
                     return;
                 }
@@ -144,7 +156,7 @@ namespace BNITapCash
                     string TIDSettlement = Properties.Settings.Default.TID;
                     string operator_name = Properties.Settings.Default.Username;
                     string responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
-                    if (responseDeduct == "OK")
+                    if (responseDeduct == Constant.MESSAGE_OK)
                     {
                         // API POST Data to server
                         this.SendDataToServer(totalFare, base64Image, paymentMethod, bankCode);
@@ -196,16 +208,21 @@ namespace BNITapCash
 
         private void textBox1_Click(object sender, EventArgs e)
         {
-
+            if (textBox1.Text.ToLower() == "uid card")
+                this.TextListener("uid card");
         }
 
         private void TextListener(string field, bool is_textchanged = false)
         {
             if (!is_textchanged)
             {
-                if (textBox2.Text.ToLower() == "nomor plat kendaraan")
+                if (field == "nomor plat kendaraan")
                 {
                     textBox2.Clear();
+                }
+                if (field == "uid card")
+                {
+                    textBox1.Clear();
                 }
             }
             textBox1.ForeColor = Color.FromArgb(78, 184, 206);
@@ -214,7 +231,7 @@ namespace BNITapCash
 
         private void logout_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to logout?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show(Constant.CONFIRMATION_MESSAGE_BEFORE_EXIT, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 Properties.Settings.Default.Password = "";
@@ -253,31 +270,31 @@ namespace BNITapCash
         private void textBox2_Click(object sender, EventArgs e)
         {
             if (textBox2.Text.ToLower() == "nomor plat kendaraan")
-                this.TextListener("Nomor Plat Kendaraan");
+                this.TextListener("nomor plat kendaraan");
         }
 
         private string ValidateFields()
         {
             if (textBox2.Text.ToLower() == "nomor plat kendaraan" || textBox2.Text == "")
             {
-                return "Field 'Nomor Plat Kendaraan' Harus Diisi.";
+                return Constant.WARMING_MESSAGE_PLATE_NUMBER_NOT_EMPTY;
             }
 
             if (textBox4.Text.ToLower() == "waktu keluar" || textBox4.Text == "")
             {
-                return "Field 'Waktu Keluar' Kosong.";
+                return Constant.WARNING_MESSAGE_DATETIME_LEAVE_NOT_EMPTY;
             }
 
             if (textBox1.Text.ToLower() == "uid card" || textBox1.Text == "")
             {
-                return "Field 'UID Card' Harus Diisi.";
+                return Constant.WARNING_MESSAGE_UID_CARD_NOT_EMPTY;
             }
 
             if (comboBox1.SelectedIndex == -1 || comboBox1.SelectedIndex == 0)
             {
-                return "Field 'Tipe Kendaraan' Harus Dipilih.";
+                return Constant.WARNING_MESSAGE_VEHICLE_TYPE_NOT_EMPTY;
             }
-            return "ok";
+            return Constant.MESSAGE_OK;
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -370,13 +387,13 @@ namespace BNITapCash
                         }
                         else
                         {
-                            MessageBox.Show("Error : Can't establish connection to server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Silahkan Tap Kartunya Terlebih Dahulu.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(Constant.WARNING_MESSAGE_UNTAPPED_CARD, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     this.ResetComboBox();
                     return;
                 }
@@ -405,7 +422,7 @@ namespace BNITapCash
                 switch (response.Status)
                 {
                     case 206:
-                        MessageBox.Show("Transaksi Berhasil.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Clear(true);
                         break;
                     default:
@@ -415,13 +432,13 @@ namespace BNITapCash
             }
             else
             {
-                MessageBox.Show("Error found when receiving server response.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show(Constant.CONFIRMATION_MESSAGE_BEFORE_EXIT, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 Dispose();
@@ -437,6 +454,44 @@ namespace BNITapCash
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private AutoCompleteStringCollection SearchBarcode(string keyword)
+        {
+            var queryParam = "?barcode=" + keyword;
+            var ApiURL = Properties.Resources.SearchBarcodeAPIURL + queryParam;
+            string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
+            DataResponseArray response = (DataResponseArray)restApi.get(ip_address_server, ApiURL, false);
+            if (response != null)
+            {
+                if (response.Status == 206)
+                {
+                    string data = response.Data.ToString();
+                    List<Barcode> barcodes = JsonConvert.DeserializeObject<List<Barcode>>(response.Data.ToString());
+                    if (barcodes.Count > 0)
+                    {
+                        foreach (Barcode barcode in barcodes)
+                        {
+                            autoComplete.Add(barcode.barcode);
+                        }
+                    }
+                }
+            }
+            return autoComplete;
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string barcode = textBox1.Text.ToString();
+                autoComplete.Clear();
+                autoComplete = SearchBarcode(barcode);
+                if (autoComplete != null)
+                {
+                    textBox1.AutoCompleteCustomSource = autoComplete;
+                }
+            }
         }
     }
 }
