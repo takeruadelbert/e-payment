@@ -31,6 +31,7 @@ namespace BNITapCash
         private MifareCard mifareCard;
         private RESTAPI restApi;
         private AutoCompleteStringCollection autoComplete;
+        private string ip_address_server;
 
         public string UIDCard
         {
@@ -60,11 +61,14 @@ namespace BNITapCash
         {
             nonCash.Checked = true;
             this.helper = new TKHelper();
+            ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
             //textBox4.Text = this.helper.GetCurrentDatetime();            
             try
             {
                 stream = new JPEGStream(liveCameraURL);
                 stream.NewFrame += stream_NewFrame;
+                stream.Login = Properties.Settings.Default.LiveCameraUsername;
+                stream.Password = Properties.Settings.Default.LiveCameraPassword;
                 stream.Start();
             }
             catch (Exception ex)
@@ -334,10 +338,7 @@ namespace BNITapCash
                         RequestFareRequest requestFare = new RequestFareRequest(uidType, UIDCard, vehicle);
                         var sent_param = JsonConvert.SerializeObject(requestFare);
 
-                        RESTAPI api = new RESTAPI();
-                        string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
-
-                        DataResponseArray response = (DataResponseArray)api.post(ip_address_server, APIUrl, false, sent_param);
+                        DataResponseArray response = (DataResponseArray)restApi.post(ip_address_server, APIUrl, false, sent_param);
                         if (response != null)
                         {
                             switch (response.Status)
@@ -405,15 +406,15 @@ namespace BNITapCash
         private void SendDataToServer(int totalFare, string base64Image, string paymentMethod, string bankCode = "")
         {
             string uid = textBox1.Text.ToString();
+            string uidType = helper.GetUidType(uid);
             string vehicle = comboBox1.Text.ToString();
             string datetimeOut = this.helper.ConvertDatetimeToDefaultFormat(textBox4.Text.ToString());
             string username = Properties.Settings.Default.Username;
             string plateNumber = textBox2.Text.ToString();
             string ipAddressLocal = this.helper.GetLocalIPAddress();
-            ParkingOutRequest parkingOutRequest = new ParkingOutRequest(uid, vehicle, datetimeOut, username, plateNumber, totalFare, ipAddressLocal, paymentMethod, bankCode, base64Image);
+            ParkingOutRequest parkingOutRequest = new ParkingOutRequest(uidType, uid, vehicle, datetimeOut, username, plateNumber, totalFare, ipAddressLocal, paymentMethod, bankCode, base64Image);
             var sent_param = JsonConvert.SerializeObject(parkingOutRequest);
 
-            string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
             DataResponseObject response = (DataResponseObject)restApi.post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, true, sent_param);
             if (response != null)
             {
@@ -489,6 +490,60 @@ namespace BNITapCash
                 {
                     textBox1.AutoCompleteCustomSource = autoComplete;
                 }
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ReprintTicket();
+        }
+
+        private void buttonGenerateReport_Click(object sender, EventArgs e)
+        {
+            PrintReportOperator();
+        }
+
+        private void ReprintTicket()
+        {
+            string reprintTicketApiUrl = Properties.Resources.ReprintTicketAPIURL;
+            DataResponseObject response = (DataResponseObject)restApi.get(ip_address_server, reprintTicketApiUrl, true);
+            if (response != null)
+            {
+                if (response.Status == 206)
+                {
+                    MessageBox.Show(Constant.REPRINT_TICKET_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void PrintReportOperator()
+        {
+            string generateReportApiUrl = Properties.Resources.GenerateReportAPIURL;
+            PrintReportRequest printReportRequest = new PrintReportRequest(Properties.Settings.Default.Username);
+            var sentParam = JsonConvert.SerializeObject(printReportRequest);
+            DataResponseObject response = (DataResponseObject)restApi.post(ip_address_server, generateReportApiUrl, true, sentParam);
+            if (response != null)
+            {
+                if (response.Status == 206)
+                {
+                    MessageBox.Show(Constant.PRINT_REPORT_OPERATOR_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

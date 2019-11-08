@@ -70,8 +70,8 @@
             this.panel14 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonReprint = new System.Windows.Forms.Button();
+            this.buttonGenerateReport = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -586,8 +586,8 @@
             this.panel14.Controls.Add(this.cash);
             this.panel14.Controls.Add(this.nonCash);
             this.panel14.Controls.Add(this.button5);
-            this.panel14.Controls.Add(this.button4);
-            this.panel14.Controls.Add(this.button3);
+            this.panel14.Controls.Add(this.buttonReprint);
+            this.panel14.Controls.Add(this.buttonGenerateReport);
             this.panel14.Controls.Add(this.label7);
             this.panel14.Controls.Add(this.btnClear);
             this.panel14.Controls.Add(this.btnSave);
@@ -662,39 +662,41 @@
             this.button5.TabIndex = 47;
             this.button5.UseVisualStyleBackColor = false;
             // 
-            // button4
+            // buttonReprint
             // 
-            this.button4.BackColor = System.Drawing.Color.Transparent;
-            this.button4.BackgroundImage = global::BNITapCash.Properties.Resources.reprint_button;
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button4.Location = new System.Drawing.Point(471, 529);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(120, 35);
-            this.button4.TabIndex = 46;
-            this.button4.UseVisualStyleBackColor = false;
+            this.buttonReprint.BackColor = System.Drawing.Color.Transparent;
+            this.buttonReprint.BackgroundImage = global::BNITapCash.Properties.Resources.reprint_button;
+            this.buttonReprint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonReprint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonReprint.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.buttonReprint.FlatAppearance.BorderSize = 0;
+            this.buttonReprint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonReprint.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonReprint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonReprint.Location = new System.Drawing.Point(471, 529);
+            this.buttonReprint.Name = "buttonReprint";
+            this.buttonReprint.Size = new System.Drawing.Size(120, 35);
+            this.buttonReprint.TabIndex = 46;
+            this.buttonReprint.UseVisualStyleBackColor = false;
+            this.buttonReprint.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button3
+            // buttonGenerateReport
             // 
-            this.button3.BackColor = System.Drawing.Color.Transparent;
-            this.button3.BackgroundImage = global::BNITapCash.Properties.Resources.print_report;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button3.Location = new System.Drawing.Point(345, 529);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(120, 35);
-            this.button3.TabIndex = 45;
-            this.button3.UseVisualStyleBackColor = false;
+            this.buttonGenerateReport.BackColor = System.Drawing.Color.Transparent;
+            this.buttonGenerateReport.BackgroundImage = global::BNITapCash.Properties.Resources.print_report;
+            this.buttonGenerateReport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonGenerateReport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonGenerateReport.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.buttonGenerateReport.FlatAppearance.BorderSize = 0;
+            this.buttonGenerateReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonGenerateReport.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonGenerateReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonGenerateReport.Location = new System.Drawing.Point(345, 529);
+            this.buttonGenerateReport.Name = "buttonGenerateReport";
+            this.buttonGenerateReport.Size = new System.Drawing.Size(120, 35);
+            this.buttonGenerateReport.TabIndex = 45;
+            this.buttonGenerateReport.UseVisualStyleBackColor = false;
+            this.buttonGenerateReport.Click += new System.EventHandler(this.buttonGenerateReport_Click);
             // 
             // label7
             // 
@@ -892,8 +894,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonReprint;
+        private System.Windows.Forms.Button buttonGenerateReport;
         private System.Windows.Forms.RadioButton nonCash;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel9;

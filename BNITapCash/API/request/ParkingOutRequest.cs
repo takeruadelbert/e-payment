@@ -4,6 +4,9 @@ namespace BNITapCash.API.request
 {
     class ParkingOutRequest
     {
+        [JsonProperty("type")]
+        private string UidType { get; set; }
+        
         [JsonProperty("uid")]
         private string UID { get; set; }
 
@@ -34,8 +37,9 @@ namespace BNITapCash.API.request
         [JsonProperty("image")]
         private string Image { get; set; }
 
-        public ParkingOutRequest(string uid, string vehicle, string datetimeOut, string username, string plateNumber, int totalFare, string ipAddress, string paymentMethod, string bankCode, string image)
+        public ParkingOutRequest(string uidType, string uid, string vehicle, string datetimeOut, string username, string plateNumber, int totalFare, string ipAddress, string paymentMethod, string bankCode, string image)
         {
+            UidType = uidType;
             UID = uid;
             Vehicle = vehicle;
             DatetimeOut = datetimeOut;

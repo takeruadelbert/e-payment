@@ -41,6 +41,8 @@
         public static readonly string ERROR_MESSAGE_INVALID_GATE = "Gate Tidak Terdaftar di Server.";
 
         public static readonly string STATUS_CONNECTION_ESTABLISH = "Connection Established.";
+        public static readonly string REPRINT_TICKET_SUCCESS = "Print Ulang Tiket Berhasil.";
+        public static readonly string PRINT_REPORT_OPERATOR_SUCCESS = "Print Report Sukses.";
 
         // reader device attributes
         public static readonly byte LED_BLUE = 0x01;

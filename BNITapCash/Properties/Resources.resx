@@ -331,4 +331,12 @@
     <value>/ws/parking_outs/check_gate_out</value>
     <comment>API for checking if the gate is valid by its IP Address</comment>
   </data>
+  <data name="GenerateReportAPIURL" xml:space="preserve">
+    <value>/ws/parking_outs/print_laporan_operator</value>
+    <comment>API for printing report operator</comment>
+  </data>
+  <data name="ReprintTicketAPIURL" xml:space="preserve">
+    <value>/ws/parking_outs/reprint_ticket</value>
+    <comment>API for reprinting the ticket</comment>
+  </data>
 </root>

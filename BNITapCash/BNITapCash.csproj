@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\request\ParkingOutRequest.cs" />
+    <Compile Include="API\request\PrintReportRequest.cs" />
     <Compile Include="API\request\RequestFareRequest.cs" />
     <Compile Include="API\response\base\DataResponse.cs" />
     <Compile Include="API\response\base\DataResponseArray.cs" />

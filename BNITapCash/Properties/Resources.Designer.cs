@@ -149,6 +149,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/parking_outs/print_laporan_operator.
+        /// </summary>
+        internal static string GenerateReportAPIURL {
+            get {
+                return ResourceManager.GetString("GenerateReportAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Group_3 {
@@ -605,6 +614,15 @@ namespace BNITapCash.Properties {
             get {
                 object obj = ResourceManager.GetObject("reprint button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /ws/parking_outs/reprint_ticket.
+        /// </summary>
+        internal static string ReprintTicketAPIURL {
+            get {
+                return ResourceManager.GetString("ReprintTicketAPIURL", resourceCulture);
             }
         }
         
