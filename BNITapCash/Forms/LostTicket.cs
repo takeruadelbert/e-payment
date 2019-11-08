@@ -32,22 +32,24 @@ namespace BNITapCash.Forms
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            Clear(true);
-        }
-
+       
         public void Clear(bool include_uid = false)
         {
             
         }
 
-        private void btnClear_Click_1(object sender, EventArgs e)
+        private void btnLsTicketClear_Click(object sender, EventArgs e)
+        {
+            Clear(true);
+        }
+
+
+        private void btnLsTicketSave_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void label8_Click(object sender, EventArgs e)
+        private void back_to_cashier_Click(object sender, EventArgs e)
         {
 
         }
