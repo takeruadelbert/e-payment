@@ -193,24 +193,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="src\fonts\Poppins-Black.ttf" />
-    <None Include="src\fonts\Poppins-BlackItalic.ttf" />
-    <None Include="src\fonts\Poppins-Bold.ttf" />
-    <None Include="src\fonts\Poppins-BoldItalic.ttf" />
-    <None Include="src\fonts\Poppins-ExtraBold.ttf" />
-    <None Include="src\fonts\Poppins-ExtraBoldItalic.ttf" />
-    <None Include="src\fonts\Poppins-ExtraLight.ttf" />
-    <None Include="src\fonts\Poppins-ExtraLightItalic.ttf" />
-    <None Include="src\fonts\Poppins-Italic.ttf" />
-    <None Include="src\fonts\Poppins-Light.ttf" />
-    <None Include="src\fonts\Poppins-LightItalic.ttf" />
-    <None Include="src\fonts\Poppins-Medium.ttf" />
-    <None Include="src\fonts\Poppins-MediumItalic.ttf" />
-    <None Include="src\fonts\Poppins-Regular.ttf" />
-    <None Include="src\fonts\Poppins-SemiBold.ttf" />
-    <None Include="src\fonts\Poppins-SemiBoldItalic.ttf" />
-    <None Include="src\fonts\Poppins-Thin.ttf" />
-    <None Include="src\fonts\Poppins-ThinItalic.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-Black.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-BlackItalic.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-Bold.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-BoldItalic.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-ExtraBold.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-ExtraBoldItalic.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-ExtraLight.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-ExtraLightItalic.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-Italic.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-Light.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-LightItalic.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-Medium.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-MediumItalic.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-Regular.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-SemiBold.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-SemiBoldItalic.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-Thin.ttf" />
+    <EmbeddedResource Include="src\fonts\Poppins-ThinItalic.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -245,7 +245,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app_icon.ico" />
-    <None Include="src\fonts\OFL.txt" />
+    <EmbeddedResource Include="src\fonts\OFL.txt" />
     <None Include="Resources\main-footer2.png" />
     <None Include="Resources\icon setting1.png" />
     <None Include="Resources\main-footer-short2.png" />

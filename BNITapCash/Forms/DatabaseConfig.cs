@@ -178,7 +178,6 @@ namespace BNITapCash.Forms
                 MessageBox.Show(Constant.WARNING_MESSAGE_USERNAME_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-
             return result;
         }
 

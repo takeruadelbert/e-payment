@@ -1,3 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using BNITapCash.API;
+using BNITapCash.Bank.BNI;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using BNITapCash.Helper;
 ﻿using BNITapCash.API;
 using BNITapCash.API.response;
 using BNITapCash.Card.Mifare;
@@ -11,7 +27,9 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
-using System.Windows.Forms;
+using BNITapCash.Miscellaneous;
+using BNITapCash.DB;
+using BNITapCash.Forms;
 
 namespace BNITapCash
 {
