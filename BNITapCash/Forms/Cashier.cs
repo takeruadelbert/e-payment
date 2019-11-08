@@ -139,7 +139,7 @@ namespace BNITapCash
                     MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_TROUBLE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
+                System.Threading.Thread.Sleep(Constant.DELAY_TIME_START_WEBCAM);
                 if (webcamImage.Image == null)
                 {
                     MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_SNAPSHOOT_FAILED, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -201,7 +201,7 @@ namespace BNITapCash
             txtMinute.Text = "";
             txtSecond.Text = "";
             txtGrandTotal.Text = "0";
-            this.ResetComboBox();
+            //this.ResetComboBox();
 
             PictFace.Image = Properties.Resources.no_image;
             PictFace.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -471,7 +471,8 @@ namespace BNITapCash
                     {
                         foreach (Barcode barcode in barcodes)
                         {
-                            autoComplete.Add(barcode.barcode);
+                            listBarcodeSuggestion.Items.Add(barcode.barcode);
+                            //autoComplete.Add(barcode.barcode);
                         }
                     }
                 }
@@ -483,13 +484,32 @@ namespace BNITapCash
         {
             if (e.KeyCode == Keys.Enter)
             {
+                listBarcodeSuggestion.Visible = true;
                 string barcode = textBox1.Text.ToString();
-                autoComplete.Clear();
-                autoComplete = SearchBarcode(barcode);
-                if (autoComplete != null)
+                listBarcodeSuggestion.Items.Clear();
+                SearchBarcode(barcode);
+                listBarcodeSuggestion.DroppedDown = true;
+                listBarcodeSuggestion.Focus();
+                if (listBarcodeSuggestion.Items.Count == 0)
+                {
+                    listBarcodeSuggestion.Items.Add("Data Tidak Ditemukan");
+                    textBox1.Focus();
+
+                }
+                else if (listBarcodeSuggestion.Items.Count == 1)
                 {
                     textBox1.AutoCompleteCustomSource = autoComplete;
                 }
+            }
+        }
+
+        private void selectBarcode(object sender, EventArgs e)
+        {
+            if (listBarcodeSuggestion.SelectedItem.ToString() != "Data Tidak Ditemukan")
+            {
+                textBox1.Text = listBarcodeSuggestion.Text;
+                textBox1.Text = listBarcodeSuggestion.Text;
+                listBarcodeSuggestion.Visible = false;
             }
         }
 
@@ -545,6 +565,7 @@ namespace BNITapCash
             {
                 MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
     }
 }

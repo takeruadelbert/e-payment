@@ -2,6 +2,7 @@
 using AForge.Video.DirectShow;
 using System;
 using System.Drawing;
+using BNITapCash.ConstantVariable;
 
 namespace BNITapCash.Miscellaneous.Webcam
 {
@@ -26,7 +27,15 @@ namespace BNITapCash.Miscellaneous.Webcam
 
         public void StopWebcam()
         {
-            frame.Stop();
+            try
+            {
+                frame.Stop();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
 
         void NewFrame_event(object send, NewFrameEventArgs e)
