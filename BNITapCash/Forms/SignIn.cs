@@ -1,5 +1,6 @@
 using BNITapCash.API;
 using BNITapCash.API.request;
+using BNITapCash.API.response;
 using BNITapCash.Card.Mifare;
 using BNITapCash.ConstantVariable;
 using BNITapCash.DB;
@@ -147,10 +148,13 @@ namespace BNITapCash
 
                     this.ip_address_server = "http://" + this.setting.IPAddressServer;
 
-                    // pull some data from server e.g. Vehicle Types
-                    if (PullDataFromServer())
+                    if (CheckGate())
                     {
-                        ApiSignIn(username, password);
+                        // pull some data from server e.g. Vehicle Types
+                        if (PullDataFromServer())
+                        {
+                            ApiSignIn(username, password);
+                        }
                     }
                 }
             }
@@ -350,6 +354,37 @@ namespace BNITapCash
         private void button2_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private bool CheckGate()
+        {
+            string CheckGateApiUrl = Properties.Resources.CheckGateAPIURL;
+            DataResponseObject response = (DataResponseObject)restApi.get(this.ip_address_server, CheckGateApiUrl, true);
+            if (response != null)
+            {
+                switch (response.Status)
+                {
+                    case 206:
+                        string data = response.Data.ToString();
+                        Gate gate = JsonConvert.DeserializeObject<Gate>(data);
+
+                        Properties.Settings.Default.GateID = gate.Id;
+                        Properties.Settings.Default.GateName = gate.Name;
+
+                        return true;
+                    case 401:
+                        MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_GATE, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    default:
+                        MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
     }
 }

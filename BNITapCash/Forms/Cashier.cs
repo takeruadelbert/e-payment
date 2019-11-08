@@ -467,7 +467,7 @@ namespace BNITapCash
                 if (response.Status == 206)
                 {
                     string data = response.Data.ToString();
-                    List<Barcode> barcodes = JsonConvert.DeserializeObject<List<Barcode>>(response.Data.ToString());
+                    List<Barcode> barcodes = JsonConvert.DeserializeObject<List<Barcode>>(data);
                     if (barcodes.Count > 0)
                     {
                         foreach (Barcode barcode in barcodes)

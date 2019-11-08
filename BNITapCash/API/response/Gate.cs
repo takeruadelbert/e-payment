@@ -5,15 +5,15 @@ namespace BNITapCash.API.response
     class Gate
     {
         [JsonProperty("id")]
-        private long Id { get; set; }
+        public int Id;
 
         [JsonProperty("name")]
-        private string Name { get; set; }
+        public string Name;
 
         [JsonProperty("ipv4")]
-        private string IpAddress { get; set; }
+        public string IpAddress;
 
-        public Gate(long id, string name, string ipAddress)
+        public Gate(int id, string name, string ipAddress)
         {
             Id = id;
             Name = name;

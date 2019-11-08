@@ -1,10 +1,11 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace BNITapCash.API
 {
     class DataResponseObject : DataResponse
     {
         [JsonProperty("data")]
-        public JsonObjectAttribute Data { get; set; }
+        public JToken Data { get; set; }
     }
 }
