@@ -1,21 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using BNITapCash.API;
-using BNITapCash.Bank.BNI;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using BNITapCash.Helper;
-﻿using BNITapCash.API;
-using BNITapCash.API.response;
+using BNITapCash.API.request;
 using BNITapCash.Card.Mifare;
 using BNITapCash.ConstantVariable;
 using BNITapCash.DB;
@@ -24,12 +8,9 @@ using BNITapCash.Helper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
-using BNITapCash.Miscellaneous;
-using BNITapCash.DB;
-using BNITapCash.Forms;
+using System.Windows.Forms;
 
 namespace BNITapCash
 {
@@ -254,10 +235,8 @@ namespace BNITapCash
         private void ApiSignIn(string username, string password, string ip_address_server)
         {
             var APIUrl = Properties.Resources.LoginAPIURL;
-            JObject param = new JObject();
-            param["username"] = username;
-            param["password"] = password;
-            var sent_param = JsonConvert.SerializeObject(param);
+            SignInRequest signInRequest = new SignInRequest(username, password);
+            string sent_param = JsonConvert.SerializeObject(signInRequest);
 
             RESTAPI api = new RESTAPI();
             DataResponseArray response = (DataResponseArray)api.post(ip_address_server, APIUrl, false, sent_param);
