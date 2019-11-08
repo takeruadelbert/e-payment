@@ -78,6 +78,7 @@
     <Compile Include="API\base\DataResponse.cs" />
     <Compile Include="API\base\DataResponseArray.cs" />
     <Compile Include="API\base\DataResponseObject.cs" />
+    <Compile Include="API\request\SignInRequest.cs" />
     <Compile Include="API\response\Barcode.cs" />
     <Compile Include="API\RESTAPI.cs" />
     <Compile Include="Bank\BNI\BNI.cs" />
