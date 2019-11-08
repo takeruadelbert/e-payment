@@ -111,6 +111,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/parking_outs/check_gate_out.
+        /// </summary>
+        internal static string CheckGateAPIURL {
+            get {
+                return ResourceManager.GetString("CheckGateAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap close_button {

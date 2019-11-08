@@ -22,6 +22,8 @@ namespace BNITapCash
         private About about;
         private TMID tmid;
         private TKHelper tk = new TKHelper();
+        private RESTAPI restApi;
+        private string ip_address_server;
 
         public Login()
         {
@@ -31,6 +33,7 @@ namespace BNITapCash
             this.DBConfig = new DatabaseConfig(this);
             this.about = new About();
             this.tmid = new TMID(this);
+            this.restApi = new RESTAPI();
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -142,12 +145,12 @@ namespace BNITapCash
                     }
                     Properties.Settings.Default.Save();
 
-                    string ip_address_server = "http://" + this.setting.IPAddressServer;
+                    this.ip_address_server = "http://" + this.setting.IPAddressServer;
 
                     // pull some data from server e.g. Vehicle Types
-                    if (PullDataFromServer(ip_address_server))
+                    if (PullDataFromServer())
                     {
-                        ApiSignIn(username, password, ip_address_server);
+                        ApiSignIn(username, password);
                     }
                 }
             }
@@ -190,11 +193,10 @@ namespace BNITapCash
 
             return true;
         }
-        private bool PullDataFromServer(string ip_address_server)
+        private bool PullDataFromServer()
         {
             string APIPullData = Properties.Resources.RequestVehicleTypeAPIURL;
-            RESTAPI pull = new RESTAPI();
-            DataResponseArray receivedData = (DataResponseArray)pull.get(ip_address_server, APIPullData);
+            DataResponseArray receivedData = (DataResponseArray)restApi.get(this.ip_address_server, APIPullData);
             if (receivedData != null)
             {
                 switch (receivedData.Status)
@@ -232,14 +234,13 @@ namespace BNITapCash
             }
         }
 
-        private void ApiSignIn(string username, string password, string ip_address_server)
+        private void ApiSignIn(string username, string password)
         {
             var APIUrl = Properties.Resources.LoginAPIURL;
             SignInRequest signInRequest = new SignInRequest(username, password);
             string sent_param = JsonConvert.SerializeObject(signInRequest);
 
-            RESTAPI api = new RESTAPI();
-            DataResponseArray response = (DataResponseArray)api.post(ip_address_server, APIUrl, false, sent_param);
+            DataResponseArray response = (DataResponseArray)restApi.post(this.ip_address_server, APIUrl, false, sent_param);
             if (response != null)
             {
                 switch (response.Status)
