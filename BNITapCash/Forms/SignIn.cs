@@ -1,22 +1,4 @@
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BNITapCash.API;
-using BNITapCash.Bank.BNI;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using BNITapCash.Helper;
-﻿using BNITapCash.API;
-using BNITapCash.API.response;
 using BNITapCash.API;
 using BNITapCash.API.request;
 using BNITapCash.API.response;
@@ -30,9 +12,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 using System.Threading;
-using BNITapCash.Miscellaneous;
-using BNITapCash.DB;
-using BNITapCash.Forms;
+using System.Windows.Forms;
 
 namespace BNITapCash
 {
@@ -43,7 +23,6 @@ namespace BNITapCash
         private DatabaseConfig DBConfig;
         private About about;
         private TMID tmid;
-        private TKHelper tk = new TKHelper();
         private RESTAPI restApi;
         private string ip_address_server;
 
@@ -234,7 +213,7 @@ namespace BNITapCash
                         // write into a file called 'master-data.json'
                         try
                         {
-                            string savedDir = tk.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
+                            string savedDir = TKHelper.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
                             string json = JsonConvert.SerializeObject(vehicleTypes);
                             System.IO.File.WriteAllText(@savedDir, json);
                             //MessageBox.Show("Pull Master Data is Success.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

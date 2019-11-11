@@ -23,7 +23,6 @@ namespace BNITapCash
     {
         private Login home;
         private BNI bni;
-        private TKHelper helper;
         private readonly string liveCameraURL = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressLiveCamera + "/snapshot";
         JPEGStream stream;
 
@@ -61,9 +60,8 @@ namespace BNITapCash
         private void Initialize()
         {
             nonCash.Checked = true;
-            this.helper = new TKHelper();
             ip_address_server = Properties.Settings.Default.IPAddressServer;
-            //textBox4.Text = this.helper.GetCurrentDatetime();            
+
             try
             {
                 stream = new JPEGStream(liveCameraURL);
@@ -79,8 +77,6 @@ namespace BNITapCash
                 LiveCamera.Image = Properties.Resources.no_image;
             }
             this.bni = new BNI();
-            //this.bni.RunMain();
-            //this.StartTimer();
 
             this.mifareCard = new MifareCard(this);
             this.mifareCard.RunMain();
@@ -89,7 +85,7 @@ namespace BNITapCash
             try
             {
                 comboBox1.Items.Add("- Pilih Tipe Kendaraan -");
-                string masterDataFile = this.helper.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
+                string masterDataFile = TKHelper.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
                 using (StreamReader reader = new StreamReader(masterDataFile))
                 {
                     string json = reader.ReadToEnd();
@@ -128,55 +124,42 @@ namespace BNITapCash
             string feedback = this.ValidateFields();
             if (feedback == Constant.MESSAGE_OK)
             {
-                int totalFare = this.helper.IDRToNominal(txtGrandTotal.Text.ToString());
-
                 // encoded base64 Image from Webcam
-                try
+                string base64WebcamImage = CaptureWebcamImage();
+                if (!string.IsNullOrEmpty(base64WebcamImage))
                 {
-                    camera.StartWebcam();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_TROUBLE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                System.Threading.Thread.Sleep(Constant.DELAY_TIME_START_WEBCAM);
-                if (webcamImage.Image == null)
-                {
-                    MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_SNAPSHOOT_FAILED, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    camera.StopWebcam();
-                    return;
-                }
-                camera.StopWebcam();
-                Bitmap bmp = new Bitmap(webcamImage.Image, Properties.Settings.Default.WebcamWidth, Properties.Settings.Default.WebcamHeight);
-                string base64Image = bmp.ToBase64String(ImageFormat.Png);
+                    // check the payment method whether it's cash or non-cash
+                    int totalFare = TKHelper.IDRToNominal(txtGrandTotal.Text.ToString());
+                    string paymentMethod = nonCash.Checked ? "NCSH" : "CASH";
 
-                // check the payment method whether it's cash or non-cash
-                string type = nonCash.Checked ? "noncash" : "cash";
-                if (type == "noncash")
-                {
-                    string paymentMethod = "NCSH";
-                    string bankCode = "BNI";
-                    // deduct balance of card
-                    string ipv4 = helper.GetLocalIPAddress();
-                    string TIDSettlement = Properties.Settings.Default.TID;
-                    string operator_name = Properties.Settings.Default.Username;
-                    string responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
-                    if (responseDeduct == Constant.MESSAGE_OK)
+                    ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, paymentMethod);
+                    if (parkingOut != null)
                     {
-                        // API POST Data to server
-                        this.SendDataToServer(totalFare, base64Image, paymentMethod, bankCode);
+                        if (paymentMethod == "NCSH")
+                        {
+                            string bankCode = "BNI";
+                            // deduct balance of card
+                            string ipv4 = TKHelper.GetLocalIPAddress();
+                            string TIDSettlement = Properties.Settings.Default.TID;
+                            string operator_name = Properties.Settings.Default.Username;
+                            string responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
+                            if (responseDeduct == Constant.MESSAGE_OK)
+                            {
+                                MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                this.Clear(true);
+                            }
+                            else
+                            {
+                                MessageBox.Show(responseDeduct, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show(responseDeduct, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                }
-                else
-                {
-                    string paymentMethod = "CASH";
-                    this.SendDataToServer(totalFare, base64Image, paymentMethod);
                 }
             }
             else
@@ -184,6 +167,39 @@ namespace BNITapCash
                 MessageBox.Show(feedback, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+        }
+
+        //private void StoreDataToDatabase()
+        //{
+        //    // store deduct result card to server
+        //    string created = TKHelper.ConvertDatetimeToDefaultFormat(helper.GetCurrentDatetime());
+        //    string query = "INSERT INTO deduct_card_results (result, amount, transaction_dt, bank, ipv4, operator, ID_reader, created) VALUES('" + result + "', '" + amount +
+        //        "', '" + created + "', '" + bank + "', '" + ipv4 + "', '" + operator_name + "', '" + TIDSettlement + "', '" + created + "')";
+
+        //    database.Insert(query);
+        //}
+
+        private string CaptureWebcamImage()
+        {
+            try
+            {
+                camera.StartWebcam();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_TROUBLE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            System.Threading.Thread.Sleep(Constant.DELAY_TIME_START_WEBCAM);
+            if (webcamImage.Image == null)
+            {
+                MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_SNAPSHOOT_FAILED, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                camera.StopWebcam();
+                return null;
+            }
+            camera.StopWebcam();
+            Bitmap bmp = new Bitmap(webcamImage.Image, Properties.Settings.Default.WebcamWidth, Properties.Settings.Default.WebcamHeight);
+            return bmp.ToBase64String(ImageFormat.Png);
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -197,7 +213,7 @@ namespace BNITapCash
                 textBox1.Text = "UID Card";
             textBox2.Text = "Nomor Plat Kendaraan";
             textBox3.Text = "Waktu Masuk";
-            textBox4.Text = this.helper.GetCurrentDatetime();
+            textBox4.Text = TKHelper.GetCurrentDatetime();
             txtHour.Text = "";
             txtMinute.Text = "";
             txtSecond.Text = "";
@@ -305,7 +321,7 @@ namespace BNITapCash
 
         private void TimerTick(object sender, EventArgs e)
         {
-            textBox4.Text = this.helper.GetCurrentDatetime();
+            textBox4.Text = TKHelper.GetCurrentDatetime();
         }
 
         private void StartTimer()
@@ -332,7 +348,7 @@ namespace BNITapCash
                     // send data API
                     var APIUrl = Properties.Resources.RequestUIDFareAPIURL;
 
-                    string uidType = helper.GetUidType(UIDCard);
+                    string uidType = TKHelper.GetUidType(UIDCard);
                     string vehicle = comboBox1.Text.ToString();
                     RequestFareRequest requestFare = new RequestFareRequest(uidType, UIDCard, vehicle);
                     var sent_param = JsonConvert.SerializeObject(requestFare);
@@ -343,7 +359,6 @@ namespace BNITapCash
                         switch (response.Status)
                         {
                             case 206:
-                                //MessageBox.Show(response.Message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 foreach (JObject data in response.Data)
                                 {
                                     // Duration Data Process
@@ -359,12 +374,12 @@ namespace BNITapCash
                                     // Datetime Parking In
                                     string datetime_in = data["waktu_masuk"].ToString();
                                     string[] temp_dt_in = datetime_in.Split(' ');
-                                    textBox3.Text = this.helper.ConvertDatetime(temp_dt_in[0], temp_dt_in[1]);
+                                    textBox3.Text = TKHelper.ConvertDatetime(temp_dt_in[0], temp_dt_in[1]);
 
                                     // Datetime Out
                                     string datetime_out = data["waktu_keluar"].ToString();
                                     string[] temp_dt_out = datetime_out.Split(' ');
-                                    textBox4.Text = this.helper.ConvertDatetime(temp_dt_out[0], temp_dt_out[1]);
+                                    textBox4.Text = TKHelper.ConvertDatetime(temp_dt_out[0], temp_dt_out[1]);
 
                                     // Load Picture of face and plate number
                                     string URL_pict_face = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + data["gambar_face"].ToString();
@@ -378,7 +393,7 @@ namespace BNITapCash
 
                                     // Total Fare Process
                                     string total_fare = data["tarif_parkir"].ToString();
-                                    txtGrandTotal.Text = this.helper.IDR(total_fare);
+                                    txtGrandTotal.Text = TKHelper.IDR(total_fare);
                                 }
                                 break;
                             default:
@@ -401,15 +416,15 @@ namespace BNITapCash
             }
         }
 
-        private void SendDataToServer(int totalFare, string base64Image, string paymentMethod, string bankCode = "")
+        private ParkingOut SendDataToServer(int totalFare, string base64Image, string paymentMethod, string bankCode = "")
         {
             string uid = textBox1.Text.ToString();
-            string uidType = helper.GetUidType(uid);
+            string uidType = TKHelper.GetUidType(uid);
             string vehicle = comboBox1.Text.ToString();
-            string datetimeOut = this.helper.ConvertDatetimeToDefaultFormat(textBox4.Text.ToString());
+            string datetimeOut = TKHelper.ConvertDatetimeToDefaultFormat(textBox4.Text.ToString());
             string username = Properties.Settings.Default.Username;
             string plateNumber = textBox2.Text.ToString();
-            string ipAddressLocal = this.helper.GetLocalIPAddress();
+            string ipAddressLocal = TKHelper.GetLocalIPAddress();
             ParkingOutRequest parkingOutRequest = new ParkingOutRequest(uidType, uid, vehicle, datetimeOut, username, plateNumber, totalFare, ipAddressLocal, paymentMethod, bankCode, base64Image);
             var sent_param = JsonConvert.SerializeObject(parkingOutRequest);
 
@@ -419,17 +434,16 @@ namespace BNITapCash
                 switch (response.Status)
                 {
                     case 206:
-                        MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Clear(true);
-                        break;
+                        return JsonConvert.DeserializeObject<ParkingOut>(response.Data.ToString());
                     default:
-                        MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
+                        MessageBox.Show(response.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return null;
                 }
             }
             else
             {
                 MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
         }
 

@@ -5,12 +5,9 @@ namespace BNITapCash.Forms
 {
     public partial class About : Form
     {
-        private Form home;
-
         public About()
         {
             InitializeComponent();
-            this.home = home;
             InitData();
         }
 

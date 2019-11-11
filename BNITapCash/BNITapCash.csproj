@@ -90,6 +90,7 @@
     <Compile Include="API\response\ParkingOut.cs" />
     <Compile Include="API\RESTAPI.cs" />
     <Compile Include="Bank\BNI\BNI.cs" />
+    <Compile Include="Bank\DataModel\DataDeduct.cs" />
     <Compile Include="Card\Mifare\Card.cs" />
     <Compile Include="Card\Mifare\MifareCard.cs" />
     <Compile Include="Constant\Constant.cs" />

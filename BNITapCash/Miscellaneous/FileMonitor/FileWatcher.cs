@@ -1,10 +1,7 @@
-﻿using System;
+﻿using BNITapCash.Helper;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BNITapCash.Helper;
 
 namespace BNITapCash.Miscellaneous.FileMonitor
 {
@@ -12,11 +9,10 @@ namespace BNITapCash.Miscellaneous.FileMonitor
     {
         private FileSystemWatcher watcher;
         public static List<string> newFile;
-        private TKHelper tk = new TKHelper(); 
 
         public FileWatcher()
         {
-            string settlementDir = tk.GetDirectoryName() + "\\settlement";
+            string settlementDir = TKHelper.GetDirectoryName() + "\\settlement";
             watcher = new FileSystemWatcher(@settlementDir);
             watcher.EnableRaisingEvents = true;
             watcher.IncludeSubdirectories = true;

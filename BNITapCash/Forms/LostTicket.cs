@@ -16,7 +16,6 @@ namespace BNITapCash.Forms
 {
     public partial class LostTicket : Form
     {
-        private TKHelper helper;
         private readonly string liveCameraURL = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressLiveCamera + "/snapshot";
         private JPEGStream stream;
         private RESTAPI restApi;
@@ -31,7 +30,6 @@ namespace BNITapCash.Forms
             this.home = home;
             this.webcamImage = webcam;
             this.camera = new Webcam(this);
-            helper = new TKHelper();
             restApi = new RESTAPI();
             ipAddressServer = Properties.Settings.Default.IPAddressServer;
             InitData();
@@ -59,7 +57,7 @@ namespace BNITapCash.Forms
             try
             {
                 tipe_kendaraan.Items.Add("- Pilih Tipe Kendaraan -");
-                string masterDataFile = this.helper.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
+                string masterDataFile = TKHelper.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
                 using (StreamReader reader = new StreamReader(masterDataFile))
                 {
                     string json = reader.ReadToEnd();
@@ -150,10 +148,10 @@ namespace BNITapCash.Forms
                 {
                     FineFare fineFare = JsonConvert.DeserializeObject<FineFare>(response.Data.ToString());
                     string chargeFare = fineFare.ChargeFare.ToString();
-                    txtGrandTotal.Text = helper.IDR(chargeFare);
+                    txtGrandTotal.Text = TKHelper.IDR(chargeFare);
                     string datetimeOut = fineFare.DatetimeOut.ToString();
                     string[] temp_dt_out = datetimeOut.Split(' ');
-                    waktu_keluar.Text = helper.ConvertDatetime(temp_dt_out[0], temp_dt_out[1]);
+                    waktu_keluar.Text = TKHelper.ConvertDatetime(temp_dt_out[0], temp_dt_out[1]);
                 }
                 else
                 {
@@ -233,10 +231,10 @@ namespace BNITapCash.Forms
         {
             string vehicle = tipe_kendaraan.SelectedItem.ToString();
             string username = Properties.Settings.Default.Username;
-            string datetimeOut = helper.ConvertDatetimeToDefaultFormat(waktu_keluar.Text.ToString());
-            int totalFare = helper.IDRToNominal(txtGrandTotal.Text.ToString());
+            string datetimeOut = TKHelper.ConvertDatetimeToDefaultFormat(waktu_keluar.Text.ToString());
+            int totalFare = TKHelper.IDRToNominal(txtGrandTotal.Text.ToString());
             string plateNumber = nomor_plat.Text.ToString();
-            string ipAddress = helper.GetLocalIPAddress();
+            string ipAddress = TKHelper.GetLocalIPAddress();
             string paymentMethod = cash.Checked ? "CASH" : "NCSH";
             string webcamCapturedImage = capturedImage;
             LostTicketRequest lostTicketRequest = new LostTicketRequest(vehicle, username, datetimeOut, totalFare, plateNumber, ipAddress, paymentMethod, webcamCapturedImage);

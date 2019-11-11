@@ -84,14 +84,13 @@ namespace BNITapCash
             int height = Convert.ToInt32(txtHeight.Text);
 			string liveCamUsername = liveCameraUsername.Text;
             string liveCamPassword = liveCameraPassword.Text;
-            TKHelper tk = new TKHelper();
             if (ipv4 != "" && ipv4 != "IP Address Server" && ipv4 != null)
             {
                 if (ipv4_live_cam != "" && ipv4_live_cam != "IP Address Live Camera" && ipv4_live_cam != null)
                 {
-                    if (tk.ValidateIPv4(ipv4))
+                    if (TKHelper.ValidateIPv4(ipv4))
                     {
-                        if (tk.ValidateIPv4(ipv4_live_cam))
+                        if (TKHelper.ValidateIPv4(ipv4_live_cam))
                         {
                             Properties.Settings.Default.IPAddressServer = ipv4;
                             Properties.Settings.Default.IPAddressLiveCamera = ipv4_live_cam;

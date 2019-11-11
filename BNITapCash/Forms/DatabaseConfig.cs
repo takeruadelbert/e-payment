@@ -154,7 +154,6 @@ namespace BNITapCash.Forms
         private bool ValidateFields(string db_host, string db_name, string db_username)
         {
             bool result = true;
-            TKHelper tk = new TKHelper();
             if (string.IsNullOrEmpty(db_host) || db_host == "Host")
             {
                 MessageBox.Show(Constant.WARNING_MESSAGE_HOST_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -162,7 +161,7 @@ namespace BNITapCash.Forms
             }
             else if (db_host.ToLower() != Constant.LOCALHOST_VALUE)
             {
-                if (!tk.ValidateIPv4(db_host))
+                if (!TKHelper.ValidateIPv4(db_host))
                 {
                     MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_HOST, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;

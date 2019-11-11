@@ -11,7 +11,7 @@ namespace BNITapCash.Helper
 {
     class TKHelper
     {
-        public bool ValidateIPv4(string ipString)
+        public static bool ValidateIPv4(string ipString)
         {
             if (String.IsNullOrWhiteSpace(ipString))
             {
@@ -26,12 +26,12 @@ namespace BNITapCash.Helper
             return splitValues.All(r => byte.TryParse(r, out tempForParsing));
         }
 
-        public string GetCurrentDatetime()
+        public static string GetCurrentDatetime()
         {
             return DateTime.Now.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID")) + " " + DateTime.Now.ToString("HH:mm:ss");
         }
 
-        public string ConvertDatetime(string param_date, string param_time)
+        public static string ConvertDatetime(string param_date, string param_time)
         {
             System.Globalization.CultureInfo cultureinfo = new System.Globalization.CultureInfo("id-ID");
             DateTime dt = DateTime.Parse(param_date, cultureinfo);
@@ -39,38 +39,38 @@ namespace BNITapCash.Helper
         }
 
         // Default Format : yyyy-MM-dd HH:mm:ss
-        public string ConvertDatetimeToDefaultFormat(string dt)
+        public static string ConvertDatetimeToDefaultFormat(string dt)
         {
             string[] temp = dt.Split(' ');
             string date = temp[0];
-            string month = this.GetMonthInNumber(temp[1]);
+            string month = GetMonthInNumber(temp[1]);
             string year = temp[2];
             string time = temp[3];
             return year + "-" + month + "-" + date + " " + time;
         }
 
-        public string IDR(string nominal)
+        public static string IDR(string nominal)
         {
             return String.Format(CultureInfo.CreateSpecificCulture("id-id"), "{0:N0}", Convert.ToInt32(nominal));
         }
 
-        public int IDRToNominal(string strNominal)
+        public static int IDRToNominal(string strNominal)
         {
             return int.Parse(Regex.Replace(strNominal, @",.*|\D", ""));
         }
 
-        public string GetApplicationExecutableDirectoryName()
+        public static string GetApplicationExecutableDirectoryName()
         {
             string workingDirectory = Environment.CurrentDirectory;
             return Directory.GetParent(workingDirectory).Parent.FullName;
         }
 
-        public string GetDirectoryName()
+        public static string GetDirectoryName()
         {
             return System.AppDomain.CurrentDomain.BaseDirectory;
         }
 
-        public string GetLocalIPAddress()
+        public static string GetLocalIPAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)
@@ -83,7 +83,7 @@ namespace BNITapCash.Helper
             throw new Exception("No network adapters with an IPv4 address in the system!");
         }
 
-        private string GetMonthInNumber(string month, int digit = 2)
+        private static string GetMonthInNumber(string month, int digit = 2)
         {
             int month_in_number = -1;
             switch (month)
@@ -131,7 +131,7 @@ namespace BNITapCash.Helper
             return month_in_number != -1 ? month_in_number.ToString("00") : "";
         }
 
-        public string GetUidType(string uid)
+        public static string GetUidType(string uid)
         {
             return uid.Length == Constant.BARCODE_LENGTH ? "barcode" : "nfc";
         }
