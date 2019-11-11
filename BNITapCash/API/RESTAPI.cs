@@ -4,12 +4,13 @@ using System;
 using System.IO;
 using System.Net;
 using System.Text;
+using BNITapCash.ConstantVariable;
 
 namespace BNITapCash.API
 {
     class RESTAPI : RestAPIMethod
     {
-        private const int timeout_conn = 5000; // 3 seconds
+        private const int TIMEOUT_CONNECTION = 5000; // 3 seconds
         public RESTAPI()
         {
 
@@ -20,10 +21,10 @@ namespace BNITapCash.API
             string result = "";
             try
             {
-                string full_API_URL = ip_address_server + Properties.Resources.repo + APIUrl;
+                string full_API_URL = Constant.URL_PROTOCOL + ip_address_server + Properties.Resources.repo + APIUrl;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(full_API_URL);
                 request.Method = "POST";
-                request.Timeout = timeout_conn;
+                request.Timeout = TIMEOUT_CONNECTION;
 
                 System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
                 Byte[] byteArray = encoding.GetBytes(sent_param);
@@ -65,10 +66,10 @@ namespace BNITapCash.API
             string result = "";
             try
             {
-                string full_URL_API = ip_address_server + Properties.Resources.repo + API_URL;
+                string full_URL_API = Constant.URL_PROTOCOL + ip_address_server + Properties.Resources.repo + API_URL;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(full_URL_API);
                 request.Method = "GET";
-                request.Timeout = timeout_conn;
+                request.Timeout = TIMEOUT_CONNECTION;
                 WebResponse response = request.GetResponse();
                 using (Stream responseStream = response.GetResponseStream())
                 {

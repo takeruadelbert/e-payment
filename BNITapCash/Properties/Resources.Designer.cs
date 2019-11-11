@@ -267,6 +267,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/parking_outs/save_lost_ticket.
+        /// </summary>
+        internal static string LostTicketAPIURL {
+            get {
+                return ResourceManager.GetString("LostTicketAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap main {
@@ -627,6 +636,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/parking_outs/request_uid_fine.
+        /// </summary>
+        internal static string RequestFineFareAPIURL {
+            get {
+                return ResourceManager.GetString("RequestFineFareAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /ws/parking_outs/request_uid_fare.
         /// </summary>
         internal static string RequestUIDFareAPIURL {
@@ -686,6 +704,16 @@ namespace BNITapCash.Properties {
         internal static System.Drawing.Bitmap stn {
             get {
                 object obj = ResourceManager.GetObject("stn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap there_is_no_connected_camera {
+            get {
+                object obj = ResourceManager.GetObject("there-is-no-connected-camera", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

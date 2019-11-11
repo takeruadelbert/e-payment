@@ -10,6 +10,7 @@
         public static readonly string CONFIRMATION_MESSAGE_BEFORE_EXIT = "Are you sure you want to exit?";
         public static readonly int BARCODE_LENGTH = 16;
         public static readonly int DELAY_TIME_START_WEBCAM = 1500; // in milliseconds
+        public static readonly string URL_PROTOCOL = "http://";
 
         // validation
         public static readonly string WARNING_MESSAGE_USERNAME_NOT_EMPTY = "Username Harus Diisi.";

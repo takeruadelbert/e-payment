@@ -1,20 +1,27 @@
 ﻿using AForge.Video;
 using AForge.Video.DirectShow;
+using BNITapCash.Forms;
 using System;
 using System.Drawing;
-using BNITapCash.ConstantVariable;
 
 namespace BNITapCash.Miscellaneous.Webcam
 {
     class Webcam
     {
         private Cashier cashier;
+        private LostTicket lostTicket;
+
         VideoCaptureDevice frame;
         FilterInfoCollection Devices;
 
         public Webcam(Cashier cashier)
         {
             this.cashier = cashier;
+        }
+
+        public Webcam(LostTicket lostTicket)
+        {
+            this.lostTicket = lostTicket;
         }
 
         public void StartWebcam()
@@ -42,7 +49,14 @@ namespace BNITapCash.Miscellaneous.Webcam
         {
             try
             {
-                this.cashier.webcamImage.Image = (Image)e.Frame.Clone();
+                if (cashier != null)
+                {
+                    cashier.webcamImage.Image = (Image)e.Frame.Clone();
+                }
+                else
+                {
+                    lostTicket.webcamImage.Image = (Image)e.Frame.Clone();
+                }
             }
             catch (Exception ex)
             {

@@ -5,6 +5,7 @@ using BNITapCash.API.response;
 using BNITapCash.Bank.BNI;
 using BNITapCash.Card.Mifare;
 using BNITapCash.ConstantVariable;
+using BNITapCash.Forms;
 using BNITapCash.Helper;
 using BNITapCash.Miscellaneous.Webcam;
 using Newtonsoft.Json;
@@ -23,7 +24,7 @@ namespace BNITapCash
         private Login home;
         private BNI bni;
         private TKHelper helper;
-        private readonly string liveCameraURL = "http://" + Properties.Settings.Default.IPAddressLiveCamera + "/snapshot";
+        private readonly string liveCameraURL = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressLiveCamera + "/snapshot";
         JPEGStream stream;
 
         public PictureBox webcamImage;
@@ -61,7 +62,7 @@ namespace BNITapCash
         {
             nonCash.Checked = true;
             this.helper = new TKHelper();
-            ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
+            ip_address_server = Properties.Settings.Default.IPAddressServer;
             //textBox4.Text = this.helper.GetCurrentDatetime();            
             try
             {
@@ -201,7 +202,7 @@ namespace BNITapCash
             txtMinute.Text = "";
             txtSecond.Text = "";
             txtGrandTotal.Text = "0";
-            //this.ResetComboBox();
+            this.ResetComboBox();
 
             PictFace.Image = Properties.Resources.no_image;
             PictFace.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -285,7 +286,7 @@ namespace BNITapCash
                 return Constant.WARMING_MESSAGE_PLATE_NUMBER_NOT_EMPTY;
             }
 
-            if (textBox4.Text.ToLower() == "waktu keluar" || textBox4.Text == "")
+            if (textBox4.Text.ToLower() == "- - -  00:00:00" || textBox4.Text == "")
             {
                 return Constant.WARNING_MESSAGE_DATETIME_LEAVE_NOT_EMPTY;
             }
@@ -328,70 +329,67 @@ namespace BNITapCash
             {
                 if (textBox1.Text != "" && textBox1.Text != "UID Card")
                 {
-                    if (comboBox1.SelectedIndex != 0)
+                    // send data API
+                    var APIUrl = Properties.Resources.RequestUIDFareAPIURL;
+
+                    string uidType = helper.GetUidType(UIDCard);
+                    string vehicle = comboBox1.Text.ToString();
+                    RequestFareRequest requestFare = new RequestFareRequest(uidType, UIDCard, vehicle);
+                    var sent_param = JsonConvert.SerializeObject(requestFare);
+
+                    DataResponseArray response = (DataResponseArray)restApi.post(ip_address_server, APIUrl, false, sent_param);
+                    if (response != null)
                     {
-                        // send data API
-                        var APIUrl = Properties.Resources.RequestUIDFareAPIURL;
-
-                        string uidType = helper.GetUidType(UIDCard);
-                        string vehicle = comboBox1.Text.ToString();
-                        RequestFareRequest requestFare = new RequestFareRequest(uidType, UIDCard, vehicle);
-                        var sent_param = JsonConvert.SerializeObject(requestFare);
-
-                        DataResponseArray response = (DataResponseArray)restApi.post(ip_address_server, APIUrl, false, sent_param);
-                        if (response != null)
+                        switch (response.Status)
                         {
-                            switch (response.Status)
-                            {
-                                case 206:
-                                    //MessageBox.Show(response.Message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    foreach (JObject data in response.Data)
-                                    {
-                                        // Duration Data Process
-                                        string duration = data["lama_parkir"].ToString();
-                                        string[] temp = duration.Split(':');
-                                        txtHour.Text = temp[0];
-                                        txtMinute.Text = temp[1];
-                                        txtSecond.Text = temp[2];
+                            case 206:
+                                //MessageBox.Show(response.Message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                foreach (JObject data in response.Data)
+                                {
+                                    // Duration Data Process
+                                    string duration = data["lama_parkir"].ToString();
+                                    string[] temp = duration.Split(':');
+                                    txtHour.Text = temp[0];
+                                    txtMinute.Text = temp[1];
+                                    txtSecond.Text = temp[2];
 
-                                        // Total Fare Process
-                                        txtGrandTotal.Text = data["tarif_parkir"].ToString();
+                                    // Total Fare Process
+                                    txtGrandTotal.Text = data["tarif_parkir"].ToString();
 
-                                        // Datetime Parking In
-                                        string datetime_in = data["waktu_masuk"].ToString();
-                                        string[] temp_dt_in = datetime_in.Split(' ');
-                                        textBox3.Text = this.helper.ConvertDatetime(temp_dt_in[0], temp_dt_in[1]);
+                                    // Datetime Parking In
+                                    string datetime_in = data["waktu_masuk"].ToString();
+                                    string[] temp_dt_in = datetime_in.Split(' ');
+                                    textBox3.Text = this.helper.ConvertDatetime(temp_dt_in[0], temp_dt_in[1]);
 
-                                        // Datetime Out
-                                        string datetime_out = data["waktu_keluar"].ToString();
-                                        string[] temp_dt_out = datetime_out.Split(' ');
-                                        textBox4.Text = this.helper.ConvertDatetime(temp_dt_out[0], temp_dt_out[1]);
+                                    // Datetime Out
+                                    string datetime_out = data["waktu_keluar"].ToString();
+                                    string[] temp_dt_out = datetime_out.Split(' ');
+                                    textBox4.Text = this.helper.ConvertDatetime(temp_dt_out[0], temp_dt_out[1]);
 
-                                        // Load Picture of face and plate number
-                                        string URL_pict_face = "http://" + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + data["gambar_face"].ToString();
-                                        PictFace.Load(URL_pict_face);
-                                        PictFace.BackgroundImageLayout = ImageLayout.Stretch;
-                                        PictFace.SizeMode = PictureBoxSizeMode.StretchImage;
-                                        string URL_pict_vehicle = "http://" + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + data["gambar_plate"].ToString();
-                                        PictVehicle.Load(URL_pict_vehicle);
-                                        PictVehicle.BackgroundImageLayout = ImageLayout.Stretch;
-                                        PictVehicle.SizeMode = PictureBoxSizeMode.StretchImage;
+                                    // Load Picture of face and plate number
+                                    string URL_pict_face = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + data["gambar_face"].ToString();
+                                    PictFace.Load(URL_pict_face);
+                                    PictFace.BackgroundImageLayout = ImageLayout.Stretch;
+                                    PictFace.SizeMode = PictureBoxSizeMode.StretchImage;
+                                    string URL_pict_vehicle = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + data["gambar_plate"].ToString();
+                                    PictVehicle.Load(URL_pict_vehicle);
+                                    PictVehicle.BackgroundImageLayout = ImageLayout.Stretch;
+                                    PictVehicle.SizeMode = PictureBoxSizeMode.StretchImage;
 
-                                        // Total Fare Process
-                                        string total_fare = data["tarif_parkir"].ToString();
-                                        txtGrandTotal.Text = this.helper.IDR(total_fare);
-                                    }
-                                    break;
-                                default:
-                                    MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    this.Clear();
-                                    break;
-                            }
+                                    // Total Fare Process
+                                    string total_fare = data["tarif_parkir"].ToString();
+                                    txtGrandTotal.Text = this.helper.IDR(total_fare);
+                                }
+                                break;
+                            default:
+                                MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                this.Clear();
+                                break;
                         }
-                        else
-                        {
-                            MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -459,7 +457,6 @@ namespace BNITapCash
         {
             var queryParam = "?barcode=" + keyword;
             var ApiURL = Properties.Resources.SearchBarcodeAPIURL + queryParam;
-            string ip_address_server = "http://" + Properties.Settings.Default.IPAddressServer;
             DataResponseArray response = (DataResponseArray)restApi.get(ip_address_server, ApiURL, false);
             if (response != null)
             {
@@ -566,6 +563,14 @@ namespace BNITapCash
                 MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        private void buttonLostTicket_Click(object sender, EventArgs e)
+        {
+            stream.Stop();
+            LostTicket lostTicket = new LostTicket(home);
+            lostTicket.Show();
+            Hide();
         }
     }
 }

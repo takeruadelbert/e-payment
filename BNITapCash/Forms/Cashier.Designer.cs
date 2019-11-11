@@ -69,7 +69,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel14 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
+            this.buttonLostTicket = new System.Windows.Forms.Button();
             this.buttonReprint = new System.Windows.Forms.Button();
             this.buttonGenerateReport = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -443,6 +443,7 @@
             this.webcam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.webcam.TabIndex = 32;
             this.webcam.TabStop = false;
+            this.webcam.Visible = false;
             // 
             // panel1
             // 
@@ -455,7 +456,7 @@
             // 
             // LiveCamera
             // 
-            this.LiveCamera.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("LiveCamera.BackgroundImage")));
+            this.LiveCamera.BackgroundImage = global::BNITapCash.Properties.Resources.there_is_no_connected_camera;
             this.LiveCamera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.LiveCamera.ImageLocation = "";
             this.LiveCamera.Location = new System.Drawing.Point(35, 434);
@@ -587,7 +588,7 @@
             this.panel14.Controls.Add(this.panel9);
             this.panel14.Controls.Add(this.cash);
             this.panel14.Controls.Add(this.nonCash);
-            this.panel14.Controls.Add(this.button5);
+            this.panel14.Controls.Add(this.buttonLostTicket);
             this.panel14.Controls.Add(this.buttonReprint);
             this.panel14.Controls.Add(this.buttonGenerateReport);
             this.panel14.Controls.Add(this.label7);
@@ -648,22 +649,23 @@
             this.panel9.Size = new System.Drawing.Size(1133, 1);
             this.panel9.TabIndex = 7;
             // 
-            // button5
+            // buttonLostTicket
             // 
-            this.button5.BackColor = System.Drawing.Color.Transparent;
-            this.button5.BackgroundImage = global::BNITapCash.Properties.Resources.missing_ticket_button;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button5.Location = new System.Drawing.Point(597, 529);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(120, 35);
-            this.button5.TabIndex = 47;
-            this.button5.UseVisualStyleBackColor = false;
+            this.buttonLostTicket.BackColor = System.Drawing.Color.Transparent;
+            this.buttonLostTicket.BackgroundImage = global::BNITapCash.Properties.Resources.missing_ticket_button;
+            this.buttonLostTicket.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonLostTicket.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonLostTicket.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.buttonLostTicket.FlatAppearance.BorderSize = 0;
+            this.buttonLostTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonLostTicket.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLostTicket.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonLostTicket.Location = new System.Drawing.Point(597, 529);
+            this.buttonLostTicket.Name = "buttonLostTicket";
+            this.buttonLostTicket.Size = new System.Drawing.Size(120, 35);
+            this.buttonLostTicket.TabIndex = 47;
+            this.buttonLostTicket.UseVisualStyleBackColor = false;
+            this.buttonLostTicket.Click += new System.EventHandler(this.buttonLostTicket_Click);
             // 
             // buttonReprint
             // 
@@ -909,7 +911,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button buttonLostTicket;
         private System.Windows.Forms.Button buttonReprint;
         private System.Windows.Forms.Button buttonGenerateReport;
         private System.Windows.Forms.RadioButton nonCash;

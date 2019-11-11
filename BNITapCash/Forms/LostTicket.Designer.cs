@@ -52,19 +52,21 @@
             this.lineTopInnerbox = new System.Windows.Forms.Panel();
             this.btnLsTicketSave = new System.Windows.Forms.Button();
             this.btnLsTicketClear = new System.Windows.Forms.Button();
-            this.logout = new System.Windows.Forms.PictureBox();
+            this.buttonBackToCashier = new System.Windows.Forms.PictureBox();
             this.labelBackToLogin = new System.Windows.Forms.Label();
             this.btnMinimize = new System.Windows.Forms.Button();
             this.panelInnerBoxWhite = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.webcam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoPelindo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.logout)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonBackToCashier)).BeginInit();
             this.panelInnerBoxWhite.SuspendLayout();
             this.SuspendLayout();
             // 
             // LiveCamera
             // 
+            this.LiveCamera.BackgroundImage = global::BNITapCash.Properties.Resources.there_is_no_connected_camera;
+            this.LiveCamera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.LiveCamera.Location = new System.Drawing.Point(18, 119);
             this.LiveCamera.Name = "LiveCamera";
             this.LiveCamera.Size = new System.Drawing.Size(250, 150);
@@ -100,7 +102,7 @@
             this.txtGrandTotal.MinimumSize = new System.Drawing.Size(290, 45);
             this.txtGrandTotal.Name = "txtGrandTotal";
             this.txtGrandTotal.ReadOnly = true;
-            this.txtGrandTotal.Size = new System.Drawing.Size(290, 45);
+            this.txtGrandTotal.Size = new System.Drawing.Size(290, 33);
             this.txtGrandTotal.TabIndex = 60;
             this.txtGrandTotal.Text = "0";
             this.txtGrandTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -110,14 +112,14 @@
             this.waktu_keluar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.waktu_keluar.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.waktu_keluar.Cursor = System.Windows.Forms.Cursors.No;
-            this.waktu_keluar.Font = new System.Drawing.Font("Poppins Medium", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.waktu_keluar.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.waktu_keluar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
             this.waktu_keluar.Location = new System.Drawing.Point(331, 256);
             this.waktu_keluar.MaximumSize = new System.Drawing.Size(350, 40);
             this.waktu_keluar.MinimumSize = new System.Drawing.Size(350, 40);
             this.waktu_keluar.Name = "waktu_keluar";
             this.waktu_keluar.ReadOnly = true;
-            this.waktu_keluar.Size = new System.Drawing.Size(350, 40);
+            this.waktu_keluar.Size = new System.Drawing.Size(350, 28);
             this.waktu_keluar.TabIndex = 58;
             this.waktu_keluar.Text = "- - -  00:00:00";
             this.waktu_keluar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -177,13 +179,15 @@
             this.nomor_plat.BackColor = System.Drawing.Color.White;
             this.nomor_plat.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nomor_plat.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.nomor_plat.Font = new System.Drawing.Font("Poppins Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nomor_plat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nomor_plat.ForeColor = System.Drawing.Color.DimGray;
-            this.nomor_plat.Location = new System.Drawing.Point(615, 153);
+            this.nomor_plat.Location = new System.Drawing.Point(615, 150);
             this.nomor_plat.Name = "nomor_plat";
-            this.nomor_plat.Size = new System.Drawing.Size(260, 23);
+            this.nomor_plat.Size = new System.Drawing.Size(260, 17);
             this.nomor_plat.TabIndex = 54;
             this.nomor_plat.Text = "Nomor Plat Kendaraan";
+            this.nomor_plat.Click += new System.EventHandler(this.nomor_plat_Click);
+            this.nomor_plat.TextChanged += new System.EventHandler(this.nomor_plat_TextChanged);
             // 
             // tipe_kendaraan
             // 
@@ -191,13 +195,14 @@
             this.tipe_kendaraan.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tipe_kendaraan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tipe_kendaraan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.tipe_kendaraan.Font = new System.Drawing.Font("Poppins Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tipe_kendaraan.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tipe_kendaraan.ForeColor = System.Drawing.Color.DimGray;
             this.tipe_kendaraan.FormattingEnabled = true;
-            this.tipe_kendaraan.Location = new System.Drawing.Point(331, 141);
+            this.tipe_kendaraan.Location = new System.Drawing.Point(331, 143);
             this.tipe_kendaraan.Name = "tipe_kendaraan";
-            this.tipe_kendaraan.Size = new System.Drawing.Size(256, 34);
+            this.tipe_kendaraan.Size = new System.Drawing.Size(256, 26);
             this.tipe_kendaraan.TabIndex = 57;
+            this.tipe_kendaraan.SelectionChangeCommitted += new System.EventHandler(this.tipe_kendaraan_SelectionChangeCommitted);
             // 
             // lineNomorPlat
             // 
@@ -226,22 +231,22 @@
             // labelTipeKendaraan
             // 
             this.labelTipeKendaraan.AutoSize = true;
-            this.labelTipeKendaraan.Font = new System.Drawing.Font("Poppins Medium", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTipeKendaraan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTipeKendaraan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
             this.labelTipeKendaraan.Location = new System.Drawing.Point(325, 119);
             this.labelTipeKendaraan.Name = "labelTipeKendaraan";
-            this.labelTipeKendaraan.Size = new System.Drawing.Size(127, 23);
+            this.labelTipeKendaraan.Size = new System.Drawing.Size(119, 16);
             this.labelTipeKendaraan.TabIndex = 66;
             this.labelTipeKendaraan.Text = "Tipe Kendaraan";
             // 
             // labelNoPlat
             // 
             this.labelNoPlat.AutoSize = true;
-            this.labelNoPlat.Font = new System.Drawing.Font("Poppins Medium", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNoPlat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNoPlat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
             this.labelNoPlat.Location = new System.Drawing.Point(610, 119);
             this.labelNoPlat.Name = "labelNoPlat";
-            this.labelNoPlat.Size = new System.Drawing.Size(91, 23);
+            this.labelNoPlat.Size = new System.Drawing.Size(85, 16);
             this.labelNoPlat.TabIndex = 67;
             this.labelNoPlat.Text = "Nomor Plat";
             // 
@@ -263,11 +268,11 @@
             // labelWaktuKeluar
             // 
             this.labelWaktuKeluar.AutoSize = true;
-            this.labelWaktuKeluar.Font = new System.Drawing.Font("Poppins Medium", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWaktuKeluar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelWaktuKeluar.ForeColor = System.Drawing.Color.DimGray;
             this.labelWaktuKeluar.Location = new System.Drawing.Point(323, 216);
             this.labelWaktuKeluar.Name = "labelWaktuKeluar";
-            this.labelWaktuKeluar.Size = new System.Drawing.Size(194, 23);
+            this.labelWaktuKeluar.Size = new System.Drawing.Size(178, 16);
             this.labelWaktuKeluar.TabIndex = 68;
             this.labelWaktuKeluar.Text = "Waktu Keluar Kendaraan";
             // 
@@ -346,7 +351,7 @@
             this.btnLsTicketSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(165)))), ((int)(((byte)(44)))));
             this.btnLsTicketSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(165)))), ((int)(((byte)(44)))));
             this.btnLsTicketSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLsTicketSave.Font = new System.Drawing.Font("Poppins ExtraBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLsTicketSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLsTicketSave.ForeColor = System.Drawing.Color.White;
             this.btnLsTicketSave.Location = new System.Drawing.Point(989, 524);
             this.btnLsTicketSave.Name = "btnLsTicketSave";
@@ -364,7 +369,7 @@
             this.btnLsTicketClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnLsTicketClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnLsTicketClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLsTicketClear.Font = new System.Drawing.Font("Poppins ExtraBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLsTicketClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLsTicketClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnLsTicketClear.Location = new System.Drawing.Point(797, 524);
             this.btnLsTicketClear.Name = "btnLsTicketClear";
@@ -374,18 +379,18 @@
             this.btnLsTicketClear.UseVisualStyleBackColor = false;
             this.btnLsTicketClear.Click += new System.EventHandler(this.btnLsTicketClear_Click);
             // 
-            // logout
+            // buttonBackToCashier
             // 
-            this.logout.BackColor = System.Drawing.Color.Transparent;
-            this.logout.BackgroundImage = global::BNITapCash.Properties.Resources.back_button;
-            this.logout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.logout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.logout.Location = new System.Drawing.Point(586, 525);
-            this.logout.Name = "logout";
-            this.logout.Size = new System.Drawing.Size(40, 40);
-            this.logout.TabIndex = 75;
-            this.logout.TabStop = false;
-            this.logout.Click += new System.EventHandler(this.back_to_cashier_Click);
+            this.buttonBackToCashier.BackColor = System.Drawing.Color.Transparent;
+            this.buttonBackToCashier.BackgroundImage = global::BNITapCash.Properties.Resources.back_button;
+            this.buttonBackToCashier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonBackToCashier.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonBackToCashier.Location = new System.Drawing.Point(586, 525);
+            this.buttonBackToCashier.Name = "buttonBackToCashier";
+            this.buttonBackToCashier.Size = new System.Drawing.Size(40, 40);
+            this.buttonBackToCashier.TabIndex = 75;
+            this.buttonBackToCashier.TabStop = false;
+            this.buttonBackToCashier.Click += new System.EventHandler(this.back_to_cashier_Click);
             // 
             // labelBackToLogin
             // 
@@ -423,7 +428,7 @@
             this.panelInnerBoxWhite.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelInnerBoxWhite.Controls.Add(this.btnMinimize);
             this.panelInnerBoxWhite.Controls.Add(this.labelBackToLogin);
-            this.panelInnerBoxWhite.Controls.Add(this.logout);
+            this.panelInnerBoxWhite.Controls.Add(this.buttonBackToCashier);
             this.panelInnerBoxWhite.Controls.Add(this.btnLsTicketClear);
             this.panelInnerBoxWhite.Controls.Add(this.btnLsTicketSave);
             this.panelInnerBoxWhite.Controls.Add(this.lineTopInnerbox);
@@ -469,7 +474,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.webcam)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoPelindo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.logout)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonBackToCashier)).EndInit();
             this.panelInnerBoxWhite.ResumeLayout(false);
             this.panelInnerBoxWhite.PerformLayout();
             this.ResumeLayout(false);
@@ -502,7 +507,7 @@
         private System.Windows.Forms.Panel lineTopInnerbox;
         private System.Windows.Forms.Button btnLsTicketSave;
         private System.Windows.Forms.Button btnLsTicketClear;
-        private System.Windows.Forms.PictureBox logout;
+        private System.Windows.Forms.PictureBox buttonBackToCashier;
         private System.Windows.Forms.Label labelBackToLogin;
         private System.Windows.Forms.Button btnMinimize;
         private System.Windows.Forms.Panel panelInnerBoxWhite;

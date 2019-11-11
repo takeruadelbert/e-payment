@@ -167,7 +167,7 @@ namespace BNITapCash
                     }
                     Properties.Settings.Default.Save();
 
-                    this.ip_address_server = "http://" + this.setting.IPAddressServer;
+                    this.ip_address_server = this.setting.IPAddressServer;
 
                     if (CheckGate())
                     {

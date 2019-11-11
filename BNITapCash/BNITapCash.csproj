@@ -75,6 +75,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\request\FineFareRequest.cs" />
+    <Compile Include="API\request\LostTicketRequest.cs" />
     <Compile Include="API\request\ParkingOutRequest.cs" />
     <Compile Include="API\request\PrintReportRequest.cs" />
     <Compile Include="API\request\RequestFareRequest.cs" />
@@ -83,7 +85,9 @@
     <Compile Include="API\response\base\DataResponseObject.cs" />
     <Compile Include="API\request\SignInRequest.cs" />
     <Compile Include="API\response\Barcode.cs" />
+    <Compile Include="API\response\FineFare.cs" />
     <Compile Include="API\response\Gate.cs" />
+    <Compile Include="API\response\ParkingOut.cs" />
     <Compile Include="API\RESTAPI.cs" />
     <Compile Include="Bank\BNI\BNI.cs" />
     <Compile Include="Card\Mifare\Card.cs" />
@@ -250,6 +254,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app_icon.ico" />
+    <None Include="Resources\there-is-no-connected-camera.jpg" />
     <EmbeddedResource Include="src\fonts\OFL.txt" />
     <None Include="Resources\main-footer2.png" />
     <None Include="Resources\icon setting1.png" />
