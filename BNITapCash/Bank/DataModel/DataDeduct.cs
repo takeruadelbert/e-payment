@@ -1,8 +1,9 @@
 ﻿using BNITapCash.Helper;
+using BNITapCash.ConstantVariable;
 
 namespace BNITapCash.Bank.DataModel
 {
-    class DataDeduct
+    public class DataDeduct
     {
         private string _deductResult;
         private int _amount;
@@ -12,6 +13,14 @@ namespace BNITapCash.Bank.DataModel
         private string _operatorName;
         private string _idReader;
         private string _createdDatetime;
+        private bool _isError;
+        private string _message;
+
+        public DataDeduct(bool isError, string message)
+        {
+            _isError = isError;
+            _message = message;
+        }
 
         public DataDeduct(string deductResult, int amount, string bank, string operatorName, string idReader)
         {
@@ -20,6 +29,8 @@ namespace BNITapCash.Bank.DataModel
             this._bank = bank;
             this._operatorName = operatorName;
             this._idReader = idReader;
+            this._isError = false;
+            this._message = Constant.MESSAGE_OK;
         }
 
         public string DeductResult
@@ -54,17 +65,29 @@ namespace BNITapCash.Bank.DataModel
 
         public string TransactionDatetime
         {
-            get { return TKHelper.GetCurrentDatetime(); }
+            get { return TKHelper.GetCurrentDatetimeInDefaultFormat(); }
         }
 
         public string CreatedDatetime
         {
-            get { return TKHelper.GetCurrentDatetime(); }
+            get { return TKHelper.GetCurrentDatetimeInDefaultFormat(); }
         }
 
         public string IpAddress
         {
             get { return TKHelper.GetLocalIPAddress(); }
+        }
+
+        public bool IsError
+        {
+            get { return _isError; }
+            set { _isError = value; }
+        }
+
+        public string Message
+        {
+            get { return _message; }
+            set { _message = value; }
         }
     }
 }

@@ -31,6 +31,11 @@ namespace BNITapCash.Helper
             return DateTime.Now.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID")) + " " + DateTime.Now.ToString("HH:mm:ss");
         }
 
+        public static string GetCurrentDatetimeInDefaultFormat()
+        {
+            return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
         public static string ConvertDatetime(string param_date, string param_time)
         {
             System.Globalization.CultureInfo cultureinfo = new System.Globalization.CultureInfo("id-ID");

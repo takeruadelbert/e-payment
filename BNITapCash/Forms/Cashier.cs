@@ -3,8 +3,10 @@ using BNITapCash.API;
 using BNITapCash.API.request;
 using BNITapCash.API.response;
 using BNITapCash.Bank.BNI;
+using BNITapCash.Bank.DataModel;
 using BNITapCash.Card.Mifare;
 using BNITapCash.ConstantVariable;
+using BNITapCash.DB;
 using BNITapCash.Forms;
 using BNITapCash.Helper;
 using BNITapCash.Miscellaneous.Webcam;
@@ -24,8 +26,8 @@ namespace BNITapCash
         private Login home;
         private BNI bni;
         private readonly string liveCameraURL = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressLiveCamera + "/snapshot";
-        JPEGStream stream;
-
+        private JPEGStream stream;
+        private DBConnect database;
         public PictureBox webcamImage;
         private Webcam camera;
         private MifareCard mifareCard;
@@ -54,6 +56,7 @@ namespace BNITapCash
             this.webcamImage = webcam;
             this.camera = new Webcam(this);
             this.restApi = new RESTAPI();
+            this.database = new DBConnect();
             autoComplete = new AutoCompleteStringCollection();
         }
 
@@ -142,15 +145,20 @@ namespace BNITapCash
                             string ipv4 = TKHelper.GetLocalIPAddress();
                             string TIDSettlement = Properties.Settings.Default.TID;
                             string operator_name = Properties.Settings.Default.Username;
-                            string responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
-                            if (responseDeduct == Constant.MESSAGE_OK)
+
+                            // need to disconnect SCard from WinsCard.dll beforehand in order to execute further actions to avoid 'Outstanding Connection' Exception.
+                            mifareCard.disconnect();
+
+                            DataDeduct responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
+                            if (responseDeduct.Message == Constant.MESSAGE_OK)
                             {
+                                StoreDataToDatabase(responseDeduct, parkingOut);
                                 MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 this.Clear(true);
                             }
                             else
                             {
-                                MessageBox.Show(responseDeduct, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(responseDeduct.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
                             }
                         }
@@ -169,15 +177,62 @@ namespace BNITapCash
             }
         }
 
-        //private void StoreDataToDatabase()
-        //{
-        //    // store deduct result card to server
-        //    string created = TKHelper.ConvertDatetimeToDefaultFormat(helper.GetCurrentDatetime());
-        //    string query = "INSERT INTO deduct_card_results (result, amount, transaction_dt, bank, ipv4, operator, ID_reader, created) VALUES('" + result + "', '" + amount +
-        //        "', '" + created + "', '" + bank + "', '" + ipv4 + "', '" + operator_name + "', '" + TIDSettlement + "', '" + created + "')";
+        private void StoreDataToDatabase(DataDeduct dataDeduct, ParkingOut parkingOut)
+        {
+            try
+            {
+                // store deduct result card to server
+                string result = dataDeduct.DeductResult;
+                int amount = dataDeduct.Amount;
+                string created = dataDeduct.CreatedDatetime;
+                string bank = dataDeduct.Bank;
+                string ipv4 = dataDeduct.IpAddress;
+                string operatorName = dataDeduct.OperatorName;
+                string idReader = dataDeduct.IdReader;
+                int parkingOutId = parkingOut.ParkingOutId;
 
-        //    database.Insert(query);
-        //}
+                string query = "INSERT INTO deduct_card_results (parking_out_id, result, amount, transaction_dt, bank, ipv4, operator, ID_reader, created) VALUES('" + parkingOutId + "', '" +
+                    result + "', '" + amount + "', '" + created + "', '" + bank + "', '" + ipv4 + "', '" + operatorName + "', '" + idReader + "', '" + created + "')";
+
+                database.Insert(query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private ParkingOut SendDataToServer(int totalFare, string base64Image, string paymentMethod, string bankCode = "")
+        {
+            string uid = textBox1.Text.ToString();
+            string uidType = TKHelper.GetUidType(uid);
+            string vehicle = comboBox1.Text.ToString();
+            string datetimeOut = TKHelper.ConvertDatetimeToDefaultFormat(textBox4.Text.ToString());
+            string username = Properties.Settings.Default.Username;
+            string plateNumber = textBox2.Text.ToString();
+            string ipAddressLocal = TKHelper.GetLocalIPAddress();
+            ParkingOutRequest parkingOutRequest = new ParkingOutRequest(uidType, uid, vehicle, datetimeOut, username, plateNumber, totalFare, ipAddressLocal, paymentMethod, bankCode, base64Image);
+            var sent_param = JsonConvert.SerializeObject(parkingOutRequest);
+
+            DataResponseObject response = (DataResponseObject)restApi.post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, true, sent_param);
+            if (response != null)
+            {
+                switch (response.Status)
+                {
+                    case 206:
+                        return JsonConvert.DeserializeObject<ParkingOut>(response.Data.ToString());
+                    default:
+                        MessageBox.Show(response.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return null;
+                }
+            }
+            else
+            {
+                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
 
         private string CaptureWebcamImage()
         {
@@ -413,37 +468,6 @@ namespace BNITapCash
                     this.ResetComboBox();
                     return;
                 }
-            }
-        }
-
-        private ParkingOut SendDataToServer(int totalFare, string base64Image, string paymentMethod, string bankCode = "")
-        {
-            string uid = textBox1.Text.ToString();
-            string uidType = TKHelper.GetUidType(uid);
-            string vehicle = comboBox1.Text.ToString();
-            string datetimeOut = TKHelper.ConvertDatetimeToDefaultFormat(textBox4.Text.ToString());
-            string username = Properties.Settings.Default.Username;
-            string plateNumber = textBox2.Text.ToString();
-            string ipAddressLocal = TKHelper.GetLocalIPAddress();
-            ParkingOutRequest parkingOutRequest = new ParkingOutRequest(uidType, uid, vehicle, datetimeOut, username, plateNumber, totalFare, ipAddressLocal, paymentMethod, bankCode, base64Image);
-            var sent_param = JsonConvert.SerializeObject(parkingOutRequest);
-
-            DataResponseObject response = (DataResponseObject)restApi.post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, true, sent_param);
-            if (response != null)
-            {
-                switch (response.Status)
-                {
-                    case 206:
-                        return JsonConvert.DeserializeObject<ParkingOut>(response.Data.ToString());
-                    default:
-                        MessageBox.Show(response.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return null;
-                }
-            }
-            else
-            {
-                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
             }
         }
 

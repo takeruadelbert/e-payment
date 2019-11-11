@@ -1,5 +1,5 @@
-﻿using BNITapCash.ConstantVariable;
-using BNITapCash.Miscellaneous.FileMonitor;
+﻿using BNITapCash.Bank.DataModel;
+using BNITapCash.ConstantVariable;
 using BNITapCash.Readers.Contactless.Acr123U;
 using PCSC;
 using System;
@@ -173,8 +173,9 @@ namespace BNITapCash.Bank.BNI
             Console.WriteLine();
         }
 
-        public string DeductBalance(string bank, string ipv4, string TIDSettlement, string operator_name, int amount = 1)
+        public DataDeduct DeductBalance(string bank, string ipv4, string TIDSettlement, string operator_name, int amount = 1)
         {
+            DataDeduct dataDeduct = null;
             try
             {
                 // check if deducted amount is sufficient within balance range and the balance must be greater than 0
@@ -200,12 +201,12 @@ namespace BNITapCash.Bank.BNI
                         this.SetLCDDisplayText(Constant.MESSAGE_SUCCESS_DEDUCT);
                         acr123u.disconnect();
 
-                        return Constant.MESSAGE_OK;
+                        dataDeduct = new DataDeduct(result, amount, bank, operator_name, TIDSettlement);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
-                        return ex.Message;
+                        dataDeduct = new DataDeduct(true, ex.Message);
                     }
                 }
                 else
@@ -222,7 +223,7 @@ namespace BNITapCash.Bank.BNI
                     acr123u.LCDBacklightControl(0xFF);
                     this.acr123u.setLEDControl(this.LEDStatus);
                     acr123u.disconnect();
-                    return Constant.ERROR_MESSAGE_CANNOT_DEDUCT_INSUFFICIENT_BALANCE;
+                    dataDeduct = new DataDeduct(true, Constant.ERROR_MESSAGE_CANNOT_DEDUCT_INSUFFICIENT_BALANCE);
                 }
             }
             catch (Exception ex)
@@ -239,8 +240,10 @@ namespace BNITapCash.Bank.BNI
                 acr123u.LCDBacklightControl(0xFF);
                 this.acr123u.setLEDControl(this.LEDStatus);
                 acr123u.disconnect();
-                return ex.Message;
+                dataDeduct = new DataDeduct(true, ex.Message);
             }
+
+            return dataDeduct;
         }
 
         public void RunMain()
