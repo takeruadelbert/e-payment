@@ -155,6 +155,8 @@ namespace BNITapCash
                                 StoreDataToDatabase(responseDeduct, parkingOut);
                                 MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 this.Clear(true);
+
+                                mifareCard.RunMain();
                             }
                             else
                             {

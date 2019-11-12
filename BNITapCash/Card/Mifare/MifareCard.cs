@@ -169,6 +169,7 @@ namespace BNITapCash.Card.Mifare
                 string cardUID = getcardUID();
                 this.cashier.UIDCard = cardUID;
                 Console.WriteLine("UID = " + cardUID);
+                //disconnect();
             }
         }
 

@@ -151,13 +151,7 @@ namespace BNITapCash.Bank.BNI
                 try
                 {
                     Console.WriteLine(Constant.CARD_REMOVED + Constant.BREAKLINE);
-                    acr123u.connectDirect();
-                    acr123u.LCDBacklightControl(0xFF);
-                    this.LEDStatus = Constant.LED_ORANGE;
-                    this.LEDStatus |= Constant.LED_ANT_BLUE;
-                    this.acr123u.setLEDControl(this.LEDStatus);
-                    this.SetLCDDisplayText(Constant.MESSAGE_WAITING_CARD);
-                    acr123u.disconnect();
+                    SetToWaitingCard();
                 }
                 catch (Exception ex)
                 {
@@ -244,6 +238,17 @@ namespace BNITapCash.Bank.BNI
             }
 
             return dataDeduct;
+        }
+
+        private void SetToWaitingCard()
+        {
+            acr123u.connectDirect();
+            acr123u.LCDBacklightControl(0xFF);
+            this.LEDStatus = Constant.LED_ORANGE;
+            this.LEDStatus |= Constant.LED_ANT_BLUE;
+            this.acr123u.setLEDControl(this.LEDStatus);
+            this.SetLCDDisplayText(Constant.MESSAGE_WAITING_CARD);
+            acr123u.disconnect();
         }
 
         public void RunMain()
