@@ -141,7 +141,7 @@ namespace BNITapCash.Card.Mifare
                 cardUID = cardUID.Replace("-", string.Empty).ToLower();
                 cardUID = UInt32.Parse(cardUID, System.Globalization.NumberStyles.HexNumber).ToString().PadLeft(10, '0');
             }
-
+            disconnect();
             return cardUID;
         }
 
@@ -180,7 +180,7 @@ namespace BNITapCash.Card.Mifare
                 Console.WriteLine(Constant.BREAKLINE + Constant.CARD_INSERTED);
                 connect();
 
-                //SetToScanningCard();
+                SetToScanningCard();
             }), null);
         }
 
@@ -191,7 +191,7 @@ namespace BNITapCash.Card.Mifare
                 Console.WriteLine(Constant.BREAKLINE + Constant.CARD_REMOVED);
                 disconnect();
 
-                //SetToWaitingCardToBeScanned();
+                SetToWaitingCardToBeScanned();
             }), null);
         }
 
