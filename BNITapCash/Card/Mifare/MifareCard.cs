@@ -169,7 +169,7 @@ namespace BNITapCash.Card.Mifare
                 string cardUID = getcardUID();
                 this.cashier.UIDCard = cardUID;
                 Console.WriteLine("UID = " + cardUID);
-                //disconnect();
+                disconnect();
             }
         }
 
@@ -177,10 +177,12 @@ namespace BNITapCash.Card.Mifare
         {
             context.Post(new SendOrPostCallback(o =>
             {
+                SetToScanningCard();
+
                 Console.WriteLine(Constant.BREAKLINE + Constant.CARD_INSERTED);
                 connect();
 
-                SetToScanningCard();
+                
             }), null);
         }
 
