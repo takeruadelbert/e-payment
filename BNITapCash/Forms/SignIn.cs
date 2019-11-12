@@ -44,7 +44,8 @@ namespace BNITapCash
 
         private void username_Click(object sender, EventArgs e)
         {
-
+            if (username.Text.ToLower() == "username")
+                this.ChangeTextListener("username");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -59,13 +60,13 @@ namespace BNITapCash
 
         private void textBox1_Click(object sender, EventArgs e)
         {
-            if (username.Text == "Username")
+            if (username.Text.ToLower() == "username")
                 this.ChangeTextListener("username");
         }
 
         private void textBox2_Click(object sender, EventArgs e)
         {
-            if (password.Text == "Password")
+            if (password.Text.ToLower() == "password")
                 this.ChangeTextListener("password");
         }
 
@@ -73,7 +74,7 @@ namespace BNITapCash
         {
             if (!is_textchanged)
             {
-                if (field == "username")
+                if (field.ToLower() == "username")
                 {
                     username.Clear();
                 }
