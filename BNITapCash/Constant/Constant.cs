@@ -86,5 +86,6 @@
         public static readonly string ERROR_MESSAGE_FAILED_GET_SAM_STATUS = "Failed to Get SAM Status : No Reader found or selected.";
         public static readonly string ERROR_MESSAGE_CANNOT_DEDUCT_INSUFFICIENT_BALANCE = "Can't Deduct : Insufficient Balance.";
         public static readonly string TRANSACTION_SUCCESS = "Transaksi Berhasil.";
+        public static readonly string RC_CODE_LIST_FILE_PATH = @"\src\RC\BNIListRC.json";
     }
 }

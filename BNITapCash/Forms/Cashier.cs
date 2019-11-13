@@ -127,55 +127,53 @@ namespace BNITapCash
             string feedback = this.ValidateFields();
             if (feedback == Constant.MESSAGE_OK)
             {
-                // encoded base64 Image from Webcam
-                string base64WebcamImage = CaptureWebcamImage();
-                if (!string.IsNullOrEmpty(base64WebcamImage))
+                // need to disconnect SCard from WinsCard.dll beforehand in order to execute further actions to avoid 'Outstanding Connection' Exception.
+                mifareCard.disconnect();
+
+                // check the payment method whether it's cash or non-cash
+                int totalFare = TKHelper.IDRToNominal(txtGrandTotal.Text.ToString());
+                string paymentMethod = nonCash.Checked ? "NCSH" : "CASH";
+
+                if (paymentMethod == "NCSH")
                 {
-                    // check the payment method whether it's cash or non-cash
-                    int totalFare = TKHelper.IDRToNominal(txtGrandTotal.Text.ToString());
-                    string paymentMethod = nonCash.Checked ? "NCSH" : "CASH";
+                    string bankCode = "BNI";
+                    string ipv4 = TKHelper.GetLocalIPAddress();
+                    string TIDSettlement = Properties.Settings.Default.TID;
+                    string operator_name = Properties.Settings.Default.Username;
 
-                    ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, paymentMethod);
-                    if (parkingOut != null)
+                    DataDeduct responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
+                    if (!responseDeduct.IsError)
                     {
-                        if (paymentMethod == "NCSH")
+                        string base64WebcamImage = CaptureWebcamImage();
+                        if (!string.IsNullOrEmpty(base64WebcamImage))
                         {
-                            string bankCode = "BNI";
-                            // deduct balance of card
-                            string ipv4 = TKHelper.GetLocalIPAddress();
-                            string TIDSettlement = Properties.Settings.Default.TID;
-                            string operator_name = Properties.Settings.Default.Username;
-
-                            // need to disconnect SCard from WinsCard.dll beforehand in order to execute further actions to avoid 'Outstanding Connection' Exception.
-                            mifareCard.disconnect();
-
-                            DataDeduct responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
-                            if (responseDeduct.Message == Constant.MESSAGE_OK)
-                            {
-                                StoreDataToDatabase(responseDeduct, parkingOut);
-                                MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                this.Clear(true);
-
-                                mifareCard.RunMain();
-                            }
-                            else
-                            {
-                                MessageBox.Show(responseDeduct.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                        }
-                        else
-                        {
+                            ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, paymentMethod);
+                            StoreDataToDatabase(responseDeduct, parkingOut);
                             MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return;
+                            this.Clear(true);
+
+                            mifareCard.RunMain();
                         }
                     }
+                    else
+                    {
+                        MessageBox.Show(responseDeduct.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
+                else
+                {
+                    string base64WebcamImage = CaptureWebcamImage();
+                    if (!string.IsNullOrEmpty(base64WebcamImage))
+                    {
+                        ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, paymentMethod);
+                        MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                mifareCard.RunMain();
             }
             else
             {
                 MessageBox.Show(feedback, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
             }
         }
 

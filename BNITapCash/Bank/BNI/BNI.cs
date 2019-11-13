@@ -1,5 +1,6 @@
 ﻿using BNITapCash.Bank.DataModel;
 using BNITapCash.ConstantVariable;
+using BNITapCash.Helper;
 using BNITapCash.Readers.Contactless.Acr123U;
 using PCSC;
 using System;
@@ -11,6 +12,7 @@ namespace BNITapCash.Bank.BNI
     {
         BNITapCashDLL.TapCashDLL bni = new BNITapCashDLL.TapCashDLL();
         List<string> readerList = new List<string>();
+        private IDictionary<string, string> RCList;
         string selectedReader;
 
         System.Threading.SynchronizationContext context;
@@ -28,6 +30,8 @@ namespace BNITapCash.Bank.BNI
                 this.readerList = bni.getListReader();
                 this.selectedReader = this.readerList[0]; // PICC selected
                 this.acr123u.readerName = this.readerList[0];
+                RCList = TKHelper.ParseReturnCodeList(Constant.RC_CODE_LIST_FILE_PATH);
+                Console.WriteLine(RCList);
             }
             catch (Exception ex)
             {
@@ -177,31 +181,28 @@ namespace BNITapCash.Bank.BNI
                 if (cardBalance > 0 && (cardBalance - amount) > 0)
                 {
                     string result = bni.debitProcess(this.readerList[2].ToString(), this.selectedReader.ToString(), amount, Properties.Settings.Default.TID);
-
-                    try
+                    string returnMessage = RCList.ContainsKey(result) ? RCList[result] : Constant.MESSAGE_OK;
+                    if (returnMessage != Constant.MESSAGE_OK)
                     {
-                        Console.WriteLine("Successfully Deducted for Rp. " + amount + ",-.");
-                        Console.WriteLine("Current Balance : " + String.Format("{0:n}", Int32.Parse(this.GetCardBalance())));
-
-                        acr123u.connectDirect();
-                        int repeat = 3;
-                        int onDuration = 5;
-                        int OffDuration = 10;
-                        acr123u.setBuzzerControl((byte)repeat, (byte)onDuration, (byte)OffDuration);
-                        this.LEDStatus = Constant.LED_GREEN;
-                        this.LEDStatus |= Constant.LED_ANT_GREEN;
-                        acr123u.LCDBacklightControl(0xFF);
-                        this.acr123u.setLEDControl(this.LEDStatus);
-                        this.SetLCDDisplayText(Constant.MESSAGE_SUCCESS_DEDUCT);
-                        acr123u.disconnect();
-
-                        dataDeduct = new DataDeduct(result, amount, bank, operator_name, TIDSettlement);
+                        dataDeduct = new DataDeduct(true, returnMessage);
+                        return dataDeduct;
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        dataDeduct = new DataDeduct(true, ex.Message);
-                    }
+                    Console.WriteLine("Successfully Deducted for Rp. " + amount + ",-.");
+                    Console.WriteLine("Current Balance : " + String.Format("{0:n}", Int32.Parse(this.GetCardBalance())));
+
+                    acr123u.connectDirect();
+                    int repeat = 3;
+                    int onDuration = 5;
+                    int OffDuration = 10;
+                    acr123u.setBuzzerControl((byte)repeat, (byte)onDuration, (byte)OffDuration);
+                    this.LEDStatus = Constant.LED_GREEN;
+                    this.LEDStatus |= Constant.LED_ANT_GREEN;
+                    acr123u.LCDBacklightControl(0xFF);
+                    this.acr123u.setLEDControl(this.LEDStatus);
+                    this.SetLCDDisplayText(Constant.MESSAGE_SUCCESS_DEDUCT);
+                    acr123u.disconnect();
+
+                    dataDeduct = new DataDeduct(result, amount, bank, operator_name, TIDSettlement);
                 }
                 else
                 {

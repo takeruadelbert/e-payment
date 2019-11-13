@@ -1,11 +1,13 @@
 ﻿using BNITapCash.ConstantVariable;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
+using System.Web.Script.Serialization;
 
 namespace BNITapCash.Helper
 {
@@ -139,6 +141,13 @@ namespace BNITapCash.Helper
         public static string GetUidType(string uid)
         {
             return uid.Length == Constant.BARCODE_LENGTH ? "barcode" : "nfc";
+        }
+
+        public static IDictionary<string, string> ParseReturnCodeList(string filePath)
+        {
+            string json = File.ReadAllText(GetApplicationExecutableDirectoryName() + filePath);
+            IDictionary<string, string> listCode = (new JavaScriptSerializer()).Deserialize<Dictionary<string, string>>(json);
+            return listCode;
         }
     }
 }
