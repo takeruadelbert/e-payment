@@ -330,4 +330,5 @@ ASALocalRun/
 .mfractor/
 
 .vs/*
-BNITapCash/src/*
+BNITapCash/src/fonts/
+BNITapCash/src/master-data.json
