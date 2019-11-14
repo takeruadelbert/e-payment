@@ -150,9 +150,6 @@ namespace BNITapCash
                             ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, paymentMethod);
                             StoreDataToDatabase(responseDeduct, parkingOut);
                             MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Clear(true);
-
-                            mifareCard.RunMain();
                         }
                     }
                     else
@@ -170,6 +167,7 @@ namespace BNITapCash
                     }
                 }
                 mifareCard.RunMain();
+                this.Clear(true);
             }
             else
             {
@@ -245,16 +243,20 @@ namespace BNITapCash
                 MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_TROUBLE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
-            System.Threading.Thread.Sleep(Constant.DELAY_TIME_START_WEBCAM);
+            System.Threading.Thread.Sleep(Constant.DELAY_TIME_WEBCAM);
             if (webcamImage.Image == null)
             {
                 MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_SNAPSHOOT_FAILED, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 camera.StopWebcam();
                 return null;
             }
-            camera.StopWebcam();
-            Bitmap bmp = new Bitmap(webcamImage.Image, Properties.Settings.Default.WebcamWidth, Properties.Settings.Default.WebcamHeight);
-            return bmp.ToBase64String(ImageFormat.Png);
+            else
+            {
+                camera.StopWebcam();
+                Bitmap bmp = new Bitmap(webcamImage.Image, Properties.Settings.Default.WebcamWidth, Properties.Settings.Default.WebcamHeight);
+                return bmp.ToBase64String(ImageFormat.Png);
+            }
+
         }
 
         private void btnClear_Click(object sender, EventArgs e)

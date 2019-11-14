@@ -443,7 +443,6 @@
             this.webcam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.webcam.TabIndex = 32;
             this.webcam.TabStop = false;
-            this.webcam.Visible = false;
             // 
             // panel1
             // 

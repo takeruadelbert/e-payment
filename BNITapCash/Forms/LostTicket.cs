@@ -272,7 +272,7 @@ namespace BNITapCash.Forms
                 MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_TROUBLE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
-            System.Threading.Thread.Sleep(Constant.DELAY_TIME_START_WEBCAM);
+
             if (webcamImage.Image == null)
             {
                 MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_SNAPSHOOT_FAILED, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

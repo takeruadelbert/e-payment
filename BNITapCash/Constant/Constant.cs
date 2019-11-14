@@ -9,7 +9,7 @@
         public static readonly string LOCALHOST_VALUE = "localhost";
         public static readonly string CONFIRMATION_MESSAGE_BEFORE_EXIT = "Are you sure you want to exit?";
         public static readonly int BARCODE_LENGTH = 16;
-        public static readonly int DELAY_TIME_START_WEBCAM = 1500; // in milliseconds
+        public static readonly int DELAY_TIME_WEBCAM = 1000; // in milliseconds
         public static readonly string URL_PROTOCOL = "http://";
 
         // validation
