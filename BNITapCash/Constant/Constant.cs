@@ -9,7 +9,7 @@
         public static readonly string LOCALHOST_VALUE = "localhost";
         public static readonly string CONFIRMATION_MESSAGE_BEFORE_EXIT = "Are you sure you want to exit?";
         public static readonly int BARCODE_LENGTH = 16;
-        public static readonly int DELAY_TIME_START_WEBCAM = 1500; // in milliseconds
+        public static readonly int DELAY_TIME_WEBCAM = 1000; // in milliseconds
         public static readonly string URL_PROTOCOL = "http://";
 
         // validation
@@ -78,6 +78,9 @@
         // live camera
         public static readonly string ERROR_MESSAGE_FAIL_TO_CONNECT_LIVE_CAMERA = "Error : Cannot Connect to Live Camera.";
 
+        // miscellaneous
+        public static readonly string PATH_FILE_MASTER_DATA = @"\src\master-data.json";
+
         // BNI
         public static readonly string MESSAGE_OK = "OK";
         public static readonly string MESSAGE_INTIALIZING_SAM = "Initializing SAM ...";
@@ -86,5 +89,6 @@
         public static readonly string ERROR_MESSAGE_FAILED_GET_SAM_STATUS = "Failed to Get SAM Status : No Reader found or selected.";
         public static readonly string ERROR_MESSAGE_CANNOT_DEDUCT_INSUFFICIENT_BALANCE = "Can't Deduct : Insufficient Balance.";
         public static readonly string TRANSACTION_SUCCESS = "Transaksi Berhasil.";
+        public static readonly string RC_CODE_LIST_FILE_PATH = @"\src\RC\BNIListRC.json";
     }
 }

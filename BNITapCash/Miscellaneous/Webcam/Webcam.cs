@@ -6,13 +6,13 @@ using System.Drawing;
 
 namespace BNITapCash.Miscellaneous.Webcam
 {
-    class Webcam
+    public class Webcam
     {
         private Cashier cashier;
         private LostTicket lostTicket;
-
-        VideoCaptureDevice frame;
-        FilterInfoCollection Devices;
+        private static FilterInfoCollection Devices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+        private VideoCaptureDevice frame = new VideoCaptureDevice(Devices[0].MonikerString);
+        private static bool hasCaptured = false;
 
         public Webcam(Cashier cashier)
         {
@@ -26,10 +26,17 @@ namespace BNITapCash.Miscellaneous.Webcam
 
         public void StartWebcam()
         {
-            Devices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            frame = new VideoCaptureDevice(Devices[0].MonikerString);
+
             frame.NewFrame += new NewFrameEventHandler(NewFrame_event);
             frame.Start();
+            while (true)
+            {
+                if (hasCaptured == true)
+                {
+                    // give delay until webcam has snapshot.
+                    break;
+                }
+            }
         }
 
         public void StopWebcam()
@@ -57,6 +64,7 @@ namespace BNITapCash.Miscellaneous.Webcam
                 {
                     lostTicket.webcamImage.Image = (Image)e.Frame.Clone();
                 }
+                hasCaptured = true;
             }
             catch (Exception ex)
             {

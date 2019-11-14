@@ -88,7 +88,7 @@ namespace BNITapCash
             try
             {
                 comboBox1.Items.Add("- Pilih Tipe Kendaraan -");
-                string masterDataFile = TKHelper.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
+                string masterDataFile = TKHelper.GetApplicationExecutableDirectoryName() + Constant.PATH_FILE_MASTER_DATA;
                 using (StreamReader reader = new StreamReader(masterDataFile))
                 {
                     string json = reader.ReadToEnd();
@@ -127,55 +127,51 @@ namespace BNITapCash
             string feedback = this.ValidateFields();
             if (feedback == Constant.MESSAGE_OK)
             {
-                // encoded base64 Image from Webcam
-                string base64WebcamImage = CaptureWebcamImage();
-                if (!string.IsNullOrEmpty(base64WebcamImage))
+                // check the payment method whether it's cash or non-cash
+                int totalFare = TKHelper.IDRToNominal(txtGrandTotal.Text.ToString());
+                string paymentMethod = nonCash.Checked ? "NCSH" : "CASH";
+
+                if (paymentMethod == "NCSH")
                 {
-                    // check the payment method whether it's cash or non-cash
-                    int totalFare = TKHelper.IDRToNominal(txtGrandTotal.Text.ToString());
-                    string paymentMethod = nonCash.Checked ? "NCSH" : "CASH";
+                    string bankCode = "BNI";
+                    string ipv4 = TKHelper.GetLocalIPAddress();
+                    string TIDSettlement = Properties.Settings.Default.TID;
+                    string operator_name = Properties.Settings.Default.Username;
 
-                    ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, paymentMethod);
-                    if (parkingOut != null)
+                    // need to disconnect SCard from WinsCard.dll beforehand in order to execute further actions to avoid 'Outstanding Connection' Exception.
+                    mifareCard.disconnect();
+
+                    DataDeduct responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
+                    if (!responseDeduct.IsError)
                     {
-                        if (paymentMethod == "NCSH")
+                        string base64WebcamImage = CaptureWebcamImage();
+                        if (!string.IsNullOrEmpty(base64WebcamImage))
                         {
-                            string bankCode = "BNI";
-                            // deduct balance of card
-                            string ipv4 = TKHelper.GetLocalIPAddress();
-                            string TIDSettlement = Properties.Settings.Default.TID;
-                            string operator_name = Properties.Settings.Default.Username;
-
-                            // need to disconnect SCard from WinsCard.dll beforehand in order to execute further actions to avoid 'Outstanding Connection' Exception.
-                            mifareCard.disconnect();
-
-                            DataDeduct responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
-                            if (responseDeduct.Message == Constant.MESSAGE_OK)
-                            {
-                                StoreDataToDatabase(responseDeduct, parkingOut);
-                                MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                this.Clear(true);
-
-                                mifareCard.RunMain();
-                            }
-                            else
-                            {
-                                MessageBox.Show(responseDeduct.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return;
+                            ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, paymentMethod);
+                            StoreDataToDatabase(responseDeduct, parkingOut);
+                            MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);                            
                         }
                     }
+                    else
+                    {
+                        MessageBox.Show(responseDeduct.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
+                else
+                {
+                    string base64WebcamImage = CaptureWebcamImage();
+                    if (!string.IsNullOrEmpty(base64WebcamImage))
+                    {
+                        ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, paymentMethod);
+                        MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                
+                this.Clear(true);
             }
             else
             {
                 MessageBox.Show(feedback, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
             }
         }
 
@@ -247,16 +243,20 @@ namespace BNITapCash
                 MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_TROUBLE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
-            System.Threading.Thread.Sleep(Constant.DELAY_TIME_START_WEBCAM);
+            System.Threading.Thread.Sleep(Constant.DELAY_TIME_WEBCAM);
             if (webcamImage.Image == null)
             {
                 MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_SNAPSHOOT_FAILED, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 camera.StopWebcam();
                 return null;
             }
-            camera.StopWebcam();
-            Bitmap bmp = new Bitmap(webcamImage.Image, Properties.Settings.Default.WebcamWidth, Properties.Settings.Default.WebcamHeight);
-            return bmp.ToBase64String(ImageFormat.Png);
+            else
+            {
+                camera.StopWebcam();
+                Bitmap bmp = new Bitmap(webcamImage.Image, Properties.Settings.Default.WebcamWidth, Properties.Settings.Default.WebcamHeight);
+                return bmp.ToBase64String(ImageFormat.Png);
+            }
+
         }
 
         private void btnClear_Click(object sender, EventArgs e)
