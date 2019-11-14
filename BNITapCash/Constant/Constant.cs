@@ -78,6 +78,9 @@
         // live camera
         public static readonly string ERROR_MESSAGE_FAIL_TO_CONNECT_LIVE_CAMERA = "Error : Cannot Connect to Live Camera.";
 
+        // miscellaneous
+        public static readonly string PATH_FILE_MASTER_DATA = @"\src\master-data.json";
+
         // BNI
         public static readonly string MESSAGE_OK = "OK";
         public static readonly string MESSAGE_INTIALIZING_SAM = "Initializing SAM ...";

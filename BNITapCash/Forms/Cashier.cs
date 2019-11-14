@@ -88,7 +88,7 @@ namespace BNITapCash
             try
             {
                 comboBox1.Items.Add("- Pilih Tipe Kendaraan -");
-                string masterDataFile = TKHelper.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
+                string masterDataFile = TKHelper.GetApplicationExecutableDirectoryName() + Constant.PATH_FILE_MASTER_DATA;
                 using (StreamReader reader = new StreamReader(masterDataFile))
                 {
                     string json = reader.ReadToEnd();
