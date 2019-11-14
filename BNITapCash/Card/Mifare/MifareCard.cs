@@ -32,7 +32,7 @@ namespace BNITapCash.Card.Mifare
 
         public MifareCard()
         {
-            
+
         }
 
         public MifareCard(Cashier cashier)
@@ -167,9 +167,12 @@ namespace BNITapCash.Card.Mifare
             if (connectCard())
             {
                 string cardUID = getcardUID();
-                this.cashier.UIDCard = cardUID;
+                if (cashier.UIDCard.Length != Constant.BARCODE_LENGTH)
+                {
+                    cashier.UIDCard = cardUID;
+                }
                 Console.WriteLine("UID = " + cardUID);
-                disconnect();
+                //disconnect();
             }
         }
 
@@ -182,7 +185,7 @@ namespace BNITapCash.Card.Mifare
                 Console.WriteLine(Constant.BREAKLINE + Constant.CARD_INSERTED);
                 connect();
 
-                
+
             }), null);
         }
 
@@ -220,7 +223,7 @@ namespace BNITapCash.Card.Mifare
             {
                 context = new SynchronizationContext();
             }
-            
+
             sCardMonitor.CardInserted += new CardInsertedEvent(CardInserted);
             sCardMonitor.CardRemoved += new CardRemovedEvent(CardRemoved);
             sCardMonitor.Start(SelectDevice());

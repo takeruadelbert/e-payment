@@ -127,9 +127,6 @@ namespace BNITapCash
             string feedback = this.ValidateFields();
             if (feedback == Constant.MESSAGE_OK)
             {
-                // need to disconnect SCard from WinsCard.dll beforehand in order to execute further actions to avoid 'Outstanding Connection' Exception.
-                mifareCard.disconnect();
-
                 // check the payment method whether it's cash or non-cash
                 int totalFare = TKHelper.IDRToNominal(txtGrandTotal.Text.ToString());
                 string paymentMethod = nonCash.Checked ? "NCSH" : "CASH";
@@ -141,6 +138,9 @@ namespace BNITapCash
                     string TIDSettlement = Properties.Settings.Default.TID;
                     string operator_name = Properties.Settings.Default.Username;
 
+                    // need to disconnect SCard from WinsCard.dll beforehand in order to execute further actions to avoid 'Outstanding Connection' Exception.
+                    mifareCard.disconnect();
+
                     DataDeduct responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
                     if (!responseDeduct.IsError)
                     {
@@ -149,7 +149,7 @@ namespace BNITapCash
                         {
                             ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, paymentMethod);
                             StoreDataToDatabase(responseDeduct, parkingOut);
-                            MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);                            
                         }
                     }
                     else
@@ -166,7 +166,7 @@ namespace BNITapCash
                         MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
-                mifareCard.RunMain();
+                
                 this.Clear(true);
             }
             else
