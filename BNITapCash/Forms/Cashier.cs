@@ -151,6 +151,7 @@ namespace BNITapCash
                             ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, paymentMethod);
                             StoreDataToDatabase(responseDeduct, parkingOut);
                             MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Clear(true);
                         }
                     }
                     else
@@ -165,10 +166,9 @@ namespace BNITapCash
                     {
                         ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, paymentMethod);
                         MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Clear(true);
                     }
                 }
-
-                this.Clear(true);
             }
             else
             {
