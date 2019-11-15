@@ -70,6 +70,7 @@
             this.LiveCamera.Location = new System.Drawing.Point(18, 119);
             this.LiveCamera.Name = "LiveCamera";
             this.LiveCamera.Size = new System.Drawing.Size(250, 150);
+            this.LiveCamera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.LiveCamera.TabIndex = 2;
             this.LiveCamera.TabStop = false;
             // 
@@ -470,6 +471,7 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "LostTicket";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LostTicket";
             ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.webcam)).EndInit();
