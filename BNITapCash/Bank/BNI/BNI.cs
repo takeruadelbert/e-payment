@@ -31,6 +31,8 @@ namespace BNITapCash.Bank.BNI
                 this.selectedReader = this.readerList[0]; // PICC selected
                 this.acr123u.readerName = this.readerList[0];
                 RCList = TKHelper.ParseReturnCodeList(Constant.RC_CODE_LIST_FILE_PATH);
+
+                InitializeSAM();
             }
             catch (Exception ex)
             {
@@ -66,6 +68,7 @@ namespace BNITapCash.Bank.BNI
                 }
                 else
                 {
+                    Console.WriteLine(SAM_message);
                     return SAM_message;
                 }
 

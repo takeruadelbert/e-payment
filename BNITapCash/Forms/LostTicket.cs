@@ -108,6 +108,7 @@ namespace BNITapCash.Forms
         public void Clear()
         {
             waktu_keluar.Text = "- - -  00:00:00";
+            nomor_plat.Text = "Nomor Plat Kendaraan";
             txtGrandTotal.Text = "0";
             cash.Checked = true;
             ResetComboBox();
