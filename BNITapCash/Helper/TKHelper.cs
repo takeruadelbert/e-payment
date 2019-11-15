@@ -149,5 +149,26 @@ namespace BNITapCash.Helper
             IDictionary<string, string> listCode = (new JavaScriptSerializer()).Deserialize<Dictionary<string, string>>(json);
             return listCode;
         }
+
+        public static string GetValueTime(string time, string type)
+        {
+            if (string.IsNullOrEmpty(time))
+            {
+                return null;
+            }
+
+            string[] splitTime = time.Split(':');
+            switch (type.ToLower())
+            {
+                case "hour":
+                    return splitTime[0];
+                case "minute":
+                    return splitTime[1];
+                case "second":
+                    return splitTime[2];
+                default:
+                    return null;
+            }
+        }
     }
 }

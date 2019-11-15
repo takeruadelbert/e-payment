@@ -88,6 +88,7 @@
     <Compile Include="API\response\Barcode.cs" />
     <Compile Include="API\response\FineFare.cs" />
     <Compile Include="API\response\Gate.cs" />
+    <Compile Include="API\response\ParkingIn.cs" />
     <Compile Include="API\response\ParkingOut.cs" />
     <Compile Include="API\RESTAPI.cs" />
     <Compile Include="Bank\BNI\BNI.cs" />

@@ -11,7 +11,6 @@ using BNITapCash.Forms;
 using BNITapCash.Helper;
 using BNITapCash.Miscellaneous.Webcam;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -34,6 +33,7 @@ namespace BNITapCash
         private RESTAPI restApi;
         private AutoCompleteStringCollection autoComplete;
         private string ip_address_server;
+        private ParkingIn parkingIn;
 
         public string UIDCard
         {
@@ -57,6 +57,7 @@ namespace BNITapCash
             this.camera = new Webcam(this);
             this.restApi = new RESTAPI();
             this.database = new DBConnect();
+            this.parkingIn = new ParkingIn();
             autoComplete = new AutoCompleteStringCollection();
         }
 
@@ -149,7 +150,7 @@ namespace BNITapCash
                         {
                             ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, paymentMethod);
                             StoreDataToDatabase(responseDeduct, parkingOut);
-                            MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);                            
+                            MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -166,7 +167,7 @@ namespace BNITapCash
                         MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
-                
+
                 this.Clear(true);
             }
             else
@@ -410,48 +411,52 @@ namespace BNITapCash
                     RequestFareRequest requestFare = new RequestFareRequest(uidType, UIDCard, vehicle);
                     var sent_param = JsonConvert.SerializeObject(requestFare);
 
-                    DataResponseArray response = (DataResponseArray)restApi.post(ip_address_server, APIUrl, false, sent_param);
+                    DataResponseObject response = (DataResponseObject)restApi.post(ip_address_server, APIUrl, true, sent_param);
                     if (response != null)
                     {
                         switch (response.Status)
                         {
                             case 206:
-                                foreach (JObject data in response.Data)
+                                parkingIn = JsonConvert.DeserializeObject<ParkingIn>(response.Data.ToString());
+
+                                txtHour.Text = TKHelper.GetValueTime(parkingIn.DatetimeIn, "hour");
+                                txtMinute.Text = TKHelper.GetValueTime(parkingIn.DatetimeIn, "minute");
+                                txtSecond.Text = TKHelper.GetValueTime(parkingIn.DatetimeIn, "second");
+
+                                txtGrandTotal.Text = TKHelper.IDR(parkingIn.Fare.ToString());
+
+                                string[] datetimeIn = parkingIn.DatetimeIn.Split(' ');
+                                textBox3.Text = TKHelper.ConvertDatetime(datetimeIn[0], datetimeIn[1]);
+
+                                string[] datetimeOut = parkingIn.DatetimeOut.Split(' ');
+                                textBox4.Text = TKHelper.ConvertDatetime(datetimeOut[0], datetimeOut[1]);
+
+                                // Load Picture of face and plate number
+                                string faceImage = parkingIn.FaceImage;
+                                if (string.IsNullOrEmpty(faceImage))
                                 {
-                                    // Duration Data Process
-                                    string duration = data["lama_parkir"].ToString();
-                                    string[] temp = duration.Split(':');
-                                    txtHour.Text = temp[0];
-                                    txtMinute.Text = temp[1];
-                                    txtSecond.Text = temp[2];
-
-                                    // Total Fare Process
-                                    txtGrandTotal.Text = data["tarif_parkir"].ToString();
-
-                                    // Datetime Parking In
-                                    string datetime_in = data["waktu_masuk"].ToString();
-                                    string[] temp_dt_in = datetime_in.Split(' ');
-                                    textBox3.Text = TKHelper.ConvertDatetime(temp_dt_in[0], temp_dt_in[1]);
-
-                                    // Datetime Out
-                                    string datetime_out = data["waktu_keluar"].ToString();
-                                    string[] temp_dt_out = datetime_out.Split(' ');
-                                    textBox4.Text = TKHelper.ConvertDatetime(temp_dt_out[0], temp_dt_out[1]);
-
-                                    // Load Picture of face and plate number
-                                    string URL_pict_face = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + data["gambar_face"].ToString();
-                                    PictFace.Load(URL_pict_face);
-                                    PictFace.BackgroundImageLayout = ImageLayout.Stretch;
-                                    PictFace.SizeMode = PictureBoxSizeMode.StretchImage;
-                                    string URL_pict_vehicle = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + data["gambar_plate"].ToString();
-                                    PictVehicle.Load(URL_pict_vehicle);
-                                    PictVehicle.BackgroundImageLayout = ImageLayout.Stretch;
-                                    PictVehicle.SizeMode = PictureBoxSizeMode.StretchImage;
-
-                                    // Total Fare Process
-                                    string total_fare = data["tarif_parkir"].ToString();
-                                    txtGrandTotal.Text = TKHelper.IDR(total_fare);
+                                    PictFace.Image = Properties.Resources.no_image;
                                 }
+                                else
+                                {
+                                    string URL_pict_face = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + faceImage;
+                                    PictFace.Load(URL_pict_face);
+                                }
+                                PictFace.BackgroundImageLayout = ImageLayout.Stretch;
+                                PictFace.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                                string plateNumberImage = parkingIn.PlateNumberImage;
+                                if (string.IsNullOrEmpty(plateNumberImage))
+                                {
+                                    PictVehicle.Image = Properties.Resources.no_image;
+                                }
+                                else
+                                {
+                                    string URL_pict_vehicle = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + parkingIn.PlateNumberImage;
+                                    PictVehicle.Load(URL_pict_vehicle);
+                                }
+                                PictVehicle.BackgroundImageLayout = ImageLayout.Stretch;
+                                PictVehicle.SizeMode = PictureBoxSizeMode.StretchImage;
                                 break;
                             default:
                                 MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
