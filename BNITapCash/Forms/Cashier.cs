@@ -594,13 +594,17 @@ namespace BNITapCash
             DataResponseObject response = (DataResponseObject)restApi.post(ip_address_server, generateReportApiUrl, true, sentParam);
             if (response != null)
             {
-                if (response.Status == 206)
+                switch (response.Status)
                 {
-                    MessageBox.Show(Constant.PRINT_REPORT_OPERATOR_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    case 206:
+                        MessageBox.Show(Constant.PRINT_REPORT_OPERATOR_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case 208:
+                        MessageBox.Show(response.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    default:
+                        MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
                 }
             }
             else
