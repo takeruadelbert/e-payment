@@ -50,6 +50,8 @@ namespace BNITapCash.Forms
         private void button1_Click_1(object sender, EventArgs e)
         {
             Dispose();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void button2_Click(object sender, EventArgs e)

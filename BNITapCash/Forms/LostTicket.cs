@@ -111,6 +111,8 @@ namespace BNITapCash.Forms
         {
             Bitmap bmp = (Bitmap)eventArgs.Frame.Clone();
             LiveCamera.Image = bmp;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void btnMinimize_Click(object sender, EventArgs e)
@@ -137,9 +139,11 @@ namespace BNITapCash.Forms
         private void back_to_cashier_Click(object sender, EventArgs e)
         {
             StopLiveCamera();
+            database.DisposeDatabaseConnection();
             Cashier cashier = new Cashier(home);
             cashier.Show();
             Dispose();
+            GC.Collect();
         }
 
         private void tipe_kendaraan_SelectionChangeCommitted(object sender, EventArgs e)

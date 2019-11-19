@@ -74,6 +74,8 @@ namespace BNITapCash
         {
             home.Show();
             Dispose();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void save_Click(object sender, EventArgs e)

@@ -18,11 +18,8 @@ namespace BNITapCash
 {
     public partial class Login : Form
     {
-        private Setting setting;
         private Cashier cashier;
-        private DatabaseConfig DBConfig;
         private About about;
-        private TMID tmid;
         private RESTAPI restApi;
         private string ip_address_server;
 
@@ -30,10 +27,7 @@ namespace BNITapCash
         {
             InitializeComponent();
             InitData();
-            this.setting = new Setting(this);
-            this.DBConfig = new DatabaseConfig(this);
-            this.about = new About();
-            this.tmid = new TMID(this);
+            about = new About();
             this.restApi = new RESTAPI();
         }
 
@@ -123,7 +117,7 @@ namespace BNITapCash
                         MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_LOCAL_DATABASE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-
+                    database.DisposeDatabaseConnection();
                     // check reader connection
                     MifareCard mifareCard = new MifareCard();
                     if (!mifareCard.CheckReaderConnection())
@@ -147,7 +141,7 @@ namespace BNITapCash
                     }
                     Properties.Settings.Default.Save();
 
-                    this.ip_address_server = this.setting.IPAddressServer;
+                    this.ip_address_server = Properties.Settings.Default.IPAddressServer;
 
                     if (CheckGate())
                     {
@@ -156,6 +150,8 @@ namespace BNITapCash
                         {
                             ApiSignIn(username, password);
                             loading.Dispose();
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
                         }
                     }
                 }
@@ -174,24 +170,24 @@ namespace BNITapCash
                 MessageBox.Show(Constant.WARNING_MESSAGE_PASSWORD_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            if (string.IsNullOrEmpty(this.setting.IPAddressServer))
+            if (string.IsNullOrEmpty(Properties.Settings.Default.IPAddressServer))
             {
                 MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_SERVER, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            if (string.IsNullOrEmpty(this.setting.IPAddressLiveCamera))
+            if (string.IsNullOrEmpty(Properties.Settings.Default.IPAddressLiveCamera))
             {
                 MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_LIVE_CAMERA, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             // validate TID & Settlement MID for further transaction
-            if (string.IsNullOrEmpty(this.tmid.TID))
+            if (string.IsNullOrEmpty(Properties.Settings.Default.TID))
             {
                 MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_TID, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            if (string.IsNullOrEmpty(this.tmid.MID))
+            if (string.IsNullOrEmpty(Properties.Settings.Default.MID))
             {
                 MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_MID, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -311,7 +307,10 @@ namespace BNITapCash
         private void iPv4ServerCameraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Hide();
+            Setting setting = new Setting(this);
             setting.Show();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
@@ -325,7 +324,10 @@ namespace BNITapCash
         private void databaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Hide();
+            DatabaseConfig DBConfig = new DatabaseConfig(this);
             DBConfig.Show();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -335,12 +337,17 @@ namespace BNITapCash
                 about = new About();
                 about.Show();
             }
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void tIDSettlementMIDToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Hide();
+            TMID tmid = new TMID(this);
             tmid.Show();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void button1_Click(object sender, EventArgs e)

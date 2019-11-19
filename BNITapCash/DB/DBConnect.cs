@@ -40,7 +40,17 @@ namespace BNITapCash.DB
         private void InitDatabaseConnection(string server, string database, string uid, string password)
         {
             string connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-            connection = new MySqlConnection(connectionString);
+            if (connection == null)
+            {
+                connection = new MySqlConnection(connectionString);
+            }
+        }
+
+        public void DisposeDatabaseConnection()
+        {
+            connection = null;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         //open connection to database
@@ -284,7 +294,7 @@ namespace BNITapCash.DB
 
         public bool CheckMySQLConnection()
         {
-            bool successful = true;
+            bool successful;
             try
             {
                 successful = this.OpenConnection();

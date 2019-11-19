@@ -346,6 +346,8 @@ namespace BNITapCash
         {
             Bitmap bmp = (Bitmap)eventArgs.Frame.Clone();
             LiveCamera.Image = bmp;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void panel10_Paint(object sender, PaintEventArgs e)
@@ -630,11 +632,12 @@ namespace BNITapCash
         {
             mifareCard.Stop();
             StopLiveCamera();
+            database.DisposeDatabaseConnection();
             LostTicket lostTicket = new LostTicket(home);
             lostTicket.Show();
             Hide();
             Dispose();
-
+            GC.Collect();
         }
     }
 }

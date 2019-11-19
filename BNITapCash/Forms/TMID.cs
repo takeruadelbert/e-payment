@@ -62,7 +62,9 @@ namespace BNITapCash.Forms
         private void back_Click(object sender, EventArgs e)
         {
             Dispose();
-            login.Show();            
+            login.Show();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void txtTID_TextChanged(object sender, EventArgs e)
