@@ -229,6 +229,13 @@ namespace BNITapCash.Card.Mifare
             sCardMonitor.Start(SelectDevice());
         }
 
+        public void Stop()
+        {
+            sCardMonitor.CardInserted -= new CardInsertedEvent(CardInserted);
+            sCardMonitor.CardRemoved -= new CardRemovedEvent(CardRemoved);
+            sCardMonitor.Dispose();
+        }
+
         private void SetToScanningCard()
         {
             acr123u.connectDirect();

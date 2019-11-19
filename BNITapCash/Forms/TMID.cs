@@ -61,8 +61,8 @@ namespace BNITapCash.Forms
 
         private void back_Click(object sender, EventArgs e)
         {
-            Hide();
-            login.Show();
+            Dispose();
+            login.Show();            
         }
 
         private void txtTID_TextChanged(object sender, EventArgs e)

@@ -1,9 +1,6 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 using System.Diagnostics;
 using System.IO;
 
@@ -246,7 +243,7 @@ namespace BNITapCash.DB
                 file.Close();
                 process.Close();
             }
-            catch (IOException ex)
+            catch (IOException)
             {
                 Console.WriteLine("Error , unable to backup!");
             }
@@ -279,7 +276,7 @@ namespace BNITapCash.DB
                 process.WaitForExit();
                 process.Close();
             }
-            catch (IOException ex)
+            catch (IOException)
             {
                 Console.WriteLine("Error , unable to Restore!");
             }
@@ -296,7 +293,7 @@ namespace BNITapCash.DB
                     this.CloseConnection();
                 }
             }
-            catch (MySqlException ex)
+            catch (MySqlException)
             {
                 successful = false;
             }

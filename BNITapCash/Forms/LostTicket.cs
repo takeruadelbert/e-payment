@@ -101,6 +101,12 @@ namespace BNITapCash.Forms
             }
         }
 
+        private void StopLiveCamera()
+        {
+            stream.Stop();
+            stream.NewFrame -= stream_NewFrame;
+        }
+
         private void stream_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             Bitmap bmp = (Bitmap)eventArgs.Frame.Clone();
@@ -130,10 +136,10 @@ namespace BNITapCash.Forms
 
         private void back_to_cashier_Click(object sender, EventArgs e)
         {
-            stream.Stop();
+            StopLiveCamera();
             Cashier cashier = new Cashier(home);
             cashier.Show();
-            Hide();
+            Dispose();
         }
 
         private void tipe_kendaraan_SelectionChangeCommitted(object sender, EventArgs e)

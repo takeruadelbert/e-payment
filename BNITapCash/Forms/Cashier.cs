@@ -66,20 +66,8 @@ namespace BNITapCash
             nonCash.Checked = true;
             ip_address_server = Properties.Settings.Default.IPAddressServer;
 
-            try
-            {
-                stream = new JPEGStream(liveCameraURL);
-                stream.NewFrame += stream_NewFrame;
-                stream.Login = Properties.Settings.Default.LiveCameraUsername;
-                stream.Password = Properties.Settings.Default.LiveCameraPassword;
-                stream.Start();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_LIVE_CAMERA, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                LiveCamera.Image = Properties.Resources.no_image;
-            }
+            StartLiveCamera();
+
             this.bni = new BNI();
 
             this.mifareCard = new MifareCard(this);
@@ -106,6 +94,30 @@ namespace BNITapCash
                 Console.WriteLine(ex.Message);
                 MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_FETCH_VEHICLE_TYPE_DATA, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void StartLiveCamera()
+        {
+            try
+            {
+                stream = new JPEGStream(liveCameraURL);
+                stream.NewFrame += stream_NewFrame;
+                stream.Login = Properties.Settings.Default.LiveCameraUsername;
+                stream.Password = Properties.Settings.Default.LiveCameraPassword;
+                stream.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_LIVE_CAMERA, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LiveCamera.Image = Properties.Resources.no_image;
+            }
+        }
+
+        private void StopLiveCamera()
+        {
+            stream.Stop();
+            stream.NewFrame -= stream_NewFrame;
         }
 
         private void logo_Click(object sender, EventArgs e)
@@ -616,10 +628,13 @@ namespace BNITapCash
 
         private void buttonLostTicket_Click(object sender, EventArgs e)
         {
-            stream.Stop();
+            mifareCard.Stop();
+            StopLiveCamera();
             LostTicket lostTicket = new LostTicket(home);
             lostTicket.Show();
             Hide();
+            Dispose();
+
         }
     }
 }

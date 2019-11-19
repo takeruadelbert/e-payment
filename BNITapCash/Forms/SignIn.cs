@@ -155,6 +155,7 @@ namespace BNITapCash
                         if (PullDataFromServer())
                         {
                             ApiSignIn(username, password);
+                            loading.Dispose();
                         }
                     }
                 }

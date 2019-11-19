@@ -73,7 +73,7 @@ namespace BNITapCash
         private void back_Click(object sender, EventArgs e)
         {
             home.Show();
-            Hide();
+            Dispose();
         }
 
         private void save_Click(object sender, EventArgs e)
