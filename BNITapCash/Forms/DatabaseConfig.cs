@@ -95,50 +95,50 @@ namespace BNITapCash.Forms
 
         private void txtDBHost_TextChanged(object sender, EventArgs e)
         {
-            this.TextChangeListener(true);
+            this.TextChangeListener("host", true);
         }
 
         private void txtDBName_TextChanged(object sender, EventArgs e)
         {
-            this.TextChangeListener(true);
+            this.TextChangeListener("database name", true);
         }
 
         private void txtDBUsername_TextChanged(object sender, EventArgs e)
         {
-            this.TextChangeListener(true);
+            this.TextChangeListener("username", true);
         }
 
         private void txtDBPassword_TextChanged(object sender, EventArgs e)
         {
-            this.TextChangeListener(true);
+            this.TextChangeListener("password", true);
         }
 
         private void txtDBHost_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener();
+            this.TextChangeListener("host");
         }
 
         private void txtDBName_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener();
+            this.TextChangeListener("database name");
         }
 
         private void txtDBUsername_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener();
+            this.TextChangeListener("username");
         }
 
-        private void TextChangeListener(bool is_textchanged = false)
+        private void TextChangeListener(string text, bool is_textchanged = false)
         {
             if (!is_textchanged)
             {
-                if (txtDBHost.Text == "Host")
+                if (text.ToLower() == "host")
                     txtDBHost.Clear();
-                if (txtDBName.Text == "Database Name")
+                if (text.ToLower() == "database name")
                     txtDBName.Clear();
-                if (txtDBUsername.Text == "Username")
+                if (text.ToLower() == "username")
                     txtDBUsername.Clear();
-                if (txtDBPassword.Text == "Password")
+                if (text.ToLower() == "password")
                     txtDBPassword.Clear();
             }
             txtDBPassword.PasswordChar = '●';
@@ -150,13 +150,13 @@ namespace BNITapCash.Forms
 
         private void txtDBPassword_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener();
+            this.TextChangeListener("password");
         }
 
         private bool ValidateFields(string db_host, string db_name, string db_username)
         {
             bool result = true;
-            if (string.IsNullOrEmpty(db_host) || db_host == "Host")
+            if (string.IsNullOrEmpty(db_host) || db_host.ToLower() == "host")
             {
                 MessageBox.Show(Constant.WARNING_MESSAGE_HOST_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -169,12 +169,12 @@ namespace BNITapCash.Forms
                     return false;
                 }
             }
-            if (string.IsNullOrEmpty(db_name) || db_name == "Database Name")
+            if (string.IsNullOrEmpty(db_name) || db_name.ToLower() == "database name")
             {
                 MessageBox.Show(Constant.WARNING_MESSAGE_DATABASE_NAME_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            if (string.IsNullOrEmpty(db_username) || db_username == "Username")
+            if (string.IsNullOrEmpty(db_username) || db_username.ToLower() == "username")
             {
                 MessageBox.Show(Constant.WARNING_MESSAGE_USERNAME_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;

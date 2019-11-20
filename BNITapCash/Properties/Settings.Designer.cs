@@ -181,7 +181,7 @@ namespace BNITapCash.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("admin")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string LiveCameraUsername {
             get {
                 return ((string)(this["LiveCameraUsername"]));

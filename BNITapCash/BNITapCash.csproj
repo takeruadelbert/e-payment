@@ -37,21 +37,17 @@
     <ApplicationIcon>app_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\STN Internal\Project Ilugroup\Ilugroup 2019\DLL Tambahan\AForge.dll</HintPath>
+    <Reference Include="AForge">
+      <HintPath>..\..\DLL\AForge.dll</HintPath>
     </Reference>
-    <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\STN Internal\Project Ilugroup\Ilugroup 2019\DLL Tambahan\AForge.Video.dll</HintPath>
+    <Reference Include="AForge.Video">
+      <HintPath>..\..\DLL\AForge.Video.dll</HintPath>
     </Reference>
-    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\STN Internal\Project Ilugroup\Ilugroup 2019\DLL Tambahan\AForge.Video.DirectShow.dll</HintPath>
+    <Reference Include="AForge.Video.DirectShow">
+      <HintPath>..\..\DLL\AForge.Video.DirectShow.dll</HintPath>
     </Reference>
-    <Reference Include="BNITapCashDLL, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\STN Internal\Project Ilugroup\Ilugroup 2019\AssetBNI\ToolsDevTapCash\PCSC_Tools\DLL\BNITapCashDLL.dll</HintPath>
+    <Reference Include="BNITapCashDLL">
+      <HintPath>..\..\DLL\BNITapCashDLL.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -60,9 +56,8 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="pcsc-sharp, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\STN Internal\Project Ilugroup\Ilugroup 2019\AssetBNI\ToolsDevTapCash\PCSC_Tools\DLL\pcsc-sharp.dll</HintPath>
+    <Reference Include="pcsc-sharp">
+      <HintPath>..\..\DLL\pcsc-sharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
