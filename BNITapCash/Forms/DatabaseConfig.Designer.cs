@@ -337,9 +337,9 @@
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
             this.label2.Location = new System.Drawing.Point(38, 199);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(230, 18);
+            this.label2.Size = new System.Drawing.Size(222, 18);
             this.label2.TabIndex = 25;
-            this.label2.Text = "IP Address E-Payment Server";
+            this.label2.Text = "Local IP Address E-Payment";
             // 
             // label1
             // 

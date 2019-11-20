@@ -111,6 +111,16 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] BNIListRC {
+            get {
+                object obj = ResourceManager.GetObject("BNIListRC", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /ws/parking_outs/check_gate_out.
         /// </summary>
         internal static string CheckGateAPIURL {

@@ -160,12 +160,12 @@ namespace BNITapCash
 
         private bool Validate(string username, string password)
         {
-            if (username == "" || username == "Username")
+            if (username == "" || username.ToLower() == "Username")
             {
                 MessageBox.Show(Constant.WARNING_MESSAGE_USERNAME_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            if (password == "" || password == "Password")
+            if (password == "" || password.ToLower() == "Password")
             {
                 MessageBox.Show(Constant.WARNING_MESSAGE_PASSWORD_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -211,9 +211,11 @@ namespace BNITapCash
                         // write into a file called 'master-data.json'
                         try
                         {
-                            string savedDir = TKHelper.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
+                            string savedDir = TKHelper.GetApplicationExecutableDirectoryName() + Constant.DIR_PATH_SOURCE;
+                            string savedFilePath = TKHelper.GetApplicationExecutableDirectoryName() + Constant.PATH_FILE_MASTER_DATA;
                             string json = JsonConvert.SerializeObject(vehicleTypes);
-                            System.IO.File.WriteAllText(@savedDir, json);
+                            TKHelper.CreateDirIfDoesNotExist(savedDir);
+                            System.IO.File.WriteAllText(@savedFilePath, json);
                             //MessageBox.Show("Pull Master Data is Success.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             return true;

@@ -192,7 +192,6 @@
     <EmbeddedResource Include="Forms\Setting.resx">
       <DependentUpon>Setting.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="src\RC\BNIListRC.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -69,31 +69,31 @@ namespace BNITapCash.Forms
 
         private void txtTID_TextChanged(object sender, EventArgs e)
         {
-            this.TextChangeListener(true);
+            this.TextChangeListener("TID", true);
         }
 
         private void txtSettlementMID_TextChanged(object sender, EventArgs e)
         {
-            this.TextChangeListener(true);
+            this.TextChangeListener("MID", true);
         }
 
         private void txtTID_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener();
+            this.TextChangeListener("TID");
         }
 
         private void txtSettlementMID_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener();
+            this.TextChangeListener("MID");
         }
 
-        private void TextChangeListener(bool is_textchanged = false)
+        private void TextChangeListener(string text, bool is_textchanged = false)
         {
             if (!is_textchanged)
             {
-                if (txtTID.Text == "TID")
+                if (text == "TID" && txtTID.Text == "TID")
                     txtTID.Clear();
-                else if (txtSettlementMID.Text == "Settlement MID")
+                else if (text == "MID" && txtSettlementMID.Text == "Settlement MID")
                     txtSettlementMID.Clear();
             }
             txtTID.ForeColor = Color.FromArgb(78, 184, 206);
