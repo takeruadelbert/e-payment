@@ -321,14 +321,14 @@
             this.cash.AutoSize = true;
             this.cash.BackColor = System.Drawing.Color.WhiteSmoke;
             this.cash.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cash.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cash.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cash.ForeColor = System.Drawing.Color.Gray;
             this.cash.Location = new System.Drawing.Point(349, 411);
-            this.cash.MaximumSize = new System.Drawing.Size(202, 62);
-            this.cash.MinimumSize = new System.Drawing.Size(202, 62);
+            this.cash.MaximumSize = new System.Drawing.Size(186, 45);
+            this.cash.MinimumSize = new System.Drawing.Size(186, 45);
             this.cash.Name = "cash";
             this.cash.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.cash.Size = new System.Drawing.Size(202, 62);
+            this.cash.Size = new System.Drawing.Size(186, 45);
             this.cash.TabIndex = 61;
             this.cash.TabStop = true;
             this.cash.Text = "Tunai";
@@ -401,9 +401,9 @@
             this.labelBackToLogin.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.labelBackToLogin.Location = new System.Drawing.Point(629, 533);
             this.labelBackToLogin.Name = "labelBackToLogin";
-            this.labelBackToLogin.Size = new System.Drawing.Size(119, 20);
+            this.labelBackToLogin.Size = new System.Drawing.Size(72, 20);
             this.labelBackToLogin.TabIndex = 76;
-            this.labelBackToLogin.Text = "Back To Kasir";
+            this.labelBackToLogin.Text = "Kembali";
             // 
             // btnMinimize
             // 

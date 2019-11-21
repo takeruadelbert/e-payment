@@ -56,7 +56,7 @@ namespace BNITapCash.Forms
         {
             InitVehicleType();
             InitLiveCamera();
-            cash.Checked = true;
+            nonCash.Checked = true;
         }
 
         private void InitVehicleType()
