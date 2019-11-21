@@ -453,8 +453,15 @@ namespace BNITapCash
                                 }
                                 else
                                 {
-                                    string URL_pict_face = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + faceImage;
-                                    PictFace.Load(URL_pict_face);
+                                    try
+                                    {
+                                        string URL_pict_face = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + faceImage;
+                                        PictFace.Load(URL_pict_face);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        PictFace.Image = Properties.Resources.no_image;
+                                    }
                                 }
                                 PictFace.BackgroundImageLayout = ImageLayout.Stretch;
                                 PictFace.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -466,8 +473,15 @@ namespace BNITapCash
                                 }
                                 else
                                 {
-                                    string URL_pict_vehicle = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + parkingIn.PlateNumberImage;
-                                    PictVehicle.Load(URL_pict_vehicle);
+                                    try
+                                    {
+                                        string URL_pict_vehicle = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressServer + Properties.Resources.repo + "/" + parkingIn.PlateNumberImage;
+                                        PictVehicle.Load(URL_pict_vehicle);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        PictVehicle.Image = Properties.Resources.no_image;
+                                    }
                                 }
                                 PictVehicle.BackgroundImageLayout = ImageLayout.Stretch;
                                 PictVehicle.SizeMode = PictureBoxSizeMode.StretchImage;
