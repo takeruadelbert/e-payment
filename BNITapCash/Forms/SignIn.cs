@@ -2,11 +2,11 @@
 using BNITapCash.API;
 using BNITapCash.API.request;
 using BNITapCash.API.response;
-using BNITapCash.Card.Mifare;
 using BNITapCash.ConstantVariable;
 using BNITapCash.DB;
 using BNITapCash.Forms;
 using BNITapCash.Helper;
+using BNITapCash.Readers.Contactless.Acr123U;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -118,9 +118,11 @@ namespace BNITapCash
                         return;
                     }
                     database.DisposeDatabaseConnection();
+
                     // check reader connection
-                    MifareCard mifareCard = new MifareCard();
-                    if (!mifareCard.CheckReaderConnection())
+                    Acr123U acr123U = new Acr123U();
+                    string[] readerList = acr123U.getReaderList();
+                    if (readerList.Length <= 0)
                     {
                         MessageBox.Show(Constant.ERROR_MESSAGE_DEVICE_READER_NOT_FOUND, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
