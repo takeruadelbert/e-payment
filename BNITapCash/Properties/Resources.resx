@@ -350,4 +350,7 @@
     <value>/ws/parking_outs/save_lost_ticket</value>
     <comment>API for saving data lost ticket to server</comment>
   </data>
+  <data name="BNIListRC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\RC\BNIListRC.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

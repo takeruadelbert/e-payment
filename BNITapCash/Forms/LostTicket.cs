@@ -2,7 +2,10 @@
 using BNITapCash.API;
 using BNITapCash.API.request;
 using BNITapCash.API.response;
+using BNITapCash.Bank.BNI;
+using BNITapCash.Bank.DataModel;
 using BNITapCash.ConstantVariable;
+using BNITapCash.DB;
 using BNITapCash.Helper;
 using BNITapCash.Miscellaneous.Webcam;
 using Newtonsoft.Json;
@@ -23,6 +26,8 @@ namespace BNITapCash.Forms
         private Login home;
         public PictureBox webcamImage;
         private Webcam camera;
+        private BNI bni;
+        private DBConnect database;
 
         public LostTicket(Login home)
         {
@@ -30,6 +35,8 @@ namespace BNITapCash.Forms
             this.home = home;
             this.webcamImage = webcam;
             this.camera = new Webcam(this);
+            this.bni = new BNI();
+            this.database = new DBConnect();
             restApi = new RESTAPI();
             ipAddressServer = Properties.Settings.Default.IPAddressServer;
             InitData();
@@ -94,10 +101,18 @@ namespace BNITapCash.Forms
             }
         }
 
+        private void StopLiveCamera()
+        {
+            stream.Stop();
+            stream.NewFrame -= stream_NewFrame;
+        }
+
         private void stream_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             Bitmap bmp = (Bitmap)eventArgs.Frame.Clone();
             LiveCamera.Image = bmp;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void btnMinimize_Click(object sender, EventArgs e)
@@ -108,6 +123,7 @@ namespace BNITapCash.Forms
         public void Clear()
         {
             waktu_keluar.Text = "- - -  00:00:00";
+            nomor_plat.Text = "Nomor Plat Kendaraan";
             txtGrandTotal.Text = "0";
             cash.Checked = true;
             ResetComboBox();
@@ -122,10 +138,12 @@ namespace BNITapCash.Forms
 
         private void back_to_cashier_Click(object sender, EventArgs e)
         {
-            stream.Stop();
+            StopLiveCamera();
+            database.DisposeDatabaseConnection();
             Cashier cashier = new Cashier(home);
             cashier.Show();
-            Hide();
+            Dispose();
+            GC.Collect();
         }
 
         private void tipe_kendaraan_SelectionChangeCommitted(object sender, EventArgs e)
@@ -199,11 +217,7 @@ namespace BNITapCash.Forms
         {
             if (ValidateLostTicket())
             {
-                string base64WebcamImage = CaptureWebcamImage();
-                if (!string.IsNullOrEmpty(base64WebcamImage))
-                {
-                    SaveDataLostTicket(base64WebcamImage);
-                }
+                SaveDataLostTicket();
             }
         }
 
@@ -227,37 +241,43 @@ namespace BNITapCash.Forms
             return true;
         }
 
-        private void SaveDataLostTicket(string capturedImage)
+        private void SaveDataLostTicket()
         {
-            string vehicle = tipe_kendaraan.SelectedItem.ToString();
-            string username = Properties.Settings.Default.Username;
-            string datetimeOut = TKHelper.ConvertDatetimeToDefaultFormat(waktu_keluar.Text.ToString());
             int totalFare = TKHelper.IDRToNominal(txtGrandTotal.Text.ToString());
-            string plateNumber = nomor_plat.Text.ToString();
-            string ipAddress = TKHelper.GetLocalIPAddress();
             string paymentMethod = cash.Checked ? "CASH" : "NCSH";
-            string webcamCapturedImage = capturedImage;
-            LostTicketRequest lostTicketRequest = new LostTicketRequest(vehicle, username, datetimeOut, totalFare, plateNumber, ipAddress, paymentMethod, webcamCapturedImage);
-            var payload = JsonConvert.SerializeObject(lostTicketRequest);
-
-            string lostTicketApiUrl = Properties.Resources.LostTicketAPIURL;
-
-            DataResponseObject response = (DataResponseObject)restApi.post(ipAddressServer, lostTicketApiUrl, true, payload);
-            if (response != null)
+            if (paymentMethod == "NCSH")
             {
-                if (response.Status == 206)
+                string bankCode = "BNI";
+                string ipv4 = TKHelper.GetLocalIPAddress();
+                string TIDSettlement = Properties.Settings.Default.TID;
+                string operator_name = Properties.Settings.Default.Username;
+
+                DataDeduct responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
+                if (!responseDeduct.IsError)
                 {
-                    ParkingOut parkingOut = JsonConvert.DeserializeObject<ParkingOut>(response.Data.ToString());
-                    MessageBox.Show(Constant.TRANSACTION_SUCCESS, "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string base64WebcamImage = CaptureWebcamImage();
+                    if (!string.IsNullOrEmpty(base64WebcamImage))
+                    {
+                        ParkingOut parkingOut = SendDataToServer(base64WebcamImage, paymentMethod, totalFare);
+                        StoreDataToDatabase(responseDeduct, parkingOut);
+                        MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Clear();
+                    }
                 }
                 else
                 {
-                    MessageBox.Show(response.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(responseDeduct.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string base64WebcamImage = CaptureWebcamImage();
+                if (!string.IsNullOrEmpty(base64WebcamImage))
+                {
+                    SendDataToServer(base64WebcamImage, paymentMethod, totalFare);
+                    MessageBox.Show(Constant.TRANSACTION_SUCCESS, "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Clear();
+                }
             }
         }
 
@@ -272,7 +292,7 @@ namespace BNITapCash.Forms
                 MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_TROUBLE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
-
+            System.Threading.Thread.Sleep(Constant.DELAY_TIME_WEBCAM);
             if (webcamImage.Image == null)
             {
                 MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_SNAPSHOOT_FAILED, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -282,6 +302,65 @@ namespace BNITapCash.Forms
             camera.StopWebcam();
             Bitmap bmp = new Bitmap(webcamImage.Image, Properties.Settings.Default.WebcamWidth, Properties.Settings.Default.WebcamHeight);
             return bmp.ToBase64String(ImageFormat.Png);
+        }
+
+        private ParkingOut SendDataToServer(string webcamCapturedImage, string paymentMethod, int totalFare)
+        {
+            string vehicle = tipe_kendaraan.SelectedItem.ToString();
+            string username = Properties.Settings.Default.Username;
+            string datetimeOut = TKHelper.ConvertDatetimeToDefaultFormat(waktu_keluar.Text.ToString());
+            string plateNumber = nomor_plat.Text.ToString();
+            string ipAddress = TKHelper.GetLocalIPAddress();
+
+            LostTicketRequest lostTicketRequest = new LostTicketRequest(vehicle, username, datetimeOut, totalFare, plateNumber, ipAddress, paymentMethod, webcamCapturedImage);
+            var payload = JsonConvert.SerializeObject(lostTicketRequest);
+
+            string lostTicketApiUrl = Properties.Resources.LostTicketAPIURL;
+
+            DataResponseObject response = (DataResponseObject)restApi.post(ipAddressServer, lostTicketApiUrl, true, payload);
+            if (response != null)
+            {
+                if (response.Status == 206)
+                {
+                    return JsonConvert.DeserializeObject<ParkingOut>(response.Data.ToString());
+                }
+                else
+                {
+                    MessageBox.Show(response.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return null;
+                }
+            }
+            else
+            {
+                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        private void StoreDataToDatabase(DataDeduct dataDeduct, ParkingOut parkingOut)
+        {
+            try
+            {
+                // store deduct result card to server
+                string result = dataDeduct.DeductResult;
+                int amount = dataDeduct.Amount;
+                string created = dataDeduct.CreatedDatetime;
+                string bank = dataDeduct.Bank;
+                string ipv4 = dataDeduct.IpAddress;
+                string operatorName = dataDeduct.OperatorName;
+                string idReader = dataDeduct.IdReader;
+                int parkingOutId = parkingOut.ParkingOutId;
+
+                string query = "INSERT INTO deduct_card_results (parking_out_id, result, amount, transaction_dt, bank, ipv4, operator, ID_reader, created) VALUES('" + parkingOutId + "', '" +
+                    result + "', '" + amount + "', '" + created + "', '" + bank + "', '" + ipv4 + "', '" + operatorName + "', '" + idReader + "', '" + created + "')";
+
+                database.Insert(query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
     }
 }

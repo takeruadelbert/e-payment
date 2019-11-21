@@ -79,7 +79,8 @@
         public static readonly string ERROR_MESSAGE_FAIL_TO_CONNECT_LIVE_CAMERA = "Error : Cannot Connect to Live Camera.";
 
         // miscellaneous
-        public static readonly string PATH_FILE_MASTER_DATA = @"\src\master-data.json";
+        public static readonly string DIR_PATH_SOURCE = @"\src";
+        public static readonly string PATH_FILE_MASTER_DATA = DIR_PATH_SOURCE + @"\master-data.json";
 
         // BNI
         public static readonly string MESSAGE_OK = "OK";
@@ -89,6 +90,6 @@
         public static readonly string ERROR_MESSAGE_FAILED_GET_SAM_STATUS = "Failed to Get SAM Status : No Reader found or selected.";
         public static readonly string ERROR_MESSAGE_CANNOT_DEDUCT_INSUFFICIENT_BALANCE = "Can't Deduct : Insufficient Balance.";
         public static readonly string TRANSACTION_SUCCESS = "Transaksi Berhasil.";
-        public static readonly string RC_CODE_LIST_FILE_PATH = @"\src\RC\BNIListRC.json";
+        public static readonly string RC_CODE_LIST_FILE_PATH = DIR_PATH_SOURCE + @"\RC\BNIListRC.json";
     }
 }

@@ -1,9 +1,6 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 using System.Diagnostics;
 using System.IO;
 
@@ -43,7 +40,17 @@ namespace BNITapCash.DB
         private void InitDatabaseConnection(string server, string database, string uid, string password)
         {
             string connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-            connection = new MySqlConnection(connectionString);
+            if (connection == null)
+            {
+                connection = new MySqlConnection(connectionString);
+            }
+        }
+
+        public void DisposeDatabaseConnection()
+        {
+            connection = null;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         //open connection to database
@@ -246,7 +253,7 @@ namespace BNITapCash.DB
                 file.Close();
                 process.Close();
             }
-            catch (IOException ex)
+            catch (IOException)
             {
                 Console.WriteLine("Error , unable to backup!");
             }
@@ -279,7 +286,7 @@ namespace BNITapCash.DB
                 process.WaitForExit();
                 process.Close();
             }
-            catch (IOException ex)
+            catch (IOException)
             {
                 Console.WriteLine("Error , unable to Restore!");
             }
@@ -287,7 +294,7 @@ namespace BNITapCash.DB
 
         public bool CheckMySQLConnection()
         {
-            bool successful = true;
+            bool successful;
             try
             {
                 successful = this.OpenConnection();
@@ -296,7 +303,7 @@ namespace BNITapCash.DB
                     this.CloseConnection();
                 }
             }
-            catch (MySqlException ex)
+            catch (MySqlException)
             {
                 successful = false;
             }

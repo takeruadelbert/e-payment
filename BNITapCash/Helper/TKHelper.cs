@@ -1,4 +1,5 @@
 ﻿using BNITapCash.ConstantVariable;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -6,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Script.Serialization;
 
@@ -68,8 +70,7 @@ namespace BNITapCash.Helper
 
         public static string GetApplicationExecutableDirectoryName()
         {
-            string workingDirectory = Environment.CurrentDirectory;
-            return Directory.GetParent(workingDirectory).Parent.FullName;
+            return Environment.CurrentDirectory;
         }
 
         public static string GetDirectoryName()
@@ -148,6 +149,44 @@ namespace BNITapCash.Helper
             string json = File.ReadAllText(GetApplicationExecutableDirectoryName() + filePath);
             IDictionary<string, string> listCode = (new JavaScriptSerializer()).Deserialize<Dictionary<string, string>>(json);
             return listCode;
+        }
+
+        public static IDictionary<string, string> ParseRCJsonFileToDictionary(byte[] json)
+        {
+            string jsonStr = Encoding.UTF8.GetString(json);
+            return JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonStr);
+        }
+
+        public static string GetValueTime(string time, string type)
+        {
+            if (string.IsNullOrEmpty(time))
+            {
+                return null;
+            }
+
+            string[] splitTime = time.Split(':');
+            switch (type.ToLower())
+            {
+                case "hour":
+                    return splitTime[0];
+                case "minute":
+                    return splitTime[1];
+                case "second":
+                    return splitTime[2];
+                default:
+                    return null;
+            }
+        }
+
+        public static void CreateDirIfDoesNotExist(string pathDir)
+        {
+            if (!string.IsNullOrEmpty(pathDir))
+            {
+                if (!Directory.Exists(pathDir))
+                {
+                    Directory.CreateDirectory(pathDir);
+                }
+            }
         }
     }
 }

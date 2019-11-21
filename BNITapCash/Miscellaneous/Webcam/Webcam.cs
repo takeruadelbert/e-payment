@@ -44,6 +44,7 @@ namespace BNITapCash.Miscellaneous.Webcam
             try
             {
                 frame.Stop();
+                frame.NewFrame -= new NewFrameEventHandler(NewFrame_event);
             }
             catch (Exception ex)
             {
