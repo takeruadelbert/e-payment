@@ -166,12 +166,15 @@ namespace BNITapCash.Card.Mifare
         {
             if (connectCard())
             {
-                string cardUID = getcardUID();
-                if (cashier.UIDCard.Length != Constant.BARCODE_LENGTH)
+                if (cashier.UIDCard.ToLower() == "uid card")
                 {
-                    cashier.UIDCard = cardUID;
+                    string cardUID = getcardUID();
+                    if (cashier.UIDCard.Length != Constant.BARCODE_LENGTH)
+                    {
+                        cashier.UIDCard = cardUID;
+                    }
+                    Console.WriteLine("UID = " + cardUID);
                 }
-                Console.WriteLine("UID = " + cardUID);
                 //disconnect();
             }
         }

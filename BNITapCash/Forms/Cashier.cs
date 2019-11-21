@@ -433,9 +433,9 @@ namespace BNITapCash
                             case 206:
                                 parkingIn = JsonConvert.DeserializeObject<ParkingIn>(response.Data.ToString());
 
-                                txtHour.Text = TKHelper.GetValueTime(parkingIn.DatetimeIn, "hour");
-                                txtMinute.Text = TKHelper.GetValueTime(parkingIn.DatetimeIn, "minute");
-                                txtSecond.Text = TKHelper.GetValueTime(parkingIn.DatetimeIn, "second");
+                                txtHour.Text = TKHelper.GetValueTime(parkingIn.ParkDuration, "hour");
+                                txtMinute.Text = TKHelper.GetValueTime(parkingIn.ParkDuration, "minute");
+                                txtSecond.Text = TKHelper.GetValueTime(parkingIn.ParkDuration, "second");
 
                                 txtGrandTotal.Text = TKHelper.IDR(parkingIn.Fare.ToString());
 
