@@ -44,6 +44,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCheckUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -54,11 +55,11 @@
             // AppName
             // 
             this.AppName.AutoSize = true;
-            this.AppName.Font = new System.Drawing.Font("Poppins Medium", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AppName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AppName.ForeColor = System.Drawing.Color.Black;
             this.AppName.Location = new System.Drawing.Point(163, 238);
             this.AppName.Name = "AppName";
-            this.AppName.Size = new System.Drawing.Size(294, 48);
+            this.AppName.Size = new System.Drawing.Size(278, 31);
             this.AppName.TabIndex = 2;
             this.AppName.Text = "E-PASS & E-Payment";
             this.AppName.Click += new System.EventHandler(this.AppName_Click);
@@ -66,11 +67,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Poppins Medium", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(101, 454);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(415, 19);
+            this.label1.Size = new System.Drawing.Size(372, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "E-Payment  Copyright © 2019 | Developed and Maintenanced by";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -80,13 +81,13 @@
             this.linkLabel1.ActiveLinkColor = System.Drawing.Color.Maroon;
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.DisabledLinkColor = System.Drawing.Color.White;
-            this.linkLabel1.Font = new System.Drawing.Font("Poppins Medium", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkLabel1.ForeColor = System.Drawing.Color.Black;
             this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel1.LinkColor = System.Drawing.Color.Black;
             this.linkLabel1.Location = new System.Drawing.Point(235, 472);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(194, 19);
+            this.linkLabel1.Size = new System.Drawing.Size(180, 13);
             this.linkLabel1.TabIndex = 4;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "PT. Surya Teknologi Nasional.";
@@ -96,22 +97,22 @@
             // txtLabel
             // 
             this.txtLabel.AutoSize = true;
-            this.txtLabel.Font = new System.Drawing.Font("Poppins Medium", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLabel.ForeColor = System.Drawing.Color.Black;
             this.txtLabel.Location = new System.Drawing.Point(251, 288);
             this.txtLabel.Name = "txtLabel";
-            this.txtLabel.Size = new System.Drawing.Size(58, 19);
+            this.txtLabel.Size = new System.Drawing.Size(49, 13);
             this.txtLabel.TabIndex = 6;
             this.txtLabel.Text = "Version";
             // 
             // txtVersion
             // 
             this.txtVersion.AutoSize = true;
-            this.txtVersion.Font = new System.Drawing.Font("Poppins Medium", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtVersion.ForeColor = System.Drawing.Color.Black;
             this.txtVersion.Location = new System.Drawing.Point(310, 288);
             this.txtVersion.Name = "txtVersion";
-            this.txtVersion.Size = new System.Drawing.Size(35, 19);
+            this.txtVersion.Size = new System.Drawing.Size(36, 13);
             this.txtVersion.TabIndex = 9;
             this.txtVersion.Text = "1.0.0";
             this.txtVersion.Click += new System.EventHandler(this.txtVersion_Click);
@@ -171,6 +172,7 @@
             this.panel3.BackColor = System.Drawing.Color.Transparent;
             this.panel3.BackgroundImage = global::BNITapCash.Properties.Resources.BG_PUTIH21;
             this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel3.Controls.Add(this.btnCheckUpdate);
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.button2);
@@ -237,6 +239,17 @@
             this.panel1.Size = new System.Drawing.Size(36, 38);
             this.panel1.TabIndex = 33;
             // 
+            // btnCheckUpdate
+            // 
+            this.btnCheckUpdate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnCheckUpdate.Location = new System.Drawing.Point(247, 316);
+            this.btnCheckUpdate.Name = "btnCheckUpdate";
+            this.btnCheckUpdate.Size = new System.Drawing.Size(108, 31);
+            this.btnCheckUpdate.TabIndex = 34;
+            this.btnCheckUpdate.Text = "Check For Update";
+            this.btnCheckUpdate.UseVisualStyleBackColor = true;
+            this.btnCheckUpdate.Click += new System.EventHandler(this.btnCheckUpdate_Click);
+            // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -283,5 +296,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnCheckUpdate;
     }
 }

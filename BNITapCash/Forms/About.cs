@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
+using EPaymentUpdater;
 
 namespace BNITapCash.Forms
 {
-    public partial class About : Form
+    public partial class About : Form, IApplicationUpdateable
     {
         public About()
         {
@@ -13,7 +16,8 @@ namespace BNITapCash.Forms
 
         private void InitData()
         {
-            txtVersion.Text = Properties.Resources.VersionApp;
+            //txtVersion.Text = Properties.Resources.VersionApp;
+            txtVersion.Text = ApplicationAssembly.GetName().Version.ToString();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -57,6 +61,41 @@ namespace BNITapCash.Forms
         private void button2_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnCheckUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public string ApplicationName
+        {
+            get { return "E-Payment"; }
+        }
+
+        public string ApplicationID
+        {
+            get { return "E-Payment"; }
+        }
+
+        public Assembly ApplicationAssembly
+        {
+            get { return Assembly.GetExecutingAssembly(); }
+        }
+
+        public Icon ApplicationIcon
+        {
+            get { return this.Icon; }
+        }
+
+        public Uri UpdateXmlLocation
+        {
+            get { return new Uri("https://www.dropbox.com/s/xcrb3pio6bu6dra/update.xml?dl=0"); }
+        }
+
+        public Form Context
+        {
+            get { return this; }
         }
     }
 }

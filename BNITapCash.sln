@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BNITapCash", "BNITapCash\BNITapCash.csproj", "{891B4022-0650-4BB1-A391-CE8862175D67}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "E-Payment Installer", "..\E-Payment Installer\E-Payment Installer.vdproj", "{ED1C71BF-E16D-4A53-98FB-0BCBA867ECC0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPaymentUpdater", "..\EPaymentUpdater\EPaymentUpdater.csproj", "{70215911-E230-4D7E-9766-617515BEA9D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,16 +29,18 @@ Global
 		{891B4022-0650-4BB1-A391-CE8862175D67}.Release|x64.Build.0 = Release|Any CPU
 		{891B4022-0650-4BB1-A391-CE8862175D67}.Release|x86.ActiveCfg = Release|Any CPU
 		{891B4022-0650-4BB1-A391-CE8862175D67}.Release|x86.Build.0 = Release|Any CPU
-		{ED1C71BF-E16D-4A53-98FB-0BCBA867ECC0}.Debug|Any CPU.ActiveCfg = Debug
-		{ED1C71BF-E16D-4A53-98FB-0BCBA867ECC0}.Debug|x64.ActiveCfg = Debug
-		{ED1C71BF-E16D-4A53-98FB-0BCBA867ECC0}.Debug|x64.Build.0 = Debug
-		{ED1C71BF-E16D-4A53-98FB-0BCBA867ECC0}.Debug|x86.ActiveCfg = Debug
-		{ED1C71BF-E16D-4A53-98FB-0BCBA867ECC0}.Debug|x86.Build.0 = Debug
-		{ED1C71BF-E16D-4A53-98FB-0BCBA867ECC0}.Release|Any CPU.ActiveCfg = Release
-		{ED1C71BF-E16D-4A53-98FB-0BCBA867ECC0}.Release|x64.ActiveCfg = Release
-		{ED1C71BF-E16D-4A53-98FB-0BCBA867ECC0}.Release|x64.Build.0 = Release
-		{ED1C71BF-E16D-4A53-98FB-0BCBA867ECC0}.Release|x86.ActiveCfg = Release
-		{ED1C71BF-E16D-4A53-98FB-0BCBA867ECC0}.Release|x86.Build.0 = Release
+		{70215911-E230-4D7E-9766-617515BEA9D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70215911-E230-4D7E-9766-617515BEA9D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70215911-E230-4D7E-9766-617515BEA9D0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{70215911-E230-4D7E-9766-617515BEA9D0}.Debug|x64.Build.0 = Debug|Any CPU
+		{70215911-E230-4D7E-9766-617515BEA9D0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{70215911-E230-4D7E-9766-617515BEA9D0}.Debug|x86.Build.0 = Debug|Any CPU
+		{70215911-E230-4D7E-9766-617515BEA9D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70215911-E230-4D7E-9766-617515BEA9D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70215911-E230-4D7E-9766-617515BEA9D0}.Release|x64.ActiveCfg = Release|Any CPU
+		{70215911-E230-4D7E-9766-617515BEA9D0}.Release|x64.Build.0 = Release|Any CPU
+		{70215911-E230-4D7E-9766-617515BEA9D0}.Release|x86.ActiveCfg = Release|Any CPU
+		{70215911-E230-4D7E-9766-617515BEA9D0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
