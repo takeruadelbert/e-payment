@@ -17,7 +17,7 @@ namespace BNITapCash.Forms
         private void InitData()
         {
             //txtVersion.Text = Properties.Resources.VersionApp;
-            txtVersion.Text = ApplicationAssembly.GetName().Version.ToString();
+            txtVersion.Text = ApplicationAssembly.GetName().Version.ToString();            
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -65,17 +65,18 @@ namespace BNITapCash.Forms
 
         private void btnCheckUpdate_Click(object sender, EventArgs e)
         {
-
+            ApplicationUpdater updater = new ApplicationUpdater(this);
+            updater.DoUpdate();
         }
 
         public string ApplicationName
         {
-            get { return "E-Payment"; }
+            get { return "epayment"; }
         }
 
         public string ApplicationID
         {
-            get { return "E-Payment"; }
+            get { return "epayment"; }
         }
 
         public Assembly ApplicationAssembly
@@ -90,7 +91,7 @@ namespace BNITapCash.Forms
 
         public Uri UpdateXmlLocation
         {
-            get { return new Uri("https://www.dropbox.com/s/xcrb3pio6bu6dra/update.xml?dl=0"); }
+            get { return new Uri("http://localhost/test/update.xml"); }
         }
 
         public Form Context
