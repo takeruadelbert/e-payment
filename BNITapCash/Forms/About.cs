@@ -91,7 +91,7 @@ namespace BNITapCash.Forms
 
         public Uri UpdateXmlLocation
         {
-            get { return new Uri("http://localhost/test/update.xml"); }
+            get { return new Uri("https://www.dropbox.com/s/xcrb3pio6bu6dra/update.xml?dl=1"); }
         }
 
         public Form Context
