@@ -84,6 +84,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.listBarcodeSuggestion = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -109,7 +110,7 @@
             this.textBox4.MinimumSize = new System.Drawing.Size(350, 40);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(350, 28);
+            this.textBox4.Size = new System.Drawing.Size(350, 40);
             this.textBox4.TabIndex = 13;
             this.textBox4.Text = "- - -  00:00:00";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -328,7 +329,7 @@
             this.txtGrandTotal.MinimumSize = new System.Drawing.Size(290, 45);
             this.txtGrandTotal.Name = "txtGrandTotal";
             this.txtGrandTotal.ReadOnly = true;
-            this.txtGrandTotal.Size = new System.Drawing.Size(290, 33);
+            this.txtGrandTotal.Size = new System.Drawing.Size(290, 45);
             this.txtGrandTotal.TabIndex = 28;
             this.txtGrandTotal.Text = "0";
             this.txtGrandTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -405,7 +406,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.textBox3.Size = new System.Drawing.Size(350, 28);
+            this.textBox3.Size = new System.Drawing.Size(350, 40);
             this.textBox3.TabIndex = 11;
             this.textBox3.Text = "- - -  00:00:00";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -424,9 +425,9 @@
             this.textBox1.MaximumSize = new System.Drawing.Size(262, 25);
             this.textBox1.MinimumSize = new System.Drawing.Size(262, 25);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(262, 17);
+            this.textBox1.Size = new System.Drawing.Size(262, 25);
             this.textBox1.TabIndex = 5;
-            this.textBox1.Text = "UID Card";
+            this.textBox1.Text = "Barcode";
             this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
@@ -585,6 +586,7 @@
             this.panel14.BackColor = System.Drawing.Color.Transparent;
             this.panel14.BackgroundImage = global::BNITapCash.Properties.Resources.BG_PUTIH2;
             this.panel14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel14.Controls.Add(this.button3);
             this.panel14.Controls.Add(this.panel9);
             this.panel14.Controls.Add(this.cash);
             this.panel14.Controls.Add(this.nonCash);
@@ -660,7 +662,7 @@
             this.buttonLostTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonLostTicket.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLostTicket.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonLostTicket.Location = new System.Drawing.Point(597, 529);
+            this.buttonLostTicket.Location = new System.Drawing.Point(419, 524);
             this.buttonLostTicket.Name = "buttonLostTicket";
             this.buttonLostTicket.Size = new System.Drawing.Size(120, 35);
             this.buttonLostTicket.TabIndex = 47;
@@ -678,7 +680,7 @@
             this.buttonReprint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonReprint.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonReprint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonReprint.Location = new System.Drawing.Point(471, 529);
+            this.buttonReprint.Location = new System.Drawing.Point(553, 480);
             this.buttonReprint.Name = "buttonReprint";
             this.buttonReprint.Size = new System.Drawing.Size(120, 35);
             this.buttonReprint.TabIndex = 46;
@@ -696,7 +698,7 @@
             this.buttonGenerateReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonGenerateReport.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonGenerateReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonGenerateReport.Location = new System.Drawing.Point(345, 529);
+            this.buttonGenerateReport.Location = new System.Drawing.Point(419, 480);
             this.buttonGenerateReport.Name = "buttonGenerateReport";
             this.buttonGenerateReport.Size = new System.Drawing.Size(120, 35);
             this.buttonGenerateReport.TabIndex = 45;
@@ -830,6 +832,23 @@
             this.label8.TabIndex = 35;
             this.label8.Text = "LOGOUT";
             // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.Transparent;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button3.Location = new System.Drawing.Point(553, 524);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(120, 35);
+            this.button3.TabIndex = 52;
+            this.button3.Text = "Free Pass";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
             // Cashier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -921,5 +940,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox listBarcodeSuggestion;
+        private System.Windows.Forms.Button button3;
     }
 }
