@@ -239,7 +239,6 @@
   <ItemGroup>
     <None Include="Resources\stn.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\database.png" />
   </ItemGroup>
@@ -285,6 +284,12 @@
     <None Include="Resources\mid.png" />
     <None Include="Resources\tid.jpg" />
     <None Include="Resources\id.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\EPaymentUpdater\EPaymentUpdater.csproj">
+      <Project>{70215911-e230-4d7e-9766-617515bea9d0}</Project>
+      <Name>EPaymentUpdater</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
