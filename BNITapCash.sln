@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BNITapCash", "BNITapCash\BN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPaymentUpdater", "..\EPaymentUpdater\EPaymentUpdater.csproj", "{70215911-E230-4D7E-9766-617515BEA9D0}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EPaymentInstaller", "EPaymentInstaller\EPaymentInstaller.vdproj", "{7A57CA17-E59D-4C27-9056-80F3671E63CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,12 @@ Global
 		{70215911-E230-4D7E-9766-617515BEA9D0}.Release|x64.Build.0 = Release|Any CPU
 		{70215911-E230-4D7E-9766-617515BEA9D0}.Release|x86.ActiveCfg = Release|Any CPU
 		{70215911-E230-4D7E-9766-617515BEA9D0}.Release|x86.Build.0 = Release|Any CPU
+		{7A57CA17-E59D-4C27-9056-80F3671E63CE}.Debug|Any CPU.ActiveCfg = Debug
+		{7A57CA17-E59D-4C27-9056-80F3671E63CE}.Debug|x64.ActiveCfg = Debug
+		{7A57CA17-E59D-4C27-9056-80F3671E63CE}.Debug|x86.ActiveCfg = Debug
+		{7A57CA17-E59D-4C27-9056-80F3671E63CE}.Release|Any CPU.ActiveCfg = Release
+		{7A57CA17-E59D-4C27-9056-80F3671E63CE}.Release|x64.ActiveCfg = Release
+		{7A57CA17-E59D-4C27-9056-80F3671E63CE}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
