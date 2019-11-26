@@ -1,4 +1,5 @@
 ﻿using BNITapCash.ConstantVariable;
+using BNITapCash.Forms;
 using BNITapCash.Readers.Contactless.Acr123U;
 using PCSC;
 using System;
@@ -29,6 +30,7 @@ namespace BNITapCash.Card.Mifare
         byte LEDStatus;
 
         private Cashier cashier;
+        private FreePass freePass;
 
         public MifareCard()
         {
@@ -43,6 +45,17 @@ namespace BNITapCash.Card.Mifare
             Console.WriteLine("===========");
 
             this.cashier = cashier;
+            this.acr123u = new Acr123U();
+        }
+
+        public MifareCard(FreePass freePass)
+        {
+            establishContext();
+            Console.WriteLine("===========");
+            Console.WriteLine("List Reader");
+            Console.WriteLine("===========");
+
+            this.freePass = freePass;
             this.acr123u = new Acr123U();
         }
 
@@ -166,12 +179,24 @@ namespace BNITapCash.Card.Mifare
         {
             if (connectCard())
             {
-                if (cashier.UIDCard.ToLower() == "uid card")
+                if (cashier != null)
+                {
+                    if (cashier.UIDCard.ToLower() == "uid card")
+                    {
+                        string cardUID = getcardUID();
+                        if (cashier.UIDCard.Length != Constant.BARCODE_LENGTH)
+                        {
+                            cashier.UIDCard = cardUID;
+                        }
+                        Console.WriteLine("UID = " + cardUID);
+                    }
+                }
+                else
                 {
                     string cardUID = getcardUID();
-                    if (cashier.UIDCard.Length != Constant.BARCODE_LENGTH)
+                    if (freePass.UIDCard.Length != Constant.BARCODE_LENGTH)
                     {
-                        cashier.UIDCard = cardUID;
+                        freePass.UIDCard = cardUID;
                     }
                     Console.WriteLine("UID = " + cardUID);
                 }

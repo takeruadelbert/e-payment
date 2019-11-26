@@ -120,11 +120,6 @@ namespace BNITapCash
             stream.NewFrame -= stream_NewFrame;
         }
 
-        private void logo_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -300,8 +295,8 @@ namespace BNITapCash
 
         private void textBox1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text.ToLower() == "uid card")
-                this.TextListener("uid card");
+            if (textBox1.Text.ToLower() == "barcode/uid card")
+                this.TextListener("barcode/uid card");
         }
 
         private void TextListener(string field, bool is_textchanged = false)
@@ -312,7 +307,7 @@ namespace BNITapCash
                 {
                     textBox2.Clear();
                 }
-                if (field == "uid card")
+                if (field == "barcode/uid card")
                 {
                     textBox1.Clear();
                 }
@@ -415,7 +410,7 @@ namespace BNITapCash
         {
             if (comboBox1.SelectedIndex != 0)
             {
-                if (textBox1.Text != "" && textBox1.Text != "UID Card")
+                if (textBox1.Text != "" && textBox1.Text != "Barcode/UID Card")
                 {
                     // send data API
                     var APIUrl = Properties.Resources.RequestUIDFareAPIURL;
@@ -649,6 +644,18 @@ namespace BNITapCash
             database.DisposeDatabaseConnection();
             LostTicket lostTicket = new LostTicket(home);
             lostTicket.Show();
+            Hide();
+            Dispose();
+            GC.Collect();
+        }
+
+        private void buttonFreePass_Click(object sender, EventArgs e)
+        {
+            mifareCard.Stop();
+            StopLiveCamera();
+            database.DisposeDatabaseConnection();
+            FreePass freePass = new FreePass(home);
+            freePass.Show();
             Hide();
             Dispose();
             GC.Collect();

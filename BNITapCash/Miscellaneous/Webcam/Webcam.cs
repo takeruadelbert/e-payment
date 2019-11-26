@@ -10,6 +10,7 @@ namespace BNITapCash.Miscellaneous.Webcam
     {
         private Cashier cashier;
         private LostTicket lostTicket;
+        private FreePass freePass;
         private static FilterInfoCollection Devices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
         private VideoCaptureDevice frame = new VideoCaptureDevice(Devices[0].MonikerString);
         private static bool hasCaptured = false;
@@ -22,6 +23,11 @@ namespace BNITapCash.Miscellaneous.Webcam
         public Webcam(LostTicket lostTicket)
         {
             this.lostTicket = lostTicket;
+        }
+
+        public Webcam(FreePass freePass)
+        {
+            this.freePass = freePass;
         }
 
         public void StartWebcam()
@@ -61,9 +67,13 @@ namespace BNITapCash.Miscellaneous.Webcam
                 {
                     cashier.webcamImage.Image = (Image)e.Frame.Clone();
                 }
-                else
+                else if (lostTicket != null)
                 {
                     lostTicket.webcamImage.Image = (Image)e.Frame.Clone();
+                }
+                else
+                {
+                    freePass.webcamImage.Image = (Image)e.Frame.Clone();
                 }
                 hasCaptured = true;
             }

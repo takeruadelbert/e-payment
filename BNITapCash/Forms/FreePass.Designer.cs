@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnMinimize = new System.Windows.Forms.Button();
-            this.lineTopInnerbox = new System.Windows.Forms.Panel();
-            this.logoPelindo = new System.Windows.Forms.PictureBox();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.PictFace = new System.Windows.Forms.PictureBox();
-            this.PictVehicle = new System.Windows.Forms.PictureBox();
-            this.LiveCamera = new System.Windows.Forms.PictureBox();
+            this.webcam = new System.Windows.Forms.PictureBox();
+            this.labelBackToLogin = new System.Windows.Forms.Label();
+            this.buttonBackToCashier = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.supervisorCard = new System.Windows.Forms.TextBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox9 = new System.Windows.Forms.TextBox();
@@ -57,20 +59,20 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.listBarcodeSuggestion = new System.Windows.Forms.ComboBox();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.supervisorCard = new System.Windows.Forms.TextBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.labelBackToLogin = new System.Windows.Forms.Label();
-            this.buttonBackToCashier = new System.Windows.Forms.PictureBox();
+            this.PictFace = new System.Windows.Forms.PictureBox();
+            this.PictVehicle = new System.Windows.Forms.PictureBox();
+            this.LiveCamera = new System.Windows.Forms.PictureBox();
+            this.btnMinimize = new System.Windows.Forms.Button();
+            this.lineTopInnerbox = new System.Windows.Forms.Panel();
+            this.logoPelindo = new System.Windows.Forms.PictureBox();
+            this.btnClose = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPelindo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.webcam)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonBackToCashier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictFace)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictVehicle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonBackToCashier)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPelindo)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -78,6 +80,7 @@
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BackgroundImage = global::BNITapCash.Properties.Resources.BG_PUTIH2;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.webcam);
             this.panel1.Controls.Add(this.labelBackToLogin);
             this.panel1.Controls.Add(this.buttonBackToCashier);
             this.panel1.Controls.Add(this.label6);
@@ -119,92 +122,132 @@
             this.panel1.Size = new System.Drawing.Size(1200, 600);
             this.panel1.TabIndex = 0;
             // 
-            // btnMinimize
+            // webcam
             // 
-            this.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMinimize.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnMinimize.FlatAppearance.BorderSize = 0;
-            this.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinimize.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinimize.Image = global::BNITapCash.Properties.Resources.minimize_button;
-            this.btnMinimize.Location = new System.Drawing.Point(1086, 11);
-            this.btnMinimize.Name = "btnMinimize";
-            this.btnMinimize.Size = new System.Drawing.Size(40, 30);
-            this.btnMinimize.TabIndex = 89;
-            this.btnMinimize.UseVisualStyleBackColor = true;
-            this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
+            this.webcam.BackColor = System.Drawing.Color.White;
+            this.webcam.BackgroundImage = global::BNITapCash.Properties.Resources.no_image;
+            this.webcam.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.webcam.ImageLocation = "";
+            this.webcam.Location = new System.Drawing.Point(660, 9);
+            this.webcam.Name = "webcam";
+            this.webcam.Size = new System.Drawing.Size(73, 71);
+            this.webcam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.webcam.TabIndex = 137;
+            this.webcam.TabStop = false;
+            this.webcam.Visible = false;
             // 
-            // lineTopInnerbox
+            // labelBackToLogin
             // 
-            this.lineTopInnerbox.BackColor = System.Drawing.Color.LightGray;
-            this.lineTopInnerbox.ForeColor = System.Drawing.Color.DimGray;
-            this.lineTopInnerbox.Location = new System.Drawing.Point(11, 95);
-            this.lineTopInnerbox.Name = "lineTopInnerbox";
-            this.lineTopInnerbox.Size = new System.Drawing.Size(1132, 1);
-            this.lineTopInnerbox.TabIndex = 79;
+            this.labelBackToLogin.AutoSize = true;
+            this.labelBackToLogin.BackColor = System.Drawing.Color.Transparent;
+            this.labelBackToLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBackToLogin.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelBackToLogin.Location = new System.Drawing.Point(661, 532);
+            this.labelBackToLogin.Name = "labelBackToLogin";
+            this.labelBackToLogin.Size = new System.Drawing.Size(72, 20);
+            this.labelBackToLogin.TabIndex = 136;
+            this.labelBackToLogin.Text = "Kembali";
             // 
-            // logoPelindo
+            // buttonBackToCashier
             // 
-            this.logoPelindo.BackgroundImage = global::BNITapCash.Properties.Resources.pelindo4;
-            this.logoPelindo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.logoPelindo.Location = new System.Drawing.Point(77, 12);
-            this.logoPelindo.Name = "logoPelindo";
-            this.logoPelindo.Size = new System.Drawing.Size(130, 68);
-            this.logoPelindo.TabIndex = 78;
-            this.logoPelindo.TabStop = false;
+            this.buttonBackToCashier.BackColor = System.Drawing.Color.Transparent;
+            this.buttonBackToCashier.BackgroundImage = global::BNITapCash.Properties.Resources.back_button;
+            this.buttonBackToCashier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonBackToCashier.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonBackToCashier.Location = new System.Drawing.Point(618, 524);
+            this.buttonBackToCashier.Name = "buttonBackToCashier";
+            this.buttonBackToCashier.Size = new System.Drawing.Size(40, 40);
+            this.buttonBackToCashier.TabIndex = 135;
+            this.buttonBackToCashier.TabStop = false;
+            this.buttonBackToCashier.Click += new System.EventHandler(this.buttonBackToCashier_Click);
             // 
-            // btnClose
+            // label6
             // 
-            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Image = global::BNITapCash.Properties.Resources.close_button;
-            this.btnClose.Location = new System.Drawing.Point(1126, 11);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(40, 30);
-            this.btnClose.TabIndex = 84;
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
+            this.label6.Location = new System.Drawing.Point(797, 115);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(122, 16);
+            this.label6.TabIndex = 133;
+            this.label6.Text = "Kartu Supervisor";
             // 
-            // PictFace
+            // panel6
             // 
-            this.PictFace.BackgroundImage = global::BNITapCash.Properties.Resources.no_image;
-            this.PictFace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PictFace.ImageLocation = "";
-            this.PictFace.Location = new System.Drawing.Point(35, 122);
-            this.PictFace.Name = "PictFace";
-            this.PictFace.Size = new System.Drawing.Size(250, 150);
-            this.PictFace.TabIndex = 90;
-            this.PictFace.TabStop = false;
+            this.panel6.BackColor = System.Drawing.Color.LightGray;
+            this.panel6.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.panel6.Location = new System.Drawing.Point(801, 175);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(352, 1);
+            this.panel6.TabIndex = 132;
             // 
-            // PictVehicle
+            // supervisorCard
             // 
-            this.PictVehicle.BackgroundImage = global::BNITapCash.Properties.Resources.no_image;
-            this.PictVehicle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PictVehicle.ImageLocation = "";
-            this.PictVehicle.Location = new System.Drawing.Point(35, 278);
-            this.PictVehicle.Name = "PictVehicle";
-            this.PictVehicle.Size = new System.Drawing.Size(250, 150);
-            this.PictVehicle.TabIndex = 91;
-            this.PictVehicle.TabStop = false;
+            this.supervisorCard.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.supervisorCard.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.supervisorCard.BackColor = System.Drawing.Color.White;
+            this.supervisorCard.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.supervisorCard.CausesValidation = false;
+            this.supervisorCard.Cursor = System.Windows.Forms.Cursors.No;
+            this.supervisorCard.Enabled = false;
+            this.supervisorCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.supervisorCard.ForeColor = System.Drawing.Color.DimGray;
+            this.supervisorCard.Location = new System.Drawing.Point(800, 143);
+            this.supervisorCard.MaximumSize = new System.Drawing.Size(352, 25);
+            this.supervisorCard.MinimumSize = new System.Drawing.Size(352, 25);
+            this.supervisorCard.Name = "supervisorCard";
+            this.supervisorCard.Size = new System.Drawing.Size(352, 17);
+            this.supervisorCard.TabIndex = 131;
+            this.supervisorCard.Text = "Tempel Kartu Supervisor";
+            this.supervisorCard.TextChanged += new System.EventHandler(this.supervisorCard_TextChanged);
             // 
-            // LiveCamera
+            // comboBox2
             // 
-            this.LiveCamera.BackgroundImage = global::BNITapCash.Properties.Resources.there_is_no_connected_camera;
-            this.LiveCamera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.LiveCamera.ImageLocation = "";
-            this.LiveCamera.Location = new System.Drawing.Point(35, 434);
-            this.LiveCamera.Name = "LiveCamera";
-            this.LiveCamera.Size = new System.Drawing.Size(250, 150);
-            this.LiveCamera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.LiveCamera.TabIndex = 92;
-            this.LiveCamera.TabStop = false;
+            this.comboBox2.AllowDrop = true;
+            this.comboBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(801, 145);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(261, 21);
+            this.comboBox2.TabIndex = 134;
+            this.comboBox2.Visible = false;
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnClear.Location = new System.Drawing.Point(797, 524);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(180, 45);
+            this.btnClear.TabIndex = 130;
+            this.btnClear.Text = "CLEAR";
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(193)))), ((int)(((byte)(30)))));
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(165)))), ((int)(((byte)(44)))));
+            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(165)))), ((int)(((byte)(44)))));
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.Location = new System.Drawing.Point(989, 524);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(180, 45);
+            this.btnSave.TabIndex = 129;
+            this.btnSave.Text = "SAVE";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // label7
             // 
@@ -324,6 +367,7 @@
             this.vehicleType.Name = "vehicleType";
             this.vehicleType.Size = new System.Drawing.Size(352, 26);
             this.vehicleType.TabIndex = 102;
+            this.vehicleType.SelectionChangeCommitted += new System.EventHandler(this.vehicleType_SelectionChangeCommitted);
             // 
             // plateNumber
             // 
@@ -337,6 +381,8 @@
             this.plateNumber.Size = new System.Drawing.Size(352, 17);
             this.plateNumber.TabIndex = 97;
             this.plateNumber.Text = "Nomor Plat Kendaraan";
+            this.plateNumber.Click += new System.EventHandler(this.plateNumber_Click);
+            this.plateNumber.TextChanged += new System.EventHandler(this.plateNumber_TextChanged);
             // 
             // panel13
             // 
@@ -366,13 +412,15 @@
             this.barcode.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.barcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.barcode.ForeColor = System.Drawing.Color.DimGray;
-            this.barcode.Location = new System.Drawing.Point(343, 143);
+            this.barcode.Location = new System.Drawing.Point(345, 143);
             this.barcode.MaximumSize = new System.Drawing.Size(352, 25);
             this.barcode.MinimumSize = new System.Drawing.Size(352, 25);
             this.barcode.Name = "barcode";
-            this.barcode.Size = new System.Drawing.Size(352, 25);
+            this.barcode.Size = new System.Drawing.Size(352, 17);
             this.barcode.TabIndex = 93;
             this.barcode.Text = "Scan Barcode";
+            this.barcode.Click += new System.EventHandler(this.barcode_Click);
+            this.barcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.barcode_KeyDown);
             // 
             // timeOut
             // 
@@ -386,7 +434,7 @@
             this.timeOut.MinimumSize = new System.Drawing.Size(350, 40);
             this.timeOut.Name = "timeOut";
             this.timeOut.ReadOnly = true;
-            this.timeOut.Size = new System.Drawing.Size(350, 40);
+            this.timeOut.Size = new System.Drawing.Size(350, 28);
             this.timeOut.TabIndex = 103;
             this.timeOut.Text = "- - -  00:00:00";
             this.timeOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -404,7 +452,7 @@
             this.timeIn.Name = "timeIn";
             this.timeIn.ReadOnly = true;
             this.timeIn.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.timeIn.Size = new System.Drawing.Size(350, 40);
+            this.timeIn.Size = new System.Drawing.Size(350, 28);
             this.timeIn.TabIndex = 100;
             this.timeIn.Text = "- - -  00:00:00";
             this.timeIn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -421,7 +469,7 @@
             this.txtGrandTotal.MinimumSize = new System.Drawing.Size(290, 45);
             this.txtGrandTotal.Name = "txtGrandTotal";
             this.txtGrandTotal.ReadOnly = true;
-            this.txtGrandTotal.Size = new System.Drawing.Size(290, 45);
+            this.txtGrandTotal.Size = new System.Drawing.Size(290, 33);
             this.txtGrandTotal.TabIndex = 115;
             this.txtGrandTotal.Text = "0";
             this.txtGrandTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -459,120 +507,97 @@
             this.listBarcodeSuggestion.FormattingEnabled = true;
             this.listBarcodeSuggestion.Location = new System.Drawing.Point(344, 145);
             this.listBarcodeSuggestion.Name = "listBarcodeSuggestion";
-            this.listBarcodeSuggestion.Size = new System.Drawing.Size(261, 21);
+            this.listBarcodeSuggestion.Size = new System.Drawing.Size(351, 21);
             this.listBarcodeSuggestion.TabIndex = 128;
             this.listBarcodeSuggestion.Visible = false;
+            this.listBarcodeSuggestion.SelectedIndexChanged += new System.EventHandler(this.selectBarcode);
             // 
-            // btnClear
+            // PictFace
             // 
-            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnClear.Location = new System.Drawing.Point(797, 524);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(180, 45);
-            this.btnClear.TabIndex = 130;
-            this.btnClear.Text = "CLEAR";
-            this.btnClear.UseVisualStyleBackColor = false;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.PictFace.BackgroundImage = global::BNITapCash.Properties.Resources.no_image;
+            this.PictFace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PictFace.ImageLocation = "";
+            this.PictFace.Location = new System.Drawing.Point(35, 122);
+            this.PictFace.Name = "PictFace";
+            this.PictFace.Size = new System.Drawing.Size(250, 150);
+            this.PictFace.TabIndex = 90;
+            this.PictFace.TabStop = false;
             // 
-            // btnSave
+            // PictVehicle
             // 
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(193)))), ((int)(((byte)(30)))));
-            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(165)))), ((int)(((byte)(44)))));
-            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(165)))), ((int)(((byte)(44)))));
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(989, 524);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(180, 45);
-            this.btnSave.TabIndex = 129;
-            this.btnSave.Text = "SAVE";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.PictVehicle.BackgroundImage = global::BNITapCash.Properties.Resources.no_image;
+            this.PictVehicle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PictVehicle.ImageLocation = "";
+            this.PictVehicle.Location = new System.Drawing.Point(35, 278);
+            this.PictVehicle.Name = "PictVehicle";
+            this.PictVehicle.Size = new System.Drawing.Size(250, 150);
+            this.PictVehicle.TabIndex = 91;
+            this.PictVehicle.TabStop = false;
             // 
-            // label6
+            // LiveCamera
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
-            this.label6.Location = new System.Drawing.Point(797, 115);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(122, 16);
-            this.label6.TabIndex = 133;
-            this.label6.Text = "Kartu Supervisor";
+            this.LiveCamera.BackgroundImage = global::BNITapCash.Properties.Resources.there_is_no_connected_camera;
+            this.LiveCamera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.LiveCamera.ImageLocation = "";
+            this.LiveCamera.Location = new System.Drawing.Point(35, 434);
+            this.LiveCamera.Name = "LiveCamera";
+            this.LiveCamera.Size = new System.Drawing.Size(250, 150);
+            this.LiveCamera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.LiveCamera.TabIndex = 92;
+            this.LiveCamera.TabStop = false;
             // 
-            // panel6
+            // btnMinimize
             // 
-            this.panel6.BackColor = System.Drawing.Color.LightGray;
-            this.panel6.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.panel6.Location = new System.Drawing.Point(801, 175);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(352, 1);
-            this.panel6.TabIndex = 132;
+            this.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMinimize.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnMinimize.FlatAppearance.BorderSize = 0;
+            this.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinimize.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinimize.Image = global::BNITapCash.Properties.Resources.minimize_button;
+            this.btnMinimize.Location = new System.Drawing.Point(1086, 11);
+            this.btnMinimize.Name = "btnMinimize";
+            this.btnMinimize.Size = new System.Drawing.Size(40, 30);
+            this.btnMinimize.TabIndex = 89;
+            this.btnMinimize.UseVisualStyleBackColor = true;
+            this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
             // 
-            // supervisorCard
+            // lineTopInnerbox
             // 
-            this.supervisorCard.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.supervisorCard.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.supervisorCard.BackColor = System.Drawing.Color.White;
-            this.supervisorCard.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.supervisorCard.CausesValidation = false;
-            this.supervisorCard.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.supervisorCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.supervisorCard.ForeColor = System.Drawing.Color.DimGray;
-            this.supervisorCard.Location = new System.Drawing.Point(800, 143);
-            this.supervisorCard.MaximumSize = new System.Drawing.Size(352, 25);
-            this.supervisorCard.MinimumSize = new System.Drawing.Size(352, 25);
-            this.supervisorCard.Name = "supervisorCard";
-            this.supervisorCard.Size = new System.Drawing.Size(352, 25);
-            this.supervisorCard.TabIndex = 131;
-            this.supervisorCard.Text = "Tempel Kartu Supervisor";
+            this.lineTopInnerbox.BackColor = System.Drawing.Color.LightGray;
+            this.lineTopInnerbox.ForeColor = System.Drawing.Color.DimGray;
+            this.lineTopInnerbox.Location = new System.Drawing.Point(11, 95);
+            this.lineTopInnerbox.Name = "lineTopInnerbox";
+            this.lineTopInnerbox.Size = new System.Drawing.Size(1132, 1);
+            this.lineTopInnerbox.TabIndex = 79;
             // 
-            // comboBox2
+            // logoPelindo
             // 
-            this.comboBox2.AllowDrop = true;
-            this.comboBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(801, 145);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(261, 21);
-            this.comboBox2.TabIndex = 134;
-            this.comboBox2.Visible = false;
+            this.logoPelindo.BackgroundImage = global::BNITapCash.Properties.Resources.pelindo4;
+            this.logoPelindo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.logoPelindo.Location = new System.Drawing.Point(77, 12);
+            this.logoPelindo.Name = "logoPelindo";
+            this.logoPelindo.Size = new System.Drawing.Size(130, 68);
+            this.logoPelindo.TabIndex = 78;
+            this.logoPelindo.TabStop = false;
             // 
-            // labelBackToLogin
+            // btnClose
             // 
-            this.labelBackToLogin.AutoSize = true;
-            this.labelBackToLogin.BackColor = System.Drawing.Color.Transparent;
-            this.labelBackToLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBackToLogin.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelBackToLogin.Location = new System.Drawing.Point(661, 532);
-            this.labelBackToLogin.Name = "labelBackToLogin";
-            this.labelBackToLogin.Size = new System.Drawing.Size(72, 20);
-            this.labelBackToLogin.TabIndex = 136;
-            this.labelBackToLogin.Text = "Kembali";
-            // 
-            // buttonBackToCashier
-            // 
-            this.buttonBackToCashier.BackColor = System.Drawing.Color.Transparent;
-            this.buttonBackToCashier.BackgroundImage = global::BNITapCash.Properties.Resources.back_button;
-            this.buttonBackToCashier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonBackToCashier.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonBackToCashier.Location = new System.Drawing.Point(618, 524);
-            this.buttonBackToCashier.Name = "buttonBackToCashier";
-            this.buttonBackToCashier.Size = new System.Drawing.Size(40, 40);
-            this.buttonBackToCashier.TabIndex = 135;
-            this.buttonBackToCashier.TabStop = false;
-            this.buttonBackToCashier.Click += new System.EventHandler(this.buttonBackToCashier_Click);
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Image = global::BNITapCash.Properties.Resources.close_button;
+            this.btnClose.Location = new System.Drawing.Point(1126, 11);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(40, 30);
+            this.btnClose.TabIndex = 84;
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // FreePass
             // 
@@ -583,17 +608,20 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1366, 728);
             this.Controls.Add(this.panel1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Location = new System.Drawing.Point(83, 64);
             this.Name = "FreePass";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FreePass";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPelindo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.webcam)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonBackToCashier)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictFace)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictVehicle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonBackToCashier)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPelindo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -637,5 +665,6 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label labelBackToLogin;
         private System.Windows.Forms.PictureBox buttonBackToCashier;
+        private System.Windows.Forms.PictureBox webcam;
     }
 }

@@ -130,6 +130,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/master_cards/get_supervisor/.
+        /// </summary>
+        internal static string CheckSupervisorCardAPIURL {
+            get {
+                return ResourceManager.GetString("CheckSupervisorCardAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap close_button {
@@ -646,6 +655,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/parking_outs/request_parking_data_free.
+        /// </summary>
+        internal static string RequestDataParkingFreePassAPIURL {
+            get {
+                return ResourceManager.GetString("RequestDataParkingFreePassAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /ws/parking_outs/request_uid_fine.
         /// </summary>
         internal static string RequestFineFareAPIURL {
@@ -669,6 +687,15 @@ namespace BNITapCash.Properties {
         internal static string RequestVehicleTypeAPIURL {
             get {
                 return ResourceManager.GetString("RequestVehicleTypeAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /ws/parking_outs/save_parking_out_free.
+        /// </summary>
+        internal static string SaveDataFreePassAPIURL {
+            get {
+                return ResourceManager.GetString("SaveDataFreePassAPIURL", resourceCulture);
             }
         }
         

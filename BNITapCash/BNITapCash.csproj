@@ -74,7 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\request\FineFareRequest.cs" />
+    <Compile Include="API\request\FreePassRequest.cs" />
     <Compile Include="API\request\LostTicketRequest.cs" />
+    <Compile Include="API\request\ParkingOutFreePassRequest.cs" />
     <Compile Include="API\request\ParkingOutRequest.cs" />
     <Compile Include="API\request\PrintReportRequest.cs" />
     <Compile Include="API\request\RequestFareRequest.cs" />

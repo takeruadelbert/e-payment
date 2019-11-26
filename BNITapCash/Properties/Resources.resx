@@ -353,4 +353,16 @@
   <data name="BNIListRC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\RC\BNIListRC.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="CheckSupervisorCardAPIURL" xml:space="preserve">
+    <value>/ws/master_cards/get_supervisor/</value>
+    <comment>API for checking supervisor's card in Free Pass Menu</comment>
+  </data>
+  <data name="RequestDataParkingFreePassAPIURL" xml:space="preserve">
+    <value>/ws/parking_outs/request_parking_data_free</value>
+    <comment>API for requesting data parking free pass</comment>
+  </data>
+  <data name="SaveDataFreePassAPIURL" xml:space="preserve">
+    <value>/ws/parking_outs/save_parking_out_free</value>
+    <comment>API for saving data free pass into server</comment>
+  </data>
 </root>
