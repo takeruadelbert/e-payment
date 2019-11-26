@@ -73,92 +73,92 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\request\FineFareRequest.cs" />
-    <Compile Include="API\request\FreePassRequest.cs" />
-    <Compile Include="API\request\LostTicketRequest.cs" />
-    <Compile Include="API\request\ParkingOutFreePassRequest.cs" />
-    <Compile Include="API\request\ParkingOutRequest.cs" />
-    <Compile Include="API\request\PrintReportRequest.cs" />
-    <Compile Include="API\request\RequestFareRequest.cs" />
-    <Compile Include="API\response\base\DataResponse.cs" />
-    <Compile Include="API\response\base\DataResponseArray.cs" />
-    <Compile Include="API\response\base\DataResponseObject.cs" />
-    <Compile Include="API\request\SignInRequest.cs" />
-    <Compile Include="API\response\Barcode.cs" />
-    <Compile Include="API\response\FineFare.cs" />
-    <Compile Include="API\response\Gate.cs" />
-    <Compile Include="API\response\ParkingIn.cs" />
-    <Compile Include="API\response\ParkingOut.cs" />
-    <Compile Include="API\RESTAPI.cs" />
-    <Compile Include="Bank\BNI\BNI.cs" />
-    <Compile Include="Bank\DataModel\DataDeduct.cs" />
-    <Compile Include="Card\Mifare\Card.cs" />
-    <Compile Include="Card\Mifare\MifareCard.cs" />
-    <Compile Include="Constant\Constant.cs" />
-    <Compile Include="Forms\FreePass.cs">
+    <Compile Include="Classes\API\request\FineFareRequest.cs" />
+    <Compile Include="Classes\API\request\FreePassRequest.cs" />
+    <Compile Include="Classes\API\request\LostTicketRequest.cs" />
+    <Compile Include="Classes\API\request\ParkingOutFreePassRequest.cs" />
+    <Compile Include="Classes\API\request\ParkingOutRequest.cs" />
+    <Compile Include="Classes\API\request\PrintReportRequest.cs" />
+    <Compile Include="Classes\API\request\RequestFareRequest.cs" />
+    <Compile Include="Classes\API\response\base\DataResponse.cs" />
+    <Compile Include="Classes\API\response\base\DataResponseArray.cs" />
+    <Compile Include="Classes\API\response\base\DataResponseObject.cs" />
+    <Compile Include="Classes\API\request\SignInRequest.cs" />
+    <Compile Include="Classes\API\response\Barcode.cs" />
+    <Compile Include="Classes\API\response\FineFare.cs" />
+    <Compile Include="Classes\API\response\Gate.cs" />
+    <Compile Include="Classes\API\response\ParkingIn.cs" />
+    <Compile Include="Classes\API\response\ParkingOut.cs" />
+    <Compile Include="Classes\API\RESTAPI.cs" />
+    <Compile Include="Classes\Bank\BNI\BNI.cs" />
+    <Compile Include="Classes\Bank\DataModel\DataDeduct.cs" />
+    <Compile Include="Classes\Card\Mifare\Card.cs" />
+    <Compile Include="Classes\Card\Mifare\MifareCard.cs" />
+    <Compile Include="Classes\Constant\Constant.cs" />
+    <Compile Include="Classes\Forms\FreePass.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FreePass.Designer.cs">
+    <Compile Include="Classes\Forms\FreePass.Designer.cs">
       <DependentUpon>FreePass.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interface\EventFormHandler.cs" />
-    <Compile Include="ReaderDevice\Pcsc\Apdu.cs" />
-    <Compile Include="ReaderDevice\Pcsc\Helper.cs" />
-    <Compile Include="ReaderDevice\Pcsc\PcscProvider.cs" />
-    <Compile Include="ReaderDevice\Pcsc\PcscReader.cs" />
-    <Compile Include="ReaderDevice\Reader\Acr123U.cs" />
-    <Compile Include="Bank\BNI\Trx.cs" />
-    <Compile Include="Forms\About.cs">
+    <Compile Include="Classes\Interface\EventFormHandler.cs" />
+    <Compile Include="Classes\ReaderDevice\Pcsc\Apdu.cs" />
+    <Compile Include="Classes\ReaderDevice\Pcsc\Helper.cs" />
+    <Compile Include="Classes\ReaderDevice\Pcsc\PcscProvider.cs" />
+    <Compile Include="Classes\ReaderDevice\Pcsc\PcscReader.cs" />
+    <Compile Include="Classes\ReaderDevice\Reader\Acr123U.cs" />
+    <Compile Include="Classes\Bank\BNI\Trx.cs" />
+    <Compile Include="Classes\Forms\About.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\About.Designer.cs">
+    <Compile Include="Classes\Forms\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Cashier.cs">
+    <Compile Include="Classes\Forms\Cashier.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Cashier.Designer.cs">
+    <Compile Include="Classes\Forms\Cashier.Designer.cs">
       <DependentUpon>Cashier.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReaderDevice\Exceptions\PcscException.cs" />
-    <Compile Include="ReaderDevice\Exceptions\ReaderException.cs" />
-    <Compile Include="DB\DBConnect.cs" />
-    <Compile Include="Forms\DatabaseConfig.cs">
+    <Compile Include="Classes\ReaderDevice\Exceptions\PcscException.cs" />
+    <Compile Include="Classes\ReaderDevice\Exceptions\ReaderException.cs" />
+    <Compile Include="Classes\DB\DBConnect.cs" />
+    <Compile Include="Classes\Forms\DatabaseConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DatabaseConfig.Designer.cs">
+    <Compile Include="Classes\Forms\DatabaseConfig.Designer.cs">
       <DependentUpon>DatabaseConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LostTicket.cs">
+    <Compile Include="Classes\Forms\LostTicket.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LostTicket.Designer.cs">
+    <Compile Include="Classes\Forms\LostTicket.Designer.cs">
       <DependentUpon>LostTicket.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SignIn.cs">
+    <Compile Include="Classes\Forms\SignIn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SignIn.Designer.cs">
+    <Compile Include="Classes\Forms\SignIn.Designer.cs">
       <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TMID.cs">
+    <Compile Include="Classes\Forms\TMID.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TMID.Designer.cs">
+    <Compile Include="Classes\Forms\TMID.Designer.cs">
       <DependentUpon>TMID.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helper\Base64Helper.cs" />
-    <Compile Include="Helper\ServerHelper.cs" />
-    <Compile Include="Helper\TKHelper.cs" />
-    <Compile Include="Interface\RestAPIMethod.cs" />
-    <Compile Include="Miscellaneous\FileMonitor\FileWatcher.cs" />
-    <Compile Include="Forms\Loading.cs">
+    <Compile Include="Classes\Helper\Base64Helper.cs" />
+    <Compile Include="Classes\Helper\ServerHelper.cs" />
+    <Compile Include="Classes\Helper\TKHelper.cs" />
+    <Compile Include="Classes\Interface\RestAPIMethod.cs" />
+    <Compile Include="Classes\Miscellaneous\FileMonitor\FileWatcher.cs" />
+    <Compile Include="Classes\Forms\Loading.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Loading.Designer.cs">
+    <Compile Include="Classes\Forms\Loading.Designer.cs">
       <DependentUpon>Loading.cs</DependentUpon>
     </Compile>
-    <Compile Include="Miscellaneous\Webcam\Webcam.cs" />
+    <Compile Include="Classes\Miscellaneous\Webcam\Webcam.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -166,34 +166,34 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Setting.cs">
+    <Compile Include="Classes\Forms\Setting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Setting.Designer.cs">
+    <Compile Include="Classes\Forms\Setting.Designer.cs">
       <DependentUpon>Setting.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\About.resx">
+    <EmbeddedResource Include="Classes\Forms\About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Cashier.resx">
+    <EmbeddedResource Include="Classes\Forms\Cashier.resx">
       <DependentUpon>Cashier.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DatabaseConfig.resx">
+    <EmbeddedResource Include="Classes\Forms\DatabaseConfig.resx">
       <DependentUpon>DatabaseConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FreePass.resx">
+    <EmbeddedResource Include="Classes\Forms\FreePass.resx">
       <DependentUpon>FreePass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LostTicket.resx">
+    <EmbeddedResource Include="Classes\Forms\LostTicket.resx">
       <DependentUpon>LostTicket.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SignIn.resx">
+    <EmbeddedResource Include="Classes\Forms\SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Loading.resx">
+    <EmbeddedResource Include="Classes\Forms\Loading.resx">
       <DependentUpon>Loading.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TMID.resx">
+    <EmbeddedResource Include="Classes\Forms\TMID.resx">
       <DependentUpon>TMID.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -201,7 +201,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Setting.resx">
+    <EmbeddedResource Include="Classes\Forms\Setting.resx">
       <DependentUpon>Setting.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
