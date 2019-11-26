@@ -85,7 +85,7 @@ namespace BNITapCash
             int width = Convert.ToInt32(txtWidth.Text);
             int height = Convert.ToInt32(txtHeight.Text);
             string liveCamUsername = liveCameraUsername.Text;
-            string liveCamPassword = liveCameraPassword.Text;
+            string liveCamPassword = liveCameraPassword.Text.ToLower().Equals("password") ? string.Empty : liveCameraPassword.Text;
             if (ipv4 != "" && ipv4 != "IP Server" && ipv4 != null)
             {
                 if (ipv4_live_cam != "" && ipv4_live_cam != "IP Live Camera" && ipv4_live_cam != null)
