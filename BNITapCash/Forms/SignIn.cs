@@ -6,6 +6,7 @@ using BNITapCash.ConstantVariable;
 using BNITapCash.DB;
 using BNITapCash.Forms;
 using BNITapCash.Helper;
+using BNITapCash.Interface;
 using BNITapCash.Readers.Contactless.Acr123U;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -16,7 +17,7 @@ using System.Windows.Forms;
 
 namespace BNITapCash
 {
-    public partial class Login : Form
+    public partial class Login : Form, EventFormHandler
     {
         private Cashier cashier;
         private About about;
@@ -34,12 +35,6 @@ namespace BNITapCash
         private void Login_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void username_Click(object sender, EventArgs e)
-        {
-            if (username.Text.ToLower() == "username")
-                this.ChangeTextListener("username");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -84,11 +79,6 @@ namespace BNITapCash
             password.BackgroundImage = Properties.Resources.password3;
             panel2.ForeColor = Color.FromArgb(78, 184, 206); ;
             password.ForeColor = Color.FromArgb(78, 184, 206); ;
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void SignIn()
@@ -275,16 +265,6 @@ namespace BNITapCash
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void InitData()
         {
             if (Properties.Settings.Default.Username != string.Empty)
@@ -398,6 +378,30 @@ namespace BNITapCash
                 MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+        }
+
+        public void UnsubscribeEvents()
+        {
+            username.Click -= textBox1_Click;
+            username.TextChanged -= textBox1_TextChanged;
+            password.Click -= textBox2_Click;
+            password.TextChanged -= textBox2_TextChanged;
+
+            btnLogin.Click -= btnLogin_Click;
+            button1.Click -= button1_Click;
+            button2.Click -= button2_Click;
+
+            pictureBox2.MouseDown -= pictureBox2_MouseDown;
+
+            databaseToolStripMenuItem.Click -= databaseToolStripMenuItem_Click;
+            iPv4ServerCameraToolStripMenuItem.Click -= iPv4ServerCameraToolStripMenuItem_Click;
+            tIDSettlementMIDToolStripMenuItem.Click -= tIDSettlementMIDToolStripMenuItem_Click;
+            aboutToolStripMenuItem.Click -= aboutToolStripMenuItem_Click;
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

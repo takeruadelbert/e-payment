@@ -7,6 +7,7 @@ using BNITapCash.Bank.DataModel;
 using BNITapCash.ConstantVariable;
 using BNITapCash.DB;
 using BNITapCash.Helper;
+using BNITapCash.Interface;
 using BNITapCash.Miscellaneous.Webcam;
 using Newtonsoft.Json;
 using System;
@@ -17,7 +18,7 @@ using System.Windows.Forms;
 
 namespace BNITapCash.Forms
 {
-    public partial class LostTicket : Form
+    public partial class LostTicket : Form, EventFormHandler
     {
         private readonly string liveCameraURL = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressLiveCamera + "/snapshot";
         private JPEGStream stream;
@@ -137,13 +138,15 @@ namespace BNITapCash.Forms
         }
 
         private void back_to_cashier_Click(object sender, EventArgs e)
-        {
+        {            
             StopLiveCamera();
             database.DisposeDatabaseConnection();
             Cashier cashier = new Cashier(home);
             cashier.Show();
             Dispose();
+            UnsubscribeEvents();
             GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void tipe_kendaraan_SelectionChangeCommitted(object sender, EventArgs e)
@@ -361,6 +364,18 @@ namespace BNITapCash.Forms
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+        }
+
+        public void UnsubscribeEvents()
+        {
+            tipe_kendaraan.SelectionChangeCommitted -= tipe_kendaraan_SelectionChangeCommitted;
+            nomor_plat.Click -= nomor_plat_Click;
+            nomor_plat.TextChanged -= nomor_plat_TextChanged;
+            btnLsTicketClear.Click -= btnLsTicketClear_Click;
+            btnLsTicketSave.Click -= btnLsTicketSave_Click;
+            btnMinimize.Click -= btnMinimize_Click;
+            btnClose.Click -= btnClose_Click;
+            buttonBackToCashier.Click -= back_to_cashier_Click;
         }
     }
 }

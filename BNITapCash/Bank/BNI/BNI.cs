@@ -32,6 +32,8 @@ namespace BNITapCash.Bank.BNI
                 this.acr123u.readerName = this.readerList[0];
                 RCList = TKHelper.ParseRCJsonFileToDictionary(Properties.Resources.BNIListRC);
                 InitializeSAM();
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
             catch (Exception ex)
             {
@@ -238,7 +240,8 @@ namespace BNITapCash.Bank.BNI
                 acr123u.disconnect();
                 dataDeduct = new DataDeduct(true, ex.Message);
             }
-
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
             return dataDeduct;
         }
 

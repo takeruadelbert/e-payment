@@ -2,11 +2,12 @@
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using BNITapCash.Interface;
 using EPaymentUpdater;
 
 namespace BNITapCash.Forms
 {
-    public partial class About : Form, IApplicationUpdateable
+    public partial class About : Form, IApplicationUpdateable, EventFormHandler
     {
         public About()
         {
@@ -26,33 +27,14 @@ namespace BNITapCash.Forms
             System.Diagnostics.Process.Start(Properties.Resources.DeveloperURL);
         }
 
-        private void txtVersion_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void About_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Dispose();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AppName_Click(object sender, EventArgs e)
         {
 
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            UnsubscribeEvents();
             Dispose();
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -67,6 +49,15 @@ namespace BNITapCash.Forms
         {
             ApplicationUpdater updater = new ApplicationUpdater(this);
             updater.DoUpdate();
+        }
+
+        public void UnsubscribeEvents()
+        {
+            linkLabel1.LinkClicked -= linkLabel1_LinkClicked;
+
+            btnCheckUpdate.Click -= btnCheckUpdate_Click;
+            button1.Click -= button1_Click_1;
+            button2.Click -= button2_Click;
         }
 
         public string ApplicationName

@@ -101,6 +101,7 @@
     <Compile Include="Forms\FreePass.Designer.cs">
       <DependentUpon>FreePass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interface\EventFormHandler.cs" />
     <Compile Include="ReaderDevice\Pcsc\Apdu.cs" />
     <Compile Include="ReaderDevice\Pcsc\Helper.cs" />
     <Compile Include="ReaderDevice\Pcsc\PcscProvider.cs" />

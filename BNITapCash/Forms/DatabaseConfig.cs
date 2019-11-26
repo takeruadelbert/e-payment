@@ -4,10 +4,11 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using BNITapCash.ConstantVariable;
+using BNITapCash.Interface;
 
 namespace BNITapCash.Forms
 {
-    public partial class DatabaseConfig : Form
+    public partial class DatabaseConfig : Form, EventFormHandler
     {
         private Form home;
 
@@ -65,6 +66,7 @@ namespace BNITapCash.Forms
 
         private void back_Click(object sender, EventArgs e)
         {
+            UnsubscribeEvents();
             home.Show();
             Dispose();
             GC.Collect();
@@ -232,6 +234,25 @@ namespace BNITapCash.Forms
         private void buttonTestConnection_Click(object sender, EventArgs e)
         {
             TestDatabaseConnection();
+        }
+
+        public void UnsubscribeEvents()
+        {
+            txtDBHost.Click -= txtDBHost_Click;
+            txtDBName.Click -= txtDBName_Click;
+            txtDBUsername.Click -= txtDBUsername_Click;
+            txtDBPassword.Click -= txtDBPassword_Click;
+
+            txtDBHost.TextChanged -= txtDBHost_TextChanged;
+            txtDBName.TextChanged -= txtDBName_TextChanged;
+            txtDBUsername.TextChanged -= txtDBUsername_TextChanged;
+            txtDBPassword.TextChanged -= txtDBPassword_TextChanged;
+
+            button1.Click -= button1_Click;
+            button2.Click -= button2_Click;
+            buttonTestConnection.Click -= buttonTestConnection_Click;
+            back.Click -= back_Click;
+            save.Click -= save_Click;
         }
     }
 }

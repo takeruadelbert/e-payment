@@ -9,6 +9,7 @@ using BNITapCash.ConstantVariable;
 using BNITapCash.DB;
 using BNITapCash.Forms;
 using BNITapCash.Helper;
+using BNITapCash.Interface;
 using BNITapCash.Miscellaneous.Webcam;
 using Newtonsoft.Json;
 using System;
@@ -20,7 +21,7 @@ using System.Windows.Forms;
 
 namespace BNITapCash
 {
-    public partial class Cashier : Form
+    public partial class Cashier : Form, EventFormHandler
     {
         private Login home;
         private BNI bni;
@@ -646,7 +647,9 @@ namespace BNITapCash
             lostTicket.Show();
             Hide();
             Dispose();
+            UnsubscribeEvents();
             GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void buttonFreePass_Click(object sender, EventArgs e)
@@ -658,7 +661,34 @@ namespace BNITapCash
             freePass.Show();
             Hide();
             Dispose();
+            UnsubscribeEvents();
             GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
+
+        public void UnsubscribeEvents()
+        {
+            textBox1.Click -= textBox1_Click;
+            textBox1.KeyDown -= textBox1_KeyDown;
+            textBox1.TextChanged -= textBox1_TextChanged;
+
+            listBarcodeSuggestion.SelectedIndexChanged -= selectBarcode;
+
+            comboBox1.SelectionChangeCommitted -= comboBox1_SelectionChangeCommitted;
+
+            textBox2.Click -= textBox2_Click;
+            textBox2.TextChanged -= textBox2_TextChanged;
+
+            buttonGenerateReport.Click -= buttonGenerateReport_Click;
+            buttonReprint.Click -= button4_Click;
+            buttonLostTicket.Click -= buttonLostTicket_Click;
+            buttonFreePass.Click -= buttonFreePass_Click;
+            logout.Click -= logout_Click;
+            btnClear.Click -= btnClear_Click;
+            btnSave.Click -= btnSave_Click;
+
+            button1.Click -= button1_Click;
+            button2.Click -= button2_Click;
         }
     }
 }

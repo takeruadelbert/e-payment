@@ -45,7 +45,6 @@
             this.label1.Size = new System.Drawing.Size(71, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Processing ...";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // progressBar1
             // 
@@ -55,7 +54,6 @@
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 1;
             this.progressBar1.UseWaitCursor = true;
-            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
             // 
             // pictureBox1
             // 

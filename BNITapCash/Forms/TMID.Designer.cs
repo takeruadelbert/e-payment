@@ -62,11 +62,11 @@
             // 
             this.txtSettlementMID.BackColor = System.Drawing.Color.White;
             this.txtSettlementMID.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtSettlementMID.Font = new System.Drawing.Font("Poppins Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSettlementMID.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSettlementMID.ForeColor = System.Drawing.Color.DimGray;
             this.txtSettlementMID.Location = new System.Drawing.Point(118, 311);
             this.txtSettlementMID.Name = "txtSettlementMID";
-            this.txtSettlementMID.Size = new System.Drawing.Size(215, 23);
+            this.txtSettlementMID.Size = new System.Drawing.Size(215, 17);
             this.txtSettlementMID.TabIndex = 17;
             this.txtSettlementMID.Text = "Settlement MID";
             this.txtSettlementMID.Click += new System.EventHandler(this.txtSettlementMID_Click);
@@ -122,11 +122,11 @@
             // 
             this.txtTID.BackColor = System.Drawing.Color.White;
             this.txtTID.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtTID.Font = new System.Drawing.Font("Poppins Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTID.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTID.ForeColor = System.Drawing.Color.DimGray;
             this.txtTID.Location = new System.Drawing.Point(117, 234);
             this.txtTID.Name = "txtTID";
-            this.txtTID.Size = new System.Drawing.Size(215, 23);
+            this.txtTID.Size = new System.Drawing.Size(215, 17);
             this.txtTID.TabIndex = 12;
             this.txtTID.Text = "TID";
             this.txtTID.Click += new System.EventHandler(this.txtTID_Click);
@@ -224,38 +224,38 @@
             this.button1.Size = new System.Drawing.Size(40, 30);
             this.button1.TabIndex = 38;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.label1_Click);
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Poppins Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
             this.label4.Location = new System.Drawing.Point(114, 280);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(336, 26);
+            this.label4.Size = new System.Drawing.Size(289, 18);
             this.label4.TabIndex = 24;
             this.label4.Text = "MID (Merchant Identification Number)";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Poppins Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
             this.label3.Location = new System.Drawing.Point(111, 200);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(325, 26);
+            this.label3.Size = new System.Drawing.Size(280, 18);
             this.label3.TabIndex = 23;
             this.label3.Text = "TID (Terminal Identification Number)";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Poppins ExtraBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
             this.label2.Location = new System.Drawing.Point(110, 166);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(214, 28);
+            this.label2.Size = new System.Drawing.Size(205, 20);
             this.label2.TabIndex = 22;
             this.label2.Text = "Setting Payment Reader";
             // 

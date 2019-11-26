@@ -149,13 +149,13 @@
             this.tIDSettlementMIDToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(179, 92);
             // 
             // databaseToolStripMenuItem
             // 
             this.databaseToolStripMenuItem.Image = global::BNITapCash.Properties.Resources.database;
             this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.databaseToolStripMenuItem.Text = "Database";
             this.databaseToolStripMenuItem.Click += new System.EventHandler(this.databaseToolStripMenuItem_Click);
             // 
@@ -163,7 +163,7 @@
             // 
             this.iPv4ServerCameraToolStripMenuItem.Image = global::BNITapCash.Properties.Resources.ipaddress;
             this.iPv4ServerCameraToolStripMenuItem.Name = "iPv4ServerCameraToolStripMenuItem";
-            this.iPv4ServerCameraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.iPv4ServerCameraToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.iPv4ServerCameraToolStripMenuItem.Text = "IPv4 Server/Camera";
             this.iPv4ServerCameraToolStripMenuItem.Click += new System.EventHandler(this.iPv4ServerCameraToolStripMenuItem_Click);
             // 
@@ -171,7 +171,7 @@
             // 
             this.tIDSettlementMIDToolStripMenuItem.Image = global::BNITapCash.Properties.Resources.id;
             this.tIDSettlementMIDToolStripMenuItem.Name = "tIDSettlementMIDToolStripMenuItem";
-            this.tIDSettlementMIDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tIDSettlementMIDToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.tIDSettlementMIDToolStripMenuItem.Text = "TID/Settlement MID";
             this.tIDSettlementMIDToolStripMenuItem.Click += new System.EventHandler(this.tIDSettlementMIDToolStripMenuItem_Click);
             // 
@@ -180,7 +180,7 @@
             this.aboutToolStripMenuItem.BackgroundImage = global::BNITapCash.Properties.Resources.version;
             this.aboutToolStripMenuItem.Image = global::BNITapCash.Properties.Resources.version;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.aboutToolStripMenuItem.Text = "About E-Payment";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 

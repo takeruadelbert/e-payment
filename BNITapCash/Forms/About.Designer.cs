@@ -40,11 +40,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnCheckUpdate = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnCheckUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -62,7 +62,6 @@
             this.AppName.Size = new System.Drawing.Size(278, 31);
             this.AppName.TabIndex = 2;
             this.AppName.Text = "E-PASS & E-Payment";
-            this.AppName.Click += new System.EventHandler(this.AppName_Click);
             // 
             // label1
             // 
@@ -74,7 +73,6 @@
             this.label1.Size = new System.Drawing.Size(372, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "E-Payment  Copyright © 2019 | Developed and Maintenanced by";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // linkLabel1
             // 
@@ -115,7 +113,6 @@
             this.txtVersion.Size = new System.Drawing.Size(36, 13);
             this.txtVersion.TabIndex = 9;
             this.txtVersion.Text = "1.0.0";
-            this.txtVersion.Click += new System.EventHandler(this.txtVersion_Click);
             // 
             // pictureBox1
             // 
@@ -189,6 +186,17 @@
             this.panel3.Size = new System.Drawing.Size(618, 500);
             this.panel3.TabIndex = 14;
             // 
+            // btnCheckUpdate
+            // 
+            this.btnCheckUpdate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnCheckUpdate.Location = new System.Drawing.Point(247, 316);
+            this.btnCheckUpdate.Name = "btnCheckUpdate";
+            this.btnCheckUpdate.Size = new System.Drawing.Size(108, 31);
+            this.btnCheckUpdate.TabIndex = 34;
+            this.btnCheckUpdate.Text = "Check For Update";
+            this.btnCheckUpdate.UseVisualStyleBackColor = true;
+            this.btnCheckUpdate.Click += new System.EventHandler(this.btnCheckUpdate_Click);
+            // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.White;
@@ -238,17 +246,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(36, 38);
             this.panel1.TabIndex = 33;
-            // 
-            // btnCheckUpdate
-            // 
-            this.btnCheckUpdate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnCheckUpdate.Location = new System.Drawing.Point(247, 316);
-            this.btnCheckUpdate.Name = "btnCheckUpdate";
-            this.btnCheckUpdate.Size = new System.Drawing.Size(108, 31);
-            this.btnCheckUpdate.TabIndex = 34;
-            this.btnCheckUpdate.Text = "Check For Update";
-            this.btnCheckUpdate.UseVisualStyleBackColor = true;
-            this.btnCheckUpdate.Click += new System.EventHandler(this.btnCheckUpdate_Click);
             // 
             // About
             // 

@@ -3,10 +3,11 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using BNITapCash.ConstantVariable;
+using BNITapCash.Interface;
 
 namespace BNITapCash
 {
-    public partial class Setting : Form
+    public partial class Setting : Form, EventFormHandler
     {
         private Form home;
 
@@ -72,6 +73,7 @@ namespace BNITapCash
 
         private void back_Click(object sender, EventArgs e)
         {
+            UnsubscribeEvents();
             home.Show();
             Dispose();
             GC.Collect();
@@ -226,11 +228,6 @@ namespace BNITapCash
             }
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(Constant.CONFIRMATION_MESSAGE_BEFORE_EXIT, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -244,11 +241,6 @@ namespace BNITapCash
         private void button2_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void liveCameraPassword_TextChanged_1(object sender, EventArgs e)
@@ -269,6 +261,31 @@ namespace BNITapCash
         private void liveCameraPassword_Click(object sender, EventArgs e)
         {
             this.TextChangeListener("password");
+        }
+
+        public void UnsubscribeEvents()
+        {
+            textBox1.Click -= textBox1_Click;
+            textBox2.Click -= textBox2_Click;
+            txtWidth.Click -= txtWidth_Click;
+            txtHeight.Click -= txtHeight_Click;
+            liveCameraUsername.Click -= liveCameraUsername_Click;
+            liveCameraPassword.Click -= liveCameraPassword_Click;
+
+            textBox1.TextChanged -= textBox1_TextChanged;
+            textBox2.TextChanged -= textBox2_TextChanged;
+            txtWidth.TextChanged -= txtWidth_TextChanged;
+            txtHeight.TextChanged -= txtHeight_TextChanged;
+            liveCameraUsername.TextChanged -= liveCameraUsername_TextChanged_1;
+            liveCameraPassword.TextChanged -= liveCameraPassword_TextChanged_1;
+
+            txtWidth.KeyPress -= txtWidth_KeyPress;
+            txtHeight.KeyPress -= txtHeight_KeyPress;
+
+            button1.Click -= button1_Click;
+            button2.Click -= button2_Click;
+            save.Click -= save_Click;
+            back.Click -= back_Click;
         }
     }
 }

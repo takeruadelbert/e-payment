@@ -1,11 +1,12 @@
-﻿using System;
+﻿using BNITapCash.ConstantVariable;
+using BNITapCash.Interface;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using BNITapCash.ConstantVariable;
 
 namespace BNITapCash.Forms
 {
-    public partial class TMID : Form
+    public partial class TMID : Form, EventFormHandler
     {
         private Login login;
 
@@ -61,6 +62,7 @@ namespace BNITapCash.Forms
 
         private void back_Click(object sender, EventArgs e)
         {
+            UnsubscribeEvents();
             Dispose();
             login.Show();
             GC.Collect();
@@ -100,7 +102,26 @@ namespace BNITapCash.Forms
             txtSettlementMID.ForeColor = Color.FromArgb(78, 184, 206);
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void minimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        public void UnsubscribeEvents()
+        {
+            txtTID.Click -= txtTID_Click;
+            txtSettlementMID.Click -= txtSettlementMID_Click;
+
+            txtTID.TextChanged -= txtTID_TextChanged;
+            txtSettlementMID.TextChanged -= txtSettlementMID_TextChanged;
+
+            button1.Click -= button1_Click;
+            button2.Click -= minimize_Click;
+            save.Click -= save_Click;
+            back.Click -= back_Click;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(Constant.CONFIRMATION_MESSAGE_BEFORE_EXIT, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
@@ -108,11 +129,6 @@ namespace BNITapCash.Forms
                 Dispose();
                 System.Environment.Exit(1);
             }
-        }
-
-        private void minimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

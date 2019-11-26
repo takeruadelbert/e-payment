@@ -4,8 +4,8 @@ using BNITapCash.API.request;
 using BNITapCash.API.response;
 using BNITapCash.Card.Mifare;
 using BNITapCash.ConstantVariable;
-using BNITapCash.DB;
 using BNITapCash.Helper;
+using BNITapCash.Interface;
 using BNITapCash.Miscellaneous.Webcam;
 using Newtonsoft.Json;
 using System;
@@ -17,11 +17,10 @@ using System.Windows.Forms;
 
 namespace BNITapCash.Forms
 {
-    public partial class FreePass : Form
+    public partial class FreePass : Form, EventFormHandler
     {
         private Login home;
         private JPEGStream stream;
-        private DBConnect database;
         public PictureBox webcamImage;
         private Webcam camera;
         private MifareCard MifareCard;
@@ -57,7 +56,6 @@ namespace BNITapCash.Forms
             this.webcamImage = webcam;
             this.camera = new Webcam(this);
             this.restApi = new RESTAPI();
-            this.database = new DBConnect();
             this.parkingIn = new ParkingIn();
             autoComplete = new AutoCompleteStringCollection();
             this.ip_address_server = Properties.Settings.Default.IPAddressServer;
@@ -89,9 +87,9 @@ namespace BNITapCash.Forms
         }
 
         private void StopLiveCamera()
-        {
-            stream.Stop();
+        {            
             stream.NewFrame -= stream_NewFrame;
+            stream.Stop();
         }
 
         private void stream_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -118,6 +116,8 @@ namespace BNITapCash.Forms
                     }
                     vehicleType.SelectedIndex = 0;
                 }
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
             catch (Exception ex)
             {
@@ -148,12 +148,14 @@ namespace BNITapCash.Forms
 
         private void buttonBackToCashier_Click(object sender, EventArgs e)
         {
+            MifareCard.Stop();
             StopLiveCamera();
-            database.DisposeDatabaseConnection();
             Cashier cashier = new Cashier(home);
             cashier.Show();
             Dispose();
+            UnsubscribeEvents();
             GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void vehicleType_SelectionChangeCommitted(object sender, EventArgs e)
@@ -474,7 +476,7 @@ namespace BNITapCash.Forms
             ParkingOutFreePassRequest freePassRequest = new ParkingOutFreePassRequest(vehicle, uidType, dataBarcode, username, datetimeOut, dataPlateNumber, ipAddressLocal, uid, base64Image);
             var sent_param = JsonConvert.SerializeObject(freePassRequest);
 
-            DataResponseObject response = (DataResponseObject)restApi.post(ip_address_server, Properties.Resources.SaveDataParkingAPIURL, true, sent_param);
+            DataResponseObject response = (DataResponseObject)restApi.post(ip_address_server, Properties.Resources.SaveDataFreePassAPIURL, true, sent_param);
             if (response != null)
             {
                 switch (response.Status)
@@ -491,6 +493,24 @@ namespace BNITapCash.Forms
                 MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
+        }
+
+        public void UnsubscribeEvents()
+        {
+            listBarcodeSuggestion.SelectedIndexChanged -= selectBarcode;
+            barcode.KeyDown -= barcode_KeyDown;
+            barcode.Click -= barcode_Click;
+
+            supervisorCard.TextChanged -= supervisorCard_TextChanged;
+
+            plateNumber.Click -= plateNumber_Click;
+            plateNumber.TextChanged -= plateNumber_TextChanged;
+
+            btnClear.Click -= btnClear_Click;
+            btnSave.Click -= btnSave_Click;
+            btnMinimize.Click -= btnMinimize_Click;
+            btnClose.Click -= btnClose_Click;
+            buttonBackToCashier.Click -= buttonBackToCashier_Click;
         }
     }
 }

@@ -416,7 +416,7 @@
             this.barcode.MaximumSize = new System.Drawing.Size(352, 25);
             this.barcode.MinimumSize = new System.Drawing.Size(352, 25);
             this.barcode.Name = "barcode";
-            this.barcode.Size = new System.Drawing.Size(352, 17);
+            this.barcode.Size = new System.Drawing.Size(352, 25);
             this.barcode.TabIndex = 93;
             this.barcode.Text = "Scan Barcode";
             this.barcode.Click += new System.EventHandler(this.barcode_Click);
