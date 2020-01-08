@@ -1,10 +1,10 @@
-﻿using BNITapCash.DB;
+﻿using BNITapCash.ConstantVariable;
+using BNITapCash.DB;
 using BNITapCash.Helper;
+using BNITapCash.Interface;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using BNITapCash.ConstantVariable;
-using BNITapCash.Interface;
 
 namespace BNITapCash.Forms
 {
@@ -69,8 +69,7 @@ namespace BNITapCash.Forms
             UnsubscribeEvents();
             home.Show();
             Dispose();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            TKHelper.ClearGarbage();
         }
 
         private void save_Click(object sender, EventArgs e)

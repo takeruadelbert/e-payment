@@ -87,7 +87,7 @@ namespace BNITapCash.Forms
         }
 
         private void StopLiveCamera()
-        {            
+        {
             stream.NewFrame -= stream_NewFrame;
             stream.Stop();
         }
@@ -96,8 +96,7 @@ namespace BNITapCash.Forms
         {
             Bitmap bmp = (Bitmap)eventArgs.Frame.Clone();
             LiveCamera.Image = bmp;
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            TKHelper.ClearGarbage();
         }
 
         private void InitDataVehicleType()
@@ -116,8 +115,7 @@ namespace BNITapCash.Forms
                     }
                     vehicleType.SelectedIndex = 0;
                 }
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
+                TKHelper.ClearGarbage();
             }
             catch (Exception ex)
             {
@@ -154,8 +152,7 @@ namespace BNITapCash.Forms
             cashier.Show();
             Dispose();
             UnsubscribeEvents();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            TKHelper.ClearGarbage();
         }
 
         private void vehicleType_SelectionChangeCommitted(object sender, EventArgs e)

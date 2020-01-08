@@ -1,4 +1,5 @@
 ﻿using BNITapCash.ConstantVariable;
+using BNITapCash.Helper;
 using BNITapCash.Interface;
 using System;
 using System.Drawing;
@@ -65,8 +66,7 @@ namespace BNITapCash.Forms
             UnsubscribeEvents();
             Dispose();
             login.Show();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            TKHelper.ClearGarbage();
         }
 
         private void txtTID_TextChanged(object sender, EventArgs e)

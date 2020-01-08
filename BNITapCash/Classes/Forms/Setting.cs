@@ -1,9 +1,9 @@
-﻿using BNITapCash.Helper;
+﻿using BNITapCash.ConstantVariable;
+using BNITapCash.Helper;
+using BNITapCash.Interface;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using BNITapCash.ConstantVariable;
-using BNITapCash.Interface;
 
 namespace BNITapCash
 {
@@ -76,8 +76,7 @@ namespace BNITapCash
             UnsubscribeEvents();
             home.Show();
             Dispose();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            TKHelper.ClearGarbage();
         }
 
         private void save_Click(object sender, EventArgs e)

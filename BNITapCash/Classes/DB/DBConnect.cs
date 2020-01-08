@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using BNITapCash.Helper;
 
 namespace BNITapCash.DB
 {
@@ -49,8 +50,7 @@ namespace BNITapCash.DB
         public void DisposeDatabaseConnection()
         {
             connection = null;
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            TKHelper.ClearGarbage();
         }
 
         //open connection to database

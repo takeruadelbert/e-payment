@@ -188,5 +188,11 @@ namespace BNITapCash.Helper
                 }
             }
         }
+
+        public static void ClearGarbage()
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
     }
 }

@@ -342,8 +342,7 @@ namespace BNITapCash
         {
             Bitmap bmp = (Bitmap)eventArgs.Frame.Clone();
             LiveCamera.Image = bmp;
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            TKHelper.ClearGarbage();
         }
 
         private void panel10_Paint(object sender, PaintEventArgs e)
@@ -648,8 +647,7 @@ namespace BNITapCash
             Hide();
             Dispose();
             UnsubscribeEvents();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            TKHelper.ClearGarbage();
         }
 
         private void buttonFreePass_Click(object sender, EventArgs e)
@@ -662,8 +660,7 @@ namespace BNITapCash
             Hide();
             Dispose();
             UnsubscribeEvents();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            TKHelper.ClearGarbage();
         }
 
         public void UnsubscribeEvents()

@@ -142,8 +142,7 @@ namespace BNITapCash
                         {
                             ApiSignIn(username, password);
                             loading.Dispose();
-                            GC.Collect();
-                            GC.WaitForPendingFinalizers();
+                            TKHelper.ClearGarbage();
                         }
                     }
                 }
@@ -293,8 +292,7 @@ namespace BNITapCash
             Hide();
             Setting setting = new Setting(this);
             setting.Show();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            TKHelper.ClearGarbage();
         }
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
@@ -310,8 +308,7 @@ namespace BNITapCash
             Hide();
             DatabaseConfig DBConfig = new DatabaseConfig(this);
             DBConfig.Show();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            TKHelper.ClearGarbage();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -321,8 +318,7 @@ namespace BNITapCash
                 about = new About();
                 about.Show();
             }
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            TKHelper.ClearGarbage();
         }
 
         private void tIDSettlementMIDToolStripMenuItem_Click(object sender, EventArgs e)
@@ -330,8 +326,7 @@ namespace BNITapCash
             Hide();
             TMID tmid = new TMID(this);
             tmid.Show();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            TKHelper.ClearGarbage();
         }
 
         private void button1_Click(object sender, EventArgs e)

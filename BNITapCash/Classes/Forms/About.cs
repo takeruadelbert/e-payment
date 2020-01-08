@@ -1,9 +1,10 @@
-﻿using System;
+﻿using BNITapCash.Helper;
+using BNITapCash.Interface;
+using EPaymentUpdater;
+using System;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
-using BNITapCash.Interface;
-using EPaymentUpdater;
 
 namespace BNITapCash.Forms
 {
@@ -36,8 +37,7 @@ namespace BNITapCash.Forms
         {
             UnsubscribeEvents();
             Dispose();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            TKHelper.ClearGarbage();
         }
 
         private void button2_Click(object sender, EventArgs e)
