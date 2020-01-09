@@ -4,6 +4,7 @@ using BNITapCash.API.response;
 using BNITapCash.Bank.BNI;
 using BNITapCash.Bank.DataModel;
 using BNITapCash.Card.Mifare;
+using BNITapCash.Classes.Helper;
 using BNITapCash.ConstantVariable;
 using BNITapCash.DB;
 using BNITapCash.Forms;
@@ -96,9 +97,7 @@ namespace BNITapCash
 
         private void StartLiveCamera()
         {
-            string[] options = { ":network-caching:500" };
-            string uri = "rtsp://admin:@192.168.88.93:80/ch0_0.264";
-            LiveCamera.Play(new Uri(uri), options);
+            IpCameraHelper.StartCamera(LiveCamera);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -614,16 +613,18 @@ namespace BNITapCash
         {
             mifareCard.Stop();
             database.DisposeDatabaseConnection();
+            IpCameraHelper.StopCamera(LiveCamera);
             LostTicket lostTicket = new LostTicket(home);
-            lostTicket.Show();
+            lostTicket.Show();            
             Hide();
             Dispose();
-            UnsubscribeEvents();
+            UnsubscribeEvents();            
             TKHelper.ClearGarbage();
         }
 
         private void buttonFreePass_Click(object sender, EventArgs e)
         {
+            IpCameraHelper.StopCamera(LiveCamera);
             mifareCard.Stop();
             database.DisposeDatabaseConnection();
             FreePass freePass = new FreePass(home);
@@ -663,6 +664,7 @@ namespace BNITapCash
         private void buttonPassKadeKeluar_Click(object sender, EventArgs e)
         {
             UnsubscribeEvents();
+            IpCameraHelper.StopCamera(LiveCamera);
         }
     }
 }

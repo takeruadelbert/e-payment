@@ -14,7 +14,7 @@
     <Setting Name="RememberMe" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="IPAddressLiveCamera" Type="System.String" Scope="User">
+    <Setting Name="UriAddressLiveCamera" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DBHost" Type="System.String" Scope="User">
@@ -40,12 +40,6 @@
     </Setting>
     <Setting Name="WebcamHeight" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="LiveCameraUsername" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="LiveCameraPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="GateID" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>

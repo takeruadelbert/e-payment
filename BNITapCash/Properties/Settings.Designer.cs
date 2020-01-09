@@ -12,7 +12,7 @@ namespace BNITapCash.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.3.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -74,12 +74,12 @@ namespace BNITapCash.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string IPAddressLiveCamera {
+        public string UriAddressLiveCamera {
             get {
-                return ((string)(this["IPAddressLiveCamera"]));
+                return ((string)(this["UriAddressLiveCamera"]));
             }
             set {
-                this["IPAddressLiveCamera"] = value;
+                this["UriAddressLiveCamera"] = value;
             }
         }
         
@@ -176,30 +176,6 @@ namespace BNITapCash.Properties {
             }
             set {
                 this["WebcamHeight"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LiveCameraUsername {
-            get {
-                return ((string)(this["LiveCameraUsername"]));
-            }
-            set {
-                this["LiveCameraUsername"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LiveCameraPassword {
-            get {
-                return ((string)(this["LiveCameraPassword"]));
-            }
-            set {
-                this["LiveCameraPassword"] = value;
             }
         }
         

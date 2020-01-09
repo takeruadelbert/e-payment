@@ -1,8 +1,8 @@
-﻿using AForge.Video;
-using BNITapCash.API;
+﻿using BNITapCash.API;
 using BNITapCash.API.request;
 using BNITapCash.API.response;
 using BNITapCash.Card.Mifare;
+using BNITapCash.Classes.Helper;
 using BNITapCash.ConstantVariable;
 using BNITapCash.Helper;
 using BNITapCash.Interface;
@@ -20,7 +20,6 @@ namespace BNITapCash.Forms
     public partial class FreePass : Form, EventFormHandler
     {
         private Login home;
-        private JPEGStream stream;
         public PictureBox webcamImage;
         private Webcam camera;
         private MifareCard MifareCard;
@@ -28,8 +27,6 @@ namespace BNITapCash.Forms
         private AutoCompleteStringCollection autoComplete;
         private string ip_address_server;
         private ParkingIn parkingIn;
-
-        private readonly string liveCameraURL = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressLiveCamera + "/snapshot";
 
         public string UIDCard
         {
@@ -70,33 +67,7 @@ namespace BNITapCash.Forms
 
         private void StartLiveCamera()
         {
-            try
-            {
-                stream = new JPEGStream(liveCameraURL);
-                stream.NewFrame += stream_NewFrame;
-                stream.Login = Properties.Settings.Default.LiveCameraUsername;
-                stream.Password = Properties.Settings.Default.LiveCameraPassword;
-                stream.Start();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_LIVE_CAMERA, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                LiveCamera.Image = Properties.Resources.no_image;
-            }
-        }
-
-        private void StopLiveCamera()
-        {
-            stream.NewFrame -= stream_NewFrame;
-            stream.Stop();
-        }
-
-        private void stream_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
-            Bitmap bmp = (Bitmap)eventArgs.Frame.Clone();
-            LiveCamera.Image = bmp;
-            TKHelper.ClearGarbage();
+            IpCameraHelper.StartCamera(liveCamera);
         }
 
         private void InitDataVehicleType()
@@ -146,8 +117,8 @@ namespace BNITapCash.Forms
 
         private void buttonBackToCashier_Click(object sender, EventArgs e)
         {
+            IpCameraHelper.StopCamera(liveCamera);
             MifareCard.Stop();
-            StopLiveCamera();
             Cashier cashier = new Cashier(home);
             cashier.Show();
             Dispose();

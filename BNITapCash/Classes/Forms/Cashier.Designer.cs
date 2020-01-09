@@ -861,6 +861,8 @@
             // LiveCamera
             // 
             this.LiveCamera.BackColor = System.Drawing.Color.Black;
+            this.LiveCamera.BackgroundImage = global::BNITapCash.Properties.Resources.there_is_no_connected_camera;
+            this.LiveCamera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.LiveCamera.Location = new System.Drawing.Point(35, 435);
             this.LiveCamera.Name = "LiveCamera";
             this.LiveCamera.Size = new System.Drawing.Size(250, 150);

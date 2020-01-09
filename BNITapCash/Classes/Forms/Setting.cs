@@ -49,16 +49,12 @@ namespace BNITapCash
             {
                 if (text == "ip server" && textBox1.Text.ToLower() == "ip server")
                     textBox1.Clear();
-                else if (text == "ip live camera" && textBox2.Text.ToLower() == "ip live camera")
+                else if (text == "uri live camera" && textBox2.Text.ToLower() == "uri live camera")
                     textBox2.Clear();
                 else if (text == "width" && txtWidth.Text.ToLower() == "width")
                     txtWidth.Clear();
                 else if (text == "height" && txtHeight.Text.ToLower() == "height")
                     txtHeight.Clear();
-                else if (text == "username" && liveCameraUsername.Text.ToLower() == "username")
-                    liveCameraUsername.Clear();
-                else if (text == "password" && liveCameraPassword.Text.ToLower() == "password")
-                    liveCameraPassword.Clear();
             }
             pictureBox2.BackgroundImage = Properties.Resources.Icon_pc;
             panel1.ForeColor = Color.FromArgb(78, 184, 206);
@@ -66,9 +62,6 @@ namespace BNITapCash
             textBox2.ForeColor = Color.FromArgb(78, 184, 206);
             txtWidth.ForeColor = Color.FromArgb(78, 184, 206);
             txtHeight.ForeColor = Color.FromArgb(78, 184, 206);
-            liveCameraUsername.ForeColor = Color.FromArgb(78, 184, 206);
-            if (liveCameraPassword.Text.ToLower() != "password")
-                liveCameraPassword.ForeColor = Color.FromArgb(78, 184, 206);
         }
 
         private void back_Click(object sender, EventArgs e)
@@ -85,31 +78,20 @@ namespace BNITapCash
             string ipv4_live_cam = textBox2.Text.ToString();
             int width = Convert.ToInt32(txtWidth.Text);
             int height = Convert.ToInt32(txtHeight.Text);
-            string liveCamUsername = liveCameraUsername.Text;
-            string liveCamPassword = liveCameraPassword.Text.ToLower().Equals("password") ? string.Empty : liveCameraPassword.Text;
             if (ipv4 != "" && ipv4 != "IP Server" && ipv4 != null)
             {
                 if (ipv4_live_cam != "" && ipv4_live_cam != "IP Live Camera" && ipv4_live_cam != null)
                 {
                     if (TKHelper.ValidateIPv4(ipv4))
                     {
-                        if (TKHelper.ValidateIPv4(ipv4_live_cam))
-                        {
-                            Properties.Settings.Default.IPAddressServer = ipv4;
-                            Properties.Settings.Default.IPAddressLiveCamera = ipv4_live_cam;
-                            Properties.Settings.Default.WebcamWidth = width;
-                            Properties.Settings.Default.WebcamHeight = height;
-                            Properties.Settings.Default.LiveCameraUsername = liveCamUsername;
-                            Properties.Settings.Default.LiveCameraPassword = liveCamPassword;
-                            Properties.Settings.Default.Save();
-                            IPAddressServer = ipv4;
-                            IPAddressLiveCamera = ipv4_live_cam;
-                            MessageBox.Show(Constant.SETTING_UPDATE_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_LIVE_CAMERA, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
+                        Properties.Settings.Default.IPAddressServer = ipv4;
+                        Properties.Settings.Default.UriAddressLiveCamera = ipv4_live_cam;
+                        Properties.Settings.Default.WebcamWidth = width;
+                        Properties.Settings.Default.WebcamHeight = height;
+                        Properties.Settings.Default.Save();
+                        IPAddressServer = ipv4;
+                        IPAddressLiveCamera = ipv4_live_cam;
+                        MessageBox.Show(Constant.SETTING_UPDATE_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
@@ -140,10 +122,10 @@ namespace BNITapCash
                 this.IPAddressServer = Properties.Settings.Default.IPAddressServer;
             }
 
-            if (Properties.Settings.Default.IPAddressLiveCamera != string.Empty)
+            if (Properties.Settings.Default.UriAddressLiveCamera != string.Empty)
             {
-                textBox2.Text = Properties.Settings.Default.IPAddressLiveCamera;
-                IPAddressLiveCamera = Properties.Settings.Default.IPAddressLiveCamera;
+                textBox2.Text = Properties.Settings.Default.UriAddressLiveCamera;
+                IPAddressLiveCamera = Properties.Settings.Default.UriAddressLiveCamera;
             }
 
             // give default value of resolution : (480 x 360)
@@ -168,27 +150,16 @@ namespace BNITapCash
                 txtHeight.Text = "360";
                 WebcamHeight = 360;
             }
-
-            if (Properties.Settings.Default.LiveCameraUsername != string.Empty)
-            {
-                liveCameraUsername.Text = Properties.Settings.Default.LiveCameraUsername;
-
-            }
-
-            if (Properties.Settings.Default.LiveCameraPassword != string.Empty)
-            {
-                liveCameraPassword.Text = Properties.Settings.Default.LiveCameraPassword;
-            }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            this.TextChangeListener("ip live camera", true);
+            this.TextChangeListener("uri live camera", true);
         }
 
         private void textBox2_Click(object sender, EventArgs e)
         {
-            this.TextChangeListener("ip live camera");
+            this.TextChangeListener("uri live camera");
         }
 
         private void txtWidth_TextChanged(object sender, EventArgs e)
@@ -242,41 +213,17 @@ namespace BNITapCash
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void liveCameraPassword_TextChanged_1(object sender, EventArgs e)
-        {
-            liveCameraPassword.PasswordChar = '●';
-            this.TextChangeListener("password", true);
-        }
-        private void liveCameraUsername_TextChanged_1(object sender, EventArgs e)
-        {
-            this.TextChangeListener("username", true);
-        }
-
-        private void liveCameraUsername_Click(object sender, EventArgs e)
-        {
-            this.TextChangeListener("username");
-        }
-
-        private void liveCameraPassword_Click(object sender, EventArgs e)
-        {
-            this.TextChangeListener("password");
-        }
-
         public void UnsubscribeEvents()
         {
             textBox1.Click -= textBox1_Click;
             textBox2.Click -= textBox2_Click;
             txtWidth.Click -= txtWidth_Click;
             txtHeight.Click -= txtHeight_Click;
-            liveCameraUsername.Click -= liveCameraUsername_Click;
-            liveCameraPassword.Click -= liveCameraPassword_Click;
 
             textBox1.TextChanged -= textBox1_TextChanged;
             textBox2.TextChanged -= textBox2_TextChanged;
             txtWidth.TextChanged -= txtWidth_TextChanged;
             txtHeight.TextChanged -= txtHeight_TextChanged;
-            liveCameraUsername.TextChanged -= liveCameraUsername_TextChanged_1;
-            liveCameraPassword.TextChanged -= liveCameraPassword_TextChanged_1;
 
             txtWidth.KeyPress -= txtWidth_KeyPress;
             txtHeight.KeyPress -= txtHeight_KeyPress;

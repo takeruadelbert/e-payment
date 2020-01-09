@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FreePass));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.liveCamera = new Vlc.DotNet.Forms.VlcControl();
             this.webcam = new System.Windows.Forms.PictureBox();
             this.labelBackToLogin = new System.Windows.Forms.Label();
             this.buttonBackToCashier = new System.Windows.Forms.PictureBox();
@@ -61,17 +63,16 @@
             this.listBarcodeSuggestion = new System.Windows.Forms.ComboBox();
             this.PictFace = new System.Windows.Forms.PictureBox();
             this.PictVehicle = new System.Windows.Forms.PictureBox();
-            this.LiveCamera = new System.Windows.Forms.PictureBox();
             this.btnMinimize = new System.Windows.Forms.Button();
             this.lineTopInnerbox = new System.Windows.Forms.Panel();
             this.logoPelindo = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.webcam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonBackToCashier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictFace)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictVehicle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoPelindo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,6 +81,7 @@
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BackgroundImage = global::BNITapCash.Properties.Resources.BG_PUTIH2;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.liveCamera);
             this.panel1.Controls.Add(this.webcam);
             this.panel1.Controls.Add(this.labelBackToLogin);
             this.panel1.Controls.Add(this.buttonBackToCashier);
@@ -112,7 +114,6 @@
             this.panel1.Controls.Add(this.listBarcodeSuggestion);
             this.panel1.Controls.Add(this.PictFace);
             this.panel1.Controls.Add(this.PictVehicle);
-            this.panel1.Controls.Add(this.LiveCamera);
             this.panel1.Controls.Add(this.btnMinimize);
             this.panel1.Controls.Add(this.lineTopInnerbox);
             this.panel1.Controls.Add(this.logoPelindo);
@@ -121,6 +122,20 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1200, 600);
             this.panel1.TabIndex = 0;
+            // 
+            // liveCamera
+            // 
+            this.liveCamera.BackColor = System.Drawing.Color.Black;
+            this.liveCamera.BackgroundImage = global::BNITapCash.Properties.Resources.there_is_no_connected_camera;
+            this.liveCamera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.liveCamera.Location = new System.Drawing.Point(35, 435);
+            this.liveCamera.Name = "liveCamera";
+            this.liveCamera.Size = new System.Drawing.Size(250, 150);
+            this.liveCamera.Spu = -1;
+            this.liveCamera.TabIndex = 138;
+            this.liveCamera.Text = "Live Camera";
+            this.liveCamera.VlcLibDirectory = ((System.IO.DirectoryInfo)(resources.GetObject("liveCamera.VlcLibDirectory")));
+            this.liveCamera.VlcMediaplayerOptions = null;
             // 
             // webcam
             // 
@@ -416,7 +431,7 @@
             this.barcode.MaximumSize = new System.Drawing.Size(352, 25);
             this.barcode.MinimumSize = new System.Drawing.Size(352, 25);
             this.barcode.Name = "barcode";
-            this.barcode.Size = new System.Drawing.Size(352, 25);
+            this.barcode.Size = new System.Drawing.Size(352, 17);
             this.barcode.TabIndex = 93;
             this.barcode.Text = "Scan Barcode";
             this.barcode.Click += new System.EventHandler(this.barcode_Click);
@@ -534,18 +549,6 @@
             this.PictVehicle.TabIndex = 91;
             this.PictVehicle.TabStop = false;
             // 
-            // LiveCamera
-            // 
-            this.LiveCamera.BackgroundImage = global::BNITapCash.Properties.Resources.there_is_no_connected_camera;
-            this.LiveCamera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.LiveCamera.ImageLocation = "";
-            this.LiveCamera.Location = new System.Drawing.Point(35, 434);
-            this.LiveCamera.Name = "LiveCamera";
-            this.LiveCamera.Size = new System.Drawing.Size(250, 150);
-            this.LiveCamera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.LiveCamera.TabIndex = 92;
-            this.LiveCamera.TabStop = false;
-            // 
             // btnMinimize
             // 
             this.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -616,11 +619,11 @@
             this.Text = "FreePass";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.webcam)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonBackToCashier)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictFace)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictVehicle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoPelindo)).EndInit();
             this.ResumeLayout(false);
 
@@ -635,7 +638,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.PictureBox PictFace;
         private System.Windows.Forms.PictureBox PictVehicle;
-        private System.Windows.Forms.PictureBox LiveCamera;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox9;
@@ -666,5 +668,6 @@
         private System.Windows.Forms.Label labelBackToLogin;
         private System.Windows.Forms.PictureBox buttonBackToCashier;
         private System.Windows.Forms.PictureBox webcam;
+        private Vlc.DotNet.Forms.VlcControl liveCamera;
     }
 }

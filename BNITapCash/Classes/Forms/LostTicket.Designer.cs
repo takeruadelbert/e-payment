@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LiveCamera = new System.Windows.Forms.PictureBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LostTicket));
             this.panelWaktuKendaraanKeluarRed = new System.Windows.Forms.Panel();
             this.panelTotalTarifGreen = new System.Windows.Forms.Panel();
             this.txtGrandTotal = new System.Windows.Forms.TextBox();
@@ -56,23 +56,13 @@
             this.labelBackToLogin = new System.Windows.Forms.Label();
             this.btnMinimize = new System.Windows.Forms.Button();
             this.panelInnerBoxWhite = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).BeginInit();
+            this.liveCamera = new Vlc.DotNet.Forms.VlcControl();
             ((System.ComponentModel.ISupportInitialize)(this.webcam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoPelindo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonBackToCashier)).BeginInit();
             this.panelInnerBoxWhite.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             this.SuspendLayout();
-            // 
-            // LiveCamera
-            // 
-            this.LiveCamera.BackgroundImage = global::BNITapCash.Properties.Resources.there_is_no_connected_camera;
-            this.LiveCamera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.LiveCamera.Location = new System.Drawing.Point(18, 119);
-            this.LiveCamera.Name = "LiveCamera";
-            this.LiveCamera.Size = new System.Drawing.Size(250, 150);
-            this.LiveCamera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.LiveCamera.TabIndex = 2;
-            this.LiveCamera.TabStop = false;
             // 
             // panelWaktuKendaraanKeluarRed
             // 
@@ -427,6 +417,7 @@
             this.panelInnerBoxWhite.BackColor = System.Drawing.Color.Transparent;
             this.panelInnerBoxWhite.BackgroundImage = global::BNITapCash.Properties.Resources.BG_PUTIH2;
             this.panelInnerBoxWhite.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelInnerBoxWhite.Controls.Add(this.liveCamera);
             this.panelInnerBoxWhite.Controls.Add(this.btnMinimize);
             this.panelInnerBoxWhite.Controls.Add(this.labelBackToLogin);
             this.panelInnerBoxWhite.Controls.Add(this.buttonBackToCashier);
@@ -453,11 +444,24 @@
             this.panelInnerBoxWhite.Controls.Add(this.txtGrandTotal);
             this.panelInnerBoxWhite.Controls.Add(this.panelTotalTarifGreen);
             this.panelInnerBoxWhite.Controls.Add(this.panelWaktuKendaraanKeluarRed);
-            this.panelInnerBoxWhite.Controls.Add(this.LiveCamera);
             this.panelInnerBoxWhite.Location = new System.Drawing.Point(83, 64);
             this.panelInnerBoxWhite.Name = "panelInnerBoxWhite";
             this.panelInnerBoxWhite.Size = new System.Drawing.Size(1200, 600);
             this.panelInnerBoxWhite.TabIndex = 3;
+            // 
+            // liveCamera
+            // 
+            this.liveCamera.BackColor = System.Drawing.Color.Black;
+            this.liveCamera.BackgroundImage = global::BNITapCash.Properties.Resources.there_is_no_connected_camera;
+            this.liveCamera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.liveCamera.Location = new System.Drawing.Point(32, 121);
+            this.liveCamera.Name = "liveCamera";
+            this.liveCamera.Size = new System.Drawing.Size(250, 150);
+            this.liveCamera.Spu = -1;
+            this.liveCamera.TabIndex = 78;
+            this.liveCamera.Text = "Live Camera";
+            this.liveCamera.VlcLibDirectory = ((System.IO.DirectoryInfo)(resources.GetObject("liveCamera.VlcLibDirectory")));
+            this.liveCamera.VlcMediaplayerOptions = null;
             // 
             // LostTicket
             // 
@@ -473,19 +477,17 @@
             this.Name = "LostTicket";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LostTicket";
-            ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.webcam)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoPelindo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonBackToCashier)).EndInit();
             this.panelInnerBoxWhite.ResumeLayout(false);
             this.panelInnerBoxWhite.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox LiveCamera;
         private System.Windows.Forms.Panel panelWaktuKendaraanKeluarRed;
         private System.Windows.Forms.Panel panelTotalTarifGreen;
         private System.Windows.Forms.TextBox txtGrandTotal;
@@ -513,5 +515,6 @@
         private System.Windows.Forms.Label labelBackToLogin;
         private System.Windows.Forms.Button btnMinimize;
         private System.Windows.Forms.Panel panelInnerBoxWhite;
+        private Vlc.DotNet.Forms.VlcControl liveCamera;
     }
 }
