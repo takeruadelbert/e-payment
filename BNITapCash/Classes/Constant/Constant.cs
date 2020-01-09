@@ -12,6 +12,9 @@
         public static readonly int DELAY_TIME_WEBCAM = 1000; // in milliseconds
         public static readonly string URL_PROTOCOL = "http://";
 
+        // error message
+        public static readonly string ERROR_MESSAGE_FAIL_TO_WRITE_MASTER_DATA_FILE = "Fail to Write Master Data File.";
+
         // validation
         public static readonly string WARNING_MESSAGE_USERNAME_NOT_EMPTY = "Username Harus Diisi.";
         public static readonly string WARNING_MESSAGE_PASSWORD_NOT_EMPTY = "Password Harus Diisi.";
@@ -81,7 +84,8 @@
 
         // miscellaneous
         public static readonly string DIR_PATH_SOURCE = @"\src";
-        public static readonly string PATH_FILE_MASTER_DATA = DIR_PATH_SOURCE + @"\master-data.json";
+        public static readonly string PATH_FILE_MASTER_DATA_PARKING_OUT = DIR_PATH_SOURCE + @"\master-data-parking-out.json";
+        public static readonly string PATH_FILE_MASTER_DATA_PARKING_IN = DIR_PATH_SOURCE + @"\master-data-parking-in.json";
 
         // BNI
         public static readonly string MESSAGE_OK = "OK";

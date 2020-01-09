@@ -1,7 +1,7 @@
-
 using BNITapCash.API;
 using BNITapCash.API.request;
 using BNITapCash.API.response;
+using BNITapCash.Classes.API.response;
 using BNITapCash.ConstantVariable;
 using BNITapCash.DB;
 using BNITapCash.Forms;
@@ -138,7 +138,7 @@ namespace BNITapCash
                     if (CheckGate())
                     {
                         // pull some data from server e.g. Vehicle Types
-                        if (PullDataFromServer())
+                        if (PullDataFromServer(Properties.Settings.Default.GateType))
                         {
                             ApiSignIn(username, password);
                             loading.Dispose();
@@ -166,7 +166,7 @@ namespace BNITapCash
                 MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_SERVER, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            if (string.IsNullOrEmpty(Properties.Settings.Default.IPAddressLiveCamera))
+            if (string.IsNullOrEmpty(Properties.Settings.Default.UriAddressLiveCamera))
             {
                 MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_LIVE_CAMERA, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -186,7 +186,44 @@ namespace BNITapCash
 
             return true;
         }
-        private bool PullDataFromServer()
+        private bool PullDataFromServer(string GateType)
+        {
+            return GateType.ToLower() == "in" ? PullDataParkingIn() : PullDataParkingOut();
+        }
+
+        private bool PullDataParkingIn()
+        {
+            string APIPullData = Properties.Resources.RequestDataParkingPedestrianAPIURL;
+            DataResponseObject response = (DataResponseObject)restApi.get(ip_address_server, APIPullData, true);
+            if (response != null)
+            {
+                if (response.Status == 206)
+                {
+                    ParkingInPedestrian parkingInPedestrian = JsonConvert.DeserializeObject<ParkingInPedestrian>(response.Data.ToString());
+                    if (TKHelper.WriteDataIntoJSONFile(parkingInPedestrian, Constant.DIR_PATH_SOURCE, Constant.PATH_FILE_MASTER_DATA_PARKING_IN))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_WRITE_MASTER_DATA_FILE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        private bool PullDataParkingOut()
         {
             string APIPullData = Properties.Resources.RequestVehicleTypeAPIURL;
             DataResponseArray receivedData = (DataResponseArray)restApi.get(this.ip_address_server, APIPullData);
@@ -199,22 +236,13 @@ namespace BNITapCash
                         JObject vehicleTypes = new JObject();
                         vehicleTypes.Add(new JProperty("VehicleTypes", receivedVehicleTypes));
 
-                        // write into a file called 'master-data.json'
-                        try
+                        if (TKHelper.WriteDataIntoJSONFile(vehicleTypes, Constant.DIR_PATH_SOURCE, Constant.PATH_FILE_MASTER_DATA_PARKING_OUT))
                         {
-                            string savedDir = TKHelper.GetApplicationExecutableDirectoryName() + Constant.DIR_PATH_SOURCE;
-                            string savedFilePath = TKHelper.GetApplicationExecutableDirectoryName() + Constant.PATH_FILE_MASTER_DATA;
-                            string json = JsonConvert.SerializeObject(vehicleTypes);
-                            TKHelper.CreateDirIfDoesNotExist(savedDir);
-                            System.IO.File.WriteAllText(@savedFilePath, json);
-                            //MessageBox.Show("Pull Master Data is Success.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                             return true;
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            Console.WriteLine(ex.Message);
-                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_WRITE_MASTER_DATA_FILE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return false;
                         }
                     default:
@@ -243,8 +271,15 @@ namespace BNITapCash
                     case 201:
                         try
                         {
-                            this.cashier = new Cashier(this);
-                            this.cashier.Show();
+                            if (Properties.Settings.Default.GateType.ToLower() == "in")
+                            {
+                                Console.WriteLine("Gate masuk.");
+                            }
+                            else
+                            {
+                                this.cashier = new Cashier(this);
+                                this.cashier.Show();
+                            }
                             Hide();
                         }
                         catch (Exception)
@@ -358,6 +393,7 @@ namespace BNITapCash
 
                         Properties.Settings.Default.GateID = gate.Id;
                         Properties.Settings.Default.GateName = gate.Name;
+                        Properties.Settings.Default.GateType = gate.Type;
 
                         return true;
                     case 401:

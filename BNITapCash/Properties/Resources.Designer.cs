@@ -121,7 +121,7 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /ws/parking_outs/check_gate_out.
+        ///   Looks up a localized string similar to /ws/parking_outs/check_gate.
         /// </summary>
         internal static string CheckGateAPIURL {
             get {
@@ -660,6 +660,15 @@ namespace BNITapCash.Properties {
         internal static string RequestDataParkingFreePassAPIURL {
             get {
                 return ResourceManager.GetString("RequestDataParkingFreePassAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /ws/people_types/get_all_pedestrian_data.
+        /// </summary>
+        internal static string RequestDataParkingPedestrianAPIURL {
+            get {
+                return ResourceManager.GetString("RequestDataParkingPedestrianAPIURL", resourceCulture);
             }
         }
         

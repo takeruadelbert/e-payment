@@ -202,5 +202,17 @@ namespace BNITapCash.Properties {
                 this["GateName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GateType {
+            get {
+                return ((string)(this["GateType"]));
+            }
+            set {
+                this["GateType"] = value;
+            }
+        }
     }
 }

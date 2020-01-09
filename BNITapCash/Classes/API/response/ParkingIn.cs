@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using BNITapCash.Classes.API.response;
+using Newtonsoft.Json;
 
 namespace BNITapCash.API.response
 {
-    class ParkingIn
+    class ParkingIn : BaseResponse
     {
         [JsonProperty("lama_parkir")]
         public string ParkDuration { get; set; }

@@ -13,11 +13,15 @@ namespace BNITapCash.API.response
         [JsonProperty("ipv4")]
         public string IpAddress;
 
-        public Gate(int id, string name, string ipAddress)
+        [JsonProperty("type")]
+        public string Type;
+
+        public Gate(int id, string name, string ipAddress, string type)
         {
             Id = id;
             Name = name;
             IpAddress = ipAddress;
+            Type = type;
         }
     }
 }

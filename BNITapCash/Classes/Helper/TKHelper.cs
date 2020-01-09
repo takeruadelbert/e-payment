@@ -1,5 +1,7 @@
-﻿using BNITapCash.ConstantVariable;
+﻿using BNITapCash.Classes.API.response;
+using BNITapCash.ConstantVariable;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -193,6 +195,42 @@ namespace BNITapCash.Helper
         {
             GC.Collect();
             GC.WaitForPendingFinalizers();
+        }
+
+        public static bool WriteDataIntoJSONFile(BaseResponse input, string dirPathSource, string pathFile)
+        {
+            try
+            {
+                string savedDir = GetApplicationExecutableDirectoryName() + dirPathSource;
+                string savedFilePath = GetApplicationExecutableDirectoryName() + pathFile;
+                string json = JsonConvert.SerializeObject(input);
+                CreateDirIfDoesNotExist(savedDir);
+                File.WriteAllText(@savedFilePath, json);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public static bool WriteDataIntoJSONFile(JObject input, string dirPathSource, string pathFile)
+        {
+            try
+            {
+                string savedDir = GetApplicationExecutableDirectoryName() + dirPathSource;
+                string savedFilePath = GetApplicationExecutableDirectoryName() + pathFile;
+                string json = JsonConvert.SerializeObject(input);
+                CreateDirIfDoesNotExist(savedDir);
+                File.WriteAllText(@savedFilePath, json);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
     }
 }
