@@ -57,7 +57,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.webcam = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.LiveCamera = new System.Windows.Forms.PictureBox();
             this.PictVehicle = new System.Windows.Forms.PictureBox();
             this.PictFace = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -68,6 +67,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel14 = new System.Windows.Forms.Panel();
+            this.buttonPassKadeKeluar = new System.Windows.Forms.Button();
             this.buttonFreePass = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
             this.buttonLostTicket = new System.Windows.Forms.Button();
@@ -85,17 +85,18 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.listBarcodeSuggestion = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.LiveCamera = new Vlc.DotNet.Forms.VlcControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.webcam)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictVehicle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictFace)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             this.panel14.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox4
@@ -425,7 +426,7 @@
             this.textBox1.MaximumSize = new System.Drawing.Size(262, 25);
             this.textBox1.MinimumSize = new System.Drawing.Size(262, 25);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(262, 25);
+            this.textBox1.Size = new System.Drawing.Size(262, 17);
             this.textBox1.TabIndex = 5;
             this.textBox1.Text = "Barcode/UID Card";
             this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
@@ -454,18 +455,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(260, 1);
             this.panel1.TabIndex = 6;
-            // 
-            // LiveCamera
-            // 
-            this.LiveCamera.BackgroundImage = global::BNITapCash.Properties.Resources.there_is_no_connected_camera;
-            this.LiveCamera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.LiveCamera.ImageLocation = "";
-            this.LiveCamera.Location = new System.Drawing.Point(35, 434);
-            this.LiveCamera.Name = "LiveCamera";
-            this.LiveCamera.Size = new System.Drawing.Size(250, 150);
-            this.LiveCamera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.LiveCamera.TabIndex = 2;
-            this.LiveCamera.TabStop = false;
             // 
             // PictVehicle
             // 
@@ -586,6 +575,8 @@
             this.panel14.BackColor = System.Drawing.Color.Transparent;
             this.panel14.BackgroundImage = global::BNITapCash.Properties.Resources.BG_PUTIH2;
             this.panel14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel14.Controls.Add(this.LiveCamera);
+            this.panel14.Controls.Add(this.buttonPassKadeKeluar);
             this.panel14.Controls.Add(this.buttonFreePass);
             this.panel14.Controls.Add(this.panel9);
             this.panel14.Controls.Add(this.cash);
@@ -624,7 +615,6 @@
             this.panel14.Controls.Add(this.panel6);
             this.panel14.Controls.Add(this.PictVehicle);
             this.panel14.Controls.Add(this.textBox5);
-            this.panel14.Controls.Add(this.LiveCamera);
             this.panel14.Controls.Add(this.pictureBox5);
             this.panel14.Controls.Add(this.panel1);
             this.panel14.Controls.Add(this.webcam);
@@ -642,6 +632,24 @@
             this.panel14.Size = new System.Drawing.Size(1200, 600);
             this.panel14.TabIndex = 12;
             // 
+            // buttonPassKadeKeluar
+            // 
+            this.buttonPassKadeKeluar.BackColor = System.Drawing.Color.Transparent;
+            this.buttonPassKadeKeluar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonPassKadeKeluar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonPassKadeKeluar.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.buttonPassKadeKeluar.FlatAppearance.BorderSize = 0;
+            this.buttonPassKadeKeluar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPassKadeKeluar.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPassKadeKeluar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonPassKadeKeluar.Location = new System.Drawing.Point(620, 480);
+            this.buttonPassKadeKeluar.Name = "buttonPassKadeKeluar";
+            this.buttonPassKadeKeluar.Size = new System.Drawing.Size(120, 35);
+            this.buttonPassKadeKeluar.TabIndex = 53;
+            this.buttonPassKadeKeluar.Text = "Pass Kade Keluar";
+            this.buttonPassKadeKeluar.UseVisualStyleBackColor = false;
+            this.buttonPassKadeKeluar.Click += new System.EventHandler(this.buttonPassKadeKeluar_Click);
+            // 
             // buttonFreePass
             // 
             this.buttonFreePass.BackColor = System.Drawing.Color.Transparent;
@@ -652,7 +660,7 @@
             this.buttonFreePass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonFreePass.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFreePass.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonFreePass.Location = new System.Drawing.Point(553, 524);
+            this.buttonFreePass.Location = new System.Drawing.Point(485, 524);
             this.buttonFreePass.Name = "buttonFreePass";
             this.buttonFreePass.Size = new System.Drawing.Size(120, 35);
             this.buttonFreePass.TabIndex = 52;
@@ -680,7 +688,7 @@
             this.buttonLostTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonLostTicket.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLostTicket.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonLostTicket.Location = new System.Drawing.Point(419, 524);
+            this.buttonLostTicket.Location = new System.Drawing.Point(351, 524);
             this.buttonLostTicket.Name = "buttonLostTicket";
             this.buttonLostTicket.Size = new System.Drawing.Size(120, 35);
             this.buttonLostTicket.TabIndex = 47;
@@ -698,7 +706,7 @@
             this.buttonReprint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonReprint.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonReprint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonReprint.Location = new System.Drawing.Point(553, 480);
+            this.buttonReprint.Location = new System.Drawing.Point(485, 480);
             this.buttonReprint.Name = "buttonReprint";
             this.buttonReprint.Size = new System.Drawing.Size(120, 35);
             this.buttonReprint.TabIndex = 46;
@@ -716,7 +724,7 @@
             this.buttonGenerateReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonGenerateReport.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonGenerateReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonGenerateReport.Location = new System.Drawing.Point(419, 480);
+            this.buttonGenerateReport.Location = new System.Drawing.Point(351, 480);
             this.buttonGenerateReport.Name = "buttonGenerateReport";
             this.buttonGenerateReport.Size = new System.Drawing.Size(120, 35);
             this.buttonGenerateReport.TabIndex = 45;
@@ -850,6 +858,18 @@
             this.label8.TabIndex = 35;
             this.label8.Text = "LOGOUT";
             // 
+            // LiveCamera
+            // 
+            this.LiveCamera.BackColor = System.Drawing.Color.Black;
+            this.LiveCamera.Location = new System.Drawing.Point(35, 435);
+            this.LiveCamera.Name = "LiveCamera";
+            this.LiveCamera.Size = new System.Drawing.Size(250, 150);
+            this.LiveCamera.Spu = -1;
+            this.LiveCamera.TabIndex = 54;
+            this.LiveCamera.Text = "Live Camera";
+            this.LiveCamera.VlcLibDirectory = ((System.IO.DirectoryInfo)(resources.GetObject("LiveCamera.VlcLibDirectory")));
+            this.LiveCamera.VlcMediaplayerOptions = null;
+            // 
             // Cashier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -875,12 +895,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.logout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.webcam)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictVehicle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictFace)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             this.panel14.ResumeLayout(false);
             this.panel14.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LiveCamera)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -913,7 +933,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.PictureBox webcam;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox LiveCamera;
         private System.Windows.Forms.PictureBox PictVehicle;
         private System.Windows.Forms.PictureBox PictFace;
         private System.Windows.Forms.Button button1;
@@ -942,5 +961,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox listBarcodeSuggestion;
         private System.Windows.Forms.Button buttonFreePass;
+        private System.Windows.Forms.Button buttonPassKadeKeluar;
+        private Vlc.DotNet.Forms.VlcControl LiveCamera;
     }
 }

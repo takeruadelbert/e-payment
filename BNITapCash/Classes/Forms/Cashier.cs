@@ -1,5 +1,4 @@
-﻿using AForge.Video;
-using BNITapCash.API;
+﻿using BNITapCash.API;
 using BNITapCash.API.request;
 using BNITapCash.API.response;
 using BNITapCash.Bank.BNI;
@@ -25,8 +24,6 @@ namespace BNITapCash
     {
         private Login home;
         private BNI bni;
-        private readonly string liveCameraURL = Constant.URL_PROTOCOL + Properties.Settings.Default.IPAddressLiveCamera + "/snapshot";
-        private JPEGStream stream;
         private DBConnect database;
         public PictureBox webcamImage;
         private Webcam camera;
@@ -99,26 +96,9 @@ namespace BNITapCash
 
         private void StartLiveCamera()
         {
-            try
-            {
-                stream = new JPEGStream(liveCameraURL);
-                stream.NewFrame += stream_NewFrame;
-                stream.Login = Properties.Settings.Default.LiveCameraUsername;
-                stream.Password = Properties.Settings.Default.LiveCameraPassword;
-                stream.Start();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_LIVE_CAMERA, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                LiveCamera.Image = Properties.Resources.no_image;
-            }
-        }
-
-        private void StopLiveCamera()
-        {
-            stream.Stop();
-            stream.NewFrame -= stream_NewFrame;
+            string[] options = { ":network-caching:500" };
+            string uri = "rtsp://admin:@192.168.88.93:80/ch0_0.264";
+            LiveCamera.Play(new Uri(uri), options);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -336,13 +316,6 @@ namespace BNITapCash
         private void logout_MouseHover(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(logout, "Logout");
-        }
-
-        private void stream_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
-            Bitmap bmp = (Bitmap)eventArgs.Frame.Clone();
-            LiveCamera.Image = bmp;
-            TKHelper.ClearGarbage();
         }
 
         private void panel10_Paint(object sender, PaintEventArgs e)
@@ -640,7 +613,6 @@ namespace BNITapCash
         private void buttonLostTicket_Click(object sender, EventArgs e)
         {
             mifareCard.Stop();
-            StopLiveCamera();
             database.DisposeDatabaseConnection();
             LostTicket lostTicket = new LostTicket(home);
             lostTicket.Show();
@@ -653,7 +625,6 @@ namespace BNITapCash
         private void buttonFreePass_Click(object sender, EventArgs e)
         {
             mifareCard.Stop();
-            StopLiveCamera();
             database.DisposeDatabaseConnection();
             FreePass freePass = new FreePass(home);
             freePass.Show();
@@ -680,12 +651,18 @@ namespace BNITapCash
             buttonReprint.Click -= button4_Click;
             buttonLostTicket.Click -= buttonLostTicket_Click;
             buttonFreePass.Click -= buttonFreePass_Click;
+            buttonPassKadeKeluar.Click -= buttonPassKadeKeluar_Click;
             logout.Click -= logout_Click;
             btnClear.Click -= btnClear_Click;
             btnSave.Click -= btnSave_Click;
 
             button1.Click -= button1_Click;
             button2.Click -= button2_Click;
+        }
+
+        private void buttonPassKadeKeluar_Click(object sender, EventArgs e)
+        {
+            UnsubscribeEvents();
         }
     }
 }
