@@ -73,6 +73,7 @@
             this.username.Text = "username";
             this.username.Click += new System.EventHandler(this.textBox1_Click);
             this.username.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.username.KeyDown += new System.Windows.Forms.KeyEventHandler(this.username_KeyDown);
             // 
             // panel1
             // 
@@ -96,6 +97,7 @@
             this.password.Text = "password";
             this.password.Click += new System.EventHandler(this.textBox2_Click);
             this.password.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.password.KeyDown += new System.Windows.Forms.KeyEventHandler(this.password_KeyDown);
             // 
             // panel2
             // 

@@ -2,6 +2,7 @@ using BNITapCash.API;
 using BNITapCash.API.request;
 using BNITapCash.API.response;
 using BNITapCash.Classes.API.response;
+using BNITapCash.Classes.Forms;
 using BNITapCash.ConstantVariable;
 using BNITapCash.DB;
 using BNITapCash.Forms;
@@ -21,6 +22,7 @@ namespace BNITapCash
     {
         private Cashier cashier;
         private About about;
+        private PassKadeIn passKadeIn;
         private RESTAPI restApi;
         private string ip_address_server;
 
@@ -273,7 +275,8 @@ namespace BNITapCash
                         {
                             if (Properties.Settings.Default.GateType.ToLower() == "in")
                             {
-                                Console.WriteLine("Gate masuk.");
+                                this.passKadeIn = new PassKadeIn(this);
+                                this.passKadeIn.Show();
                             }
                             else
                             {
@@ -420,8 +423,10 @@ namespace BNITapCash
         {
             username.Click -= textBox1_Click;
             username.TextChanged -= textBox1_TextChanged;
+            username.KeyDown -= username_KeyDown;
             password.Click -= textBox2_Click;
             password.TextChanged -= textBox2_TextChanged;
+            password.KeyDown -= password_KeyDown;
 
             btnLogin.Click -= btnLogin_Click;
             button1.Click -= button1_Click;
@@ -438,6 +443,22 @@ namespace BNITapCash
         private void pictureBox2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void username_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                btnLogin.PerformClick();
+            }
+        }
+
+        private void password_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin.PerformClick();
+            }
         }
     }
 }
