@@ -81,6 +81,7 @@
 
         // live camera
         public static readonly string ERROR_MESSAGE_FAIL_TO_CONNECT_LIVE_CAMERA = "Error : Cannot Connect to Live Camera.";
+        public static readonly string ERROR_MESSAGE_SNAPSHOT_FAILED = "Fail to snapshoot IP Camera.";
 
         // miscellaneous
         public static readonly string DIR_PATH_SOURCE = @"\src";

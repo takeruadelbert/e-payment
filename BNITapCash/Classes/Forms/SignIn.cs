@@ -394,6 +394,11 @@ namespace BNITapCash
                         Properties.Settings.Default.GateID = gate.Id;
                         Properties.Settings.Default.GateName = gate.Name;
                         Properties.Settings.Default.GateType = gate.Type;
+                        Properties.Settings.Default.UriAddressLiveCamera = gate.RtspUri;
+                        Properties.Settings.Default.UriSnapshotLiveCamera = gate.SnapshotUri;
+                        Properties.Settings.Default.WebcamEnabled = gate.WebcamEnabled;
+                        Properties.Settings.Default.WebcamWidth = gate.WebcamWidth;
+                        Properties.Settings.Default.WebcamHeight = gate.WebcamHeight;
 
                         return true;
                     case 401:

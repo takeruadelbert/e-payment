@@ -16,12 +16,32 @@ namespace BNITapCash.API.response
         [JsonProperty("type")]
         public string Type;
 
-        public Gate(int id, string name, string ipAddress, string type)
+        [JsonProperty("link_snapshot")]
+        public string SnapshotUri;
+
+        [JsonProperty("link_rts")]
+        public string RtspUri;
+
+        [JsonProperty("enable_webcam")]
+        public bool WebcamEnabled;
+
+        [JsonProperty("webcam_width")]
+        public int WebcamWidth;
+
+        [JsonProperty("webcam_height")]
+        public int WebcamHeight;
+
+        public Gate(int id, string name, string ipAddress, string type, string snapshotUri, string rtspUri, bool webcamEnabled, int webcamWidth, int webcamHeight)
         {
             Id = id;
             Name = name;
             IpAddress = ipAddress;
             Type = type;
+            SnapshotUri = snapshotUri;
+            RtspUri = rtspUri;
+            WebcamEnabled = webcamEnabled;
+            WebcamWidth = webcamWidth;
+            WebcamHeight = webcamHeight;
         }
     }
 }

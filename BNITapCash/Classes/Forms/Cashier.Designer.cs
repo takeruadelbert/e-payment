@@ -67,6 +67,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel14 = new System.Windows.Forms.Panel();
+            this.LiveCamera = new Vlc.DotNet.Forms.VlcControl();
             this.buttonPassKadeKeluar = new System.Windows.Forms.Button();
             this.buttonFreePass = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -85,7 +86,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.listBarcodeSuggestion = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.LiveCamera = new Vlc.DotNet.Forms.VlcControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -632,6 +632,20 @@
             this.panel14.Size = new System.Drawing.Size(1200, 600);
             this.panel14.TabIndex = 12;
             // 
+            // LiveCamera
+            // 
+            this.LiveCamera.BackColor = System.Drawing.Color.Black;
+            this.LiveCamera.BackgroundImage = global::BNITapCash.Properties.Resources.there_is_no_connected_camera;
+            this.LiveCamera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.LiveCamera.Location = new System.Drawing.Point(35, 435);
+            this.LiveCamera.Name = "LiveCamera";
+            this.LiveCamera.Size = new System.Drawing.Size(250, 150);
+            this.LiveCamera.Spu = -1;
+            this.LiveCamera.TabIndex = 54;
+            this.LiveCamera.Text = "Live Camera";
+            this.LiveCamera.VlcLibDirectory = ((System.IO.DirectoryInfo)(resources.GetObject("LiveCamera.VlcLibDirectory")));
+            this.LiveCamera.VlcMediaplayerOptions = null;
+            // 
             // buttonPassKadeKeluar
             // 
             this.buttonPassKadeKeluar.BackColor = System.Drawing.Color.Transparent;
@@ -857,20 +871,6 @@
             this.label8.Size = new System.Drawing.Size(82, 20);
             this.label8.TabIndex = 35;
             this.label8.Text = "LOGOUT";
-            // 
-            // LiveCamera
-            // 
-            this.LiveCamera.BackColor = System.Drawing.Color.Black;
-            this.LiveCamera.BackgroundImage = global::BNITapCash.Properties.Resources.there_is_no_connected_camera;
-            this.LiveCamera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.LiveCamera.Location = new System.Drawing.Point(35, 435);
-            this.LiveCamera.Name = "LiveCamera";
-            this.LiveCamera.Size = new System.Drawing.Size(250, 150);
-            this.LiveCamera.Spu = -1;
-            this.LiveCamera.TabIndex = 54;
-            this.LiveCamera.Text = "Live Camera";
-            this.LiveCamera.VlcLibDirectory = ((System.IO.DirectoryInfo)(resources.GetObject("LiveCamera.VlcLibDirectory")));
-            this.LiveCamera.VlcMediaplayerOptions = null;
             // 
             // Cashier
             // 

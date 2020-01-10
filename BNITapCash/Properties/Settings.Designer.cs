@@ -214,5 +214,53 @@ namespace BNITapCash.Properties {
                 this["GateType"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UriSnapshotLiveCamera {
+            get {
+                return ((string)(this["UriSnapshotLiveCamera"]));
+            }
+            set {
+                this["UriSnapshotLiveCamera"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool WebcamEnabled {
+            get {
+                return ((bool)(this["WebcamEnabled"]));
+            }
+            set {
+                this["WebcamEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("480")]
+        public int LiveCameraWidth {
+            get {
+                return ((int)(this["LiveCameraWidth"]));
+            }
+            set {
+                this["LiveCameraWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("360")]
+        public int LiveCameraHeight {
+            get {
+                return ((int)(this["LiveCameraHeight"]));
+            }
+            set {
+                this["LiveCameraHeight"] = value;
+            }
+        }
     }
 }
