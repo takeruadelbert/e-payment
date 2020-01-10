@@ -369,4 +369,8 @@
     <value>/ws/people_types/get_all_pedestrian_data</value>
     <comment>API for requesting data parking of pedestrian</comment>
   </data>
+  <data name="RequestVehicleFarePassKadeAPIURL" xml:space="preserve">
+    <value>/ws/parking_ins/request_uid_go</value>
+    <comment>API for requesting data vehicle fare in 'Pass Kade In'.</comment>
+  </data>
 </root>

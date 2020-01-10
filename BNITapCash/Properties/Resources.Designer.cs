@@ -691,6 +691,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/parking_ins/request_uid_go.
+        /// </summary>
+        internal static string RequestVehicleFarePassKadeAPIURL {
+            get {
+                return ResourceManager.GetString("RequestVehicleFarePassKadeAPIURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /ws/vehicle_types/get_all_vehicle_name.
         /// </summary>
         internal static string RequestVehicleTypeAPIURL {

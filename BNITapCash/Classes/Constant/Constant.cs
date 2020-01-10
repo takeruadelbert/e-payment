@@ -43,8 +43,9 @@
         public static readonly string ERROR_MESSAGE_FAIL_TO_CONNECT_LOCAL_DATABASE = "Error : Can't Establish Connection to Local Database." + BREAKLINE + "Please setup properly.";
         public static readonly string ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER = "Error : Can't establish connection to server.";
         public static readonly string ERROR_MESSAGE_FAIL_TO_FETCH_VEHICLE_TYPE_DATA = "Error : failed to fetch vehicle type data.";
+        public static readonly string ERROR_MESSAGE_FAIL_TO_FETCH_OUTLOAD = "Error : failed to fetch data outload.";
         public static readonly string ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER = "Error found when receiving server response.";
-        public static readonly string ERROR_MESSAGE_INVALID_GATE = "Gate Tidak Terdaftar di Server.";
+        public static readonly string ERROR_MESSAGE_INVALID_GATE = "Gate Tidak Terdaftar di Server.";        
 
         public static readonly string STATUS_CONNECTION_ESTABLISH = "Connection Established.";
         public static readonly string REPRINT_TICKET_SUCCESS = "Print Ulang Tiket Berhasil.";

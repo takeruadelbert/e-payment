@@ -70,6 +70,11 @@ namespace BNITapCash.Helper
             return int.Parse(Regex.Replace(strNominal, @",.*|\D", ""));
         }
 
+        public static string IDRWithCurrency(string nominal)
+        {
+            return String.Format("Rp. {0},-", IDR(nominal));
+        }
+
         public static string GetApplicationExecutableDirectoryName()
         {
             return Environment.CurrentDirectory;
@@ -157,6 +162,19 @@ namespace BNITapCash.Helper
         {
             string jsonStr = Encoding.UTF8.GetString(json);
             return JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonStr);
+        }
+
+        public static int DictionaryGetValueByKey(Dictionary<string, int> dictionary, string key)
+        {
+            try
+            {
+                return dictionary[key];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
         }
 
         public static string GetValueTime(string time, string type)

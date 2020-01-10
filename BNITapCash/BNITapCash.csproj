@@ -87,6 +87,7 @@
     <Compile Include="Classes\API\request\LostTicketRequest.cs" />
     <Compile Include="Classes\API\request\ParkingOutFreePassRequest.cs" />
     <Compile Include="Classes\API\request\ParkingOutRequest.cs" />
+    <Compile Include="Classes\API\request\PassKadeInVehicleFareRequest.cs" />
     <Compile Include="Classes\API\request\PrintReportRequest.cs" />
     <Compile Include="Classes\API\request\RequestFareRequest.cs" />
     <Compile Include="Classes\API\response\base\BaseResponse.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Classes\API\response\ParkingIn.cs" />
     <Compile Include="Classes\API\response\ParkingInPedestrian.cs" />
     <Compile Include="Classes\API\response\ParkingOut.cs" />
+    <Compile Include="Classes\API\response\PassKadeInVehicleFare.cs" />
     <Compile Include="Classes\API\response\Pedestrian.cs" />
     <Compile Include="Classes\API\RESTAPI.cs" />
     <Compile Include="Classes\Bank\BNI\BNI.cs" />
@@ -119,12 +121,6 @@
     </Compile>
     <Compile Include="Classes\Forms\PassKadeIn.Designer.cs">
       <DependentUpon>PassKadeIn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\Forms\PassKadeOut.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Classes\Forms\PassKadeOut.Designer.cs">
-      <DependentUpon>PassKadeOut.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Helper\CameraHelper.cs" />
     <Compile Include="Classes\Interface\EventFormHandler.cs" />
@@ -212,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Classes\Forms\LostTicket.resx">
       <DependentUpon>LostTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Classes\Forms\PassKadeIn.resx">
+      <DependentUpon>PassKadeIn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Classes\Forms\SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>
