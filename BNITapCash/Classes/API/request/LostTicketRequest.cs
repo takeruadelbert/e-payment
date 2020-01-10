@@ -28,7 +28,10 @@ namespace BNITapCash.API.request
         [JsonProperty("image")]
         private string CapturedWebcamImage { get; set; }
 
-        public LostTicketRequest(string vehicle, string username, string datetimeOut, int totalFare, string plateNumber, string ipAddress, string paymentMethod, string image)
+        [JsonProperty("camera_image")]
+        private string LiveCameraSnapshotImage { get; set; }
+
+        public LostTicketRequest(string vehicle, string username, string datetimeOut, int totalFare, string plateNumber, string ipAddress, string paymentMethod, string image, string liveCameraSnapshotImage)
         {
             Vehicle = vehicle;
             Username = username;
@@ -38,6 +41,7 @@ namespace BNITapCash.API.request
             IpAddress = ipAddress;
             PaymentMethod = paymentMethod;
             CapturedWebcamImage = image;
+            LiveCameraSnapshotImage = liveCameraSnapshotImage;
         }
     }
 }

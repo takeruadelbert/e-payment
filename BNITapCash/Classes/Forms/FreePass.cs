@@ -11,7 +11,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
@@ -67,7 +66,7 @@ namespace BNITapCash.Forms
 
         private void StartLiveCamera()
         {
-            IpCameraHelper.StartCamera(liveCamera);
+            CameraHelper.StartIpCamera(liveCamera);
         }
 
         private void InitDataVehicleType()
@@ -117,7 +116,7 @@ namespace BNITapCash.Forms
 
         private void buttonBackToCashier_Click(object sender, EventArgs e)
         {
-            IpCameraHelper.StopCamera(liveCamera);
+            CameraHelper.StopIpCamera(liveCamera);
             MifareCard.Stop();
             Cashier cashier = new Cashier(home);
             cashier.Show();
@@ -335,10 +334,11 @@ namespace BNITapCash.Forms
         {
             if (ValidateFields())
             {
-                string base64WebcamImage = CaptureWebcamImage();
-                if (!string.IsNullOrEmpty(base64WebcamImage))
+                string base64WebcamImage = CameraHelper.CaptureWebcamImage(camera, webcamImage);
+                string base64LiveCameraSnapshotImage = CameraHelper.SnapshotLiveCamera();
+                if (!string.IsNullOrEmpty(base64LiveCameraSnapshotImage))
                 {
-                    ParkingOut parkingOut = SendDataToServer(base64WebcamImage);
+                    ParkingOut parkingOut = SendDataToServer(base64WebcamImage, base64LiveCameraSnapshotImage);
                     MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Clear(true);
                 }
@@ -405,33 +405,7 @@ namespace BNITapCash.Forms
             }
         }
 
-        private string CaptureWebcamImage()
-        {
-            try
-            {
-                camera.StartWebcam();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_TROUBLE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
-            System.Threading.Thread.Sleep(Constant.DELAY_TIME_WEBCAM);
-            if (webcamImage.Image == null)
-            {
-                MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_SNAPSHOOT_FAILED, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                camera.StopWebcam();
-                return null;
-            }
-            else
-            {
-                camera.StopWebcam();
-                Bitmap bmp = new Bitmap(webcamImage.Image, Properties.Settings.Default.WebcamWidth, Properties.Settings.Default.WebcamHeight);
-                return bmp.ToBase64String(ImageFormat.Png);
-            }
-        }
-
-        private ParkingOut SendDataToServer(string base64Image)
+        private ParkingOut SendDataToServer(string base64Image, string base64LiveCameraSnapshotImage)
         {
             string dataBarcode = barcode.Text.ToString();
             string uid = supervisorCard.Text.ToString();
@@ -441,7 +415,7 @@ namespace BNITapCash.Forms
             string username = Properties.Settings.Default.Username;
             string dataPlateNumber = plateNumber.Text.ToString();
             string ipAddressLocal = TKHelper.GetLocalIPAddress();
-            ParkingOutFreePassRequest freePassRequest = new ParkingOutFreePassRequest(vehicle, uidType, dataBarcode, username, datetimeOut, dataPlateNumber, ipAddressLocal, uid, base64Image);
+            ParkingOutFreePassRequest freePassRequest = new ParkingOutFreePassRequest(vehicle, uidType, dataBarcode, username, datetimeOut, dataPlateNumber, ipAddressLocal, uid, base64Image, base64LiveCameraSnapshotImage);
             var sent_param = JsonConvert.SerializeObject(freePassRequest);
 
             DataResponseObject response = (DataResponseObject)restApi.post(ip_address_server, Properties.Resources.SaveDataFreePassAPIURL, true, sent_param);

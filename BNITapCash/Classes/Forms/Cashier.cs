@@ -15,9 +15,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Net;
 using System.Windows.Forms;
 
 namespace BNITapCash
@@ -34,7 +32,6 @@ namespace BNITapCash
         private AutoCompleteStringCollection autoComplete;
         private string ip_address_server;
         private ParkingIn parkingIn;
-        private readonly string snapshotUri = Properties.Settings.Default.UriSnapshotLiveCamera;
 
         public string UIDCard
         {
@@ -102,7 +99,7 @@ namespace BNITapCash
 
         private void StartLiveCamera()
         {
-            IpCameraHelper.StartCamera(LiveCamera);
+            CameraHelper.StartIpCamera(LiveCamera);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -137,8 +134,8 @@ namespace BNITapCash
                     DataDeduct responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
                     if (!responseDeduct.IsError)
                     {
-                        string base64WebcamImage = CaptureWebcamImage();
-                        string base64LiveCameraSnapshot = SnapshotLiveCamera();
+                        string base64WebcamImage = CameraHelper.CaptureWebcamImage(camera, webcamImage);
+                        string base64LiveCameraSnapshot = CameraHelper.SnapshotLiveCamera();
                         if (!string.IsNullOrEmpty(base64LiveCameraSnapshot))
                         {
                             ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, base64LiveCameraSnapshot, paymentMethod);
@@ -154,8 +151,8 @@ namespace BNITapCash
                 }
                 else
                 {
-                    string base64WebcamImage = CaptureWebcamImage();
-                    string base4LiveCameraSnapshot = SnapshotLiveCamera();
+                    string base64WebcamImage = CameraHelper.CaptureWebcamImage(camera, webcamImage);
+                    string base4LiveCameraSnapshot = CameraHelper.SnapshotLiveCamera();
                     if (!string.IsNullOrEmpty(base4LiveCameraSnapshot))
                     {
                         ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, base4LiveCameraSnapshot, paymentMethod);
@@ -223,62 +220,6 @@ namespace BNITapCash
             else
             {
                 MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
-        }
-
-        private string CaptureWebcamImage()
-        {
-            if (Properties.Settings.Default.WebcamEnabled)
-            {
-                try
-                {
-                    camera.StartWebcam();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_TROUBLE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return null;
-                }
-                System.Threading.Thread.Sleep(Constant.DELAY_TIME_WEBCAM);
-                if (webcamImage.Image == null)
-                {
-                    MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_SNAPSHOOT_FAILED, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    camera.StopWebcam();
-                    return null;
-                }
-                else
-                {
-                    camera.StopWebcam();
-                    Bitmap bmp = new Bitmap(webcamImage.Image, Properties.Settings.Default.WebcamWidth, Properties.Settings.Default.WebcamHeight);
-                    return bmp.ToBase64String(ImageFormat.Jpeg);
-                }
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        private string SnapshotLiveCamera()
-        {
-            int liveCameraWidth = Properties.Settings.Default.LiveCameraWidth;
-            int liveCameraHeight = Properties.Settings.Default.LiveCameraHeight;
-            try
-            {
-                HttpWebRequest request = WebRequest.Create(snapshotUri) as HttpWebRequest;
-                Bitmap bitmap;
-                using (Stream stream = request.GetResponse().GetResponseStream())
-                {
-                    Image image = Image.FromStream(stream);
-                    bitmap = new Bitmap(image, liveCameraWidth, liveCameraHeight);
-                    return bitmap.ToBase64String(ImageFormat.Jpeg);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show(Constant.ERROR_MESSAGE_SNAPSHOT_FAILED, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -649,7 +590,7 @@ namespace BNITapCash
         {
             mifareCard.Stop();
             database.DisposeDatabaseConnection();
-            IpCameraHelper.StopCamera(LiveCamera);
+            CameraHelper.StopIpCamera(LiveCamera);
             LostTicket lostTicket = new LostTicket(home);
             lostTicket.Show();
             Hide();
@@ -660,7 +601,7 @@ namespace BNITapCash
 
         private void buttonFreePass_Click(object sender, EventArgs e)
         {
-            IpCameraHelper.StopCamera(LiveCamera);
+            CameraHelper.StopIpCamera(LiveCamera);
             mifareCard.Stop();
             database.DisposeDatabaseConnection();
             FreePass freePass = new FreePass(home);
@@ -700,7 +641,7 @@ namespace BNITapCash
         private void buttonPassKadeKeluar_Click(object sender, EventArgs e)
         {
             UnsubscribeEvents();
-            IpCameraHelper.StopCamera(LiveCamera);
+            CameraHelper.StopIpCamera(LiveCamera);
         }
     }
 }

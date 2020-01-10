@@ -12,7 +12,6 @@ using BNITapCash.Miscellaneous.Webcam;
 using Newtonsoft.Json;
 using System;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
@@ -63,7 +62,7 @@ namespace BNITapCash.Forms
             try
             {
                 tipe_kendaraan.Items.Add("- Pilih Tipe Kendaraan -");
-                string masterDataFile = TKHelper.GetApplicationExecutableDirectoryName() + "\\src\\master-data.json";
+                string masterDataFile = TKHelper.GetApplicationExecutableDirectoryName() + Constant.PATH_FILE_MASTER_DATA_PARKING_OUT;
                 using (StreamReader reader = new StreamReader(masterDataFile))
                 {
                     string json = reader.ReadToEnd();
@@ -84,7 +83,7 @@ namespace BNITapCash.Forms
 
         private void InitLiveCamera()
         {
-            IpCameraHelper.StartCamera(liveCamera);
+            CameraHelper.StartIpCamera(liveCamera);
         }
 
         private void btnMinimize_Click(object sender, EventArgs e)
@@ -110,12 +109,12 @@ namespace BNITapCash.Forms
 
         private void back_to_cashier_Click(object sender, EventArgs e)
         {
-            IpCameraHelper.StopCamera(liveCamera);
+            CameraHelper.StopIpCamera(liveCamera);
             database.DisposeDatabaseConnection();
             Cashier cashier = new Cashier(home);
             cashier.Show();
             Dispose();
-            UnsubscribeEvents();            
+            UnsubscribeEvents();
             TKHelper.ClearGarbage();
         }
 
@@ -228,10 +227,11 @@ namespace BNITapCash.Forms
                 DataDeduct responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
                 if (!responseDeduct.IsError)
                 {
-                    string base64WebcamImage = CaptureWebcamImage();
-                    if (!string.IsNullOrEmpty(base64WebcamImage))
+                    string base64WebcamImage = CameraHelper.CaptureWebcamImage(camera, webcamImage);
+                    string base64LiveCameraSnapshotImage = CameraHelper.SnapshotLiveCamera();
+                    if (!string.IsNullOrEmpty(base64LiveCameraSnapshotImage))
                     {
-                        ParkingOut parkingOut = SendDataToServer(base64WebcamImage, paymentMethod, totalFare);
+                        ParkingOut parkingOut = SendDataToServer(base64WebcamImage, base64LiveCameraSnapshotImage, paymentMethod, totalFare);
                         StoreDataToDatabase(responseDeduct, parkingOut);
                         MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Clear();
@@ -244,40 +244,18 @@ namespace BNITapCash.Forms
             }
             else
             {
-                string base64WebcamImage = CaptureWebcamImage();
-                if (!string.IsNullOrEmpty(base64WebcamImage))
+                string base64WebcamImage = CameraHelper.CaptureWebcamImage(camera, webcamImage);
+                string base64LiveCameraSnapshotImage = CameraHelper.SnapshotLiveCamera();
+                if (!string.IsNullOrEmpty(base64LiveCameraSnapshotImage))
                 {
-                    SendDataToServer(base64WebcamImage, paymentMethod, totalFare);
+                    SendDataToServer(base64WebcamImage, base64LiveCameraSnapshotImage, paymentMethod, totalFare);
                     MessageBox.Show(Constant.TRANSACTION_SUCCESS, "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Clear();
                 }
             }
         }
 
-        private string CaptureWebcamImage()
-        {
-            try
-            {
-                camera.StartWebcam();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_TROUBLE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
-            System.Threading.Thread.Sleep(Constant.DELAY_TIME_WEBCAM);
-            if (webcamImage.Image == null)
-            {
-                MessageBox.Show(Constant.ERROR_MESSAGE_WEBCAM_SNAPSHOOT_FAILED, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                camera.StopWebcam();
-                return null;
-            }
-            camera.StopWebcam();
-            Bitmap bmp = new Bitmap(webcamImage.Image, Properties.Settings.Default.WebcamWidth, Properties.Settings.Default.WebcamHeight);
-            return bmp.ToBase64String(ImageFormat.Png);
-        }
-
-        private ParkingOut SendDataToServer(string webcamCapturedImage, string paymentMethod, int totalFare)
+        private ParkingOut SendDataToServer(string webcamCapturedImage, string liveCameraSnapshotImage, string paymentMethod, int totalFare)
         {
             string vehicle = tipe_kendaraan.SelectedItem.ToString();
             string username = Properties.Settings.Default.Username;
@@ -285,7 +263,7 @@ namespace BNITapCash.Forms
             string plateNumber = nomor_plat.Text.ToString();
             string ipAddress = TKHelper.GetLocalIPAddress();
 
-            LostTicketRequest lostTicketRequest = new LostTicketRequest(vehicle, username, datetimeOut, totalFare, plateNumber, ipAddress, paymentMethod, webcamCapturedImage);
+            LostTicketRequest lostTicketRequest = new LostTicketRequest(vehicle, username, datetimeOut, totalFare, plateNumber, ipAddress, paymentMethod, webcamCapturedImage, liveCameraSnapshotImage);
             var payload = JsonConvert.SerializeObject(lostTicketRequest);
 
             string lostTicketApiUrl = Properties.Resources.LostTicketAPIURL;

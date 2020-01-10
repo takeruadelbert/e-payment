@@ -126,7 +126,7 @@
     <Compile Include="Classes\Forms\PassKadeOut.Designer.cs">
       <DependentUpon>PassKadeOut.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Helper\IpCameraHelper.cs" />
+    <Compile Include="Classes\Helper\CameraHelper.cs" />
     <Compile Include="Classes\Interface\EventFormHandler.cs" />
     <Compile Include="Classes\ReaderDevice\Pcsc\Apdu.cs" />
     <Compile Include="Classes\ReaderDevice\Pcsc\Helper.cs" />

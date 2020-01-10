@@ -34,7 +34,10 @@ namespace BNITapCash.API.request
         [JsonProperty("image")]
         private string Base64Image { get; set; }
 
-        public ParkingOutFreePassRequest(string vehicle, string type, string uid, string username, string datetimeOut, string plateNumber, string ipAddress, string supervisorUidCard, string base64image)
+        [JsonProperty("camera_image")]
+        private string Base64LiveCameraSnapshotImage { get; set; }
+
+        public ParkingOutFreePassRequest(string vehicle, string type, string uid, string username, string datetimeOut, string plateNumber, string ipAddress, string supervisorUidCard, string base64image, string base64LiveCameraSnapshotImage)
         {
             Vehicle = vehicle;
             Type = type;
@@ -46,6 +49,7 @@ namespace BNITapCash.API.request
             IpAddress = ipAddress;
             SupervisorUIDCard = supervisorUidCard;
             Base64Image = base64image;
+            Base64LiveCameraSnapshotImage = base64LiveCameraSnapshotImage;
         }
     }
 }
