@@ -87,6 +87,7 @@
     <Compile Include="Classes\API\request\LostTicketRequest.cs" />
     <Compile Include="Classes\API\request\ParkingOutFreePassRequest.cs" />
     <Compile Include="Classes\API\request\ParkingOutRequest.cs" />
+    <Compile Include="Classes\API\request\PassKadeDepartureRequest.cs" />
     <Compile Include="Classes\API\request\PassKadeInVehicleFareRequest.cs" />
     <Compile Include="Classes\API\request\PrintReportRequest.cs" />
     <Compile Include="Classes\API\request\RequestFareRequest.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Classes\API\response\ParkingIn.cs" />
     <Compile Include="Classes\API\response\ParkingInPedestrian.cs" />
     <Compile Include="Classes\API\response\ParkingOut.cs" />
+    <Compile Include="Classes\API\response\PassKadeDeparture.cs" />
     <Compile Include="Classes\API\response\PassKadeInVehicleFare.cs" />
     <Compile Include="Classes\API\response\Pedestrian.cs" />
     <Compile Include="Classes\API\RESTAPI.cs" />

@@ -43,7 +43,7 @@
             this.ticket = new System.Windows.Forms.TextBox();
             this.listBarcodeSuggestion = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.datetimeIn = new System.Windows.Forms.TextBox();
+            this.departureDatetime = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.liveCamera = new Vlc.DotNet.Forms.VlcControl();
             this.btnMinimize = new System.Windows.Forms.Button();
@@ -94,7 +94,7 @@
             this.panelInnerBoxWhite.Controls.Add(this.ticket);
             this.panelInnerBoxWhite.Controls.Add(this.listBarcodeSuggestion);
             this.panelInnerBoxWhite.Controls.Add(this.label1);
-            this.panelInnerBoxWhite.Controls.Add(this.datetimeIn);
+            this.panelInnerBoxWhite.Controls.Add(this.departureDatetime);
             this.panelInnerBoxWhite.Controls.Add(this.panel4);
             this.panelInnerBoxWhite.Controls.Add(this.liveCamera);
             this.panelInnerBoxWhite.Controls.Add(this.btnMinimize);
@@ -263,8 +263,9 @@
             this.ticket.Name = "ticket";
             this.ticket.Size = new System.Drawing.Size(262, 17);
             this.ticket.TabIndex = 82;
-            this.ticket.Text = "Scan Tiket/Kartu";
+            this.ticket.Text = "Barcode/UID Kartu";
             this.ticket.Click += new System.EventHandler(this.ticket_Click);
+            this.ticket.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ticket_KeyDown);
             // 
             // listBarcodeSuggestion
             // 
@@ -277,6 +278,7 @@
             this.listBarcodeSuggestion.Size = new System.Drawing.Size(360, 21);
             this.listBarcodeSuggestion.TabIndex = 85;
             this.listBarcodeSuggestion.Visible = false;
+            this.listBarcodeSuggestion.SelectedIndexChanged += new System.EventHandler(this.selectBarcode);
             // 
             // label1
             // 
@@ -285,27 +287,27 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
             this.label1.Location = new System.Drawing.Point(331, 352);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(179, 16);
+            this.label1.Size = new System.Drawing.Size(239, 16);
             this.label1.TabIndex = 80;
-            this.label1.Text = "Waktu Masuk Kendaraan";
+            this.label1.Text = "Waktu Keberangkatan Kendaraan";
             // 
-            // datetimeIn
+            // departureDatetime
             // 
-            this.datetimeIn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
-            this.datetimeIn.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.datetimeIn.Cursor = System.Windows.Forms.Cursors.No;
-            this.datetimeIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.datetimeIn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(72)))), ((int)(((byte)(135)))));
-            this.datetimeIn.Location = new System.Drawing.Point(342, 391);
-            this.datetimeIn.MaximumSize = new System.Drawing.Size(350, 40);
-            this.datetimeIn.MinimumSize = new System.Drawing.Size(350, 40);
-            this.datetimeIn.Name = "datetimeIn";
-            this.datetimeIn.ReadOnly = true;
-            this.datetimeIn.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.datetimeIn.Size = new System.Drawing.Size(350, 28);
-            this.datetimeIn.TabIndex = 79;
-            this.datetimeIn.Text = "- - -  00:00:00";
-            this.datetimeIn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.departureDatetime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
+            this.departureDatetime.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.departureDatetime.Cursor = System.Windows.Forms.Cursors.No;
+            this.departureDatetime.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.departureDatetime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(72)))), ((int)(((byte)(135)))));
+            this.departureDatetime.Location = new System.Drawing.Point(342, 391);
+            this.departureDatetime.MaximumSize = new System.Drawing.Size(350, 40);
+            this.departureDatetime.MinimumSize = new System.Drawing.Size(350, 40);
+            this.departureDatetime.Name = "departureDatetime";
+            this.departureDatetime.ReadOnly = true;
+            this.departureDatetime.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.departureDatetime.Size = new System.Drawing.Size(350, 28);
+            this.departureDatetime.TabIndex = 79;
+            this.departureDatetime.Text = "- - -  00:00:00";
+            this.departureDatetime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // panel4
             // 
@@ -405,6 +407,7 @@
             this.btnSave.TabIndex = 73;
             this.btnSave.Text = "SAVE";
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // lineTopInnerbox
             // 
@@ -689,7 +692,7 @@
         private System.Windows.Forms.TextBox txtGrandTotal;
         private System.Windows.Forms.Panel panelTotalTarifGreen;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox datetimeIn;
+        private System.Windows.Forms.TextBox departureDatetime;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;

@@ -1,5 +1,6 @@
 ﻿using AForge.Video;
 using AForge.Video.DirectShow;
+using BNITapCash.Classes.Forms;
 using BNITapCash.Forms;
 using System;
 using System.Drawing;
@@ -11,6 +12,7 @@ namespace BNITapCash.Miscellaneous.Webcam
         private Cashier cashier;
         private LostTicket lostTicket;
         private FreePass freePass;
+        private PassKadeIn passKadeIn;
         private static FilterInfoCollection Devices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
         private VideoCaptureDevice frame = new VideoCaptureDevice(Devices[0].MonikerString);
         private static bool hasCaptured = false;
@@ -28,6 +30,11 @@ namespace BNITapCash.Miscellaneous.Webcam
         public Webcam(FreePass freePass)
         {
             this.freePass = freePass;
+        }
+
+        public Webcam(PassKadeIn passKadeIn)
+        {
+            this.passKadeIn = passKadeIn;
         }
 
         public void StartWebcam()
@@ -70,6 +77,10 @@ namespace BNITapCash.Miscellaneous.Webcam
                 else if (lostTicket != null)
                 {
                     lostTicket.webcamImage.Image = (Image)e.Frame.Clone();
+                }
+                else if (passKadeIn != null)
+                {
+                    passKadeIn.webcamImage.Image = (Image)e.Frame.Clone();
                 }
                 else
                 {

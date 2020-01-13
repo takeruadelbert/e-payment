@@ -232,9 +232,9 @@ namespace BNITapCash
         public void Clear(bool include_uid = false)
         {
             if (include_uid)
-                textBox1.Text = "UID Card";
+                textBox1.Text = "Barcode/UID Kartu";
             textBox2.Text = "Nomor Plat Kendaraan";
-            textBox3.Text = "Waktu Masuk";
+            textBox3.Text = "- - -  00:00:00";
             textBox4.Text = TKHelper.GetCurrentDatetime();
             txtHour.Text = "";
             txtMinute.Text = "";
@@ -252,8 +252,8 @@ namespace BNITapCash
 
         private void textBox1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text.ToLower() == "barcode/uid card")
-                this.TextListener("barcode/uid card");
+            if (textBox1.Text.ToLower() == "barcode/uid kartu")
+                this.TextListener("barcode/uid kartu");
         }
 
         private void TextListener(string field, bool is_textchanged = false)
@@ -264,7 +264,7 @@ namespace BNITapCash
                 {
                     textBox2.Clear();
                 }
-                if (field == "barcode/uid card")
+                if (field == "barcode/uid kartu")
                 {
                     textBox1.Clear();
                 }
@@ -323,7 +323,7 @@ namespace BNITapCash
                 return Constant.WARNING_MESSAGE_DATETIME_LEAVE_NOT_EMPTY;
             }
 
-            if (textBox1.Text.ToLower() == "uid card" || textBox1.Text == "")
+            if (textBox1.Text.ToLower() == "barcode/uid kartu" || textBox1.Text == "")
             {
                 return Constant.WARNING_MESSAGE_UID_CARD_NOT_EMPTY;
             }
@@ -359,7 +359,7 @@ namespace BNITapCash
         {
             if (comboBox1.SelectedIndex != 0)
             {
-                if (textBox1.Text != "" && textBox1.Text != "Barcode/UID Card")
+                if (textBox1.Text != "" && textBox1.Text != "Barcode/UID Kartu")
                 {
                     // send data API
                     var APIUrl = Properties.Resources.RequestUIDFareAPIURL;

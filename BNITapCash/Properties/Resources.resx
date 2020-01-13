@@ -373,4 +373,8 @@
     <value>/ws/parking_ins/request_uid_go</value>
     <comment>API for requesting data vehicle fare in 'Pass Kade In'.</comment>
   </data>
+  <data name="SaveDataPassKadeDepartureApiUrl" xml:space="preserve">
+    <value>/ws/parking_ins/save_uid_go</value>
+    <comment>API for saving data pass kade departure into server.</comment>
+  </data>
 </root>

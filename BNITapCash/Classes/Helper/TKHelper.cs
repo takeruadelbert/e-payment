@@ -177,6 +177,19 @@ namespace BNITapCash.Helper
             }
         }
 
+        public static string DictionaryGetValueByKey(Dictionary<string, string> dictionary, string key)
+        {
+            try
+            {
+                return dictionary[key];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
         public static string GetValueTime(string time, string type)
         {
             if (string.IsNullOrEmpty(time))

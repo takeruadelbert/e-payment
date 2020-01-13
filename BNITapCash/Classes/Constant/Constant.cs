@@ -35,6 +35,7 @@
         public static readonly string WARNING_MESSAGE_INVALID_HOST = "Invalid Host.";
         public static readonly string WARNING_MESSAGE_UNTAPPED_CARD = "Silahkan Tap Kartunya Terlebih Dahulu.";
         public static readonly string WARNING_MESSAGE_BARCODE_NOT_EMPTY = "Field 'Barcode' Harus Diisi.";
+        public static readonly string WARNING_MESSAGE_OUTLOAD_NOT_EMPTY = "Field 'Tarif Muatan' Harus Dipilih.";
 
         public static readonly string DATABASE_CONFIG_VALIDATION_SUCCESS = "Konfigurasi Database Berhasil Diupdate.";
         public static readonly string SETTING_UPDATE_SUCCESS = "Setting Berhasil Diupdate.";

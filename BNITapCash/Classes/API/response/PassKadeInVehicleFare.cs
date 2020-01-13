@@ -11,13 +11,13 @@ namespace BNITapCash.Classes.API.response
         public int Fare;
 
         [JsonProperty("waktu_berangkat")]
-        public string DatetimeOut;
+        public string DepartureDatetime;
 
-        public PassKadeInVehicleFare(string type, int fare, string datetimeOut)
+        public PassKadeInVehicleFare(string type, int fare, string departure)
         {
             VehicleType = type;
             Fare = fare;
-            DatetimeOut = datetimeOut;
+            DepartureDatetime = departure;
         }
     }
 }

@@ -727,6 +727,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/parking_ins/save_uid_go.
+        /// </summary>
+        internal static string SaveDataPassKadeDepartureApiUrl {
+            get {
+                return ResourceManager.GetString("SaveDataPassKadeDepartureApiUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /ws/parking_ins/search_barcode.
         /// </summary>
         internal static string SearchBarcodeAPIURL {

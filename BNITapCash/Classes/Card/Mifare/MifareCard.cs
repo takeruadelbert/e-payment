@@ -1,4 +1,5 @@
-﻿using BNITapCash.ConstantVariable;
+﻿using BNITapCash.Classes.Forms;
+using BNITapCash.ConstantVariable;
 using BNITapCash.Forms;
 using BNITapCash.Readers.Contactless.Acr123U;
 using PCSC;
@@ -31,6 +32,7 @@ namespace BNITapCash.Card.Mifare
 
         private Cashier cashier;
         private FreePass freePass;
+        private PassKadeIn passKadeIn;
 
         public MifareCard()
         {
@@ -56,6 +58,17 @@ namespace BNITapCash.Card.Mifare
             Console.WriteLine("===========");
 
             this.freePass = freePass;
+            this.acr123u = new Acr123U();
+        }
+
+        public MifareCard(PassKadeIn passKadeIn)
+        {
+            establishContext();
+            Console.WriteLine("===========");
+            Console.WriteLine("List Reader");
+            Console.WriteLine("===========");
+
+            this.passKadeIn = passKadeIn;
             this.acr123u = new Acr123U();
         }
 
@@ -181,12 +194,24 @@ namespace BNITapCash.Card.Mifare
             {
                 if (cashier != null)
                 {
-                    if (cashier.UIDCard.ToLower() == "uid card")
+                    if (cashier.UIDCard.ToLower() == "barcode/uid kartu")
                     {
                         string cardUID = getcardUID();
                         if (cashier.UIDCard.Length != Constant.BARCODE_LENGTH)
                         {
                             cashier.UIDCard = cardUID;
+                        }
+                        Console.WriteLine("UID = " + cardUID);
+                    }
+                }
+                else if (passKadeIn != null)
+                {
+                    if (passKadeIn.UIDCard.ToLower() == "barcode/uid kartu")
+                    {
+                        string cardUID = getcardUID();
+                        if (passKadeIn.UIDCard.Length != Constant.BARCODE_LENGTH)
+                        {
+                            passKadeIn.UIDCard = cardUID;
                         }
                         Console.WriteLine("UID = " + cardUID);
                     }
