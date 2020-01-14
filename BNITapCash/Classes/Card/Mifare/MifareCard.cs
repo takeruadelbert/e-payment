@@ -33,6 +33,7 @@ namespace BNITapCash.Card.Mifare
         private Cashier cashier;
         private FreePass freePass;
         private PassKadeIn passKadeIn;
+        private PassKadeOut passKadeOut;
 
         public MifareCard()
         {
@@ -42,9 +43,7 @@ namespace BNITapCash.Card.Mifare
         public MifareCard(Cashier cashier)
         {
             establishContext();
-            Console.WriteLine("===========");
-            Console.WriteLine("List Reader");
-            Console.WriteLine("===========");
+            ConsoleLogListReader();
 
             this.cashier = cashier;
             this.acr123u = new Acr123U();
@@ -53,9 +52,7 @@ namespace BNITapCash.Card.Mifare
         public MifareCard(FreePass freePass)
         {
             establishContext();
-            Console.WriteLine("===========");
-            Console.WriteLine("List Reader");
-            Console.WriteLine("===========");
+            ConsoleLogListReader();
 
             this.freePass = freePass;
             this.acr123u = new Acr123U();
@@ -64,12 +61,26 @@ namespace BNITapCash.Card.Mifare
         public MifareCard(PassKadeIn passKadeIn)
         {
             establishContext();
-            Console.WriteLine("===========");
-            Console.WriteLine("List Reader");
-            Console.WriteLine("===========");
+            ConsoleLogListReader();
 
             this.passKadeIn = passKadeIn;
             this.acr123u = new Acr123U();
+        }
+
+        public MifareCard(PassKadeOut passKadeOut)
+        {
+            establishContext();
+            ConsoleLogListReader();
+
+            this.passKadeOut = passKadeOut;
+            this.acr123u = new Acr123U();
+        }
+
+        private void ConsoleLogListReader()
+        {
+            Console.WriteLine("===========");
+            Console.WriteLine("List Reader");
+            Console.WriteLine("===========");
         }
 
         public string SelectDevice()
@@ -216,13 +227,18 @@ namespace BNITapCash.Card.Mifare
                         Console.WriteLine("UID = " + cardUID);
                     }
                 }
-                else
+                else if (freePass != null)
                 {
                     string cardUID = getcardUID();
                     if (freePass.UIDCard.Length != Constant.BARCODE_LENGTH)
                     {
                         freePass.UIDCard = cardUID;
                     }
+                    Console.WriteLine("UID = " + cardUID);
+                }
+                else
+                {
+                    string cardUID = getcardUID();
                     Console.WriteLine("UID = " + cardUID);
                 }
                 //disconnect();

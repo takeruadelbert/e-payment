@@ -13,6 +13,7 @@ namespace BNITapCash.Miscellaneous.Webcam
         private LostTicket lostTicket;
         private FreePass freePass;
         private PassKadeIn passKadeIn;
+        private PassKadeOut passKadeOut;
         private static FilterInfoCollection Devices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
         private VideoCaptureDevice frame = new VideoCaptureDevice(Devices[0].MonikerString);
         private static bool hasCaptured = false;
@@ -35,6 +36,11 @@ namespace BNITapCash.Miscellaneous.Webcam
         public Webcam(PassKadeIn passKadeIn)
         {
             this.passKadeIn = passKadeIn;
+        }
+
+        public Webcam(PassKadeOut passKadeOut)
+        {
+            this.passKadeOut = passKadeOut;
         }
 
         public void StartWebcam()
@@ -81,6 +87,10 @@ namespace BNITapCash.Miscellaneous.Webcam
                 else if (passKadeIn != null)
                 {
                     passKadeIn.webcamImage.Image = (Image)e.Frame.Clone();
+                }
+                else if (passKadeOut != null)
+                {
+                    passKadeOut.webcamImage.Image = (Image)e.Frame.Clone();
                 }
                 else
                 {

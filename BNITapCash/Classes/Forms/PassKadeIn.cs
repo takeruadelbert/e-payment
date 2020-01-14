@@ -223,11 +223,16 @@ namespace BNITapCash.Classes.Forms
                 Properties.Settings.Default.Save();
 
                 CameraHelper.StopIpCamera(liveCamera);
+                mifareCard.Stop();
+                database.DisposeDatabaseConnection();
 
                 // redirect to sign-in form
                 Hide();
                 this.home.Clear();
                 this.home.Show();
+                Dispose();
+                UnsubscribeEvents();
+                TKHelper.ClearGarbage();
             }
         }
 

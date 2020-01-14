@@ -4,6 +4,7 @@ using BNITapCash.API.response;
 using BNITapCash.Bank.BNI;
 using BNITapCash.Bank.DataModel;
 using BNITapCash.Card.Mifare;
+using BNITapCash.Classes.Forms;
 using BNITapCash.Classes.Helper;
 using BNITapCash.ConstantVariable;
 using BNITapCash.DB;
@@ -612,6 +613,19 @@ namespace BNITapCash
             TKHelper.ClearGarbage();
         }
 
+        private void buttonPassKadeKeluar_Click(object sender, EventArgs e)
+        {
+            CameraHelper.StopIpCamera(LiveCamera);
+            mifareCard.Stop();
+            database.DisposeDatabaseConnection();
+            PassKadeOut passKadeOut = new PassKadeOut(home);
+            passKadeOut.Show();
+            Hide();
+            Dispose();
+            UnsubscribeEvents();
+            TKHelper.ClearGarbage();
+        }
+
         public void UnsubscribeEvents()
         {
             textBox1.Click -= textBox1_Click;
@@ -636,12 +650,6 @@ namespace BNITapCash
 
             button1.Click -= button1_Click;
             button2.Click -= button2_Click;
-        }
-
-        private void buttonPassKadeKeluar_Click(object sender, EventArgs e)
-        {
-            UnsubscribeEvents();
-            CameraHelper.StopIpCamera(LiveCamera);
         }
     }
 }

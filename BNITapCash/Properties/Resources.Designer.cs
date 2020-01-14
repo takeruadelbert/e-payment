@@ -700,6 +700,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/outloads/request_uid_outload.
+        /// </summary>
+        internal static string RequestVehicleFarePassKadeOutApiUrl {
+            get {
+                return ResourceManager.GetString("RequestVehicleFarePassKadeOutApiUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /ws/vehicle_types/get_all_vehicle_name.
         /// </summary>
         internal static string RequestVehicleTypeAPIURL {
@@ -732,6 +741,15 @@ namespace BNITapCash.Properties {
         internal static string SaveDataPassKadeDepartureApiUrl {
             get {
                 return ResourceManager.GetString("SaveDataPassKadeDepartureApiUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /ws/outloads/save_outload.
+        /// </summary>
+        internal static string SaveDataPassKadeOutApiUrl {
+            get {
+                return ResourceManager.GetString("SaveDataPassKadeOutApiUrl", resourceCulture);
             }
         }
         
