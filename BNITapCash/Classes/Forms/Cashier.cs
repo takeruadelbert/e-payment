@@ -51,7 +51,11 @@ namespace BNITapCash
         {
             InitializeComponent();
             this.home = home;
-            Initialize();
+            Initialize();            
+        }
+
+        private void Initialize()
+        {
             this.webcamImage = webcam;
             if (Properties.Settings.Default.WebcamEnabled)
             {
@@ -61,10 +65,6 @@ namespace BNITapCash
             this.database = new DBConnect();
             this.parkingIn = new ParkingIn();
             autoComplete = new AutoCompleteStringCollection();
-        }
-
-        private void Initialize()
-        {
             nonCash.Checked = true;
             ip_address_server = Properties.Settings.Default.IPAddressServer;
 

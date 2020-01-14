@@ -3,6 +3,7 @@ using AForge.Video.DirectShow;
 using BNITapCash.Classes.Forms;
 using BNITapCash.Forms;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace BNITapCash.Miscellaneous.Webcam
@@ -14,33 +15,54 @@ namespace BNITapCash.Miscellaneous.Webcam
         private FreePass freePass;
         private PassKadeIn passKadeIn;
         private PassKadeOut passKadeOut;
-        private static FilterInfoCollection Devices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-        private VideoCaptureDevice frame = new VideoCaptureDevice(Devices[0].MonikerString);
+        private static FilterInfoCollection Devices;
+        private VideoCaptureDevice frame;
         private static bool hasCaptured = false;
 
         public Webcam(Cashier cashier)
         {
             this.cashier = cashier;
+            InitializeWebcam();
         }
 
         public Webcam(LostTicket lostTicket)
         {
             this.lostTicket = lostTicket;
+            InitializeWebcam();
         }
 
         public Webcam(FreePass freePass)
         {
             this.freePass = freePass;
+            InitializeWebcam();
         }
 
         public Webcam(PassKadeIn passKadeIn)
         {
             this.passKadeIn = passKadeIn;
+            InitializeWebcam();
         }
 
         public Webcam(PassKadeOut passKadeOut)
         {
             this.passKadeOut = passKadeOut;
+            InitializeWebcam();
+        }
+
+        [Description("retry to connect the webcam device in case user just plugged it")]
+        private void InitializeWebcam()
+        {
+            try
+            {
+                Devices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                frame = new VideoCaptureDevice(Devices[0].MonikerString);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Devices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                frame = new VideoCaptureDevice(Devices[0].MonikerString);
+            }
         }
 
         public void StartWebcam()
