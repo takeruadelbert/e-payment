@@ -24,6 +24,7 @@ namespace BNITapCash
         private About about;
         private PassKadeIn passKadeIn;
         private RESTAPI restApi;
+        private Pedestrian pedestrian;
         private string ip_address_server;
 
         public Login()
@@ -273,15 +274,20 @@ namespace BNITapCash
                     case 201:
                         try
                         {
-                            if (Properties.Settings.Default.GateType.ToLower() == "in")
+                            switch (Properties.Settings.Default.GateType.ToLower())
                             {
-                                this.passKadeIn = new PassKadeIn(this);
-                                this.passKadeIn.Show();
-                            }
-                            else
-                            {
-                                this.cashier = new Cashier(this);
-                                this.cashier.Show();
+                                case "in":
+                                    this.passKadeIn = new PassKadeIn(this);
+                                    this.passKadeIn.Show();
+                                    break;
+                                case "out":
+                                    this.cashier = new Cashier(this);
+                                    this.cashier.Show();
+                                    break;
+                                default:
+                                    this.pedestrian = new Pedestrian(this);
+                                    this.pedestrian.Show();
+                                    break;
                             }
                             Hide();
                         }
@@ -447,7 +453,7 @@ namespace BNITapCash
 
         private void username_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 btnLogin.PerformClick();
             }

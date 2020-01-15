@@ -34,6 +34,7 @@ namespace BNITapCash.Card.Mifare
         private FreePass freePass;
         private PassKadeIn passKadeIn;
         private PassKadeOut passKadeOut;
+        private Pedestrian pedestrian;
 
         public MifareCard()
         {
@@ -73,6 +74,15 @@ namespace BNITapCash.Card.Mifare
             ConsoleLogListReader();
 
             this.passKadeOut = passKadeOut;
+            this.acr123u = new Acr123U();
+        }
+
+        public MifareCard(Pedestrian pedestrian)
+        {
+            establishContext();
+            ConsoleLogListReader();
+
+            this.pedestrian = pedestrian;
             this.acr123u = new Acr123U();
         }
 

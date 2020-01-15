@@ -1,9 +1,9 @@
-﻿using MySql.Data.MySqlClient;
+﻿using BNITapCash.Helper;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using BNITapCash.Helper;
 
 namespace BNITapCash.DB
 {
@@ -98,7 +98,7 @@ namespace BNITapCash.DB
         }
 
         //Insert statement
-        public void Insert(string query_cmd)
+        public MySqlCommand Insert(string query_cmd)
         {
             string query = query_cmd;
             if (this.OpenConnection())
@@ -106,7 +106,9 @@ namespace BNITapCash.DB
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 cmd.ExecuteNonQuery();
                 this.CloseConnection();
+                return cmd;
             }
+            return null;
         }
 
         //Update statement

@@ -385,4 +385,8 @@
     <value>/ws/outloads/save_outload</value>
     <comment>API for saving data of pass kade out into server.</comment>
   </data>
+  <data name="SaveDataPedestrianApiUrl" xml:space="preserve">
+    <value>/ws/people_tickets/save_pedestrian_cashless</value>
+    <comment>API for saving data pedestrian into server.</comment>
+  </data>
 </root>

@@ -754,6 +754,15 @@ namespace BNITapCash.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ws/people_tickets/save_pedestrian_cashless.
+        /// </summary>
+        internal static string SaveDataPedestrianApiUrl {
+            get {
+                return ResourceManager.GetString("SaveDataPedestrianApiUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /ws/parking_ins/search_barcode.
         /// </summary>
         internal static string SearchBarcodeAPIURL {

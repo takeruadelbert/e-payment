@@ -2,7 +2,7 @@
 
 namespace BNITapCash.Classes.API.response
 {
-    public class Pedestrian : BaseResponse
+    public class DataPedestrian : BaseResponse
     {
         [JsonProperty("name")]
         public string Name;
@@ -10,7 +10,7 @@ namespace BNITapCash.Classes.API.response
         [JsonProperty("fare")]
         public int Fare;
 
-        public Pedestrian(string name, int fare)
+        public DataPedestrian(string name, int fare)
         {
             Name = name;
             Fare = fare;

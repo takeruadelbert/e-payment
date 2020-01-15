@@ -6,7 +6,7 @@ namespace BNITapCash.Classes.API.response
     public class ParkingInPedestrian : BaseResponse
     {
         [JsonProperty("pedestrian")]
-        public List<Pedestrian> Pedestrians;
+        public List<DataPedestrian> Pedestrians;
 
         [JsonProperty("cargo")]
         public List<Cargo> Cargos;
@@ -14,7 +14,7 @@ namespace BNITapCash.Classes.API.response
         [JsonProperty("notes")]
         public List<string> Notes;
 
-        public ParkingInPedestrian(List<Pedestrian> pedestrians, List<Cargo> cargos, List<string> notes)
+        public ParkingInPedestrian(List<DataPedestrian> pedestrians, List<Cargo> cargos, List<string> notes)
         {
             Pedestrians = pedestrians;
             Cargos = cargos;

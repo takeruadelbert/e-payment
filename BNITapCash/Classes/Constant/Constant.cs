@@ -14,6 +14,7 @@
 
         // error message
         public static readonly string ERROR_MESSAGE_FAIL_TO_WRITE_MASTER_DATA_FILE = "Fail to Write Master Data File.";
+        public static readonly string ERROR_MESSAGE_FAIL_TO_SAVE_DATA_INTO_LOCAL_SERVER = "Error : Fail to Save Data Into Local Server.";
 
         // validation
         public static readonly string WARNING_MESSAGE_USERNAME_NOT_EMPTY = "Username Harus Diisi.";
@@ -45,6 +46,7 @@
         public static readonly string ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER = "Error : Can't establish connection to server.";
         public static readonly string ERROR_MESSAGE_FAIL_TO_FETCH_VEHICLE_TYPE_DATA = "Error : failed to fetch vehicle type data.";
         public static readonly string ERROR_MESSAGE_FAIL_TO_FETCH_OUTLOAD = "Error : failed to fetch data outload.";
+        public static readonly string ERROR_MESSAGE_FAIL_TO_FETCH_PEDESTRIAN_DATA = "Error : failed to fetch pedestrian type data.";
         public static readonly string ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER = "Error found when receiving server response.";
         public static readonly string ERROR_MESSAGE_INVALID_GATE = "Gate Tidak Terdaftar di Server.";        
 
