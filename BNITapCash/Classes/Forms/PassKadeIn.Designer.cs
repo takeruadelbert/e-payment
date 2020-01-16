@@ -648,7 +648,7 @@
             // notifyIcon
             // 
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
-            this.notifyIcon.Text = "notifyIcon1";
+            this.notifyIcon.Text = "E-Payment Notification Tray";
             this.notifyIcon.Visible = true;
             // 
             // PassKadeIn
