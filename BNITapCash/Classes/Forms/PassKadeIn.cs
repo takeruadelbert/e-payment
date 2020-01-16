@@ -99,7 +99,7 @@ namespace BNITapCash.Classes.Forms
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_FETCH_VEHICLE_TYPE_DATA, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_FETCH_VEHICLE_TYPE_DATA, ToolTipIcon.Error);
             }
         }
 
@@ -127,7 +127,7 @@ namespace BNITapCash.Classes.Forms
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_FETCH_OUTLOAD, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_FETCH_OUTLOAD, ToolTipIcon.Error);
             }
         }
 
@@ -157,12 +157,12 @@ namespace BNITapCash.Classes.Forms
                     }
                     else
                     {
-                        MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", response.Message, ToolTipIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, ToolTipIcon.Error);
                 }
             }
         }
@@ -355,13 +355,13 @@ namespace BNITapCash.Classes.Forms
                         {
                             PassKadeDeparture passKadeDeparture = SendDataToServer(base64WebcamImage, base64LiveCameraSnapshot, paymentMethod, bankCode);
                             StoreDataToDatabase(responseDeduct, passKadeDeparture);
-                            MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.TRANSACTION_SUCCESS, ToolTipIcon.Info);
                             Clear();
                         }
                     }
                     else
                     {
-                        MessageBox.Show(responseDeduct.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", responseDeduct.Message, ToolTipIcon.Error);
                     }
                 }
                 else
@@ -371,17 +371,17 @@ namespace BNITapCash.Classes.Forms
                     if (!string.IsNullOrEmpty(base4LiveCameraSnapshot))
                     {
                         PassKadeDeparture passKadeDeparture = SendDataToServer(base64WebcamImage, base4LiveCameraSnapshot, paymentMethod);
-                        if(passKadeDeparture != null)
+                        if (passKadeDeparture != null)
                         {
-                            MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.TRANSACTION_SUCCESS, ToolTipIcon.Info);
                             Clear();
-                        }                        
+                        }
                     }
                 }
             }
             else
             {
-                MessageBox.Show(feedback, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", feedback, ToolTipIcon.Warning);
             }
         }
 
@@ -401,19 +401,21 @@ namespace BNITapCash.Classes.Forms
 
             string passKadeDepartureRequestApiUrl = Properties.Resources.SaveDataPassKadeDepartureApiUrl;
             DataResponseObject response = (DataResponseObject)restApi.post(IpAddressServer, passKadeDepartureRequestApiUrl, true, sentParam);
-            if(response != null)
+            if (response != null)
             {
-                if(response.Status == 206)
+                if (response.Status == 206)
                 {
                     return JsonConvert.DeserializeObject<PassKadeDeparture>(response.Data.ToString());
-                } else
+                }
+                else
                 {
-                    MessageBox.Show(response.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", response.Message, ToolTipIcon.Warning);
                     return null;
                 }
-            } else
+            }
+            else
             {
-                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, ToolTipIcon.Error);
                 return null;
             }
         }
@@ -439,7 +441,7 @@ namespace BNITapCash.Classes.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", ex.Message, ToolTipIcon.Error);
                 return;
             }
         }

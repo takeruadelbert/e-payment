@@ -75,7 +75,7 @@ namespace BNITapCash.Classes.Forms
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_FETCH_VEHICLE_TYPE_DATA, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_FETCH_VEHICLE_TYPE_DATA, ToolTipIcon.Error);
             }
         }
 
@@ -99,12 +99,12 @@ namespace BNITapCash.Classes.Forms
                     }
                     else
                     {
-                        MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", response.Message, ToolTipIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, ToolTipIcon.Error);
                 }
             }
         }
@@ -192,14 +192,14 @@ namespace BNITapCash.Classes.Forms
                             if (passKadeOutResponse != null)
                             {
                                 StoreDataToDatabase(responseDeduct, passKadeOutResponse);
-                                MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.TRANSACTION_SUCCESS, ToolTipIcon.Info);
                                 Clear();
                             }
                         }
                     }
                     else
                     {
-                        MessageBox.Show(responseDeduct.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", responseDeduct.Message, ToolTipIcon.Error);
                     }
                 }
                 else
@@ -211,7 +211,7 @@ namespace BNITapCash.Classes.Forms
                         PassKadeOutResponse passKadeOutResponse = SendDataToServer(totalFare, base64WebcamImage, base4LiveCameraSnapshot, paymentMethod);
                         if (passKadeOutResponse != null)
                         {
-                            MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.TRANSACTION_SUCCESS, ToolTipIcon.Info);
                             Clear();
                         }
                     }
@@ -219,7 +219,7 @@ namespace BNITapCash.Classes.Forms
             }
             else
             {
-                MessageBox.Show(feedback, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", feedback, ToolTipIcon.Warning);
             }
         }
 
@@ -241,13 +241,13 @@ namespace BNITapCash.Classes.Forms
                     case 206:
                         return JsonConvert.DeserializeObject<PassKadeOutResponse>(response.Data.ToString());
                     default:
-                        MessageBox.Show(response.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", response.Message, ToolTipIcon.Warning);
                         return null;
                 }
             }
             else
             {
-                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, ToolTipIcon.Error);
                 return null;
             }
         }
@@ -273,7 +273,7 @@ namespace BNITapCash.Classes.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", ex.Message, ToolTipIcon.Error);
                 return;
             }
         }

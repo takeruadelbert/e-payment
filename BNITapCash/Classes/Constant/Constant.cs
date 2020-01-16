@@ -11,6 +11,7 @@
         public static readonly int BARCODE_LENGTH = 16;
         public static readonly int DELAY_TIME_WEBCAM = 1000; // in milliseconds
         public static readonly string URL_PROTOCOL = "http://";
+        public static readonly int NOTIFICATION_TRAY_TIMEOUT = 1000;
 
         // error message
         public static readonly string ERROR_MESSAGE_FAIL_TO_WRITE_MASTER_DATA_FILE = "Fail to Write Master Data File.";

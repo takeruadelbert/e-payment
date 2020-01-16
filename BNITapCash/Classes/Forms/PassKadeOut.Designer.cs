@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PassKadeOut));
             this.panelInnerBoxWhite = new System.Windows.Forms.Panel();
+            this.cash = new System.Windows.Forms.RadioButton();
+            this.nonCash = new System.Windows.Forms.RadioButton();
+            this.labelMetodePembayaran = new System.Windows.Forms.Label();
             this.labelNote = new System.Windows.Forms.Label();
             this.note = new System.Windows.Forms.RichTextBox();
             this.liveCamera = new Vlc.DotNet.Forms.VlcControl();
@@ -53,9 +57,7 @@
             this.webcam = new System.Windows.Forms.PictureBox();
             this.txtGrandTotal = new System.Windows.Forms.TextBox();
             this.panelTotalTarifGreen = new System.Windows.Forms.Panel();
-            this.cash = new System.Windows.Forms.RadioButton();
-            this.nonCash = new System.Windows.Forms.RadioButton();
-            this.labelMetodePembayaran = new System.Windows.Forms.Label();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.panelInnerBoxWhite.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonBack)).BeginInit();
@@ -98,6 +100,53 @@
             this.panelInnerBoxWhite.Name = "panelInnerBoxWhite";
             this.panelInnerBoxWhite.Size = new System.Drawing.Size(1200, 600);
             this.panelInnerBoxWhite.TabIndex = 5;
+            // 
+            // cash
+            // 
+            this.cash.AutoSize = true;
+            this.cash.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cash.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cash.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cash.ForeColor = System.Drawing.Color.Gray;
+            this.cash.Location = new System.Drawing.Point(337, 396);
+            this.cash.MaximumSize = new System.Drawing.Size(186, 45);
+            this.cash.MinimumSize = new System.Drawing.Size(186, 45);
+            this.cash.Name = "cash";
+            this.cash.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.cash.Size = new System.Drawing.Size(186, 45);
+            this.cash.TabIndex = 81;
+            this.cash.TabStop = true;
+            this.cash.Text = "Tunai";
+            this.cash.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cash.UseVisualStyleBackColor = false;
+            // 
+            // nonCash
+            // 
+            this.nonCash.AutoSize = true;
+            this.nonCash.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(197)))), ((int)(((byte)(244)))));
+            this.nonCash.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.nonCash.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nonCash.ForeColor = System.Drawing.Color.White;
+            this.nonCash.Location = new System.Drawing.Point(546, 396);
+            this.nonCash.Name = "nonCash";
+            this.nonCash.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.nonCash.Size = new System.Drawing.Size(186, 45);
+            this.nonCash.TabIndex = 82;
+            this.nonCash.TabStop = true;
+            this.nonCash.Text = "Non Tunai";
+            this.nonCash.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.nonCash.UseVisualStyleBackColor = false;
+            // 
+            // labelMetodePembayaran
+            // 
+            this.labelMetodePembayaran.AutoSize = true;
+            this.labelMetodePembayaran.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMetodePembayaran.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
+            this.labelMetodePembayaran.Location = new System.Drawing.Point(333, 365);
+            this.labelMetodePembayaran.Name = "labelMetodePembayaran";
+            this.labelMetodePembayaran.Size = new System.Drawing.Size(152, 16);
+            this.labelMetodePembayaran.TabIndex = 83;
+            this.labelMetodePembayaran.Text = "Metode Pembayaran";
             // 
             // labelNote
             // 
@@ -397,52 +446,11 @@
             this.panelTotalTarifGreen.Size = new System.Drawing.Size(360, 60);
             this.panelTotalTarifGreen.TabIndex = 71;
             // 
-            // cash
+            // notifyIcon
             // 
-            this.cash.AutoSize = true;
-            this.cash.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.cash.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cash.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cash.ForeColor = System.Drawing.Color.Gray;
-            this.cash.Location = new System.Drawing.Point(337, 396);
-            this.cash.MaximumSize = new System.Drawing.Size(186, 45);
-            this.cash.MinimumSize = new System.Drawing.Size(186, 45);
-            this.cash.Name = "cash";
-            this.cash.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.cash.Size = new System.Drawing.Size(186, 45);
-            this.cash.TabIndex = 81;
-            this.cash.TabStop = true;
-            this.cash.Text = "Tunai";
-            this.cash.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cash.UseVisualStyleBackColor = false;
-            // 
-            // nonCash
-            // 
-            this.nonCash.AutoSize = true;
-            this.nonCash.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(197)))), ((int)(((byte)(244)))));
-            this.nonCash.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.nonCash.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nonCash.ForeColor = System.Drawing.Color.White;
-            this.nonCash.Location = new System.Drawing.Point(546, 396);
-            this.nonCash.Name = "nonCash";
-            this.nonCash.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.nonCash.Size = new System.Drawing.Size(186, 45);
-            this.nonCash.TabIndex = 82;
-            this.nonCash.TabStop = true;
-            this.nonCash.Text = "Non Tunai";
-            this.nonCash.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.nonCash.UseVisualStyleBackColor = false;
-            // 
-            // labelMetodePembayaran
-            // 
-            this.labelMetodePembayaran.AutoSize = true;
-            this.labelMetodePembayaran.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMetodePembayaran.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(134)))));
-            this.labelMetodePembayaran.Location = new System.Drawing.Point(333, 365);
-            this.labelMetodePembayaran.Name = "labelMetodePembayaran";
-            this.labelMetodePembayaran.Size = new System.Drawing.Size(152, 16);
-            this.labelMetodePembayaran.TabIndex = 83;
-            this.labelMetodePembayaran.Text = "Metode Pembayaran";
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "notifyIcon1";
+            this.notifyIcon.Visible = true;
             // 
             // PassKadeOut
             // 
@@ -452,6 +460,7 @@
             this.ClientSize = new System.Drawing.Size(1366, 728);
             this.Controls.Add(this.panelInnerBoxWhite);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PassKadeOut";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PassKadeOut";
@@ -494,5 +503,6 @@
         private System.Windows.Forms.RadioButton cash;
         private System.Windows.Forms.RadioButton nonCash;
         private System.Windows.Forms.Label labelMetodePembayaran;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }

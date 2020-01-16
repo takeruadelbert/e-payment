@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Pedestrian));
             this.panelInnerBoxWhite = new System.Windows.Forms.Panel();
             this.panelBox = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,6 +56,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.txtGrandTotal = new System.Windows.Forms.TextBox();
             this.panelTotalTarifGreen = new System.Windows.Forms.Panel();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.panelInnerBoxWhite.SuspendLayout();
             this.panelBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonLogout)).BeginInit();
@@ -430,6 +433,12 @@
             this.panelTotalTarifGreen.Size = new System.Drawing.Size(360, 60);
             this.panelTotalTarifGreen.TabIndex = 71;
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "notifyIcon1";
+            this.notifyIcon.Visible = true;
+            // 
             // Pedestrian
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -438,6 +447,7 @@
             this.ClientSize = new System.Drawing.Size(1366, 728);
             this.Controls.Add(this.panelInnerBoxWhite);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Pedestrian";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pedestrian";
@@ -479,5 +489,6 @@
         private System.Windows.Forms.Panel panelLine;
         private System.Windows.Forms.Panel panelBox;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }

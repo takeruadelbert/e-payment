@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FreePass));
             this.panel1 = new System.Windows.Forms.Panel();
             this.liveCamera = new Vlc.DotNet.Forms.VlcControl();
@@ -67,6 +68,7 @@
             this.lineTopInnerbox = new System.Windows.Forms.Panel();
             this.logoPelindo = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.webcam)).BeginInit();
@@ -602,6 +604,12 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "notifyIcon1";
+            this.notifyIcon.Visible = true;
+            // 
             // FreePass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -613,6 +621,7 @@
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(83, 64);
             this.Name = "FreePass";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -669,5 +678,6 @@
         private System.Windows.Forms.PictureBox buttonBackToCashier;
         private System.Windows.Forms.PictureBox webcam;
         private Vlc.DotNet.Forms.VlcControl liveCamera;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }

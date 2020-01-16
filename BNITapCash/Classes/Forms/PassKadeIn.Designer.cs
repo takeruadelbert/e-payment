@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PassKadeIn));
             this.panelInnerBoxWhite = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
@@ -69,6 +70,7 @@
             this.webcam = new System.Windows.Forms.PictureBox();
             this.txtGrandTotal = new System.Windows.Forms.TextBox();
             this.panelTotalTarifGreen = new System.Windows.Forms.Panel();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.panelInnerBoxWhite.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonLogout)).BeginInit();
@@ -643,6 +645,12 @@
             this.panelTotalTarifGreen.Size = new System.Drawing.Size(360, 60);
             this.panelTotalTarifGreen.TabIndex = 71;
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "notifyIcon1";
+            this.notifyIcon.Visible = true;
+            // 
             // PassKadeIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -651,6 +659,7 @@
             this.ClientSize = new System.Drawing.Size(1366, 728);
             this.Controls.Add(this.panelInnerBoxWhite);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PassKadeIn";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PassKadeIn";
@@ -706,5 +715,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox txtPassKadeFare;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }

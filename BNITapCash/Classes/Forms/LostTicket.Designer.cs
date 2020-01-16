@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LostTicket));
             this.panelWaktuKendaraanKeluarRed = new System.Windows.Forms.Panel();
             this.panelTotalTarifGreen = new System.Windows.Forms.Panel();
@@ -57,6 +58,7 @@
             this.btnMinimize = new System.Windows.Forms.Button();
             this.panelInnerBoxWhite = new System.Windows.Forms.Panel();
             this.liveCamera = new Vlc.DotNet.Forms.VlcControl();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.webcam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoPelindo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonBackToCashier)).BeginInit();
@@ -463,6 +465,12 @@
             this.liveCamera.VlcLibDirectory = ((System.IO.DirectoryInfo)(resources.GetObject("liveCamera.VlcLibDirectory")));
             this.liveCamera.VlcMediaplayerOptions = null;
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "notifyIcon1";
+            this.notifyIcon.Visible = true;
+            // 
             // LostTicket
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -474,6 +482,7 @@
             this.Controls.Add(this.panelInnerBoxWhite);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LostTicket";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LostTicket";
@@ -516,5 +525,6 @@
         private System.Windows.Forms.Button btnMinimize;
         private System.Windows.Forms.Panel panelInnerBoxWhite;
         private Vlc.DotNet.Forms.VlcControl liveCamera;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }

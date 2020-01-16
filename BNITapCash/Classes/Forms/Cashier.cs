@@ -51,7 +51,7 @@ namespace BNITapCash
         {
             InitializeComponent();
             this.home = home;
-            Initialize();            
+            Initialize();
         }
 
         private void Initialize()
@@ -94,7 +94,7 @@ namespace BNITapCash
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_FETCH_VEHICLE_TYPE_DATA, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_FETCH_VEHICLE_TYPE_DATA, ToolTipIcon.Error);
             }
         }
 
@@ -141,13 +141,13 @@ namespace BNITapCash
                         {
                             ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, base64LiveCameraSnapshot, paymentMethod);
                             StoreDataToDatabase(responseDeduct, parkingOut);
-                            MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Clear(true);
+                            notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.TRANSACTION_SUCCESS, ToolTipIcon.Info);
+                            Clear(true);
                         }
                     }
                     else
                     {
-                        MessageBox.Show(responseDeduct.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", responseDeduct.Message, ToolTipIcon.Error);
                     }
                 }
                 else
@@ -157,14 +157,14 @@ namespace BNITapCash
                     if (!string.IsNullOrEmpty(base4LiveCameraSnapshot))
                     {
                         ParkingOut parkingOut = SendDataToServer(totalFare, base64WebcamImage, base4LiveCameraSnapshot, paymentMethod);
-                        MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Clear(true);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.TRANSACTION_SUCCESS, ToolTipIcon.Info);
+                        Clear(true);
                     }
                 }
             }
             else
             {
-                MessageBox.Show(feedback, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", feedback, ToolTipIcon.Warning);
             }
         }
 
@@ -189,7 +189,7 @@ namespace BNITapCash
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", ex.Message, ToolTipIcon.Error);
                 return;
             }
         }
@@ -214,13 +214,13 @@ namespace BNITapCash
                     case 206:
                         return JsonConvert.DeserializeObject<ParkingOut>(response.Data.ToString());
                     default:
-                        MessageBox.Show(response.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", response.Message, ToolTipIcon.Warning);
                         return null;
                 }
             }
             else
             {
-                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, ToolTipIcon.Warning);
                 return null;
             }
         }
@@ -432,19 +432,19 @@ namespace BNITapCash
                                 PictVehicle.SizeMode = PictureBoxSizeMode.StretchImage;
                                 break;
                             default:
-                                MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                this.Clear();
+                                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", response.Message, ToolTipIcon.Error);
+                                Clear();
                                 break;
                         }
                     }
                     else
                     {
-                        MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, ToolTipIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show(Constant.WARNING_MESSAGE_UNTAPPED_CARD, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.WARNING_MESSAGE_UNTAPPED_CARD, ToolTipIcon.Error);
                     this.ResetComboBox();
                     return;
                 }
@@ -546,16 +546,16 @@ namespace BNITapCash
             {
                 if (response.Status == 206)
                 {
-                    MessageBox.Show(Constant.REPRINT_TICKET_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.REPRINT_TICKET_SUCCESS, ToolTipIcon.Info);
                 }
                 else
                 {
-                    MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", response.Message, ToolTipIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, ToolTipIcon.Error);
             }
         }
 
@@ -570,19 +570,19 @@ namespace BNITapCash
                 switch (response.Status)
                 {
                     case 206:
-                        MessageBox.Show(Constant.PRINT_REPORT_OPERATOR_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.PRINT_REPORT_OPERATOR_SUCCESS, ToolTipIcon.Info);
                         break;
                     case 208:
-                        MessageBox.Show(response.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", response.Message, ToolTipIcon.Warning);
                         break;
                     default:
-                        MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", response.Message, ToolTipIcon.Error);
                         break;
                 }
             }
             else
             {
-                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, ToolTipIcon.Error);
             }
 
         }

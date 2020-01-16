@@ -54,16 +54,6 @@ namespace BNITapCash.Forms
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show(Constant.CONFIRMATION_MESSAGE_BEFORE_EXIT, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
-            {
-                Dispose();
-                System.Environment.Exit(1);
-            }
-        }
-
         private void back_Click(object sender, EventArgs e)
         {
             UnsubscribeEvents();
@@ -90,7 +80,7 @@ namespace BNITapCash.Forms
                 this.DBUsername = db_username;
                 this.DBPassword = db_password;
                 Properties.Settings.Default.Save();
-                MessageBox.Show(Constant.DATABASE_CONFIG_VALIDATION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.DATABASE_CONFIG_VALIDATION_SUCCESS, ToolTipIcon.Info);
             }
         }
 
@@ -159,25 +149,25 @@ namespace BNITapCash.Forms
             bool result = true;
             if (string.IsNullOrEmpty(db_host) || db_host.ToLower() == "host")
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_HOST_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_HOST_NOT_EMPTY, ToolTipIcon.Warning);
                 return false;
             }
             else if (db_host.ToLower() != Constant.LOCALHOST_VALUE)
             {
                 if (!TKHelper.ValidateIPv4(db_host))
                 {
-                    MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_HOST, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_INVALID_HOST, ToolTipIcon.Warning);
                     return false;
                 }
             }
             if (string.IsNullOrEmpty(db_name) || db_name.ToLower() == "database name")
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_DATABASE_NAME_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_DATABASE_NAME_NOT_EMPTY, ToolTipIcon.Warning);
                 return false;
             }
             if (string.IsNullOrEmpty(db_username) || db_username.ToLower() == "username")
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_USERNAME_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_USERNAME_NOT_EMPTY, ToolTipIcon.Warning);
                 return false;
             }
             return result;
@@ -214,17 +204,17 @@ namespace BNITapCash.Forms
             string dbname = txtDBName.Text;
             string username = txtDBUsername.Text;
             string password = txtDBPassword.Text;
-            if (this.ValidateFields(host, dbname, username))
+            if (ValidateFields(host, dbname, username))
             {
                 DBConnect db = new DBConnect(host, dbname, username, password);
                 if (db.CheckMySQLConnection())
                 {
-                    MessageBox.Show(Constant.STATUS_CONNECTION_ESTABLISH, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.STATUS_CONNECTION_ESTABLISH, ToolTipIcon.Info);
                     return;
                 }
                 else
                 {
-                    MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_LOCAL_DATABASE, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_LOCAL_DATABASE, ToolTipIcon.Warning);
                     return;
                 }
             }

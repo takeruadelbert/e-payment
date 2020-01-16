@@ -43,13 +43,13 @@ namespace BNITapCash.Forms
             string mid_value = txtSettlementMID.Text.ToString();
             if (string.IsNullOrEmpty(tid_value) || tid_value == "TID")
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_TID_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_TID_NOT_EMPTY, ToolTipIcon.Warning);
                 return;
             }
 
             if (string.IsNullOrEmpty(mid_value) || mid_value == "Settlement MID")
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_MID_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_MID_NOT_EMPTY, ToolTipIcon.Warning);
                 return;
             }
 
@@ -58,7 +58,7 @@ namespace BNITapCash.Forms
             Properties.Settings.Default.Save();
             TID = tid_value;
             MID = mid_value;
-            MessageBox.Show(Constant.SETTING_UPDATE_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.SETTING_UPDATE_SUCCESS, ToolTipIcon.Info);
         }
 
         private void back_Click(object sender, EventArgs e)

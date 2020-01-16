@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PedestrianFareDetail));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.logoPelindo = new System.Windows.Forms.PictureBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.Button();
             this.panelPedestrianDetail = new System.Windows.Forms.Panel();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.logoPelindo = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPelindo)).BeginInit();
             this.SuspendLayout();
@@ -52,24 +53,13 @@
             this.panel1.Size = new System.Drawing.Size(631, 338);
             this.panel1.TabIndex = 0;
             // 
-            // logoPelindo
+            // panelPedestrianDetail
             // 
-            this.logoPelindo.BackColor = System.Drawing.Color.White;
-            this.logoPelindo.BackgroundImage = global::BNITapCash.Properties.Resources.pelindo4;
-            this.logoPelindo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.logoPelindo.Location = new System.Drawing.Point(257, 15);
-            this.logoPelindo.Name = "logoPelindo";
-            this.logoPelindo.Size = new System.Drawing.Size(130, 68);
-            this.logoPelindo.TabIndex = 52;
-            this.logoPelindo.TabStop = false;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.LightGray;
-            this.panel2.Location = new System.Drawing.Point(31, 99);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(566, 1);
-            this.panel2.TabIndex = 53;
+            this.panelPedestrianDetail.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelPedestrianDetail.Location = new System.Drawing.Point(31, 116);
+            this.panelPedestrianDetail.Name = "panelPedestrianDetail";
+            this.panelPedestrianDetail.Size = new System.Drawing.Size(565, 199);
+            this.panelPedestrianDetail.TabIndex = 66;
             // 
             // btnClose
             // 
@@ -88,13 +78,24 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // panelPedestrianDetail
+            // panel2
             // 
-            this.panelPedestrianDetail.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelPedestrianDetail.Location = new System.Drawing.Point(31, 116);
-            this.panelPedestrianDetail.Name = "panelPedestrianDetail";
-            this.panelPedestrianDetail.Size = new System.Drawing.Size(565, 199);
-            this.panelPedestrianDetail.TabIndex = 66;
+            this.panel2.BackColor = System.Drawing.Color.LightGray;
+            this.panel2.Location = new System.Drawing.Point(31, 99);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(566, 1);
+            this.panel2.TabIndex = 53;
+            // 
+            // logoPelindo
+            // 
+            this.logoPelindo.BackColor = System.Drawing.Color.White;
+            this.logoPelindo.BackgroundImage = global::BNITapCash.Properties.Resources.pelindo4;
+            this.logoPelindo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.logoPelindo.Location = new System.Drawing.Point(257, 15);
+            this.logoPelindo.Name = "logoPelindo";
+            this.logoPelindo.Size = new System.Drawing.Size(130, 68);
+            this.logoPelindo.TabIndex = 52;
+            this.logoPelindo.TabStop = false;
             // 
             // PedestrianFareDetail
             // 
@@ -104,6 +105,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PedestrianFareDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PedestrianFareDetail";

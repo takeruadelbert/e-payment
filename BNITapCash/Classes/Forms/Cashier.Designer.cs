@@ -86,6 +86,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.listBarcodeSuggestion = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -872,6 +873,12 @@
             this.label8.TabIndex = 35;
             this.label8.Text = "LOGOUT";
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "notifyIcon1";
+            this.notifyIcon.Visible = true;
+            // 
             // Cashier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -965,5 +972,6 @@
         private System.Windows.Forms.Button buttonFreePass;
         private System.Windows.Forms.Button buttonPassKadeKeluar;
         private Vlc.DotNet.Forms.VlcControl LiveCamera;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }

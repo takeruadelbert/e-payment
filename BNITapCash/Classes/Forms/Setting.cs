@@ -23,7 +23,7 @@ namespace BNITapCash
         public string IPAddressServer { get; set; }
 
         public string IPAddressLiveCamera { get; set; }
-        
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.TextChangeListener("ip server", true);
@@ -69,16 +69,16 @@ namespace BNITapCash
                     Properties.Settings.Default.IPAddressServer = ipv4;
                     Properties.Settings.Default.Save();
                     IPAddressServer = ipv4;
-                    MessageBox.Show(Constant.SETTING_UPDATE_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.SETTING_UPDATE_SUCCESS, ToolTipIcon.Info);
                 }
                 else
                 {
-                    MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_SERVER, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_SERVER, ToolTipIcon.Warning);
                 }
             }
             else
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_IP_ADDRESS_SERVER_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_IP_ADDRESS_SERVER_NOT_EMPTY, ToolTipIcon.Warning);
             }
         }
 

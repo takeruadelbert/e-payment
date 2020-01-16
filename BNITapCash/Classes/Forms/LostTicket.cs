@@ -77,7 +77,7 @@ namespace BNITapCash.Forms
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_FETCH_VEHICLE_TYPE_DATA, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_FETCH_VEHICLE_TYPE_DATA, ToolTipIcon.Error);
             }
         }
 
@@ -145,12 +145,12 @@ namespace BNITapCash.Forms
                 }
                 else
                 {
-                    MessageBox.Show(response.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", response.Message, ToolTipIcon.Warning);
                 }
             }
             else
             {
-                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, ToolTipIcon.Error);
             }
         }
 
@@ -197,17 +197,17 @@ namespace BNITapCash.Forms
         {
             if (tipe_kendaraan.SelectedIndex == 0)
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_VEHICLE_TYPE_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_VEHICLE_TYPE_NOT_EMPTY, ToolTipIcon.Warning);
                 return false;
             }
             if (nomor_plat.Text.ToLower() == "nomor plat kendaraan" || nomor_plat.Text == "")
             {
-                MessageBox.Show(Constant.WARMING_MESSAGE_PLATE_NUMBER_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARMING_MESSAGE_PLATE_NUMBER_NOT_EMPTY, ToolTipIcon.Warning);
                 return false;
             }
             if (waktu_keluar.Text == "- - -  00:00:00")
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_DATETIME_LEAVE_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_DATETIME_LEAVE_NOT_EMPTY, ToolTipIcon.Warning);
                 return false;
             }
             return true;
@@ -233,13 +233,13 @@ namespace BNITapCash.Forms
                     {
                         ParkingOut parkingOut = SendDataToServer(base64WebcamImage, base64LiveCameraSnapshotImage, paymentMethod, totalFare);
                         StoreDataToDatabase(responseDeduct, parkingOut);
-                        MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.TRANSACTION_SUCCESS, ToolTipIcon.Info);
                         Clear();
                     }
                 }
                 else
                 {
-                    MessageBox.Show(responseDeduct.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", responseDeduct.Message, ToolTipIcon.Error);
                 }
             }
             else
@@ -249,7 +249,7 @@ namespace BNITapCash.Forms
                 if (!string.IsNullOrEmpty(base64LiveCameraSnapshotImage))
                 {
                     SendDataToServer(base64WebcamImage, base64LiveCameraSnapshotImage, paymentMethod, totalFare);
-                    MessageBox.Show(Constant.TRANSACTION_SUCCESS, "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.TRANSACTION_SUCCESS, ToolTipIcon.Info);
                     Clear();
                 }
             }
@@ -277,13 +277,13 @@ namespace BNITapCash.Forms
                 }
                 else
                 {
-                    MessageBox.Show(response.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", response.Message, ToolTipIcon.Warning);
                     return null;
                 }
             }
             else
             {
-                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, ToolTipIcon.Error);
                 return null;
             }
         }
@@ -309,7 +309,7 @@ namespace BNITapCash.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", ex.Message, ToolTipIcon.Error);
                 return;
             }
         }

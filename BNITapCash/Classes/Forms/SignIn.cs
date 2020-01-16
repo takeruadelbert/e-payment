@@ -107,7 +107,7 @@ namespace BNITapCash
                     DBConnect database = new DBConnect();
                     if (!database.CheckMySQLConnection())
                     {
-                        MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_LOCAL_DATABASE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_LOCAL_DATABASE, ToolTipIcon.Error);
                         return;
                     }
                     database.DisposeDatabaseConnection();
@@ -117,7 +117,7 @@ namespace BNITapCash
                     string[] readerList = acr123U.getReaderList();
                     if (readerList.Length <= 0)
                     {
-                        MessageBox.Show(Constant.ERROR_MESSAGE_DEVICE_READER_NOT_FOUND, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_DEVICE_READER_NOT_FOUND, ToolTipIcon.Error);
                         return;
                     }
 
@@ -156,34 +156,34 @@ namespace BNITapCash
         {
             if (username == "" || username.ToLower() == "Username")
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_USERNAME_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_USERNAME_NOT_EMPTY, ToolTipIcon.Warning);
                 return false;
             }
             if (password == "" || password.ToLower() == "Password")
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_PASSWORD_NOT_EMPTY, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_PASSWORD_NOT_EMPTY, ToolTipIcon.Warning);
                 return false;
             }
             if (string.IsNullOrEmpty(Properties.Settings.Default.IPAddressServer))
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_SERVER, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_SERVER, ToolTipIcon.Warning);
                 return false;
             }
             if (string.IsNullOrEmpty(Properties.Settings.Default.UriAddressLiveCamera))
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_LIVE_CAMERA, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_LIVE_CAMERA, ToolTipIcon.Warning);
                 return false;
             }
 
             // validate TID & Settlement MID for further transaction
             if (string.IsNullOrEmpty(Properties.Settings.Default.TID))
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_TID, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_INVALID_TID, ToolTipIcon.Warning);
                 return false;
             }
             if (string.IsNullOrEmpty(Properties.Settings.Default.MID))
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_INVALID_MID, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_INVALID_MID, ToolTipIcon.Warning);
                 return false;
             }
 
@@ -209,19 +209,19 @@ namespace BNITapCash
                     }
                     else
                     {
-                        MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_WRITE_MASTER_DATA_FILE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_WRITE_MASTER_DATA_FILE, ToolTipIcon.Error);
                         return false;
                     }
                 }
                 else
                 {
-                    MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", response.Message, ToolTipIcon.Error);
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, ToolTipIcon.Error);
                 return false;
             }
         }
@@ -245,17 +245,17 @@ namespace BNITapCash
                         }
                         else
                         {
-                            MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_WRITE_MASTER_DATA_FILE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_WRITE_MASTER_DATA_FILE, ToolTipIcon.Error);
                             return false;
                         }
                     default:
-                        MessageBox.Show(receivedData.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", receivedData.Message, ToolTipIcon.Error);
                         return false;
                 }
             }
             else
             {
-                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, ToolTipIcon.Error);
                 return false;
             }
         }
@@ -293,18 +293,18 @@ namespace BNITapCash
                         }
                         catch (Exception)
                         {
-                            MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_WEBCAM, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_WEBCAM, ToolTipIcon.Error);
                             return;
                         }
                         break;
                     default:
-                        MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", response.Message, ToolTipIcon.Error);
                         break;
                 }
             }
             else
             {
-                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, ToolTipIcon.Error);
             }
         }
 
@@ -411,16 +411,16 @@ namespace BNITapCash
 
                         return true;
                     case 401:
-                        MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_GATE, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.ERROR_MESSAGE_INVALID_GATE, ToolTipIcon.Warning);
                         return false;
                     default:
-                        MessageBox.Show(response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", response.Message, ToolTipIcon.Error);
                         return false;
                 }
             }
             else
             {
-                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_CONNECT_SERVER, ToolTipIcon.Error);
                 return false;
             }
         }

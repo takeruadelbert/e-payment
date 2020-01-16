@@ -89,7 +89,7 @@ namespace BNITapCash.Classes.Forms
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_FETCH_PEDESTRIAN_DATA, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_FETCH_PEDESTRIAN_DATA, ToolTipIcon.Error);
             }
         }
 
@@ -311,13 +311,13 @@ namespace BNITapCash.Classes.Forms
                         if (pedestrianResponse != null)
                         {
                             StoreDataToDatabase(responseDeduct, pedestrianResponse);
-                            MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.TRANSACTION_SUCCESS, ToolTipIcon.Info);
                             Clear();
                         }
                     }
                     else
                     {
-                        MessageBox.Show(responseDeduct.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", responseDeduct.Message, ToolTipIcon.Error);
                     }
                 }
                 else
@@ -325,14 +325,14 @@ namespace BNITapCash.Classes.Forms
                     List<PedestrianResponse> pedestrianResponse = SendDataToServer(paymentMethod);
                     if (pedestrianResponse != null)
                     {
-                        MessageBox.Show(Constant.TRANSACTION_SUCCESS, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.TRANSACTION_SUCCESS, ToolTipIcon.Info);
                         Clear();
                     }
                 }
             }
             else
             {
-                MessageBox.Show(feedback, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", feedback, ToolTipIcon.Warning);
             }
         }
 
@@ -364,13 +364,13 @@ namespace BNITapCash.Classes.Forms
                     case 206:
                         return JsonConvert.DeserializeObject<List<PedestrianResponse>>(response.Data.ToString());
                     default:
-                        MessageBox.Show(response.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", response.Message, ToolTipIcon.Warning);
                         return null;
                 }
             }
             else
             {
-                MessageBox.Show(Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_INVALID_RESPONSE_FROM_SERVER, ToolTipIcon.Error);
                 return null;
             }
         }
@@ -410,13 +410,13 @@ namespace BNITapCash.Classes.Forms
                 }
                 else
                 {
-                    MessageBox.Show(Constant.ERROR_MESSAGE_FAIL_TO_SAVE_DATA_INTO_LOCAL_SERVER, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", Constant.ERROR_MESSAGE_FAIL_TO_SAVE_DATA_INTO_LOCAL_SERVER, ToolTipIcon.Error);
                     return;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Error", ex.Message, ToolTipIcon.Error);
                 return;
             }
         }
@@ -485,7 +485,7 @@ namespace BNITapCash.Classes.Forms
 
             if (pedestrianDetails.Count <= 0 && tarifMuatan.SelectedIndex <= 1)
             {
-                MessageBox.Show(Constant.WARNING_MESSAGE_NO_DETAIL_DATA_YET, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_NO_DETAIL_DATA_YET, ToolTipIcon.Warning);
                 return;
             }
 
