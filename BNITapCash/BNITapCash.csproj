@@ -102,6 +102,8 @@
     <Compile Include="Classes\API\request\SignInRequest.cs" />
     <Compile Include="Classes\API\response\Barcode.cs" />
     <Compile Include="Classes\API\response\Cargo.cs" />
+    <Compile Include="Classes\API\response\CargoResponse.cs" />
+    <Compile Include="Classes\API\response\DataPedestrianCargoResponse.cs" />
     <Compile Include="Classes\API\response\FineFare.cs" />
     <Compile Include="Classes\API\response\Gate.cs" />
     <Compile Include="Classes\API\response\ParkingIn.cs" />

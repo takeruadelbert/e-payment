@@ -307,10 +307,10 @@ namespace BNITapCash.Classes.Forms
                     DataDeduct responseDeduct = bni.DeductBalance(bankCode, ipv4, TIDSettlement, operator_name);
                     if (!responseDeduct.IsError)
                     {
-                        List<PedestrianResponse> pedestrianResponse = SendDataToServer(paymentMethod, bankCode);
-                        if (pedestrianResponse != null)
+                        DataPedestrianCargoResponse pedestrianCargoResponse = SendDataToServer(paymentMethod, bankCode);
+                        if (pedestrianCargoResponse != null)
                         {
-                            StoreDataToDatabase(responseDeduct, pedestrianResponse);
+                            StoreDataToDatabase(responseDeduct, pedestrianCargoResponse);
                             notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.TRANSACTION_SUCCESS, ToolTipIcon.Info);
                             Clear();
                         }
@@ -322,8 +322,8 @@ namespace BNITapCash.Classes.Forms
                 }
                 else
                 {
-                    List<PedestrianResponse> pedestrianResponse = SendDataToServer(paymentMethod);
-                    if (pedestrianResponse != null)
+                    DataPedestrianCargoResponse pedestrianCargoResponse = SendDataToServer(paymentMethod);
+                    if (pedestrianCargoResponse != null)
                     {
                         notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Success", Constant.TRANSACTION_SUCCESS, ToolTipIcon.Info);
                         Clear();
@@ -338,14 +338,15 @@ namespace BNITapCash.Classes.Forms
 
         private string ValidateFields()
         {
-            if (tarifMuatan.SelectedIndex == 0)
+            List<DataPedestrianTypeQuantity> dataPedestrianTypeQuantities = GetDataPedestrianTypeQuantities();
+            if (tarifMuatan.SelectedIndex <= 1 && dataPedestrianTypeQuantities.Count <= 0)
             {
-                return Constant.WARNING_MESSAGE_OUTLOAD_NOT_EMPTY;
+                return Constant.WARNING_MESSAGE_OUTLOAD_OR_NUM_PEDESTRIAN_NOT_EMPTY;
             }
             return Constant.MESSAGE_OK;
         }
 
-        private List<PedestrianResponse> SendDataToServer(string paymentMethod, string bankCode = "")
+        private DataPedestrianCargoResponse SendDataToServer(string paymentMethod, string bankCode = "")
         {
             List<DataPedestrianTypeQuantity> dataPedestrianTypeQuantities = GetDataPedestrianTypeQuantities();
             string IpAddress = TKHelper.GetLocalIPAddress();
@@ -356,13 +357,13 @@ namespace BNITapCash.Classes.Forms
             PedestrianRequest pedestrianRequest = new PedestrianRequest(dataPedestrianTypeQuantities, IpAddress, DatetimeIn, Username, CargoFare, CargoType, paymentMethod, bankCode);
             var sentParam = JsonConvert.SerializeObject(pedestrianRequest);
 
-            DataResponseArray response = (DataResponseArray)restApi.post(Properties.Settings.Default.IPAddressServer, Properties.Resources.SaveDataPedestrianApiUrl, false, sentParam);
+            DataResponseObject response = (DataResponseObject)restApi.post(Properties.Settings.Default.IPAddressServer, Properties.Resources.SaveDataPedestrianApiUrl, true, sentParam);
             if (response != null)
             {
                 switch (response.Status)
                 {
                     case 206:
-                        return JsonConvert.DeserializeObject<List<PedestrianResponse>>(response.Data.ToString());
+                        return JsonConvert.DeserializeObject<DataPedestrianCargoResponse>(response.Data.ToString());
                     default:
                         notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", response.Message, ToolTipIcon.Warning);
                         return null;
@@ -375,7 +376,7 @@ namespace BNITapCash.Classes.Forms
             }
         }
 
-        private void StoreDataToDatabase(DataDeduct dataDeduct, List<PedestrianResponse> pedestrianResponse)
+        private void StoreDataToDatabase(DataDeduct dataDeduct, DataPedestrianCargoResponse pedestrianCargoResponse)
         {
             try
             {
@@ -395,10 +396,10 @@ namespace BNITapCash.Classes.Forms
 
                 if (cmd != null)
                 {
-                    if (pedestrianResponse.Count > 0)
+                    int lastInsertId = (int)cmd.LastInsertedId;
+                    if (pedestrianCargoResponse.Pedestrians != null)
                     {
-                        int lastInsertId = (int)cmd.LastInsertedId;
-                        foreach (PedestrianResponse pedestrian in pedestrianResponse)
+                        foreach (PedestrianResponse pedestrian in pedestrianCargoResponse.Pedestrians)
                         {
                             int peopleTicketId = pedestrian.PeopleTicketId;
                             int fare = pedestrian.Total;
@@ -406,6 +407,15 @@ namespace BNITapCash.Classes.Forms
                                             lastInsertId + "', '" + peopleTicketId + "', '" + fare + "', '" + created + "')";
                             database.Insert(query2);
                         }
+                    }
+
+                    if (pedestrianCargoResponse.Cargo != null)
+                    {
+                        int cargoFareId = pedestrianCargoResponse.Cargo.CargoFareId;
+                        int fare = pedestrianCargoResponse.Cargo.TotalFare;
+                        string query3 = "INSERT INTO deduct_card_result_details (deduct_card_result_id, cargo_fare_id, amount, created) VALUES('" +
+                                            lastInsertId + "', '" + cargoFareId + "', '" + fare + "', '" + created + "')";
+                        database.Insert(query3);
                     }
                 }
                 else

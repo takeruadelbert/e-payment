@@ -470,7 +470,7 @@ namespace BNITapCash.Classes.Forms
 
             if (tarifMuatan.SelectedIndex == -1 || tarifMuatan.SelectedIndex == 0)
             {
-                return Constant.WARNING_MESSAGE_OUTLOAD_NOT_EMPTY;
+                return Constant.WARNING_MESSAGE_OUTLOAD_OR_NUM_PEDESTRIAN_NOT_EMPTY;
             }
             return Constant.MESSAGE_OK;
         }
