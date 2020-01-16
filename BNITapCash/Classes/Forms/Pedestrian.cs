@@ -4,6 +4,7 @@ using BNITapCash.Bank.DataModel;
 using BNITapCash.Card.Mifare;
 using BNITapCash.Classes.API.request;
 using BNITapCash.Classes.API.response;
+using BNITapCash.Classes.Forms.DataModel;
 using BNITapCash.ConstantVariable;
 using BNITapCash.DB;
 using BNITapCash.Helper;
@@ -188,7 +189,6 @@ namespace BNITapCash.Classes.Forms
             nonCash.Checked = true;
             tarifMuatan.SelectedIndex = 0;
             datetimeIn.Text = TKHelper.GetCurrentDatetime();
-            txtGrandTotal.Text = "0";
 
             int countPedestrianTypeTextBox = PedestrianTypes.Count;
             if (countPedestrianTypeTextBox > 0)
@@ -206,6 +206,7 @@ namespace BNITapCash.Classes.Forms
             CargoFare = 0;
             GrandTotal = 0;
             PedestrianFare = 0;
+            txtGrandTotal.Text = "0";
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -253,16 +254,30 @@ namespace BNITapCash.Classes.Forms
 
         private void OnTextChangedPedestrianType(object sender, EventArgs e)
         {
-            TextBox textBox = sender as TextBox;
-            string stringValue = textBox.Text.ToString();
-            string pedestrianType = textBox.Name;
-            if (!string.IsNullOrEmpty(stringValue))
+            PedestrianFare = CalculateFare();
+            SetGrandTotal();
+        }
+
+        private int CalculateFare()
+        {
+            int result = 0;
+            int countPedestrianTypeTextBox = PedestrianTypes.Count;
+            if (countPedestrianTypeTextBox > 0)
             {
-                int IntegerValue = int.Parse(stringValue);
-                int PedestrianTypeFare = TKHelper.DictionaryGetValueByKey(PedestrianTypes, pedestrianType);
-                PedestrianFare += IntegerValue * PedestrianTypeFare;
-                SetGrandTotal();
+                foreach (var dataPedestrian in PedestrianTypes)
+                {
+                    string type = dataPedestrian.Key;
+                    TextBox textBox = Controls.Find(type, true).FirstOrDefault() as TextBox;
+                    string pedestrianType = textBox.Name;
+                    int quantity = string.IsNullOrEmpty(textBox.Text.ToString()) ? 0 : int.Parse(textBox.Text.ToString());
+                    int fare = dataPedestrian.Value;
+                    if (quantity > 0)
+                    {
+                        result += quantity * fare;
+                    }
+                }
             }
+            return result;
         }
 
         private void SetGrandTotal()
@@ -433,6 +448,61 @@ namespace BNITapCash.Classes.Forms
             return dataPedestrianTypeQuantities;
         }
 
+        private void txtGrandTotal_Click(object sender, EventArgs e)
+        {
+            SeePedestrianDetail();
+        }
+
+        private void RPTotalTarif_Click(object sender, EventArgs e)
+        {
+            SeePedestrianDetail();
+        }
+
+        private void totalTarif00_Click(object sender, EventArgs e)
+        {
+            SeePedestrianDetail();
+        }
+
+        private void SeePedestrianDetail()
+        {
+            List<PedestrianDetail> pedestrianDetails = new List<PedestrianDetail>();
+
+            int countPedestrianTypeTextBox = PedestrianTypes.Count;
+            if (countPedestrianTypeTextBox > 0)
+            {
+                foreach (var dataPedestrian in PedestrianTypes)
+                {
+                    string type = dataPedestrian.Key;
+                    int fare = dataPedestrian.Value;
+                    TextBox textBox = this.Controls.Find(type, true).FirstOrDefault() as TextBox;
+                    int quantity = string.IsNullOrEmpty(textBox.Text.ToString()) ? 0 : int.Parse(textBox.Text.ToString());
+                    if (quantity > 0)
+                    {
+                        pedestrianDetails.Add(new PedestrianDetail(type, quantity, fare));
+                    }
+                }
+            }
+
+            if (pedestrianDetails.Count <= 0 && tarifMuatan.SelectedIndex <= 1)
+            {
+                MessageBox.Show(Constant.WARNING_MESSAGE_NO_DETAIL_DATA_YET, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (tarifMuatan.SelectedIndex > 1)
+            {
+                string CargoType = TKHelper.DictionaryGetValueByKey(CargoTypes, tarifMuatan.Text.ToString());
+                int CargoFare = tarifMuatan.SelectedIndex == 1 ? 0 : TKHelper.DictionaryGetValueByKey(Cargos, tarifMuatan.Text);
+                pedestrianDetails.Add(new PedestrianDetail(CargoType, 1, CargoFare));
+            }
+
+            if (pedestrianDetails.Count > 0)
+            {
+                PedestrianFareDetail pedestrianFareDetail = new PedestrianFareDetail(pedestrianDetails);
+                pedestrianFareDetail.Show();
+            }
+        }
+
         public void UnsubscribeEvents()
         {
             btnClear.Click -= btnClear_Click;
@@ -440,6 +510,7 @@ namespace BNITapCash.Classes.Forms
             btnMinimize.Click -= btnMinimize_Click;
             buttonLogout.Click -= buttonLogout_Click;
             btnSave.Click -= btnSave_Click;
+            txtGrandTotal.Click -= txtGrandTotal_Click;
 
             tarifMuatan.SelectionChangeCommitted -= tarifMuatan_SelectionChangeCommitted;
 

@@ -348,7 +348,7 @@
             // 
             this.totalTarif00.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(242)))), ((int)(((byte)(191)))));
             this.totalTarif00.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.totalTarif00.Cursor = System.Windows.Forms.Cursors.No;
+            this.totalTarif00.Cursor = System.Windows.Forms.Cursors.Hand;
             this.totalTarif00.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalTarif00.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(138)))), ((int)(((byte)(9)))));
             this.totalTarif00.Location = new System.Drawing.Point(1091, 390);
@@ -358,12 +358,13 @@
             this.totalTarif00.TabIndex = 59;
             this.totalTarif00.Text = ",00.";
             this.totalTarif00.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.totalTarif00.Click += new System.EventHandler(this.totalTarif00_Click);
             // 
             // RPTotalTarif
             // 
             this.RPTotalTarif.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(242)))), ((int)(((byte)(191)))));
             this.RPTotalTarif.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.RPTotalTarif.Cursor = System.Windows.Forms.Cursors.No;
+            this.RPTotalTarif.Cursor = System.Windows.Forms.Cursors.Hand;
             this.RPTotalTarif.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RPTotalTarif.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(138)))), ((int)(((byte)(9)))));
             this.RPTotalTarif.Location = new System.Drawing.Point(804, 390);
@@ -373,6 +374,7 @@
             this.RPTotalTarif.TabIndex = 56;
             this.RPTotalTarif.Text = "Rp.";
             this.RPTotalTarif.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.RPTotalTarif.Click += new System.EventHandler(this.RPTotalTarif_Click);
             // 
             // logoPelindo
             // 
@@ -405,7 +407,7 @@
             // 
             this.txtGrandTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(242)))), ((int)(((byte)(191)))));
             this.txtGrandTotal.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtGrandTotal.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtGrandTotal.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtGrandTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGrandTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(138)))), ((int)(((byte)(9)))));
             this.txtGrandTotal.Location = new System.Drawing.Point(801, 390);
@@ -417,6 +419,7 @@
             this.txtGrandTotal.TabIndex = 60;
             this.txtGrandTotal.Text = "0";
             this.txtGrandTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtGrandTotal.Click += new System.EventHandler(this.txtGrandTotal_Click);
             // 
             // panelTotalTarifGreen
             // 
