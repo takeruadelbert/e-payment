@@ -169,11 +169,6 @@ namespace BNITapCash
                 notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_SERVER, ToolTipIcon.Warning);
                 return false;
             }
-            if (string.IsNullOrEmpty(Properties.Settings.Default.UriAddressLiveCamera))
-            {
-                notifyIcon.ShowBalloonTip(Constant.NOTIFICATION_TRAY_TIMEOUT, "Warning", Constant.WARNING_MESSAGE_INVALID_IP_ADDRESS_LIVE_CAMERA, ToolTipIcon.Warning);
-                return false;
-            }
 
             // validate TID & Settlement MID for further transaction
             if (string.IsNullOrEmpty(Properties.Settings.Default.TID))
